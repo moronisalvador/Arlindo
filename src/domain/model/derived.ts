@@ -30,6 +30,7 @@ export interface DerivedPresentation {
     paymentYears?: number
     totalPremiumsPaid?: number
     projectedAccumulatedValue?: number
+    projectedCashSurrenderValue?: number
     deathBenefit?: number
     livingBenefit?: number
     livingBenefitPercent?: number

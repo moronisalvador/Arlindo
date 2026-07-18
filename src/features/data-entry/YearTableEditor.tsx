@@ -24,9 +24,15 @@ const COLUMNS: { key: NumField; labelKey: string; integer?: boolean }[] = [
 export function YearTableEditor({
   rows,
   onChange,
+  clientAge,
+  defaultDeathBenefit,
 }: {
   rows: YearlyRow[]
   onChange: (next: YearlyRow[]) => void
+  /** Seeds the first row's age and increments from there (auto-fill, editable). */
+  clientAge?: number
+  /** Prefilled into each new row's death benefit (level-DB common case; editable). */
+  defaultDeathBenefit?: number
 }) {
   const { t } = useTranslation('dataEntry')
   const [gen, setGen] = useState(0)
@@ -41,7 +47,10 @@ export function YearTableEditor({
     const last = rows[rows.length - 1]
     const nextRow: YearlyRow = {
       policyYear: last ? last.policyYear + 1 : 1,
-      age: last?.age != null ? last.age + 1 : undefined,
+      // Auto-fill age (from the client's age, then +1 each year) and carry the
+      // death benefit down (level-DB common case). Every cell stays editable.
+      age: last?.age != null ? last.age + 1 : clientAge,
+      deathBenefit: last?.deathBenefit ?? defaultDeathBenefit,
     }
     onChange([...rows, nextRow])
     setGen((g) => g + 1)

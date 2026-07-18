@@ -272,7 +272,7 @@ function optionsSlide(pptx: pptxgen, d: DerivedPresentation) {
   // Opção 1 (navy)
   s.addShape('roundRect', { x: 0.8, y: top + 0.3, w: 5.6, h: 3, fill: { color: C.navy }, line: { type: 'none' }, rectRadius: 0.08 })
   s.addText(c.options.opt1.toUpperCase(), { x: 1, y: top + 0.6, w: 5.2, h: 0.3, fontFace: SANS, fontSize: 10, bold: true, color: C.orange, align: 'center', charSpacing: 1 })
-  s.addText(formatMoney(h.projectedAccumulatedValue, cur, { locale: loc }), { x: 1, y: top + 1.1, w: 5.2, h: 0.9, fontFace: SERIF, fontSize: 30, bold: true, color: C.white, align: 'center' })
+  s.addText(formatMoney(h.projectedCashSurrenderValue ?? h.projectedAccumulatedValue, cur, { locale: loc }), { x: 1, y: top + 1.1, w: 5.2, h: 0.9, fontFace: SERIF, fontSize: 30, bold: true, color: C.white, align: 'center' })
   s.addText(c.options.opt1Body, { x: 1, y: top + 2.1, w: 5.2, h: 0.8, fontFace: SANS, fontSize: 12, color: 'C7CCD6', align: 'center' })
   // Opção 2 (white)
   s.addShape('roundRect', { x: 6.9, y: top + 0.3, w: 5.6, h: 3, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.08 })

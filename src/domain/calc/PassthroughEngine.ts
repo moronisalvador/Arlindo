@@ -22,6 +22,15 @@ export class PassthroughEngine implements CalculationEngine {
         ? sum(rows.map((r) => r.premiumPaid ?? 0))
         : premiumTotal(inputs)
 
+    // Living benefit is death benefit × accessible %, unless an explicit dollar
+    // figure was entered (kept for the rare illustration that prints a different one).
+    const resolvedDeathBenefit = iul.deathBenefit ?? lastValue(rows, 'deathBenefit')
+    const livingBenefit =
+      iul.livingBenefit ??
+      (resolvedDeathBenefit != null && iul.livingBenefitPercent
+        ? Math.round((resolvedDeathBenefit * iul.livingBenefitPercent) / 100)
+        : undefined)
+
     return {
       meta: {
         productType: inputs.productType,
@@ -42,8 +51,10 @@ export class PassthroughEngine implements CalculationEngine {
         totalPremiumsPaid: totalPremiumsPaid || undefined,
         projectedAccumulatedValue:
           iul.projectedAccumulatedValue ?? lastValue(rows, 'accumulatedValue'),
-        deathBenefit: iul.deathBenefit ?? lastValue(rows, 'deathBenefit'),
-        livingBenefit: iul.livingBenefit,
+        projectedCashSurrenderValue:
+          iul.projectedCashSurrenderValue ?? lastValue(rows, 'cashSurrenderValue'),
+        deathBenefit: resolvedDeathBenefit,
+        livingBenefit,
         livingBenefitPercent: iul.livingBenefitPercent,
         incomeOptionAnnual: iul.incomeOptionAnnual,
         incomeToAge: iul.incomeToAge,

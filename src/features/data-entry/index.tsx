@@ -225,6 +225,15 @@ function Editor({ id }: { id: string }) {
         ? t('summaries.rows', { count: working.yearlyRows.length })
         : t('summaries.sourceTyped')
 
+  // A filled year table auto-derives projected value / projection years, so those
+  // headline inputs only appear on the no-table path.
+  const hasTable = working.yearlyRows.length > 0
+  // Living benefit is death benefit × accessible % — computed, not typed.
+  const livingBenefitComputed =
+    iul.deathBenefit != null && iul.livingBenefitPercent
+      ? Math.round((iul.deathBenefit * iul.livingBenefitPercent) / 100)
+      : undefined
+
   return (
     <div className="space-y-8 pb-12">
       <header className="space-y-2">
@@ -287,6 +296,7 @@ function Editor({ id }: { id: string }) {
               label={t('client.name')}
               value={working.client.name}
               placeholder={t('client.namePlaceholder')}
+              hint={t('plan.required')}
               onChange={(v) => setClient({ name: v })}
             />
             <NumberField
@@ -296,15 +306,6 @@ function Editor({ id }: { id: string }) {
               placeholder={t('client.agePlaceholder')}
               suffix={t('plan.years')}
               onChange={(n) => setClient({ age: n })}
-            />
-            <Segmented
-              label={t('client.sex')}
-              value={working.client.sex}
-              onChange={(v) => setClient({ sex: v })}
-              options={[
-                { value: 'M', label: t('client.male') },
-                { value: 'F', label: t('client.female') },
-              ]}
             />
           </div>
         </Card>
@@ -320,82 +321,131 @@ function Editor({ id }: { id: string }) {
         onToggle={() => toggle('plano')}
       >
         <Card>
-          <div className="grid gap-4 sm:grid-cols-2">
-            <NumberField
-              label={t('plan.premium')}
-              value={iul.premium}
-              money
-              currency={currency}
-              onChange={(n) => setIul({ premium: n })}
-            />
+          <div className="space-y-4">
             <Segmented
-              label={t('plan.premiumMode')}
-              value={iul.premiumMode}
-              onChange={(v) => setIul({ premiumMode: v })}
+              label={t('source.label')}
+              value={iul.projectionSource}
+              onChange={(v) => setIul({ projectionSource: v })}
               options={[
-                { value: 'monthly', label: t('plan.monthly') },
-                { value: 'annual', label: t('plan.annual') },
+                { value: 'typed', label: t('source.typed') },
+                { value: 'estimate', label: t('source.estimate') },
               ]}
             />
-            <NumberField
-              label={t('plan.paymentYears')}
-              value={iul.paymentYears}
-              integer
-              suffix={t('plan.years')}
-              hint={t('plan.paymentYearsHint')}
-              onChange={(n) => setIul({ paymentYears: n })}
-            />
-            <NumberField
-              label={t('plan.deathBenefit')}
-              value={iul.deathBenefit}
-              money
-              currency={currency}
-              onChange={(n) => setIul({ deathBenefit: n })}
-            />
-            <NumberField
-              label={t('plan.livingBenefit')}
-              value={iul.livingBenefit}
-              money
-              currency={currency}
-              onChange={(n) => setIul({ livingBenefit: n })}
-            />
-            <NumberField
-              label={t('plan.livingBenefitPercent')}
-              value={iul.livingBenefitPercent}
-              integer
-              suffix="%"
-              onChange={(n) =>
-                setIul({ livingBenefitPercent: Math.min(100, Math.max(0, n ?? 0)) })
-              }
-            />
-            <NumberField
-              label={t('plan.projectionYears')}
-              value={iul.projectionYears}
-              integer
-              suffix={t('plan.years')}
-              onChange={(n) => setIul({ projectionYears: n })}
-            />
-            <NumberField
-              label={t('plan.projectedAccumulatedValue')}
-              value={iul.projectedAccumulatedValue}
-              money
-              currency={currency}
-              onChange={(n) => setIul({ projectedAccumulatedValue: n })}
-            />
-            <NumberField
-              label={t('plan.incomeOptionAnnual')}
-              value={iul.incomeOptionAnnual}
-              money
-              currency={currency}
-              onChange={(n) => setIul({ incomeOptionAnnual: n })}
-            />
-            <NumberField
-              label={t('plan.incomeToAge')}
-              value={iul.incomeToAge}
-              integer
-              suffix={t('plan.age')}
-              onChange={(n) => setIul({ incomeToAge: n })}
-            />
+            <div className="grid gap-4 sm:grid-cols-2">
+              <NumberField
+                label={t('plan.premium')}
+                value={iul.premium}
+                money
+                currency={currency}
+                hint={t('plan.required')}
+                onChange={(n) => setIul({ premium: n })}
+              />
+              <Segmented
+                label={t('plan.premiumMode')}
+                value={iul.premiumMode}
+                onChange={(v) => setIul({ premiumMode: v })}
+                options={[
+                  { value: 'monthly', label: t('plan.monthly') },
+                  { value: 'annual', label: t('plan.annual') },
+                ]}
+              />
+              <NumberField
+                label={t('plan.paymentYears')}
+                value={iul.paymentYears}
+                integer
+                suffix={t('plan.years')}
+                hint={t('plan.paymentYearsHint')}
+                onChange={(n) => setIul({ paymentYears: n })}
+              />
+              <NumberField
+                label={t('plan.deathBenefit')}
+                value={iul.deathBenefit}
+                money
+                currency={currency}
+                hint={t('plan.required')}
+                onChange={(n) => setIul({ deathBenefit: n })}
+              />
+              <NumberField
+                label={t('plan.livingBenefitPercent')}
+                value={iul.livingBenefitPercent}
+                integer
+                suffix="%"
+                onChange={(n) =>
+                  setIul({ livingBenefitPercent: Math.min(100, Math.max(0, n ?? 0)) })
+                }
+              />
+              {/* Benefício em vida — computed from death benefit × %, not typed. */}
+              <div>
+                <p className="mb-1 font-sans text-base font-semibold text-ink">
+                  {t('plan.livingBenefit')}
+                </p>
+                <p className="text-lg font-semibold text-navy">
+                  {formatMoney(livingBenefitComputed, currency)}
+                </p>
+                <p className="mt-1 text-sm text-muted">
+                  {t('plan.livingBenefitComputed', { pct: iul.livingBenefitPercent ?? 0 })}
+                </p>
+              </div>
+
+              {iul.projectionSource === 'estimate' ? (
+                <NumberField
+                  label={t('source.assumedRate')}
+                  value={iul.assumedRatePct}
+                  suffix="%"
+                  hint={t('source.assumedRateHint')}
+                  onChange={(n) => setIul({ assumedRatePct: n })}
+                />
+              ) : (
+                <>
+                  <NumberField
+                    label={t('plan.incomeOptionAnnual')}
+                    value={iul.incomeOptionAnnual}
+                    money
+                    currency={currency}
+                    onChange={(n) => setIul({ incomeOptionAnnual: n })}
+                  />
+                  <NumberField
+                    label={t('plan.incomeToAge')}
+                    value={iul.incomeToAge}
+                    integer
+                    suffix={t('plan.age')}
+                    hint={t('plan.incomeToAgeHint')}
+                    onChange={(n) => setIul({ incomeToAge: n })}
+                  />
+                  {!hasTable && (
+                    <>
+                      <NumberField
+                        label={t('plan.projectionYears')}
+                        value={iul.projectionYears}
+                        integer
+                        suffix={t('plan.years')}
+                        onChange={(n) => setIul({ projectionYears: n })}
+                      />
+                      <NumberField
+                        label={t('plan.projectedAccumulatedValue')}
+                        value={iul.projectedAccumulatedValue}
+                        money
+                        currency={currency}
+                        onChange={(n) => setIul({ projectedAccumulatedValue: n })}
+                      />
+                      <NumberField
+                        label={t('plan.projectedCashSurrenderValue')}
+                        value={iul.projectedCashSurrenderValue}
+                        money
+                        currency={currency}
+                        onChange={(n) => setIul({ projectedCashSurrenderValue: n })}
+                      />
+                    </>
+                  )}
+                </>
+              )}
+            </div>
+
+            {iul.projectionSource === 'estimate' && (
+              <Card tone="alt">
+                <p className="text-base text-ink/80">{t('source.estimateNote')}</p>
+              </Card>
+            )}
           </div>
         </Card>
       </CollapsibleSection>
@@ -421,36 +471,21 @@ function Editor({ id }: { id: string }) {
         open={openKey === 'fonte'}
         onToggle={() => toggle('fonte')}
       >
-        <div className="space-y-6">
-          <Segmented
-            label={t('source.label')}
-            value={iul.projectionSource}
-            onChange={(v) => setIul({ projectionSource: v })}
-            options={[
-              { value: 'typed', label: t('source.typed') },
-              { value: 'estimate', label: t('source.estimate') },
-            ]}
-          />
-
-          {iul.projectionSource === 'estimate' ? (
-            <div className="space-y-4">
-              <div className="grid gap-4 sm:grid-cols-2">
-                <NumberField
-                  label={t('source.assumedRate')}
-                  value={iul.assumedRatePct}
-                  suffix="%"
-                  hint={t('source.assumedRateHint')}
-                  onChange={(n) => setIul({ assumedRatePct: n })}
-                />
-              </div>
-              <Card tone="alt">
-                <p className="text-base text-ink/80">{t('source.estimateNote')}</p>
-              </Card>
-            </div>
-          ) : (
-            <YearTableEditor rows={working.yearlyRows} onChange={setRows} />
-          )}
-        </div>
+        {iul.projectionSource === 'estimate' ? (
+          <Card tone="alt">
+            <p className="text-base text-ink/80">{t('source.estimateNote')}</p>
+          </Card>
+        ) : (
+          <div className="space-y-3">
+            <p className="text-sm text-muted">{t('plan.basisNote')}</p>
+            <YearTableEditor
+              rows={working.yearlyRows}
+              onChange={setRows}
+              clientAge={working.client.age}
+              defaultDeathBenefit={iul.deathBenefit}
+            />
+          </div>
+        )}
       </CollapsibleSection>
       </div>
 
