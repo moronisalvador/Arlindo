@@ -25,10 +25,10 @@ export function CoverSlide({ derived }: { derived: DerivedPresentation }) {
 
       {/* orange agent panel on the right */}
       <div className="absolute inset-y-0 right-0 flex w-[320px] flex-col items-center justify-center bg-orange px-8 text-center">
-        <p className="font-sans text-xl font-bold text-white">{branding.agentName || 'Agente'}</p>
-        <p className="mt-2 font-sans text-sm text-white/90">{branding.agentTitle}</p>
+        <p className="font-sans text-xl font-bold text-navy">{branding.agentName || 'Agente'}</p>
+        <p className="mt-2 font-sans text-sm text-navy/80">{branding.agentTitle}</p>
         {branding.agentLicense && (
-          <p className="mt-1 font-sans text-xs text-white/80">{branding.agentLicense}</p>
+          <p className="mt-1 font-sans text-xs text-navy/70">{branding.agentLicense}</p>
         )}
       </div>
 

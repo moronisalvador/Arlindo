@@ -50,6 +50,8 @@ export const riderSchema = z.object({
   percent: z.number().min(0).max(100).default(80),
   additionalCost: z.boolean().default(false),
   category: z.enum(['included', 'iul_exclusive', 'optional']).default('included'),
+  /** Lifetime maximum accelerated amount (USD), when the rider has a dollar cap. */
+  lifetimeMax: z.number().optional(),
   note: z.string().optional(),
 })
 export type Rider = z.infer<typeof riderSchema>
@@ -78,6 +80,13 @@ export const iulSchema = z.object({
   incomeOptionAnnual: z.number().optional(),
   incomeToAge: z.number().int().optional(),
   riders: z.array(riderSchema).default([]),
+  /**
+   * 'typed' = use the numbers the agent typed off the carrier illustration
+   * (PassthroughEngine). 'estimate' = let the app compute an approximate
+   * projection (IulProjectionEngine). Default 'typed' (the official illustration
+   * is authoritative).
+   */
+  projectionSource: z.enum(['typed', 'estimate']).default('typed'),
 })
 export type IulInputs = z.infer<typeof iulSchema>
 
@@ -97,6 +106,8 @@ export const presentationInputsSchema = z.object({
   createdAt: z.string(),
   updatedAt: z.string(),
   productType: productTypeSchema.default('iul'),
+  /** NLG product id from the product registry (@domain/model/products), e.g. 'flexlife'. */
+  productId: z.string().default('flexlife'),
   title: z.string().default(''),
   displayCurrency: currencyCodeSchema.default('USD'),
   branding: brandingSchema.default({}),

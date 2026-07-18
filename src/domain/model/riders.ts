@@ -1,71 +1,95 @@
 import type { Rider } from './presentation'
 
 /**
- * The standard National Life Group living-benefit rider set, in pt-BR, taken
- * from the sample IUL illustration. Data-entry (W2) prefills from this; the
- * salesman can then toggle each, adjust the accessible percentage (80% standard
- * vs 100% for Premium Chronic Care), and flag additional cost.
+ * National Life Group / LSW FlexLife living-benefit rider suite, in pt-BR, from
+ * verified NLG primary sources (a current FlexLife illustration + product guides).
+ *
+ * Accuracy notes baked in here:
+ * - The five Accelerated Benefit Riders (ABRs) carry NO additional premium; the
+ *   benefit is paid on a DISCOUNTED basis and can accelerate up to 100% of the
+ *   death benefit, subject to per-insured LIFETIME DOLLAR CAPS (lifetimeMax).
+ * - Critical Illness and Critical Injury SHARE a single $1,000,000 lifetime cap.
+ * - The Premium Chronic Care Rider is the ADDITIONAL-COST rider that accelerates
+ *   a larger share (up to the full death benefit, ~$3M cap).
+ * - `percent` = the accessible % the agent chooses to present (editable, 80/100);
+ *   `lifetimeMax` = NLG's dollar cap. Current caps/participation rates are NOT
+ *   encoded anywhere (rate-sheet-driven) — only guaranteed facts live here.
  */
 export const DEFAULT_IUL_RIDERS: Rider[] = [
   {
     id: 'terminal_illness',
     label: 'Doença Terminal',
-    englishLabel: 'Terminal Illness Rider',
+    englishLabel: 'Accelerated Benefits Rider — Terminal Illness',
     included: true,
-    percent: 80,
+    percent: 100,
     additionalCost: false,
     category: 'included',
-    note: 'Antecipa parte da cobertura em caso de doença terminal (expectativa de até 24 meses).',
+    lifetimeMax: 1_500_000,
+    note: 'Sem custo. Antecipação (com desconto) em caso de doença terminal com expectativa de até 24 meses. Limite vitalício US$ 1,5 mi.',
   },
   {
     id: 'chronic_illness',
     label: 'Doença Crônica',
-    englishLabel: 'Chronic Illness Rider',
+    englishLabel: 'Accelerated Benefits Rider — Chronic Illness',
     included: true,
-    percent: 80,
+    percent: 100,
     additionalCost: false,
     category: 'included',
-    note: 'Antecipa o benefício quando não é possível realizar 2 das 6 atividades básicas do dia a dia.',
+    lifetimeMax: 1_500_000,
+    note: 'Sem custo. Incapacidade de realizar 2 de 6 atividades diárias por 90 dias, ou comprometimento cognitivo severo. Até 2%/mês. Limite vitalício US$ 1,5 mi.',
   },
   {
     id: 'critical_illness',
     label: 'Doença Crítica',
-    englishLabel: 'Critical Illness Rider',
+    englishLabel: 'Accelerated Benefits Rider — Critical Illness',
     included: true,
-    percent: 80,
+    percent: 100,
     additionalCost: false,
     category: 'included',
-    note: 'Parcela única em caso de câncer, AVC, infarto, ELA e outras doenças críticas.',
+    lifetimeMax: 1_000_000,
+    note: 'Sem custo. Câncer, AVC, infarto, ELA, transplante e outras. Limite vitalício US$ 1 mi (compartilhado com Lesão Crítica).',
   },
   {
     id: 'critical_injury',
     label: 'Lesão Crítica / Acidentes',
-    englishLabel: 'Critical Injury Rider',
+    englishLabel: 'Accelerated Benefits Rider — Critical Injury',
     included: true,
-    percent: 80,
+    percent: 100,
     additionalCost: false,
     category: 'included',
-    note: 'Parcela única em caso de lesão grave por acidente (coma, queimaduras graves, paralisia).',
+    lifetimeMax: 1_000_000,
+    note: 'Sem custo. Coma, paralisia, queimaduras graves, traumatismo craniano. Limite vitalício US$ 1 mi (compartilhado com Doença Crítica).',
   },
   {
     id: 'alzheimers',
     label: 'Alzheimer',
-    englishLabel: "Alzheimer's Disease Rider",
+    englishLabel: "Accelerated Benefits Rider — Alzheimer's Disease",
     included: true,
-    percent: 80,
+    percent: 100,
     additionalCost: false,
     category: 'included',
-    note: 'Antecipa o benefício com diagnóstico de Alzheimer ou demência por especialista.',
+    lifetimeMax: 1_500_000,
+    note: 'Sem custo. Diagnóstico de Alzheimer/demência elegível por especialista. Limite vitalício US$ 1,5 mi.',
   },
   {
-    id: 'waiver_of_premium',
-    label: 'Isenção de Prêmio por Invalidez',
-    englishLabel: 'Waiver of Premium',
+    id: 'value_added_services',
+    label: 'Apoio ao Cuidador',
+    englishLabel: 'Value-Added Services Rider (Homethrive)',
     included: true,
     percent: 0,
     additionalCost: false,
     category: 'included',
-    note: 'Dispensa o depósito mensal em caso de invalidez, após carência.',
+    note: 'Sem custo. Apoio prático e emocional ao cuidador (parceria Homethrive). Indisponível em NY.',
+  },
+  {
+    id: 'fertility_journey',
+    label: 'Apoio à Jornada de Fertilidade',
+    englishLabel: 'Fertility Journey Rider',
+    included: true,
+    percent: 0,
+    additionalCost: false,
+    category: 'included',
+    note: 'Sem custo. Crédito ao valor acumulado após tratamento de fertilidade elegível.',
   },
   {
     id: 'premium_chronic_care',
@@ -75,17 +99,18 @@ export const DEFAULT_IUL_RIDERS: Rider[] = [
     percent: 100,
     additionalCost: true,
     category: 'iul_exclusive',
-    note: 'Mediante custo adicional, acessa até 100% do benefício por morte (limite US$ 3 mi) em doença crônica.',
+    lifetimeMax: 3_000_000,
+    note: 'Custo adicional. Antecipa uma parcela maior — até o benefício por morte integral (limite ~US$ 3 mi), 2%–4% ao mês. Indisponível em CA e NY.',
   },
   {
-    id: 'value_added_services',
-    label: 'Apoio ao Cuidador',
-    englishLabel: 'Value Added Services Rider',
+    id: 'waiver_monthly_deductions',
+    label: 'Isenção de Custos por Invalidez',
+    englishLabel: 'Waiver of Monthly Deductions Rider',
     included: false,
     percent: 0,
-    additionalCost: false,
-    category: 'iul_exclusive',
-    note: 'Serviços de apoio prático e emocional ao cuidador (parceria Homethrive).',
+    additionalCost: true,
+    category: 'optional',
+    note: 'Custo adicional. Dispensa as deduções mensais em caso de invalidez total (carência ~6 meses / LSW).',
   },
   {
     id: 'childrens_term',
@@ -95,24 +120,22 @@ export const DEFAULT_IUL_RIDERS: Rider[] = [
     percent: 0,
     additionalCost: true,
     category: 'optional',
-    note: 'Cobertura de até US$ 25.000 para os filhos, até os 23 anos, taxa única.',
-  },
-  {
-    id: 'fertility_journey',
-    label: 'Apoio à Jornada de Fertilidade',
-    englishLabel: 'Fertility Journey Rider',
-    included: false,
-    percent: 0,
-    additionalCost: false,
-    category: 'optional',
-    note: 'Suporte financeiro para tratamentos de fertilidade.',
+    lifetimeMax: 25_000,
+    note: 'Custo adicional. Cobertura de US$ 5 mil a US$ 25 mil por filho, até os 23 anos; taxa única independente do nº de filhos.',
   },
 ]
 
-/** Standard legal disclaimers (pt-BR) from the illustration; rendered on slides + PDF. */
+/**
+ * Standard NLG/LSW illustration disclaimers (pt-BR). Rendered on slides + PDF +
+ * PPTX. Includes AG49-A, non-guaranteed language, and the foreign-national /
+ * US-solicitation compliance note relevant to a Brazil-based agent.
+ */
 export const DEFAULT_IUL_DISCLAIMERS: string[] = [
-  'Documento ilustrativo. Valores projetados, não garantidos.',
-  'Os valores finais dependem do desempenho real do índice, das taxas da apólice e da análise de underwriting da National Life Group.',
-  'A utilização de um benefício em vida reduz o valor acumulado e o benefício por morte da apólice.',
-  'Os riders (Living Benefits / Accelerated Benefits Riders) estão sujeitos aos termos, condições e definições contratuais, podendo variar conforme o produto e o estado de emissão.',
+  'Esta é apenas uma ilustração e não pretende prever o desempenho real. Consulte a apólice para os detalhes completos; em caso de conflito, prevalece a apólice.',
+  'Valores não garantidos estão sujeitos a alteração e podem ser maiores ou menores do que os ilustrados.',
+  'O uso de um benefício em vida pode reduzir ou eliminar outros benefícios da apólice e dos riders.',
+  'Riders são opcionais e podem exigir prêmio adicional; sujeitos a underwriting, exclusões e limitações, podendo não estar disponíveis em todos os estados.',
+  'As garantias dependem da capacidade de pagamento de sinistros da companhia emissora (National Life Insurance Company / Life Insurance Company of the Southwest).',
+  'A taxa máxima ilustrada segue a Actuarial Guideline 49-A. O desempenho passado de índices não representa desempenho futuro.',
+  'Apólice em dólares (US$). A solicitação, a ilustração, a assinatura e a entrega devem ocorrer nos Estados Unidos. O cliente é responsável por confirmar que a legislação brasileira permite a titularidade desta apólice.',
 ]

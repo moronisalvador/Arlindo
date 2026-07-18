@@ -12,16 +12,16 @@ export function DisclaimersSlide({ derived }: { derived: DerivedPresentation }) 
       <span aria-hidden className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-navy-soft/50" />
       <div className="relative flex h-full flex-col justify-center px-20">
         <EyebrowLabel>Informações Importantes</EyebrowLabel>
-        <h2 className="mt-2 font-serif text-4xl font-semibold">Avisos legais</h2>
-        <ul className="mt-8 max-w-[900px] space-y-4">
+        <h2 className="mt-2 font-serif text-3xl font-semibold">Avisos legais</h2>
+        <ul className="mt-6 max-w-[960px] space-y-3">
           {items.map((d, i) => (
-            <li key={i} className="flex gap-3 font-sans text-lg leading-relaxed text-white/85">
+            <li key={i} className="flex gap-3 font-sans text-base leading-snug text-white/85">
               <span className="text-orange">•</span>
               <span>{d}</span>
             </li>
           ))}
         </ul>
-        <div className="mt-10 flex items-center gap-3">
+        <div className="mt-8 flex items-center gap-3">
           <span className="rounded-lg bg-white px-3 py-2">
             <BrandLogo variant="color" className="h-8" />
           </span>

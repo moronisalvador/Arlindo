@@ -65,6 +65,9 @@ export function NumberField({
           }}
           onBlur={() => {
             focused.current = false
+            // Re-sync to the canonical (clamped/rounded) value so a typed "150"
+            // that was clamped to 100 doesn't linger in the input.
+            setText(value == null ? '' : String(value))
           }}
           onChange={(e) => handle(e.target.value)}
           className={suffix ? 'pr-16' : undefined}
@@ -126,7 +129,7 @@ export function Toggle({
       className={cn(
         'inline-flex min-h-[3.25rem] items-center gap-3 rounded-xl border px-5 font-sans text-lg font-semibold transition-colors',
         on
-          ? 'border-orange bg-orange text-white'
+          ? 'border-orange bg-orange text-navy'
           : 'border-line bg-surface text-muted hover:bg-surface-alt',
       )}
     >

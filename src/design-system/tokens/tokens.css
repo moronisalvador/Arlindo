@@ -7,8 +7,9 @@
   --navy: 14 33 72; /* #0E2148 */
   --navy-deep: 8 20 48; /* #081430 */
   --navy-soft: 30 54 106; /* #1E366A — decorative circles / soft panels */
-  --orange: 232 106 29; /* #E86A1D */
-  --orange-dark: 200 84 18; /* #C85412 */
+  /* SCF brand gold/amber (matches the logo). Use NAVY text on gold fills. */
+  --orange: 221 162 46; /* #DDA22E — brand gold */
+  --orange-dark: 176 128 28; /* #B0801C — deeper gold (hover / text-on-white) */
   --surface: 255 255 255; /* white cards */
   --surface-alt: 238 240 243; /* #EEF0F3 — alt cards / app background */
   --ink: 17 24 39; /* #111827 — text on light */

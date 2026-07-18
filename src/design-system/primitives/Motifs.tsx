@@ -6,7 +6,7 @@ export function VsBadge({ className }: { className?: string }) {
     <span
       className={cn(
         'inline-flex h-12 w-12 items-center justify-center rounded-full bg-orange',
-        'font-sans text-sm font-bold uppercase text-white shadow-card',
+        'font-sans text-sm font-bold uppercase text-navy shadow-card',
         className,
       )}
     >

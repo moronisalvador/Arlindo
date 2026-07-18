@@ -1,8 +1,9 @@
 import { useTranslation } from 'react-i18next'
 import { Card } from '@design-system'
+import { formatMoney } from '@domain/format'
 import type { Rider } from '@domain/model/presentation'
 import { cn } from '@shared/cn'
-import { NumberField, Toggle } from './fields'
+import { Toggle } from './fields'
 
 const CATEGORY_ORDER: Rider['category'][] = ['included', 'iul_exclusive', 'optional']
 
@@ -52,6 +53,12 @@ export function RidersEditor({
                       {rider.englishLabel && (
                         <p className="text-sm text-muted">{rider.englishLabel}</p>
                       )}
+                      {rider.lifetimeMax != null && (
+                        <span className="mt-1 inline-block rounded-full bg-surface-alt px-3 py-1 text-sm font-semibold text-navy">
+                          {t('riders.lifetimeMaxPrefix')}{' '}
+                          {formatMoney(rider.lifetimeMax, 'USD', { compact: true })}
+                        </span>
+                      )}
                     </div>
                     <Toggle
                       on={rider.included}
@@ -66,15 +73,9 @@ export function RidersEditor({
                   {rider.included && (
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div className="space-y-2">
-                        <NumberField
-                          label={t('riders.percent')}
-                          value={rider.percent}
-                          integer
-                          suffix="%"
-                          onChange={(n) =>
-                            patch(rider.id, { percent: Math.min(100, Math.max(0, n ?? 0)) })
-                          }
-                        />
+                        <p className="font-sans text-base font-semibold text-navy">
+                          {t('riders.percent')}
+                        </p>
                         <div className="flex gap-2">
                           <QuickPercent
                             label={t('riders.quick80')}
