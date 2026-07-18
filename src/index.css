@@ -1,0 +1,67 @@
+@import './design-system/tokens/tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
+
+  body {
+    @apply bg-surface-alt text-ink font-sans antialiased;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-serif;
+  }
+
+  /* Large, obvious focus ring — accessibility for an older user. */
+  :focus-visible {
+    outline: 3px solid rgb(var(--orange));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Small uppercase, letter-spaced orange eyebrow label (SCF motif). */
+  .eyebrow {
+    @apply font-sans text-xs font-semibold uppercase tracking-eyebrow text-orange;
+  }
+}
+
+@layer utilities {
+  .print-only {
+    display: none;
+  }
+}
+
+/* --- Print base (Foundation ships the base; W4 adds per-slide print rules). --- */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  body {
+    background: #fff;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
