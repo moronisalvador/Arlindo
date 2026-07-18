@@ -85,7 +85,7 @@ export const dataEntry = {
   actions: {
     present: 'Apresentar',
     presentDisabled: 'Preencha o nome e alguns números para apresentar',
-    exportPdf: 'Exportar PDF',
+    exportPdf: 'Exportar',
     back: 'Voltar',
   },
 } as const

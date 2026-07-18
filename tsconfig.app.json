@@ -31,6 +31,8 @@
       "@design-system/*": ["src/design-system/*"],
       "@domain": ["src/domain"],
       "@domain/*": ["src/domain/*"],
+      "@export": ["src/export"],
+      "@export/*": ["src/export/*"],
       "@persistence": ["src/persistence"],
       "@persistence/*": ["src/persistence/*"],
       "@features": ["src/features"],
