@@ -1,6 +1,7 @@
 import type { PresentationInputs, YearlyRow } from '@domain/model/presentation'
 import type { DerivedPresentation } from '@domain/model/derived'
 import { getProduct } from '@domain/model/products'
+import { estimateNoteFor } from '@domain/presentationCopy'
 import type { CalculationEngine } from './CalculationEngine'
 import { PassthroughEngine } from './PassthroughEngine'
 
@@ -111,10 +112,7 @@ export class IulProjectionEngine implements CalculationEngine {
     derived.meta.engineVersion = this.version
     derived.meta.productName = derived.meta.productName || product.name
     // Make the estimate self-labeling everywhere it renders (slides/PDF/PPTX).
-    derived.disclaimers = [
-      'Estimativa gerada pelo aplicativo (não garantida) — apenas para simulação. A ilustração oficial da seguradora é o documento válido.',
-      ...derived.disclaimers,
-    ]
+    derived.disclaimers = [estimateNoteFor(inputs.presentationLanguage), ...derived.disclaimers]
     return derived
   }
 }

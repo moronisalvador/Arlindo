@@ -111,6 +111,8 @@ export const presentationInputsSchema = z.object({
   /** NLG product id from the product registry (@domain/model/products), e.g. 'flexlife'. */
   productId: z.string().default('flexlife'),
   title: z.string().default(''),
+  /** Language the client-facing presentation (slides/PDF/PPTX) is generated in. */
+  presentationLanguage: z.enum(['pt', 'en', 'es']).default('pt'),
   displayCurrency: currencyCodeSchema.default('USD'),
   branding: brandingSchema.default({}),
   client: clientSchema.default({}),

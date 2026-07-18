@@ -1,5 +1,10 @@
 import type { PresentationInputs, YearlyRow } from '@domain/model/presentation'
 import type { DerivedPresentation } from '@domain/model/derived'
+import {
+  defaultProductNameFor,
+  disclaimersFor,
+  translateRider,
+} from '@domain/presentationCopy'
 import type { CalculationEngine } from './CalculationEngine'
 
 /** Reshapes the salesman's typed illustration numbers into a DerivedPresentation. No math. */
@@ -10,6 +15,7 @@ export class PassthroughEngine implements CalculationEngine {
   compute(inputs: PresentationInputs): DerivedPresentation {
     const rows = [...inputs.yearlyRows].sort((a, b) => a.policyYear - b.policyYear)
     const iul = inputs.iul
+    const lang = inputs.presentationLanguage
 
     const totalPremiumsPaid =
       rows.length > 0
@@ -21,9 +27,10 @@ export class PassthroughEngine implements CalculationEngine {
         productType: inputs.productType,
         clientName: inputs.client.name,
         clientAge: inputs.client.age,
-        productName: inputs.title || defaultProductName(inputs),
+        productName: inputs.title || defaultProductName(inputs, lang),
         branding: inputs.branding,
         currency: inputs.displayCurrency,
+        language: lang,
         preparedOn: inputs.updatedAt,
         generatedBy: 'passthrough',
         engineVersion: this.version,
@@ -51,14 +58,24 @@ export class PassthroughEngine implements CalculationEngine {
         premiumPaid: pick(rows, 'premiumPaid'),
       },
       table: rows,
-      riders: iul.riders.filter((r) => r.included),
-      disclaimers: inputs.disclaimers,
+      riders: iul.riders.filter((r) => r.included).map((r) => translateRider(r, lang)),
+      disclaimers: disclaimersFor(lang, inputs.disclaimers),
     }
   }
 }
 
-function defaultProductName(inputs: PresentationInputs): string {
-  return inputs.productType === 'iul' ? 'Seguro de Vida Universal Indexado (IUL)' : 'Plano de Aposentadoria'
+function defaultProductName(
+  inputs: PresentationInputs,
+  lang: PresentationInputs['presentationLanguage'],
+): string {
+  if (inputs.productType !== 'iul') {
+    return lang === 'en'
+      ? 'Retirement Plan'
+      : lang === 'es'
+        ? 'Plan de Jubilación'
+        : 'Plano de Aposentadoria'
+  }
+  return defaultProductNameFor(lang)
 }
 
 function premiumTotal(inputs: PresentationInputs): number {

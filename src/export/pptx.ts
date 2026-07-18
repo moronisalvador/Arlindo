@@ -1,7 +1,8 @@
 import pptxgen from 'pptxgenjs'
 import type { DerivedPresentation } from '@domain/model/derived'
 import type { YearlyRow } from '@domain/model/presentation'
-import { formatMoney, formatNumber, formatPercent } from '@domain/format'
+import { formatMoney, formatNumber, formatPercent, localeFor } from '@domain/format'
+import { slideCopy } from '@domain/presentationCopy'
 
 /**
  * Generates an EDITABLE native .pptx (real text, tables, and a chart) from a
@@ -35,9 +36,9 @@ function sanitizeFileName(name: string): string {
   return `${base || 'apresentacao'}.pptx`
 }
 
-function monthYear(iso: string): string {
+function monthYear(iso: string, locale: string): string {
   const d = iso ? new Date(iso) : new Date()
-  const s = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(d)
+  const s = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(d)
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
@@ -82,12 +83,14 @@ function addHeader(slide: Slide, eyebrow: string, title: string): number {
 
 function coverSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
+  const c = slideCopy(d.meta.language)
+  const loc = localeFor(d.meta.language)
   s.background = { color: C.navy }
   // decorative soft circle
   s.addShape('ellipse', { x: 8.4, y: -1.8, w: 4, h: 4, fill: { color: C.navySoft, transparency: 45 }, line: { type: 'none' } })
   // orange agent panel on the right
   s.addShape('rect', { x: 10.2, y: 0, w: PW - 10.2, h: PH, fill: { color: C.orange } })
-  s.addText(d.meta.branding.agentName || 'Agente', {
+  s.addText(d.meta.branding.agentName || c.cover.agentFallback, {
     x: 10.2, y: 3.1, w: PW - 10.2, h: 0.5, align: 'center', fontFace: SANS, fontSize: 16, bold: true, color: C.navy,
   })
   s.addText(d.meta.branding.agentTitle || '', {
@@ -96,26 +99,22 @@ function coverSlide(pptx: pptxgen, d: DerivedPresentation) {
   addLogoChip(s, PW - 2.15, 0.4)
   // title block
   s.addText(d.meta.productName, { x: 0.8, y: 2.2, w: 8.8, h: 1.6, fontFace: SERIF, fontSize: 40, bold: true, color: C.white })
-  s.addText('Proposta Personalizada', { x: 0.8, y: 3.75, w: 8, h: 0.5, fontFace: SERIF, fontSize: 18, italic: true, color: C.orange })
-  s.addText(d.meta.clientName || 'Cliente', { x: 0.8, y: 4.5, w: 8, h: 0.7, fontFace: SERIF, fontSize: 28, color: C.white })
+  s.addText(c.cover.subtitle, { x: 0.8, y: 3.75, w: 8, h: 0.5, fontFace: SERIF, fontSize: 18, italic: true, color: C.orange })
+  s.addText(d.meta.clientName || c.cover.clientFallback, { x: 0.8, y: 4.5, w: 8, h: 0.7, fontFace: SERIF, fontSize: 28, color: C.white })
   s.addShape('rect', { x: 0.85, y: 5.25, w: 3.2, h: 0.06, fill: { color: C.orange } })
-  s.addText(monthYear(d.meta.preparedOn), { x: 0.8, y: 5.5, w: 6, h: 0.4, fontFace: SANS, fontSize: 12, color: 'C7CCD6' })
+  s.addText(monthYear(d.meta.preparedOn, loc), { x: 0.8, y: 5.5, w: 6, h: 0.4, fontFace: SANS, fontSize: 12, color: 'C7CCD6' })
 }
 
 function explainerSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
-  const top = addHeader(s, 'Entendendo o Produto', 'O que é uma IUL?')
-  const name = d.meta.clientName || 'o cliente'
-  s.addText(
-    `A IUL é permanente: protege ${name} para sempre e, ao mesmo tempo, constrói um patrimônio que rende com base em um índice de mercado — sobe com o índice, mas nunca cai quando o mercado cai (existe um piso de proteção).`,
-    { x: 0.6, y: top, w: 12.1, h: 0.9, fontFace: SANS, fontSize: 13, color: C.ink },
-  )
-  const pillars = [
-    ['Proteção por Morte', 'Cobertura que protege a família para sempre.'],
-    ['Benefício em Vida', 'Antecipe parte do valor em caso de doença grave.'],
-    ['Valor Acumulado', 'Uma parte de cada depósito rende ao longo do tempo.'],
-    ['Sem Expiração', 'Proteção vitalícia — não expira como o termo.'],
-  ]
+  const c = slideCopy(d.meta.language)
+  const top = addHeader(s, c.explainer.eyebrow, c.explainer.title)
+  const name = d.meta.clientName || c.clientFallback
+  const intro = c.explainer.intro(name)
+  s.addText(`${intro.pre}${intro.strong}${intro.post}`, {
+    x: 0.6, y: top, w: 12.1, h: 0.9, fontFace: SANS, fontSize: 13, color: C.ink,
+  })
+  const pillars = c.explainer.pillars.map((p) => [p.title, p.body] as const)
   const cardW = 2.9
   const gap = 0.18
   const startX = 0.6
@@ -129,17 +128,24 @@ function explainerSlide(pptx: pptxgen, d: DerivedPresentation) {
 
 function coverageSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
-  const top = addHeader(s, 'Sua Cobertura', 'Estrutura do Plano')
+  const c = slideCopy(d.meta.language)
+  const loc = localeFor(d.meta.language)
+  const top = addHeader(s, c.coverage.eyebrow, c.coverage.title)
   const cur = d.meta.currency
   const h = d.headline
-  const per = h.premiumMode === 'annual' ? '/ano' : '/mês'
+  const per = h.premiumMode === 'annual' ? c.coverage.perYear : c.coverage.perMonth
+  const depositLabel = h.paymentYears
+    ? `${c.coverage.deposit} · ${c.coverage.duringYears(h.paymentYears)}`
+    : c.coverage.deposit
   const stats: Array<[string, string]> = [
+    [depositLabel, h.premium != null ? `${formatMoney(h.premium, cur, { locale: loc })} ${per}` : '—'],
+    [c.coverage.death, formatMoney(h.deathBenefit, cur, { locale: loc })],
     [
-      h.paymentYears ? `Depósito · ${h.paymentYears} anos` : 'Depósito',
-      h.premium != null ? `${formatMoney(h.premium, cur)} ${per}` : '—',
+      c.coverage.livingLabel(
+        h.livingBenefitPercent ? formatPercent(h.livingBenefitPercent, { locale: loc }) : null,
+      ),
+      formatMoney(h.livingBenefit, cur, { locale: loc }),
     ],
-    ['Proteção por Morte', formatMoney(h.deathBenefit, cur)],
-    [`Benefício em Vida${h.livingBenefitPercent ? ` (até ${formatPercent(h.livingBenefitPercent)})` : ''}`, formatMoney(h.livingBenefit, cur)],
   ]
   const cardW = 3.9
   const gap = 0.2
@@ -152,7 +158,7 @@ function coverageSlide(pptx: pptxgen, d: DerivedPresentation) {
   })
   // included riders
   const riders = d.riders.slice(0, 8)
-  s.addText('Benefícios em Vida inclusos', { x: 0.6, y: top + 1.95, w: 8, h: 0.4, fontFace: SERIF, fontSize: 15, bold: true, color: C.navy })
+  s.addText(c.coverage.includedTitle, { x: 0.6, y: top + 1.95, w: 8, h: 0.4, fontFace: SERIF, fontSize: 15, bold: true, color: C.navy })
   riders.forEach((r, i) => {
     const col = i % 2
     const row = Math.floor(i / 2)
@@ -162,7 +168,7 @@ function coverageSlide(pptx: pptxgen, d: DerivedPresentation) {
       [
         { text: '✓  ', options: { color: C.orange, bold: true } },
         { text: r.label, options: { color: C.ink } },
-        ...(r.percent > 0 ? [{ text: `   até ${formatPercent(r.percent)}`, options: { color: C.navy, bold: true } }] : []),
+        ...(r.percent > 0 ? [{ text: `   ${c.coverage.upTo(formatPercent(r.percent, { locale: loc }))}`, options: { color: C.navy, bold: true } }] : []),
       ],
       { x, y, w: 6, h: 0.4, fontFace: SANS, fontSize: 12 },
     )
@@ -171,15 +177,17 @@ function coverageSlide(pptx: pptxgen, d: DerivedPresentation) {
 
 function projectionSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
-  const top = addHeader(s, 'Projeção de Longo Prazo', 'Crescimento do Valor Acumulado')
+  const c = slideCopy(d.meta.language)
+  const loc = localeFor(d.meta.language)
+  const top = addHeader(s, c.projection.eyebrow, c.projection.title)
   const cur = d.meta.currency
-  s.addText(`Valor projetado${d.headline.projectionYears ? ` em ${d.headline.projectionYears} anos` : ''}`.toUpperCase(), {
+  s.addText(c.projection.projectedLabel(d.headline.projectionYears ?? null).toUpperCase(), {
     x: 0.6, y: top, w: 3.3, h: 0.3, fontFace: SANS, fontSize: 9, bold: true, color: C.orange, charSpacing: 1,
   })
-  s.addText(formatMoney(d.headline.projectedAccumulatedValue, cur), {
-    x: 0.6, y: top + 0.35, w: 3.4, h: 0.9, fontFace: SERIF, fontSize: 30, bold: true, color: C.orange,
+  s.addText(formatMoney(d.headline.projectedAccumulatedValue, cur, { locale: loc }), {
+    x: 0.6, y: top + 0.35, w: 3.4, h: 0.9, fontFace: SERIF, fontSize: 30, bold: true, color: C.navy,
   })
-  s.addText('Disponível para resgate ou para continuar rendendo.', {
+  s.addText(c.projection.sub, {
     x: 0.6, y: top + 1.35, w: 3.3, h: 1, fontFace: SANS, fontSize: 12, color: C.muted,
   })
   const years = d.series.policyYears
@@ -187,7 +195,7 @@ function projectionSlide(pptx: pptxgen, d: DerivedPresentation) {
   if (years.length > 1 && values.length > 0) {
     s.addChart(
       'area',
-      [{ name: 'Valor acumulado', labels: years.map(String), values }],
+      [{ name: c.table.accumulated, labels: years.map(String), values }],
       {
         x: 4.2, y: top, w: 8.5, h: 4.4,
         chartColors: [C.orange],
@@ -198,7 +206,7 @@ function projectionSlide(pptx: pptxgen, d: DerivedPresentation) {
       },
     )
   } else {
-    s.addText('Adicione a tabela ano a ano para ver o gráfico.', {
+    s.addText(c.projection.empty, {
       x: 4.2, y: top + 1.5, w: 8, h: 1, fontFace: SANS, fontSize: 12, color: C.muted, align: 'center',
     })
   }
@@ -206,19 +214,21 @@ function projectionSlide(pptx: pptxgen, d: DerivedPresentation) {
 
 function tableSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
-  const top = addHeader(s, 'Detalhamento', 'Projeção Ano a Ano')
+  const c = slideCopy(d.meta.language)
+  const loc = localeFor(d.meta.language)
+  const top = addHeader(s, c.table.eyebrow, c.table.title)
   const cur = d.meta.currency
   const rows = sample(d.table, 14)
-  const head = ['Ano', 'Idade', 'Depósito', 'Valor acumulado', 'Proteção por morte'].map((t) => ({
+  const head = [c.table.year, c.table.age, c.table.premium, c.table.accumulated, c.table.death].map((t) => ({
     text: t,
     options: { bold: true, color: C.white, fill: { color: C.navy }, fontFace: SANS, fontSize: 11, align: 'center' as const },
   }))
   const body = rows.map((r: YearlyRow) => [
-    { text: formatNumber(r.policyYear), options: { align: 'center' as const } },
-    { text: r.age != null ? formatNumber(r.age) : '—', options: { align: 'center' as const } },
-    { text: formatMoney(r.premiumPaid, cur), options: { align: 'right' as const } },
-    { text: formatMoney(r.accumulatedValue, cur), options: { align: 'right' as const, bold: true, color: C.navy } },
-    { text: formatMoney(r.deathBenefit, cur), options: { align: 'right' as const } },
+    { text: formatNumber(r.policyYear, { locale: loc }), options: { align: 'center' as const } },
+    { text: r.age != null ? formatNumber(r.age, { locale: loc }) : '—', options: { align: 'center' as const } },
+    { text: formatMoney(r.premiumPaid, cur, { locale: loc }), options: { align: 'right' as const } },
+    { text: formatMoney(r.accumulatedValue, cur, { locale: loc }), options: { align: 'right' as const, bold: true, color: C.navy } },
+    { text: formatMoney(r.deathBenefit, cur, { locale: loc }), options: { align: 'right' as const } },
   ])
   s.addTable([head, ...body], {
     x: 0.6, y: top, w: 12.1, colW: [1.4, 1.4, 3, 3.3, 3],
@@ -229,36 +239,34 @@ function tableSlide(pptx: pptxgen, d: DerivedPresentation) {
 
 function optionsSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
-  const top = addHeader(s, 'A Partir Daí', 'Duas Opções')
+  const c = slideCopy(d.meta.language)
+  const loc = localeFor(d.meta.language)
+  const top = addHeader(s, c.options.eyebrow, c.options.title)
   const cur = d.meta.currency
   const h = d.headline
   // Opção 1 (navy)
   s.addShape('roundRect', { x: 0.8, y: top + 0.3, w: 5.6, h: 3, fill: { color: C.navy }, line: { type: 'none' }, rectRadius: 0.08 })
-  s.addText('OPÇÃO 1 · RESGATAR', { x: 1, y: top + 0.6, w: 5.2, h: 0.3, fontFace: SANS, fontSize: 10, bold: true, color: C.orange, align: 'center', charSpacing: 1 })
-  s.addText(formatMoney(h.projectedAccumulatedValue, cur), { x: 1, y: top + 1.1, w: 5.2, h: 0.9, fontFace: SERIF, fontSize: 30, bold: true, color: C.white, align: 'center' })
-  s.addText('Retirar o valor acumulado para usar como quiser.', { x: 1, y: top + 2.1, w: 5.2, h: 0.8, fontFace: SANS, fontSize: 12, color: 'C7CCD6', align: 'center' })
+  s.addText(c.options.opt1.toUpperCase(), { x: 1, y: top + 0.6, w: 5.2, h: 0.3, fontFace: SANS, fontSize: 10, bold: true, color: C.orange, align: 'center', charSpacing: 1 })
+  s.addText(formatMoney(h.projectedAccumulatedValue, cur, { locale: loc }), { x: 1, y: top + 1.1, w: 5.2, h: 0.9, fontFace: SERIF, fontSize: 30, bold: true, color: C.white, align: 'center' })
+  s.addText(c.options.opt1Body, { x: 1, y: top + 2.1, w: 5.2, h: 0.8, fontFace: SANS, fontSize: 12, color: 'C7CCD6', align: 'center' })
   // Opção 2 (white)
   s.addShape('roundRect', { x: 6.9, y: top + 0.3, w: 5.6, h: 3, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.08 })
-  s.addText('OPÇÃO 2 · DEIXAR RENDENDO', { x: 7.1, y: top + 0.6, w: 5.2, h: 0.3, fontFace: SANS, fontSize: 10, bold: true, color: C.orange, align: 'center', charSpacing: 1 })
-  s.addText(h.incomeOptionAnnual != null ? `${formatMoney(h.incomeOptionAnnual, cur)} /ano` : '—', { x: 7.1, y: top + 1.1, w: 5.2, h: 0.9, fontFace: SERIF, fontSize: 28, bold: true, color: C.navy, align: 'center' })
-  s.addText(`Renda projetada por toda a vida${h.incomeToAge ? ` (ilustrada até os ${h.incomeToAge} anos)` : ''}.`, { x: 7.1, y: top + 2.1, w: 5.2, h: 0.8, fontFace: SANS, fontSize: 12, color: C.muted, align: 'center' })
+  s.addText(c.options.opt2.toUpperCase(), { x: 7.1, y: top + 0.6, w: 5.2, h: 0.3, fontFace: SANS, fontSize: 10, bold: true, color: C.orange, align: 'center', charSpacing: 1 })
+  s.addText(h.incomeOptionAnnual != null ? `${formatMoney(h.incomeOptionAnnual, cur, { locale: loc })} ${c.options.perYear}` : '—', { x: 7.1, y: top + 1.1, w: 5.2, h: 0.9, fontFace: SERIF, fontSize: 28, bold: true, color: C.navy, align: 'center' })
+  s.addText(`${c.options.incomeForLife}${h.incomeToAge ? c.options.illustratedToAge(h.incomeToAge) : ''}.`, { x: 7.1, y: top + 2.1, w: 5.2, h: 0.8, fontFace: SANS, fontSize: 12, color: C.muted, align: 'center' })
 }
 
 function comparisonSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
-  const top = addHeader(s, 'Comparando os Produtos', 'Termo vs. IUL')
-  const rows: Array<[string, string, string]> = [
-    ['Duração', '20 anos, depois expira', 'Vitalícia, sem expiração'],
-    ['Valor acumulado', 'Não possui', 'Sim, cresce ao longo do tempo'],
-    ['Mensalidade', 'Fixa, mais baixa', 'Flexível, pode aumentar'],
-    ['Melhor para', 'Proteção máxima a baixo custo', 'Proteção vitalícia + patrimônio'],
-  ]
+  const c = slideCopy(d.meta.language)
+  const top = addHeader(s, c.comparison.eyebrow, c.comparison.title)
+  const rows: Array<[string, string, string]> = c.comparison.rows.map((r) => [r.label, r.term, r.iul])
   // Termo card (white)
   s.addShape('roundRect', { x: 0.8, y: top, w: 5.6, h: 4.3, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.08 })
-  s.addText('Seguro Temporário', { x: 0.8, y: top + 0.15, w: 5.6, h: 0.5, fontFace: SERIF, fontSize: 18, bold: true, color: C.ink, align: 'center' })
+  s.addText(c.comparison.term, { x: 0.8, y: top + 0.15, w: 5.6, h: 0.5, fontFace: SERIF, fontSize: 18, bold: true, color: C.ink, align: 'center' })
   // IUL card (navy)
   s.addShape('roundRect', { x: 6.9, y: top, w: 5.6, h: 4.3, fill: { color: C.navy }, line: { type: 'none' }, rectRadius: 0.08 })
-  s.addText('IUL ★', { x: 6.9, y: top + 0.15, w: 5.6, h: 0.5, fontFace: SERIF, fontSize: 18, bold: true, color: C.white, align: 'center' })
+  s.addText(c.comparison.iul, { x: 6.9, y: top + 0.15, w: 5.6, h: 0.5, fontFace: SERIF, fontSize: 18, bold: true, color: C.white, align: 'center' })
   rows.forEach(([label, termo, iul], i) => {
     const y = top + 0.85 + i * 0.82
     s.addText(label.toUpperCase(), { x: 1, y, w: 5.2, h: 0.25, fontFace: SANS, fontSize: 8, bold: true, color: C.muted, charSpacing: 1 })
@@ -270,10 +278,11 @@ function comparisonSlide(pptx: pptxgen, d: DerivedPresentation) {
 
 function disclaimersSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
+  const c = slideCopy(d.meta.language)
   s.background = { color: C.navy }
   s.addShape('ellipse', { x: 9.5, y: 5.5, w: 4, h: 4, fill: { color: C.navySoft, transparency: 50 }, line: { type: 'none' } })
-  s.addText('INFORMAÇÕES IMPORTANTES', { x: 0.8, y: 0.7, w: 9, h: 0.3, fontFace: SANS, fontSize: 10, bold: true, color: C.orange, charSpacing: 2 })
-  s.addText('Avisos legais', { x: 0.8, y: 1.05, w: 9, h: 0.6, fontFace: SERIF, fontSize: 26, bold: true, color: C.white })
+  s.addText(c.disclaimers.eyebrow.toUpperCase(), { x: 0.8, y: 0.7, w: 9, h: 0.3, fontFace: SANS, fontSize: 10, bold: true, color: C.orange, charSpacing: 2 })
+  s.addText(c.disclaimers.title, { x: 0.8, y: 1.05, w: 9, h: 0.6, fontFace: SERIF, fontSize: 26, bold: true, color: C.white })
   const items = d.disclaimers.length ? d.disclaimers : ['Documento ilustrativo. Valores projetados, não garantidos.']
   // Shrink type + spacing when the list is long so it never runs into the footer.
   const dense = items.length > 6

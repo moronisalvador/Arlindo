@@ -1,5 +1,6 @@
 import type { DerivedPresentation } from '@domain/model/derived'
-import { formatMoney, formatPercent } from '@domain/format'
+import { formatMoney, formatPercent, localeFor } from '@domain/format'
+import { slideCopy } from '@domain/presentationCopy'
 import { Card } from '@design-system/primitives'
 import { ContentSlide } from '../ContentSlide'
 
@@ -7,23 +8,27 @@ import { ContentSlide } from '../ContentSlide'
 export function CoverageRidersSlide({ derived }: { derived: DerivedPresentation }) {
   const h = derived.headline
   const currency = derived.meta.currency
-  const perLabel = h.premiumMode === 'annual' ? '/ano' : '/mês'
+  const c = slideCopy(derived.meta.language)
+  const locale = localeFor(derived.meta.language)
+  const perLabel = h.premiumMode === 'annual' ? c.coverage.perYear : c.coverage.perMonth
 
   const stats: Array<{ label: string; value: string; sub?: string }> = [
     {
-      label: 'Depósito',
-      value: h.premium != null ? `${formatMoney(h.premium, currency)} ${perLabel}` : '—',
-      sub: h.paymentYears ? `durante ${h.paymentYears} anos` : undefined,
+      label: c.coverage.deposit,
+      value: h.premium != null ? `${formatMoney(h.premium, currency, { locale })} ${perLabel}` : '—',
+      sub: h.paymentYears ? c.coverage.duringYears(h.paymentYears) : undefined,
     },
-    { label: 'Proteção por Morte', value: formatMoney(h.deathBenefit, currency) },
+    { label: c.coverage.death, value: formatMoney(h.deathBenefit, currency, { locale }) },
     {
-      label: `Benefício em Vida${h.livingBenefitPercent ? ` (até ${formatPercent(h.livingBenefitPercent)})` : ''}`,
-      value: formatMoney(h.livingBenefit, currency),
+      label: c.coverage.livingLabel(
+        h.livingBenefitPercent ? formatPercent(h.livingBenefitPercent, { locale }) : null,
+      ),
+      value: formatMoney(h.livingBenefit, currency, { locale }),
     },
   ]
 
   return (
-    <ContentSlide eyebrow="Sua Cobertura" title="Estrutura do Plano">
+    <ContentSlide eyebrow={c.coverage.eyebrow} title={c.coverage.title}>
       <div className="mb-8 grid grid-cols-3 gap-5">
         {stats.map((s) => (
           <Card key={s.label} headerStrip={s.label}>
@@ -40,7 +45,7 @@ export function CoverageRidersSlide({ derived }: { derived: DerivedPresentation 
       </div>
 
       <h4 className="mb-3 font-serif text-xl font-semibold text-navy">
-        Benefícios em Vida inclusos
+        {c.coverage.includedTitle}
       </h4>
       <div className="grid grid-cols-2 gap-x-8 gap-y-2">
         {derived.riders.slice(0, 8).map((r) => (
@@ -48,11 +53,11 @@ export function CoverageRidersSlide({ derived }: { derived: DerivedPresentation 
             <span className="text-orange">✓</span>
             <span className="font-sans text-lg text-ink">{r.label}</span>
             {r.additionalCost && (
-              <span className="font-sans text-xs text-muted">(custo adicional)</span>
+              <span className="font-sans text-xs text-muted">{c.coverage.additionalCost}</span>
             )}
             {r.percent > 0 && (
               <span className="ml-auto font-sans text-sm font-semibold text-navy">
-                até {formatPercent(r.percent)}
+                {c.coverage.upTo(formatPercent(r.percent, { locale }))}
               </span>
             )}
           </div>

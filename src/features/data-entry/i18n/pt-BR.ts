@@ -39,6 +39,12 @@ export const dataEntry = {
     sourceEstimate: 'Estimado no app',
     sourceTyped: 'Digitado da ilustração',
   },
+  language: {
+    label: 'Idioma da apresentação',
+    pt: 'Português',
+    en: 'Inglês',
+    es: 'Espanhol',
+  },
   product: {
     label: 'Produto National Life Group',
     carrier: 'Emissora',

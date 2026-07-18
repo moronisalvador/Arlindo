@@ -1,15 +1,18 @@
 import type { DerivedPresentation } from '@domain/model/derived'
-import { formatMoney } from '@domain/format'
+import { formatMoney, localeFor } from '@domain/format'
+import { slideCopy } from '@domain/presentationCopy'
 import { Card } from '@design-system/primitives'
 import { ContentSlide } from '../ContentSlide'
 
 /**
- * National Life's "Die Too Soon / Live Too Long / Become Ill" headline, in pt-BR:
+ * National Life's "Die Too Soon / Live Too Long / Become Ill" headline:
  * three ways the plan protects the client. Rendered right after the cover.
  */
 export function HeadlineSlide({ derived }: { derived: DerivedPresentation }) {
   const h = derived.headline
   const currency = derived.meta.currency
+  const c = slideCopy(derived.meta.language)
+  const locale = localeFor(derived.meta.language)
 
   // "Se você adoecer" — largest lifetime cap among included riders that have one.
   const capped = derived.riders.filter((r) => r.included && r.lifetimeMax != null)
@@ -27,34 +30,34 @@ export function HeadlineSlide({ derived }: { derived: DerivedPresentation }) {
   }> = [
     {
       emoji: '🛡️',
-      when: 'Se você partir cedo',
-      label: 'Proteção por Morte',
-      value: formatMoney(h.deathBenefit, currency),
-      subtitle: 'Pago à sua família, livre de imposto de renda',
+      when: c.headline.whenEarly,
+      label: c.headline.labelDeath,
+      value: formatMoney(h.deathBenefit, currency, { locale }),
+      subtitle: c.headline.subDeath,
     },
     {
       emoji: '💵',
-      when: 'Se você viver muito',
-      label: 'Renda vitalícia',
+      when: c.headline.whenLong,
+      label: c.headline.labelIncome,
       value: h.incomeOptionAnnual
-        ? `${formatMoney(h.incomeOptionAnnual, currency)} /ano`
+        ? `${formatMoney(h.incomeOptionAnnual, currency, { locale })} ${c.options.perYear}`
         : '—',
-      subtitle: h.incomeToAge ? `ilustrada até os ${h.incomeToAge} anos` : undefined,
+      subtitle: h.incomeToAge ? c.headline.illustratedToAge(h.incomeToAge) : undefined,
     },
     {
       emoji: '❤️',
-      when: 'Se você adoecer',
-      label: 'Benefícios em vida',
-      value: largestCap != null ? 'até 100% do benefício' : 'Acesso antecipado ao benefício',
+      when: c.headline.whenIll,
+      label: c.headline.labelLiving,
+      value: largestCap != null ? c.headline.livingUpToFull : c.headline.livingEarly,
       subtitle:
         largestCap != null
-          ? `até ${formatMoney(largestCap, currency, { compact: true })}`
+          ? c.headline.livingUpTo(formatMoney(largestCap, currency, { compact: true, locale }))
           : undefined,
     },
   ]
 
   return (
-    <ContentSlide eyebrow="Três Formas de Proteger" title="O que este plano faz por você">
+    <ContentSlide eyebrow={c.headline.eyebrow} title={c.headline.title}>
       <div className="grid grid-cols-3 gap-6">
         {cards.map((c) => (
           <Card key={c.when} className="h-full">

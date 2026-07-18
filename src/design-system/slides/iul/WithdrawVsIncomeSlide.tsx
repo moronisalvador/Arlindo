@@ -1,5 +1,6 @@
 import type { DerivedPresentation } from '@domain/model/derived'
-import { formatMoney } from '@domain/format'
+import { formatMoney, localeFor } from '@domain/format'
+import { slideCopy } from '@domain/presentationCopy'
 import { Card, EyebrowLabel } from '@design-system/primitives'
 import { ContentSlide } from '../ContentSlide'
 
@@ -7,28 +8,28 @@ import { ContentSlide } from '../ContentSlide'
 export function WithdrawVsIncomeSlide({ derived }: { derived: DerivedPresentation }) {
   const { headline, meta } = derived
   const currency = meta.currency
+  const c = slideCopy(meta.language)
+  const locale = localeFor(meta.language)
   return (
-    <ContentSlide eyebrow="A Partir Daí" title="Duas Opções">
+    <ContentSlide eyebrow={c.options.eyebrow} title={c.options.title}>
       <div className="grid grid-cols-2 gap-8 pt-4">
         <Card tone="navy" className="text-center">
-          <EyebrowLabel className="text-white/70">Opção 1 · Resgatar</EyebrowLabel>
+          <EyebrowLabel className="text-white/70">{c.options.opt1}</EyebrowLabel>
           <div className="mt-4 font-serif text-5xl font-semibold text-white">
-            {formatMoney(headline.projectedAccumulatedValue, currency)}
+            {formatMoney(headline.projectedAccumulatedValue, currency, { locale })}
           </div>
-          <p className="mt-4 font-sans text-lg text-white/80">
-            Retirar o valor acumulado para usar como quiser.
-          </p>
+          <p className="mt-4 font-sans text-lg text-white/80">{c.options.opt1Body}</p>
         </Card>
         <Card className="text-center">
-          <EyebrowLabel>Opção 2 · Deixar rendendo</EyebrowLabel>
+          <EyebrowLabel>{c.options.opt2}</EyebrowLabel>
           <div className="mt-4 font-serif text-5xl font-semibold text-navy">
             {headline.incomeOptionAnnual != null
-              ? `${formatMoney(headline.incomeOptionAnnual, currency)} /ano`
-              : '—'}
+              ? `${formatMoney(headline.incomeOptionAnnual, currency, { locale })} ${c.options.perYear}`
+              : c.options.none}
           </div>
           <p className="mt-4 font-sans text-lg text-muted">
-            Renda projetada por toda a vida
-            {headline.incomeToAge ? ` (ilustrada até os ${headline.incomeToAge} anos)` : ''}.
+            {c.options.incomeForLife}
+            {headline.incomeToAge ? c.options.illustratedToAge(headline.incomeToAge) : ''}.
           </p>
         </Card>
       </div>
