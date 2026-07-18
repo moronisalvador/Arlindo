@@ -75,6 +75,8 @@ export const iulSchema = z.object({
   livingBenefit: z.number().nonnegative().optional(),
   livingBenefitPercent: z.number().min(0).max(100).default(80),
   assumedRatePct: z.number().optional(),
+  /** How many years the client pays the deposit (shown on the coverage slide). */
+  paymentYears: z.number().int().positive().optional(),
   projectionYears: z.number().int().positive().optional(),
   projectedAccumulatedValue: z.number().optional(),
   incomeOptionAnnual: z.number().optional(),

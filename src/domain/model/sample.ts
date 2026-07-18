@@ -44,6 +44,7 @@ export function sampleIulPresentation(): PresentationInputs {
     iul: {
       premium: 250,
       premiumMode: 'monthly',
+      paymentYears: 20,
       deathBenefit,
       livingBenefit: 64_000,
       livingBenefitPercent: 80,

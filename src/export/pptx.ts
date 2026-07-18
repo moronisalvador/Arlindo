@@ -134,7 +134,10 @@ function coverageSlide(pptx: pptxgen, d: DerivedPresentation) {
   const h = d.headline
   const per = h.premiumMode === 'annual' ? '/ano' : '/mês'
   const stats: Array<[string, string]> = [
-    ['Depósito', h.premium != null ? `${formatMoney(h.premium, cur)} ${per}` : '—'],
+    [
+      h.paymentYears ? `Depósito · ${h.paymentYears} anos` : 'Depósito',
+      h.premium != null ? `${formatMoney(h.premium, cur)} ${per}` : '—',
+    ],
     ['Proteção por Morte', formatMoney(h.deathBenefit, cur)],
     [`Benefício em Vida${h.livingBenefitPercent ? ` (até ${formatPercent(h.livingBenefitPercent)})` : ''}`, formatMoney(h.livingBenefit, cur)],
   ]

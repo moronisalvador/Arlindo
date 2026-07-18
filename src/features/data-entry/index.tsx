@@ -322,6 +322,14 @@ function Editor({ id }: { id: string }) {
               ]}
             />
             <NumberField
+              label={t('plan.paymentYears')}
+              value={iul.paymentYears}
+              integer
+              suffix={t('plan.years')}
+              hint={t('plan.paymentYearsHint')}
+              onChange={(n) => setIul({ paymentYears: n })}
+            />
+            <NumberField
               label={t('plan.deathBenefit')}
               value={iul.deathBenefit}
               money

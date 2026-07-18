@@ -31,6 +31,7 @@ export class PassthroughEngine implements CalculationEngine {
       headline: {
         premium: iul.premium,
         premiumMode: iul.premiumMode,
+        paymentYears: iul.paymentYears,
         totalPremiumsPaid: totalPremiumsPaid || undefined,
         projectedAccumulatedValue:
           iul.projectedAccumulatedValue ?? lastValue(rows, 'accumulatedValue'),

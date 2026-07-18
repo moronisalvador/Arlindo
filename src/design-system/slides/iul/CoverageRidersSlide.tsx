@@ -9,10 +9,11 @@ export function CoverageRidersSlide({ derived }: { derived: DerivedPresentation 
   const currency = derived.meta.currency
   const perLabel = h.premiumMode === 'annual' ? '/ano' : '/mês'
 
-  const stats: Array<{ label: string; value: string }> = [
+  const stats: Array<{ label: string; value: string; sub?: string }> = [
     {
       label: 'Depósito',
       value: h.premium != null ? `${formatMoney(h.premium, currency)} ${perLabel}` : '—',
+      sub: h.paymentYears ? `durante ${h.paymentYears} anos` : undefined,
     },
     { label: 'Proteção por Morte', value: formatMoney(h.deathBenefit, currency) },
     {
@@ -30,6 +31,9 @@ export function CoverageRidersSlide({ derived }: { derived: DerivedPresentation 
               <span className="font-serif text-4xl font-semibold text-navy tabular-nums">
                 {s.value}
               </span>
+              {s.sub && (
+                <span className="mt-1 block font-sans text-base text-muted">{s.sub}</span>
+              )}
             </div>
           </Card>
         ))}

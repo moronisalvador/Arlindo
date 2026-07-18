@@ -26,6 +26,7 @@ export interface DerivedPresentation {
   headline: {
     premium?: number
     premiumMode?: 'monthly' | 'annual'
+    paymentYears?: number
     totalPremiumsPaid?: number
     projectedAccumulatedValue?: number
     deathBenefit?: number

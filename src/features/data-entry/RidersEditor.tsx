@@ -3,7 +3,7 @@ import { Card } from '@design-system'
 import { formatMoney } from '@domain/format'
 import type { Rider } from '@domain/model/presentation'
 import { cn } from '@shared/cn'
-import { Toggle } from './fields'
+import { NumberField, Toggle } from './fields'
 
 const CATEGORY_ORDER: Rider['category'][] = ['included', 'iul_exclusive', 'optional']
 
@@ -73,14 +73,25 @@ export function RidersEditor({
                   {rider.included && (
                     <div className="grid gap-4 sm:grid-cols-2">
                       <div className="space-y-2">
-                        <p className="font-sans text-base font-semibold text-navy">
-                          {t('riders.percent')}
-                        </p>
+                        <NumberField
+                          label={t('riders.percent')}
+                          value={rider.percent}
+                          integer
+                          suffix="%"
+                          onChange={(n) =>
+                            patch(rider.id, { percent: Math.min(100, Math.max(0, n ?? 0)) })
+                          }
+                        />
                         <div className="flex gap-2">
                           <QuickPercent
                             label={t('riders.quick80')}
                             active={rider.percent === 80}
                             onClick={() => patch(rider.id, { percent: 80 })}
+                          />
+                          <QuickPercent
+                            label={t('riders.quick90')}
+                            active={rider.percent === 90}
+                            onClick={() => patch(rider.id, { percent: 90 })}
                           />
                           <QuickPercent
                             label={t('riders.quick100')}
