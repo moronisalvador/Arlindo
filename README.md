@@ -1,5 +1,8 @@
 # Arlindo
 
+**App ao vivo:** https://moronisalvador.github.io/Arlindo/ — abra no iPad e toque em
+"Adicionar à Tela de Início".
+
 Ferramenta web para o agente montar apresentações de seguros e aposentadoria (IUL) a partir
 dos números da ilustração da seguradora — apresentar ao vivo (iPad / Google Meet) e exportar PDF.
 
