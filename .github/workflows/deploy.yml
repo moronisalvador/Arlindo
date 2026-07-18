@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - claude/insurance-presentation-tool-2q6xu1
   workflow_dispatch:
 
 permissions:
