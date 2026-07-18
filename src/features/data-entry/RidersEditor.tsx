@@ -1,5 +1,6 @@
 import { useTranslation } from 'react-i18next'
 import { Card } from '@design-system'
+import { formatMoney } from '@domain/format'
 import type { Rider } from '@domain/model/presentation'
 import { cn } from '@shared/cn'
 import { NumberField, Toggle } from './fields'
@@ -51,6 +52,12 @@ export function RidersEditor({
                       <p className="font-serif text-xl font-semibold text-navy">{rider.label}</p>
                       {rider.englishLabel && (
                         <p className="text-sm text-muted">{rider.englishLabel}</p>
+                      )}
+                      {rider.lifetimeMax != null && (
+                        <span className="mt-1 inline-block rounded-full bg-surface-alt px-3 py-1 text-sm font-semibold text-navy">
+                          {t('riders.lifetimeMaxPrefix')}{' '}
+                          {formatMoney(rider.lifetimeMax, 'USD', { compact: true })}
+                        </span>
                       )}
                     </div>
                     <Toggle

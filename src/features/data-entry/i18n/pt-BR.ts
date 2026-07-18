@@ -22,11 +22,28 @@ export const dataEntry = {
     licensePrefix: 'Licença',
   },
   sections: {
+    product: 'Produto',
     client: 'Cliente',
     plan: 'Plano IUL',
     riders: 'Coberturas e benefícios',
     years: 'Tabela ano a ano',
     preview: 'Prévia da apresentação',
+  },
+  product: {
+    label: 'Produto National Life Group',
+    carrier: 'Emissora',
+    minFace: 'Face mínima',
+    comingSoon: 'Mais produtos em breve.',
+    selected: 'Selecionado',
+  },
+  source: {
+    label: 'Fonte dos números',
+    typed: 'Digitados da ilustração',
+    estimate: 'Estimar no app',
+    assumedRate: 'Taxa ilustrada anual',
+    assumedRateHint: 'Taxa ilustrada anual (máx ~6,5% conforme AG49-A)',
+    estimateNote:
+      'Estimativa gerada pelo app — não garantida. A ilustração oficial é o documento válido.',
   },
   client: {
     name: 'Nome do cliente',
@@ -62,6 +79,7 @@ export const dataEntry = {
     additionalCostOff: 'Sem custo adicional',
     quick80: '80%',
     quick100: '100%',
+    lifetimeMaxPrefix: 'Limite',
     categoryIncluded: 'Já incluídos',
     categoryExclusive: 'Exclusivos do IUL',
     categoryOptional: 'Opcionais',

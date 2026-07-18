@@ -15,8 +15,8 @@ const C = {
   navy: '0E2148',
   navyDeep: '081430',
   navySoft: '1E366A',
-  orange: 'E86A1D',
-  orangeDk: 'C85412',
+  orange: 'DDA22E', // brand gold
+  orangeDk: 'B0801C',
   white: 'FFFFFF',
   alt: 'EEF0F3',
   ink: '111827',
@@ -81,10 +81,10 @@ function coverSlide(pptx: pptxgen, d: DerivedPresentation) {
   // orange agent panel on the right
   s.addShape('rect', { x: 10.2, y: 0, w: PW - 10.2, h: PH, fill: { color: C.orange } })
   s.addText(d.meta.branding.agentName || 'Agente', {
-    x: 10.2, y: 3.1, w: PW - 10.2, h: 0.5, align: 'center', fontFace: SANS, fontSize: 16, bold: true, color: C.white,
+    x: 10.2, y: 3.1, w: PW - 10.2, h: 0.5, align: 'center', fontFace: SANS, fontSize: 16, bold: true, color: C.navy,
   })
   s.addText(d.meta.branding.agentTitle || '', {
-    x: 10.2, y: 3.6, w: PW - 10.2, h: 0.4, align: 'center', fontFace: SANS, fontSize: 11, color: C.white,
+    x: 10.2, y: 3.6, w: PW - 10.2, h: 0.4, align: 'center', fontFace: SANS, fontSize: 11, color: C.navy,
   })
   addLogoChip(s, PW - 2.15, 0.4)
   // title block
@@ -137,7 +137,7 @@ function coverageSlide(pptx: pptxgen, d: DerivedPresentation) {
     const x = 0.6 + i * (cardW + gap)
     s.addShape('roundRect', { x, y: top, w: cardW, h: 1.7, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.06 })
     s.addShape('rect', { x, y: top, w: cardW, h: 0.45, fill: { color: C.orange } })
-    s.addText(label, { x: x + 0.15, y: top + 0.03, w: cardW - 0.3, h: 0.4, fontFace: SANS, fontSize: 10, bold: true, color: C.white, valign: 'middle' })
+    s.addText(label, { x: x + 0.15, y: top + 0.03, w: cardW - 0.3, h: 0.4, fontFace: SANS, fontSize: 10, bold: true, color: C.navy, valign: 'middle' })
     s.addText(value, { x: x + 0.15, y: top + 0.55, w: cardW - 0.3, h: 1, fontFace: SERIF, fontSize: 24, bold: true, color: C.navy, align: 'center', valign: 'middle' })
   })
   // included riders

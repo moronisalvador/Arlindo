@@ -19,9 +19,12 @@ import {
   type Rider,
   type YearlyRow,
 } from '@domain/model/presentation'
+import { availableProducts, getProduct } from '@domain/model/products'
+import { formatMoney } from '@domain/format'
 import { presentationRepository, profileRepository } from '@persistence'
 import { routes } from '@app/routes'
 import { queryKeys } from '@app/queryKeys'
+import { cn } from '@shared/cn'
 import { registerNamespace } from '@i18n/index'
 import { dataEntry } from './i18n/pt-BR'
 import { NumberField, Segmented, TextField } from './fields'
@@ -150,6 +153,7 @@ function Editor({ id }: { id: string }) {
     [scheduleSave],
   )
 
+  const setProduct = (productId: string) => update((p) => ({ ...p, productId }))
   const setClient = (patch: Partial<Client>) =>
     update((p) => ({ ...p, client: { ...p.client, ...patch } }))
   const setIul = (patch: Partial<IulInputs>) =>
@@ -207,8 +211,13 @@ function Editor({ id }: { id: string }) {
         )}
       </header>
 
-      {/* 1) Cliente */}
-      <Section eyebrow="1" title={t('sections.client')}>
+      {/* 1) Produto */}
+      <Section eyebrow="1" title={t('sections.product')}>
+        <ProductSelector value={working.productId} onChange={setProduct} />
+      </Section>
+
+      {/* 2) Cliente */}
+      <Section eyebrow="2" title={t('sections.client')}>
         <Card>
           <div className="grid gap-4 sm:grid-cols-2">
             <TextField
@@ -238,8 +247,8 @@ function Editor({ id }: { id: string }) {
         </Card>
       </Section>
 
-      {/* 2) Plano IUL */}
-      <Section eyebrow="2" title={t('sections.plan')}>
+      {/* 3) Plano IUL */}
+      <Section eyebrow="3" title={t('sections.plan')}>
         <Card>
           <div className="grid gap-4 sm:grid-cols-2">
             <NumberField
@@ -313,14 +322,43 @@ function Editor({ id }: { id: string }) {
         </Card>
       </Section>
 
-      {/* 3) Coberturas / Riders */}
-      <Section eyebrow="3" title={t('sections.riders')}>
+      {/* 4) Coberturas / Riders */}
+      <Section eyebrow="4" title={t('sections.riders')}>
         <RidersEditor riders={iul.riders} onChange={setRiders} />
       </Section>
 
-      {/* 4) Tabela ano a ano */}
-      <Section eyebrow="4" title={t('sections.years')}>
-        <YearTableEditor rows={working.yearlyRows} onChange={setRows} />
+      {/* 5) Fonte dos números + tabela ano a ano (ou estimativa no app) */}
+      <Section eyebrow="5" title={t('sections.years')}>
+        <div className="space-y-6">
+          <Segmented
+            label={t('source.label')}
+            value={iul.projectionSource}
+            onChange={(v) => setIul({ projectionSource: v })}
+            options={[
+              { value: 'typed', label: t('source.typed') },
+              { value: 'estimate', label: t('source.estimate') },
+            ]}
+          />
+
+          {iul.projectionSource === 'estimate' ? (
+            <div className="space-y-4">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <NumberField
+                  label={t('source.assumedRate')}
+                  value={iul.assumedRatePct}
+                  suffix="%"
+                  hint={t('source.assumedRateHint')}
+                  onChange={(n) => setIul({ assumedRatePct: n })}
+                />
+              </div>
+              <Card tone="alt">
+                <p className="text-base text-ink/80">{t('source.estimateNote')}</p>
+              </Card>
+            </div>
+          ) : (
+            <YearTableEditor rows={working.yearlyRows} onChange={setRows} />
+          )}
+        </div>
       </Section>
 
       {/* Live preview */}
@@ -355,6 +393,77 @@ function Editor({ id }: { id: string }) {
         )}
       </div>
     </div>
+  )
+}
+
+/**
+ * Product picker over the NLG registry. Renders every AVAILABLE product as a
+ * large touch button (single available product shows as a selected chip plus a
+ * "coming soon" note); more products appear automatically as they turn on.
+ * Always shows the selected product's positioning, carrier and minimum face.
+ */
+function ProductSelector({
+  value,
+  onChange,
+}: {
+  value: string
+  onChange: (id: string) => void
+}) {
+  const { t } = useTranslation('dataEntry')
+  const products = availableProducts()
+  const selected = getProduct(value)
+  const single = products.length <= 1
+
+  return (
+    <Card>
+      <div className="space-y-4">
+        <EyebrowLabel>{t('product.label')}</EyebrowLabel>
+        <div className="flex flex-wrap gap-2">
+          {products.map((p) => {
+            const active = p.id === selected.id
+            return (
+              <button
+                key={p.id}
+                type="button"
+                aria-pressed={active}
+                disabled={single}
+                onClick={() => onChange(p.id)}
+                className={cn(
+                  'min-h-[3.25rem] rounded-xl border px-5 font-sans text-lg font-semibold transition-colors',
+                  active
+                    ? 'border-navy bg-navy text-white'
+                    : 'border-line bg-surface text-ink hover:bg-surface-alt',
+                  single && 'cursor-default',
+                )}
+              >
+                {p.name}
+                {single && active && (
+                  <span className="ml-2 text-sm font-normal opacity-80">
+                    · {t('product.selected')}
+                  </span>
+                )}
+              </button>
+            )
+          })}
+        </div>
+
+        {single && <p className="text-base text-muted">{t('product.comingSoon')}</p>}
+
+        <p className="text-lg text-ink/80">{selected.positioning}</p>
+        <div className="flex flex-wrap gap-x-8 gap-y-2 text-base">
+          <span className="text-muted">
+            {t('product.carrier')}:{' '}
+            <span className="font-semibold text-navy">{selected.carrier}</span>
+          </span>
+          <span className="text-muted">
+            {t('product.minFace')}:{' '}
+            <span className="font-semibold text-navy">
+              {formatMoney(selected.minFace, 'USD', { compact: true })}
+            </span>
+          </span>
+        </div>
+      </div>
+    </Card>
   )
 }
 

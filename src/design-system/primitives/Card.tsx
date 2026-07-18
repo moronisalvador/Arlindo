@@ -33,7 +33,7 @@ export function Card({
       {...rest}
     >
       {headerStrip && (
-        <div className="flex items-center gap-2 bg-orange px-4 py-2 font-sans text-sm font-semibold text-white">
+        <div className="flex items-center gap-2 bg-orange px-4 py-2 font-sans text-sm font-semibold text-navy">
           {headerIcon}
           <span>{headerStrip}</span>
         </div>
