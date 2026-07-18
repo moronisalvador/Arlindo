@@ -29,6 +29,16 @@ export const dataEntry = {
     years: 'Tabela ano a ano',
     preview: 'Prévia da apresentação',
   },
+  summaries: {
+    toFill: 'Toque para preencher',
+    ridersIncluded_one: '{{count}} cobertura incluída',
+    ridersIncluded_other: '{{count}} coberturas incluídas',
+    ridersNone: 'Nenhuma cobertura incluída',
+    rows_one: '{{count}} ano na tabela',
+    rows_other: '{{count}} anos na tabela',
+    sourceEstimate: 'Estimado no app',
+    sourceTyped: 'Digitado da ilustração',
+  },
   product: {
     label: 'Produto National Life Group',
     carrier: 'Emissora',

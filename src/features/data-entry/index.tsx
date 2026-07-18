@@ -31,6 +31,7 @@ import { NumberField, Segmented, TextField } from './fields'
 import { RidersEditor } from './RidersEditor'
 import { YearTableEditor } from './YearTableEditor'
 import { SlidePreview } from './SlidePreview'
+import { CollapsibleSection } from './CollapsibleSection'
 
 registerNamespace('dataEntry', dataEntry)
 
@@ -102,6 +103,8 @@ function Editor({ id }: { id: string }) {
 
   const [working, setWorking] = useState<PresentationInputs | null>(null)
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle')
+  // Accordion: one section open at a time. Start on "Cliente" (Produto defaults).
+  const [openKey, setOpenKey] = useState<string>('cliente')
   const seededIdRef = useRef<string | null>(null)
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -191,6 +194,35 @@ function Editor({ id }: { id: string }) {
   const canPresent = isPresentable(working)
   const iul = working.iul
 
+  const toggle = (key: string) => setOpenKey((cur) => (cur === key ? '' : key))
+
+  // Per-section completion + collapsed summaries (progress at a glance).
+  const includedRiders = iul.riders.filter((r) => r.included).length
+  const clientComplete = working.client.name.trim().length > 0
+  const planComplete = iul.premium != null && iul.deathBenefit != null
+  const ridersComplete = includedRiders > 0
+  const yearsComplete =
+    iul.projectionSource === 'estimate' || working.yearlyRows.length > 0
+
+  const productSummary = getProduct(working.productId).name
+  const clientSummary = clientComplete
+    ? [working.client.name.trim(), working.client.age ? `${working.client.age} ${t('plan.years')}` : null]
+        .filter(Boolean)
+        .join(' · ')
+    : t('summaries.toFill')
+  const planSummary = planComplete
+    ? `${formatMoney(iul.premium, currency)} · ${formatMoney(iul.deathBenefit, currency)}`
+    : t('summaries.toFill')
+  const ridersSummary = ridersComplete
+    ? t('summaries.ridersIncluded', { count: includedRiders })
+    : t('summaries.ridersNone')
+  const yearsSummary =
+    iul.projectionSource === 'estimate'
+      ? t('summaries.sourceEstimate')
+      : working.yearlyRows.length > 0
+        ? t('summaries.rows', { count: working.yearlyRows.length })
+        : t('summaries.sourceTyped')
+
   return (
     <div className="space-y-8 pb-12">
       <header className="space-y-2">
@@ -211,13 +243,28 @@ function Editor({ id }: { id: string }) {
         )}
       </header>
 
+      <div className="space-y-4">
       {/* 1) Produto */}
-      <Section eyebrow="1" title={t('sections.product')}>
+      <CollapsibleSection
+        step="1"
+        title={t('sections.product')}
+        summary={productSummary}
+        complete
+        open={openKey === 'produto'}
+        onToggle={() => toggle('produto')}
+      >
         <ProductSelector value={working.productId} onChange={setProduct} />
-      </Section>
+      </CollapsibleSection>
 
       {/* 2) Cliente */}
-      <Section eyebrow="2" title={t('sections.client')}>
+      <CollapsibleSection
+        step="2"
+        title={t('sections.client')}
+        summary={clientSummary}
+        complete={clientComplete}
+        open={openKey === 'cliente'}
+        onToggle={() => toggle('cliente')}
+      >
         <Card>
           <div className="grid gap-4 sm:grid-cols-2">
             <TextField
@@ -245,10 +292,17 @@ function Editor({ id }: { id: string }) {
             />
           </div>
         </Card>
-      </Section>
+      </CollapsibleSection>
 
       {/* 3) Plano IUL */}
-      <Section eyebrow="3" title={t('sections.plan')}>
+      <CollapsibleSection
+        step="3"
+        title={t('sections.plan')}
+        summary={planSummary}
+        complete={planComplete}
+        open={openKey === 'plano'}
+        onToggle={() => toggle('plano')}
+      >
         <Card>
           <div className="grid gap-4 sm:grid-cols-2">
             <NumberField
@@ -320,15 +374,29 @@ function Editor({ id }: { id: string }) {
             />
           </div>
         </Card>
-      </Section>
+      </CollapsibleSection>
 
       {/* 4) Coberturas / Riders */}
-      <Section eyebrow="4" title={t('sections.riders')}>
+      <CollapsibleSection
+        step="4"
+        title={t('sections.riders')}
+        summary={ridersSummary}
+        complete={ridersComplete}
+        open={openKey === 'riders'}
+        onToggle={() => toggle('riders')}
+      >
         <RidersEditor riders={iul.riders} onChange={setRiders} />
-      </Section>
+      </CollapsibleSection>
 
       {/* 5) Fonte dos números + tabela ano a ano (ou estimativa no app) */}
-      <Section eyebrow="5" title={t('sections.years')}>
+      <CollapsibleSection
+        step="5"
+        title={t('sections.years')}
+        summary={yearsSummary}
+        complete={yearsComplete}
+        open={openKey === 'fonte'}
+        onToggle={() => toggle('fonte')}
+      >
         <div className="space-y-6">
           <Segmented
             label={t('source.label')}
@@ -359,7 +427,8 @@ function Editor({ id }: { id: string }) {
             <YearTableEditor rows={working.yearlyRows} onChange={setRows} />
           )}
         </div>
-      </Section>
+      </CollapsibleSection>
+      </div>
 
       {/* Live preview */}
       <Section eyebrow="★" title={t('sections.preview')}>
