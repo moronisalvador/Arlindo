@@ -21,29 +21,29 @@ export const DEFAULT_IUL_RIDERS: Rider[] = [
     label: 'Doença Terminal',
     englishLabel: 'Accelerated Benefits Rider — Terminal Illness',
     included: true,
-    percent: 100,
+    percent: 90,
     additionalCost: false,
     category: 'included',
     lifetimeMax: 1_500_000,
-    note: 'Sem custo. Antecipação (com desconto) em caso de doença terminal com expectativa de até 24 meses. Limite vitalício US$ 1,5 mi.',
+    note: 'Sem custo. Antecipação com desconto em caso de doença terminal (expectativa de até 24 meses). Limite vitalício de US$ 1,5 mi compartilhado com Doença Crônica e Alzheimer.',
   },
   {
     id: 'chronic_illness',
     label: 'Doença Crônica',
     englishLabel: 'Accelerated Benefits Rider — Chronic Illness',
     included: true,
-    percent: 100,
+    percent: 80,
     additionalCost: false,
     category: 'included',
     lifetimeMax: 1_500_000,
-    note: 'Sem custo. Incapacidade de realizar 2 de 6 atividades diárias por 90 dias, ou comprometimento cognitivo severo. Até 2%/mês. Limite vitalício US$ 1,5 mi.',
+    note: 'Sem custo. Incapacidade de realizar 2 de 6 atividades diárias por 90 dias, ou comprometimento cognitivo severo. Até 2%/mês. Limite vitalício de US$ 1,5 mi compartilhado com Doença Terminal e Alzheimer.',
   },
   {
     id: 'critical_illness',
     label: 'Doença Crítica',
     englishLabel: 'Accelerated Benefits Rider — Critical Illness',
     included: true,
-    percent: 100,
+    percent: 80,
     additionalCost: false,
     category: 'included',
     lifetimeMax: 1_000_000,
@@ -54,7 +54,7 @@ export const DEFAULT_IUL_RIDERS: Rider[] = [
     label: 'Lesão Crítica / Acidentes',
     englishLabel: 'Accelerated Benefits Rider — Critical Injury',
     included: true,
-    percent: 100,
+    percent: 80,
     additionalCost: false,
     category: 'included',
     lifetimeMax: 1_000_000,
@@ -65,11 +65,11 @@ export const DEFAULT_IUL_RIDERS: Rider[] = [
     label: 'Alzheimer',
     englishLabel: "Accelerated Benefits Rider — Alzheimer's Disease",
     included: true,
-    percent: 100,
+    percent: 80,
     additionalCost: false,
     category: 'included',
     lifetimeMax: 1_500_000,
-    note: 'Sem custo. Diagnóstico de Alzheimer/demência elegível por especialista. Limite vitalício US$ 1,5 mi.',
+    note: 'Sem custo. Diagnóstico de Alzheimer/demência elegível por especialista. Limite vitalício de US$ 1,5 mi compartilhado com Doença Terminal e Crônica.',
   },
   {
     id: 'value_added_services',
@@ -100,7 +100,7 @@ export const DEFAULT_IUL_RIDERS: Rider[] = [
     additionalCost: true,
     category: 'iul_exclusive',
     lifetimeMax: 3_000_000,
-    note: 'Custo adicional. Antecipa uma parcela maior — até o benefício por morte integral (limite ~US$ 3 mi), 2%–4% ao mês. Indisponível em CA e NY.',
+    note: 'Custo adicional. Antecipa uma parcela maior — até o benefício por morte integral (limite ~US$ 3 mi), 2% ou 4% ao mês (escolhido na emissão). Indisponível em CA e NY.',
   },
   {
     id: 'waiver_monthly_deductions',
@@ -121,13 +121,13 @@ export const DEFAULT_IUL_RIDERS: Rider[] = [
     additionalCost: true,
     category: 'optional',
     lifetimeMax: 25_000,
-    note: 'Custo adicional. Cobertura de US$ 5 mil a US$ 25 mil por filho, até os 23 anos; taxa única independente do nº de filhos.',
+    note: 'Custo adicional. Cobertura de US$ 5 mil a US$ 25 mil por filho (múltiplos de US$ 1.000), até os 25 anos; taxa única independente do nº de filhos.',
   },
 ]
 
 /**
  * Standard NLG/LSW illustration disclaimers (pt-BR). Rendered on slides + PDF +
- * PPTX. Includes AG49-A, non-guaranteed language, and the foreign-national /
+ * PPTX. Includes AG49-B, non-guaranteed language, and the foreign-national /
  * US-solicitation compliance note relevant to a Brazil-based agent.
  */
 export const DEFAULT_IUL_DISCLAIMERS: string[] = [
@@ -135,7 +135,8 @@ export const DEFAULT_IUL_DISCLAIMERS: string[] = [
   'Valores não garantidos estão sujeitos a alteração e podem ser maiores ou menores do que os ilustrados.',
   'O uso de um benefício em vida pode reduzir ou eliminar outros benefícios da apólice e dos riders.',
   'Riders são opcionais e podem exigir prêmio adicional; sujeitos a underwriting, exclusões e limitações, podendo não estar disponíveis em todos os estados.',
+  'Os limites vitalícios dos benefícios acelerados são compartilhados por grupo de rider e por segurado, e variam por estado (por exemplo: NY US$ 2 mi; IL e NJ US$ 500 mil).',
   'As garantias dependem da capacidade de pagamento de sinistros da companhia emissora (National Life Insurance Company / Life Insurance Company of the Southwest).',
-  'A taxa máxima ilustrada segue a Actuarial Guideline 49-A. O desempenho passado de índices não representa desempenho futuro.',
+  'A taxa máxima ilustrada segue a Actuarial Guideline 49-B. O desempenho passado de índices não representa desempenho futuro.',
   'Apólice em dólares (US$). A solicitação, a ilustração, a assinatura e a entrega devem ocorrer nos Estados Unidos. O cliente é responsável por confirmar que a legislação brasileira permite a titularidade desta apólice.',
 ]

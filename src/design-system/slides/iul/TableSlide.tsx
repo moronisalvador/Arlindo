@@ -1,6 +1,7 @@
 import type { DerivedPresentation } from '@domain/model/derived'
 import type { YearlyRow } from '@domain/model/presentation'
-import { formatMoney, formatNumber } from '@domain/format'
+import { formatMoney, formatNumber, localeFor } from '@domain/format'
+import { slideCopy } from '@domain/presentationCopy'
 import { DataTable, type Column } from '@design-system/primitives'
 import { ContentSlide } from '../ContentSlide'
 
@@ -14,34 +15,36 @@ function sample<T>(rows: T[], max: number): T[] {
 /** Year-by-year detail table (sampled to fit; highlighted years get a tint). */
 export function TableSlide({ derived }: { derived: DerivedPresentation }) {
   const currency = derived.meta.currency
+  const c = slideCopy(derived.meta.language)
+  const locale = localeFor(derived.meta.language)
   const rows = sample(derived.table, 16)
 
   const columns: Array<Column<YearlyRow>> = [
-    { key: 'year', header: 'Ano', render: (r) => formatNumber(r.policyYear) },
-    { key: 'age', header: 'Idade', render: (r) => (r.age != null ? formatNumber(r.age) : '—') },
+    { key: 'year', header: c.table.year, render: (r) => formatNumber(r.policyYear, { locale }) },
+    { key: 'age', header: c.table.age, render: (r) => (r.age != null ? formatNumber(r.age, { locale }) : '—') },
     {
       key: 'premium',
-      header: 'Depósito',
+      header: c.table.premium,
       align: 'right',
-      render: (r) => formatMoney(r.premiumPaid, currency),
+      render: (r) => formatMoney(r.premiumPaid, currency, { locale }),
     },
     {
       key: 'accum',
-      header: 'Valor acumulado',
+      header: c.table.accumulated,
       align: 'right',
       emphasize: true,
-      render: (r) => formatMoney(r.accumulatedValue, currency),
+      render: (r) => formatMoney(r.accumulatedValue, currency, { locale }),
     },
     {
       key: 'death',
-      header: 'Proteção por morte',
+      header: c.table.death,
       align: 'right',
-      render: (r) => formatMoney(r.deathBenefit, currency),
+      render: (r) => formatMoney(r.deathBenefit, currency, { locale }),
     },
   ]
 
   return (
-    <ContentSlide eyebrow="Detalhamento" title="Projeção Ano a Ano">
+    <ContentSlide eyebrow={c.table.eyebrow} title={c.table.title}>
       <DataTable
         columns={columns}
         rows={rows}

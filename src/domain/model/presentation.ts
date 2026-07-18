@@ -75,6 +75,8 @@ export const iulSchema = z.object({
   livingBenefit: z.number().nonnegative().optional(),
   livingBenefitPercent: z.number().min(0).max(100).default(80),
   assumedRatePct: z.number().optional(),
+  /** How many years the client pays the deposit (shown on the coverage slide). */
+  paymentYears: z.number().int().positive().optional(),
   projectionYears: z.number().int().positive().optional(),
   projectedAccumulatedValue: z.number().optional(),
   incomeOptionAnnual: z.number().optional(),
@@ -109,6 +111,8 @@ export const presentationInputsSchema = z.object({
   /** NLG product id from the product registry (@domain/model/products), e.g. 'flexlife'. */
   productId: z.string().default('flexlife'),
   title: z.string().default(''),
+  /** Language the client-facing presentation (slides/PDF/PPTX) is generated in. */
+  presentationLanguage: z.enum(['pt', 'en', 'es']).default('pt'),
   displayCurrency: currencyCodeSchema.default('USD'),
   branding: brandingSchema.default({}),
   client: clientSchema.default({}),

@@ -19,6 +19,7 @@ export interface DerivedPresentation {
     productName: string
     branding: Branding
     currency: CurrencyCode
+    language: 'pt' | 'en' | 'es'
     preparedOn: string
     generatedBy: 'passthrough' | 'iul-engine' | 'annuity-engine'
     engineVersion: string
@@ -26,6 +27,7 @@ export interface DerivedPresentation {
   headline: {
     premium?: number
     premiumMode?: 'monthly' | 'annual'
+    paymentYears?: number
     totalPremiumsPaid?: number
     projectedAccumulatedValue?: number
     deathBenefit?: number
