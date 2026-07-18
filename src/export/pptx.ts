@@ -50,23 +50,48 @@ function sample<T>(rows: T[], max: number): T[] {
 
 type Slide = ReturnType<pptxgen['addSlide']>
 
+// The real SCF logo, loaded to a base64 data URI once per export (set in downloadPptx).
+let logoDataUrl = ''
+
+/** Fetch the public logo asset and return it as a base64 data URI (for pptx embedding). */
+async function loadLogo(): Promise<string> {
+  try {
+    const res = await fetch(`${import.meta.env.BASE_URL}scf-logo.png`)
+    const blob = await res.blob()
+    return await new Promise<string>((resolve) => {
+      const fr = new FileReader()
+      fr.onloadend = () => resolve(typeof fr.result === 'string' ? fr.result : '')
+      fr.onerror = () => resolve('')
+      fr.readAsDataURL(blob)
+    })
+  } catch {
+    return ''
+  }
+}
+
 /**
- * SCF logo chip (top-right of a slide): a white chip holding the gold monogram
- * badge with navy "SCF" and the stacked wordmark — matching the on-screen
- * BrandLogo lockup so the PPTX carries the same branding.
+ * SCF logo chip (top-right of a slide): a white chip holding the real logo image
+ * so the PPTX carries the same branding as the on-screen deck. Falls back to a
+ * text wordmark if the image couldn't be loaded.
  */
 function addLogoChip(slide: Slide, x: number, y: number) {
-  slide.addShape('roundRect', { x, y, w: 2.0, h: 0.62, fill: { color: C.white }, line: { color: C.white }, rectRadius: 0.08 })
-  // Gold monogram badge with navy "SCF".
-  slide.addShape('roundRect', { x: x + 0.1, y: y + 0.1, w: 0.42, h: 0.42, fill: { color: C.orange }, line: { color: C.orange }, rectRadius: 0.06 })
-  slide.addText('SCF', { x: x + 0.1, y: y + 0.1, w: 0.42, h: 0.42, fontFace: SERIF, fontSize: 11, bold: true, color: C.navy, align: 'center', valign: 'middle' })
-  slide.addText(
-    [
-      { text: 'Second Chance', options: { fontFace: SERIF, fontSize: 9, bold: true, color: C.navy } },
-      { text: '\nFINANCIAL', options: { fontFace: SANS, fontSize: 6, bold: true, color: C.navy, charSpacing: 3 } },
-    ],
-    { x: x + 0.58, y, w: 1.4, h: 0.62, valign: 'middle', align: 'left', lineSpacingMultiple: 0.9 },
-  )
+  const w = 2.0
+  const h = 0.62
+  slide.addShape('roundRect', { x, y, w, h, fill: { color: C.white }, line: { color: C.white }, rectRadius: 0.08 })
+  if (logoDataUrl) {
+    slide.addImage({
+      data: logoDataUrl,
+      x: x + 0.12,
+      y: y + 0.09,
+      w: w - 0.24,
+      h: h - 0.18,
+      sizing: { type: 'contain', w: w - 0.24, h: h - 0.18 },
+    })
+  } else {
+    slide.addText('SECOND CHANCE FINANCIAL', {
+      x: x + 0.1, y, w: w - 0.2, h, fontFace: SANS, fontSize: 8, bold: true, color: C.navy, valign: 'middle', align: 'center',
+    })
+  }
 }
 
 /** Navy header bar with orange eyebrow + white serif title. Returns body top (in). */
@@ -308,6 +333,8 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
   pptx.author = 'Arlindo'
   pptx.company = derived.meta.branding.company || 'Second Chance Financial'
   pptx.title = derived.meta.productName
+
+  logoDataUrl = await loadLogo()
 
   coverSlide(pptx, derived)
   explainerSlide(pptx, derived)
