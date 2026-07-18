@@ -16,7 +16,11 @@ export function WithdrawVsIncomeSlide({ derived }: { derived: DerivedPresentatio
         <Card tone="navy" className="text-center">
           <EyebrowLabel className="text-white/70">{c.options.opt1}</EyebrowLabel>
           <div className="mt-4 font-serif text-5xl font-semibold text-white">
-            {formatMoney(headline.projectedAccumulatedValue, currency, { locale })}
+            {formatMoney(
+              headline.projectedCashSurrenderValue ?? headline.projectedAccumulatedValue,
+              currency,
+              { locale },
+            )}
           </div>
           <p className="mt-4 font-sans text-lg text-white/80">{c.options.opt1Body}</p>
         </Card>
