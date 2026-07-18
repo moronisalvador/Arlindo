@@ -18,6 +18,7 @@ export default defineConfig({
       '@app': alias('./src/app'),
       '@design-system': alias('./src/design-system'),
       '@domain': alias('./src/domain'),
+      '@export': alias('./src/export'),
       '@persistence': alias('./src/persistence'),
       '@features': alias('./src/features'),
       '@shared': alias('./src/shared'),

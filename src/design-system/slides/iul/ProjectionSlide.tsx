@@ -21,7 +21,7 @@ export function ProjectionSlide({ derived }: { derived: DerivedPresentation }) {
             <CurrencyDisplay
               amount={headline.projectedAccumulatedValue}
               currency={meta.currency}
-              className="text-6xl text-orange"
+              className="text-6xl text-navy"
             />
           </div>
           <p className="mt-4 font-sans text-lg text-muted">

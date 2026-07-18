@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import type { DerivedPresentation } from '@domain/model/derived'
 import { CoverSlide } from './iul/CoverSlide'
+import { HeadlineSlide } from './iul/HeadlineSlide'
 import { ExplainerSlide } from './iul/ExplainerSlide'
 import { CoverageRidersSlide } from './iul/CoverageRidersSlide'
 import { ProjectionSlide } from './iul/ProjectionSlide'
@@ -23,6 +24,7 @@ export interface BuiltSlide {
 export function buildSlides(derived: DerivedPresentation): BuiltSlide[] {
   const slides: BuiltSlide[] = [
     { id: 'cover', title: 'Capa', node: <CoverSlide derived={derived} /> },
+    { id: 'headline', title: 'Resumo', node: <HeadlineSlide derived={derived} /> },
     { id: 'explainer', title: 'O que é IUL', node: <ExplainerSlide derived={derived} /> },
     { id: 'coverage', title: 'Cobertura', node: <CoverageRidersSlide derived={derived} /> },
     { id: 'projection', title: 'Projeção', node: <ProjectionSlide derived={derived} /> },

@@ -19,15 +19,19 @@ import {
   type Rider,
   type YearlyRow,
 } from '@domain/model/presentation'
+import { availableProducts, getProduct } from '@domain/model/products'
+import { formatMoney } from '@domain/format'
 import { presentationRepository, profileRepository } from '@persistence'
 import { routes } from '@app/routes'
 import { queryKeys } from '@app/queryKeys'
+import { cn } from '@shared/cn'
 import { registerNamespace } from '@i18n/index'
 import { dataEntry } from './i18n/pt-BR'
 import { NumberField, Segmented, TextField } from './fields'
 import { RidersEditor } from './RidersEditor'
 import { YearTableEditor } from './YearTableEditor'
 import { SlidePreview } from './SlidePreview'
+import { CollapsibleSection } from './CollapsibleSection'
 
 registerNamespace('dataEntry', dataEntry)
 
@@ -99,6 +103,8 @@ function Editor({ id }: { id: string }) {
 
   const [working, setWorking] = useState<PresentationInputs | null>(null)
   const [saveStatus, setSaveStatus] = useState<SaveStatus>('idle')
+  // Accordion: one section open at a time. Start on "Cliente" (Produto defaults).
+  const [openKey, setOpenKey] = useState<string>('cliente')
   const seededIdRef = useRef<string | null>(null)
   const saveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
@@ -150,6 +156,7 @@ function Editor({ id }: { id: string }) {
     [scheduleSave],
   )
 
+  const setProduct = (productId: string) => update((p) => ({ ...p, productId }))
   const setClient = (patch: Partial<Client>) =>
     update((p) => ({ ...p, client: { ...p.client, ...patch } }))
   const setIul = (patch: Partial<IulInputs>) =>
@@ -187,6 +194,35 @@ function Editor({ id }: { id: string }) {
   const canPresent = isPresentable(working)
   const iul = working.iul
 
+  const toggle = (key: string) => setOpenKey((cur) => (cur === key ? '' : key))
+
+  // Per-section completion + collapsed summaries (progress at a glance).
+  const includedRiders = iul.riders.filter((r) => r.included).length
+  const clientComplete = working.client.name.trim().length > 0
+  const planComplete = iul.premium != null && iul.deathBenefit != null
+  const ridersComplete = includedRiders > 0
+  const yearsComplete =
+    iul.projectionSource === 'estimate' || working.yearlyRows.length > 0
+
+  const productSummary = getProduct(working.productId).name
+  const clientSummary = clientComplete
+    ? [working.client.name.trim(), working.client.age ? `${working.client.age} ${t('plan.years')}` : null]
+        .filter(Boolean)
+        .join(' · ')
+    : t('summaries.toFill')
+  const planSummary = planComplete
+    ? `${formatMoney(iul.premium, currency)} · ${formatMoney(iul.deathBenefit, currency)}`
+    : t('summaries.toFill')
+  const ridersSummary = ridersComplete
+    ? t('summaries.ridersIncluded', { count: includedRiders })
+    : t('summaries.ridersNone')
+  const yearsSummary =
+    iul.projectionSource === 'estimate'
+      ? t('summaries.sourceEstimate')
+      : working.yearlyRows.length > 0
+        ? t('summaries.rows', { count: working.yearlyRows.length })
+        : t('summaries.sourceTyped')
+
   return (
     <div className="space-y-8 pb-12">
       <header className="space-y-2">
@@ -207,8 +243,28 @@ function Editor({ id }: { id: string }) {
         )}
       </header>
 
-      {/* 1) Cliente */}
-      <Section eyebrow="1" title={t('sections.client')}>
+      <div className="space-y-4">
+      {/* 1) Produto */}
+      <CollapsibleSection
+        step="1"
+        title={t('sections.product')}
+        summary={productSummary}
+        complete
+        open={openKey === 'produto'}
+        onToggle={() => toggle('produto')}
+      >
+        <ProductSelector value={working.productId} onChange={setProduct} />
+      </CollapsibleSection>
+
+      {/* 2) Cliente */}
+      <CollapsibleSection
+        step="2"
+        title={t('sections.client')}
+        summary={clientSummary}
+        complete={clientComplete}
+        open={openKey === 'cliente'}
+        onToggle={() => toggle('cliente')}
+      >
         <Card>
           <div className="grid gap-4 sm:grid-cols-2">
             <TextField
@@ -236,10 +292,17 @@ function Editor({ id }: { id: string }) {
             />
           </div>
         </Card>
-      </Section>
+      </CollapsibleSection>
 
-      {/* 2) Plano IUL */}
-      <Section eyebrow="2" title={t('sections.plan')}>
+      {/* 3) Plano IUL */}
+      <CollapsibleSection
+        step="3"
+        title={t('sections.plan')}
+        summary={planSummary}
+        complete={planComplete}
+        open={openKey === 'plano'}
+        onToggle={() => toggle('plano')}
+      >
         <Card>
           <div className="grid gap-4 sm:grid-cols-2">
             <NumberField
@@ -311,17 +374,61 @@ function Editor({ id }: { id: string }) {
             />
           </div>
         </Card>
-      </Section>
+      </CollapsibleSection>
 
-      {/* 3) Coberturas / Riders */}
-      <Section eyebrow="3" title={t('sections.riders')}>
+      {/* 4) Coberturas / Riders */}
+      <CollapsibleSection
+        step="4"
+        title={t('sections.riders')}
+        summary={ridersSummary}
+        complete={ridersComplete}
+        open={openKey === 'riders'}
+        onToggle={() => toggle('riders')}
+      >
         <RidersEditor riders={iul.riders} onChange={setRiders} />
-      </Section>
+      </CollapsibleSection>
 
-      {/* 4) Tabela ano a ano */}
-      <Section eyebrow="4" title={t('sections.years')}>
-        <YearTableEditor rows={working.yearlyRows} onChange={setRows} />
-      </Section>
+      {/* 5) Fonte dos números + tabela ano a ano (ou estimativa no app) */}
+      <CollapsibleSection
+        step="5"
+        title={t('sections.years')}
+        summary={yearsSummary}
+        complete={yearsComplete}
+        open={openKey === 'fonte'}
+        onToggle={() => toggle('fonte')}
+      >
+        <div className="space-y-6">
+          <Segmented
+            label={t('source.label')}
+            value={iul.projectionSource}
+            onChange={(v) => setIul({ projectionSource: v })}
+            options={[
+              { value: 'typed', label: t('source.typed') },
+              { value: 'estimate', label: t('source.estimate') },
+            ]}
+          />
+
+          {iul.projectionSource === 'estimate' ? (
+            <div className="space-y-4">
+              <div className="grid gap-4 sm:grid-cols-2">
+                <NumberField
+                  label={t('source.assumedRate')}
+                  value={iul.assumedRatePct}
+                  suffix="%"
+                  hint={t('source.assumedRateHint')}
+                  onChange={(n) => setIul({ assumedRatePct: n })}
+                />
+              </div>
+              <Card tone="alt">
+                <p className="text-base text-ink/80">{t('source.estimateNote')}</p>
+              </Card>
+            </div>
+          ) : (
+            <YearTableEditor rows={working.yearlyRows} onChange={setRows} />
+          )}
+        </div>
+      </CollapsibleSection>
+      </div>
 
       {/* Live preview */}
       <Section eyebrow="★" title={t('sections.preview')}>
@@ -355,6 +462,77 @@ function Editor({ id }: { id: string }) {
         )}
       </div>
     </div>
+  )
+}
+
+/**
+ * Product picker over the NLG registry. Renders every AVAILABLE product as a
+ * large touch button (single available product shows as a selected chip plus a
+ * "coming soon" note); more products appear automatically as they turn on.
+ * Always shows the selected product's positioning, carrier and minimum face.
+ */
+function ProductSelector({
+  value,
+  onChange,
+}: {
+  value: string
+  onChange: (id: string) => void
+}) {
+  const { t } = useTranslation('dataEntry')
+  const products = availableProducts()
+  const selected = getProduct(value)
+  const single = products.length <= 1
+
+  return (
+    <Card>
+      <div className="space-y-4">
+        <EyebrowLabel>{t('product.label')}</EyebrowLabel>
+        <div className="flex flex-wrap gap-2">
+          {products.map((p) => {
+            const active = p.id === selected.id
+            return (
+              <button
+                key={p.id}
+                type="button"
+                aria-pressed={active}
+                disabled={single}
+                onClick={() => onChange(p.id)}
+                className={cn(
+                  'min-h-[3.25rem] rounded-xl border px-5 font-sans text-lg font-semibold transition-colors',
+                  active
+                    ? 'border-navy bg-navy text-white'
+                    : 'border-line bg-surface text-ink hover:bg-surface-alt',
+                  single && 'cursor-default',
+                )}
+              >
+                {p.name}
+                {single && active && (
+                  <span className="ml-2 text-sm font-normal opacity-80">
+                    · {t('product.selected')}
+                  </span>
+                )}
+              </button>
+            )
+          })}
+        </div>
+
+        {single && <p className="text-base text-muted">{t('product.comingSoon')}</p>}
+
+        <p className="text-lg text-ink/80">{selected.positioning}</p>
+        <div className="flex flex-wrap gap-x-8 gap-y-2 text-base">
+          <span className="text-muted">
+            {t('product.carrier')}:{' '}
+            <span className="font-semibold text-navy">{selected.carrier}</span>
+          </span>
+          <span className="text-muted">
+            {t('product.minFace')}:{' '}
+            <span className="font-semibold text-navy">
+              {formatMoney(selected.minFace, 'USD', { compact: true })}
+            </span>
+          </span>
+        </div>
+      </div>
+    </Card>
   )
 }
 

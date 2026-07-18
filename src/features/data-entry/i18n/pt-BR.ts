@@ -22,11 +22,38 @@ export const dataEntry = {
     licensePrefix: 'Licença',
   },
   sections: {
+    product: 'Produto',
     client: 'Cliente',
     plan: 'Plano IUL',
     riders: 'Coberturas e benefícios',
     years: 'Tabela ano a ano',
     preview: 'Prévia da apresentação',
+  },
+  summaries: {
+    toFill: 'Toque para preencher',
+    ridersIncluded_one: '{{count}} cobertura incluída',
+    ridersIncluded_other: '{{count}} coberturas incluídas',
+    ridersNone: 'Nenhuma cobertura incluída',
+    rows_one: '{{count}} ano na tabela',
+    rows_other: '{{count}} anos na tabela',
+    sourceEstimate: 'Estimado no app',
+    sourceTyped: 'Digitado da ilustração',
+  },
+  product: {
+    label: 'Produto National Life Group',
+    carrier: 'Emissora',
+    minFace: 'Face mínima',
+    comingSoon: 'Mais produtos em breve.',
+    selected: 'Selecionado',
+  },
+  source: {
+    label: 'Fonte dos números',
+    typed: 'Digitados da ilustração',
+    estimate: 'Estimar no app',
+    assumedRate: 'Taxa ilustrada anual',
+    assumedRateHint: 'Máximo cerca de 6,5% ao ano (limite das regras da ilustração).',
+    estimateNote:
+      'Estimativa gerada pelo app — não garantida. A ilustração oficial é o documento válido.',
   },
   client: {
     name: 'Nome do cliente',
@@ -62,6 +89,7 @@ export const dataEntry = {
     additionalCostOff: 'Sem custo adicional',
     quick80: '80%',
     quick100: '100%',
+    lifetimeMaxPrefix: 'Limite',
     categoryIncluded: 'Já incluídos',
     categoryExclusive: 'Exclusivos do IUL',
     categoryOptional: 'Opcionais',
@@ -85,7 +113,7 @@ export const dataEntry = {
   actions: {
     present: 'Apresentar',
     presentDisabled: 'Preencha o nome e alguns números para apresentar',
-    exportPdf: 'Exportar PDF',
+    exportPdf: 'Exportar',
     back: 'Voltar',
   },
 } as const

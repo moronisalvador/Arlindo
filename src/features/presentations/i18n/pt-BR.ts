@@ -13,7 +13,7 @@ export const ptBR = {
   actions: {
     open: 'Abrir',
     present: 'Apresentar',
-    exportPdf: 'Exportar PDF',
+    exportPdf: 'Exportar',
     duplicate: 'Duplicar',
     delete: 'Excluir',
   },

@@ -83,7 +83,12 @@ export default function SettingsPage() {
             }}
           >
             {FIELD_ORDER.map((key) => (
-              <Field key={key} label={t(`fields.${key}`)} htmlFor={key}>
+              <Field
+                key={key}
+                label={t(`fields.${key}`)}
+                htmlFor={key}
+                hint={key === 'agentName' ? t('hints.agentName') : undefined}
+              >
                 <TextInput
                   id={key}
                   value={form[key]}

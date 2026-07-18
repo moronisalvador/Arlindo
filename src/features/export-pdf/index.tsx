@@ -11,6 +11,7 @@ import {
   buildSlides,
 } from '@design-system'
 import { derive } from '@domain/calc'
+import { downloadPptx } from '@export/pptx'
 import { presentationRepository } from '@persistence'
 import { routes } from '@app/routes'
 import { queryKeys } from '@app/queryKeys'
@@ -129,6 +130,21 @@ export default function ExportPdfPage() {
     window.print()
   }, [])
 
+  const [pptxBusy, setPptxBusy] = useState(false)
+  const [pptxError, setPptxError] = useState(false)
+  const doPptx = useCallback(async () => {
+    if (!inputs) return
+    setPptxError(false)
+    setPptxBusy(true)
+    try {
+      await downloadPptx(derive(inputs))
+    } catch {
+      setPptxError(true)
+    } finally {
+      setPptxBusy(false)
+    }
+  }, [inputs])
+
   // ---- Non-deck states (light surface so text stays legible) ----
   if (query.isLoading) {
     return (
@@ -170,9 +186,17 @@ export default function ExportPdfPage() {
             <Button variant="primary" onClick={doPrint}>
               {t('exportButton')}
             </Button>
+            <Button variant="secondary" onClick={doPptx} disabled={pptxBusy}>
+              {pptxBusy ? t('pptxBusy') : t('pptxButton')}
+            </Button>
             <Link to={routes.home}>
               <Button variant="ghost">{t('back')}</Button>
             </Link>
+            {pptxError && (
+              <p role="alert" className="text-base font-medium text-red-600">
+                {t('pptxError')}
+              </p>
+            )}
             <p className="ml-auto hidden text-base text-muted sm:block">
               {t('reviewHint')}
             </p>

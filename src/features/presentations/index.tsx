@@ -136,6 +136,7 @@ export default function PresentationsPage() {
         eyebrow={t('eyebrow')}
         title={t('title')}
         className="rounded-card"
+        showLogo={false}
         right={
           <Button
             variant="primary"

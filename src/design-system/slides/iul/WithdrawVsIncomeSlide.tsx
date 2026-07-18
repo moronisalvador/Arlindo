@@ -21,7 +21,7 @@ export function WithdrawVsIncomeSlide({ derived }: { derived: DerivedPresentatio
         </Card>
         <Card className="text-center">
           <EyebrowLabel>Opção 2 · Deixar rendendo</EyebrowLabel>
-          <div className="mt-4 font-serif text-5xl font-semibold text-orange">
+          <div className="mt-4 font-serif text-5xl font-semibold text-navy">
             {headline.incomeOptionAnnual != null
               ? `${formatMoney(headline.incomeOptionAnnual, currency)} /ano`
               : '—'}
