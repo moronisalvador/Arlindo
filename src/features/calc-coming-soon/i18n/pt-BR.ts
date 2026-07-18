@@ -8,6 +8,7 @@ export const ptBR = {
   intro:
     'Preencha alguns dados e veja uma estimativa da projeção. Serve apenas para conversar com o cliente — a ilustração oficial da seguradora é o documento válido.',
   form: {
+    sectionTitle: 'Dados para o cálculo',
     age: 'Idade',
     agePlaceholder: 'Ex.: 40',
     premium: 'Depósito mensal',
@@ -18,7 +19,7 @@ export const ptBR = {
     projectionYearsPlaceholder: 'Ex.: 20',
     rate: 'Taxa anual estimada (%)',
     ratePlaceholder: 'Ex.: 6',
-    rateHint: 'máx ~6,5% AG49-A',
+    rateHint: 'Deixe em branco para usar a taxa padrão. Máximo cerca de 6,5% ao ano.',
     calculate: 'Calcular',
     recalculate: 'Recalcular',
     currencyPrefix: 'US$',

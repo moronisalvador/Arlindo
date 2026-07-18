@@ -93,7 +93,7 @@ export default function CalcEstimatorPage() {
         <p className="mx-auto mt-3 max-w-2xl text-lg text-muted">{t('intro')}</p>
       </header>
 
-      <Section title={t('title')}>
+      <Section title={t('form.sectionTitle')}>
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
           <Field label={t('form.age')} htmlFor="calc-age">
             <TextInput

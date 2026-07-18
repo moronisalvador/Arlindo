@@ -11,6 +11,9 @@ export const ptBR = {
     company: 'Empresa',
     carrier: 'Seguradora',
   },
+  hints: {
+    agentName: 'Aparece na capa de cada apresentação.',
+  },
   placeholders: {
     agentName: 'Ex.: Arlindo Silva',
     agentTitle: 'Ex.: Agente Financeiro Licenciado',

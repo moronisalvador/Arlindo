@@ -49,15 +49,22 @@ function sample<T>(rows: T[], max: number): T[] {
 
 type Slide = ReturnType<pptxgen['addSlide']>
 
-/** White SCF logo chip (top-right of a slide). */
+/**
+ * SCF logo chip (top-right of a slide): a white chip holding the gold monogram
+ * badge with navy "SCF" and the stacked wordmark — matching the on-screen
+ * BrandLogo lockup so the PPTX carries the same branding.
+ */
 function addLogoChip(slide: Slide, x: number, y: number) {
-  slide.addShape('roundRect', { x, y, w: 1.9, h: 0.62, fill: { color: C.white }, line: { color: C.white }, rectRadius: 0.08 })
+  slide.addShape('roundRect', { x, y, w: 2.0, h: 0.62, fill: { color: C.white }, line: { color: C.white }, rectRadius: 0.08 })
+  // Gold monogram badge with navy "SCF".
+  slide.addShape('roundRect', { x: x + 0.1, y: y + 0.1, w: 0.42, h: 0.42, fill: { color: C.orange }, line: { color: C.orange }, rectRadius: 0.06 })
+  slide.addText('SCF', { x: x + 0.1, y: y + 0.1, w: 0.42, h: 0.42, fontFace: SERIF, fontSize: 11, bold: true, color: C.navy, align: 'center', valign: 'middle' })
   slide.addText(
     [
-      { text: 'SCF ', options: { fontFace: SERIF, fontSize: 14, bold: true, color: C.orange } },
-      { text: 'SECOND CHANCE FINANCIAL', options: { fontFace: SANS, fontSize: 6, bold: true, color: C.navy } },
+      { text: 'Second Chance', options: { fontFace: SERIF, fontSize: 9, bold: true, color: C.navy } },
+      { text: '\nFINANCIAL', options: { fontFace: SANS, fontSize: 6, bold: true, color: C.navy, charSpacing: 3 } },
     ],
-    { x: x + 0.12, y, w: 1.7, h: 0.62, valign: 'middle', align: 'left' },
+    { x: x + 0.58, y, w: 1.4, h: 0.62, valign: 'middle', align: 'left', lineSpacingMultiple: 0.9 },
   )
 }
 

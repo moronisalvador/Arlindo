@@ -41,7 +41,7 @@ export const dataEntry = {
     typed: 'Digitados da ilustração',
     estimate: 'Estimar no app',
     assumedRate: 'Taxa ilustrada anual',
-    assumedRateHint: 'Taxa ilustrada anual (máx ~6,5% conforme AG49-A)',
+    assumedRateHint: 'Máximo cerca de 6,5% ao ano (limite das regras da ilustração).',
     estimateNote:
       'Estimativa gerada pelo app — não garantida. A ilustração oficial é o documento válido.',
   },
