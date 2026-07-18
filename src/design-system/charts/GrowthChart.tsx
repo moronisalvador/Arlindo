@@ -19,6 +19,9 @@ export interface GrowthChartProps {
   width?: number
   height?: number
   responsive?: boolean
+  locale?: string
+  /** Word for "Year" in the tooltip (default pt "Ano"). */
+  yearLabel?: string
 }
 
 /** Accumulated-value growth as an orange area over policy years (SVG → vector in PDF). */
@@ -29,6 +32,8 @@ export function GrowthChart({
   width = 900,
   height = 340,
   responsive = false,
+  locale,
+  yearLabel = 'Ano',
 }: GrowthChartProps) {
   const data = years.map((y, i) => ({ year: y, value: values[i] ?? 0 }))
 
@@ -52,11 +57,11 @@ export function GrowthChart({
         tickLine={false}
         axisLine={false}
         width={72}
-        tickFormatter={(v) => formatMoney(v, currency, { compact: true })}
+        tickFormatter={(v) => formatMoney(v, currency, { compact: true, locale })}
       />
       <Tooltip
-        formatter={(v: number) => formatMoney(v, currency)}
-        labelFormatter={(l) => `Ano ${l}`}
+        formatter={(v: number) => formatMoney(v, currency, { locale })}
+        labelFormatter={(l) => `${yearLabel} ${l}`}
         contentStyle={{ borderRadius: 12, border: `1px solid ${palette.line}` }}
       />
       <Area

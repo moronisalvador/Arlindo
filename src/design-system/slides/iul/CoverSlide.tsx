@@ -1,16 +1,20 @@
 import type { DerivedPresentation } from '@domain/model/derived'
+import { localeFor } from '@domain/format'
+import { slideCopy } from '@domain/presentationCopy'
 import { BrandLogo } from '@design-system/primitives'
 import { SlideRoot } from '../Slide'
 
-function formatMonthYear(iso: string): string {
+function formatMonthYear(iso: string, locale: string): string {
   const d = iso ? new Date(iso) : new Date()
-  const s = new Intl.DateTimeFormat('pt-BR', { month: 'long', year: 'numeric' }).format(d)
+  const s = new Intl.DateTimeFormat(locale, { month: 'long', year: 'numeric' }).format(d)
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
 /** Cover slide — navy field, serif title, orange agent panel + logo circle (SCF cover motif). */
 export function CoverSlide({ derived }: { derived: DerivedPresentation }) {
   const { branding, clientName, productName, preparedOn } = derived.meta
+  const c = slideCopy(derived.meta.language)
+  const locale = localeFor(derived.meta.language)
   return (
     <SlideRoot className="bg-navy text-white">
       {/* decorative navy circle top-right */}
@@ -25,7 +29,7 @@ export function CoverSlide({ derived }: { derived: DerivedPresentation }) {
 
       {/* orange agent panel on the right */}
       <div className="absolute inset-y-0 right-0 flex w-[320px] flex-col items-center justify-center bg-orange px-8 text-center">
-        <p className="font-sans text-xl font-bold text-navy">{branding.agentName || 'Agente'}</p>
+        <p className="font-sans text-xl font-bold text-navy">{branding.agentName || c.cover.agentFallback}</p>
         <p className="mt-2 font-sans text-sm text-navy/80">{branding.agentTitle}</p>
         {branding.agentLicense && (
           <p className="mt-1 font-sans text-xs text-navy/70">{branding.agentLicense}</p>
@@ -35,10 +39,10 @@ export function CoverSlide({ derived }: { derived: DerivedPresentation }) {
       {/* title block */}
       <div className="absolute left-20 top-1/2 max-w-[760px] -translate-y-1/2">
         <h1 className="font-serif text-6xl font-semibold leading-tight">{productName}</h1>
-        <p className="mt-3 font-serif text-2xl italic text-orange">Proposta Personalizada</p>
-        <p className="mt-8 font-serif text-4xl">{clientName || 'Cliente'}</p>
+        <p className="mt-3 font-serif text-2xl italic text-orange">{c.cover.subtitle}</p>
+        <p className="mt-8 font-serif text-4xl">{clientName || c.cover.clientFallback}</p>
         <span className="mt-4 block h-1 w-64 rounded-full bg-orange" />
-        <p className="mt-6 font-sans text-lg text-white/80">{formatMonthYear(preparedOn)}</p>
+        <p className="mt-6 font-sans text-lg text-white/80">{formatMonthYear(preparedOn, locale)}</p>
       </div>
     </SlideRoot>
   )

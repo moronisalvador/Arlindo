@@ -157,6 +157,8 @@ function Editor({ id }: { id: string }) {
   )
 
   const setProduct = (productId: string) => update((p) => ({ ...p, productId }))
+  const setLanguage = (presentationLanguage: 'pt' | 'en' | 'es') =>
+    update((p) => ({ ...p, presentationLanguage }))
   const setClient = (patch: Partial<Client>) =>
     update((p) => ({ ...p, client: { ...p.client, ...patch } }))
   const setIul = (patch: Partial<IulInputs>) =>
@@ -253,7 +255,21 @@ function Editor({ id }: { id: string }) {
         open={openKey === 'produto'}
         onToggle={() => toggle('produto')}
       >
-        <ProductSelector value={working.productId} onChange={setProduct} />
+        <div className="space-y-4">
+          <ProductSelector value={working.productId} onChange={setProduct} />
+          <Card>
+            <Segmented
+              label={t('language.label')}
+              value={working.presentationLanguage}
+              onChange={setLanguage}
+              options={[
+                { value: 'pt', label: t('language.pt') },
+                { value: 'en', label: t('language.en') },
+                { value: 'es', label: t('language.es') },
+              ]}
+            />
+          </Card>
+        </div>
       </CollapsibleSection>
 
       {/* 2) Cliente */}
@@ -320,6 +336,14 @@ function Editor({ id }: { id: string }) {
                 { value: 'monthly', label: t('plan.monthly') },
                 { value: 'annual', label: t('plan.annual') },
               ]}
+            />
+            <NumberField
+              label={t('plan.paymentYears')}
+              value={iul.paymentYears}
+              integer
+              suffix={t('plan.years')}
+              hint={t('plan.paymentYearsHint')}
+              onChange={(n) => setIul({ paymentYears: n })}
             />
             <NumberField
               label={t('plan.deathBenefit')}

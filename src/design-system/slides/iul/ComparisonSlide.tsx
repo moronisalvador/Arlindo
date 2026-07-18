@@ -1,29 +1,21 @@
 import type { DerivedPresentation } from '@domain/model/derived'
+import { slideCopy } from '@domain/presentationCopy'
 import { VsBadge } from '@design-system/primitives'
 import { ContentSlide } from '../ContentSlide'
 
-const ROWS = [
-  { label: 'Duração', term: '20 anos, depois expira', iul: 'Vitalícia, sem expiração' },
-  { label: 'Valor acumulado', term: 'Não possui', iul: 'Sim, cresce ao longo do tempo' },
-  { label: 'Mensalidade', term: 'Fixa, mais baixa', iul: 'Flexível, pode aumentar' },
-  {
-    label: 'Melhor para',
-    term: 'Proteção máxima a baixo custo, por um período',
-    iul: 'Proteção vitalícia + patrimônio',
-  },
-]
-
 /** Term vs IUL comparison — filled-navy recommended card vs light alternative, orange VS badge. */
-export function ComparisonSlide(_: { derived: DerivedPresentation }) {
+export function ComparisonSlide({ derived }: { derived: DerivedPresentation }) {
+  const c = slideCopy(derived.meta.language)
+  const ROWS = c.comparison.rows
   return (
-    <ContentSlide eyebrow="Comparando os Produtos" title="Termo vs. IUL">
+    <ContentSlide eyebrow={c.comparison.eyebrow} title={c.comparison.title}>
       <div className="relative grid grid-cols-2 gap-8 pt-4">
         <span className="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2">
           <VsBadge />
         </span>
         <div className="rounded-card bg-surface p-6 shadow-card">
           <h4 className="mb-4 text-center font-serif text-2xl font-semibold text-ink">
-            Seguro Temporário
+            {c.comparison.term}
           </h4>
           <dl className="space-y-3">
             {ROWS.map((r) => (
@@ -37,7 +29,7 @@ export function ComparisonSlide(_: { derived: DerivedPresentation }) {
           </dl>
         </div>
         <div className="rounded-card bg-navy p-6 text-white shadow-lift">
-          <h4 className="mb-4 text-center font-serif text-2xl font-semibold">IUL ★</h4>
+          <h4 className="mb-4 text-center font-serif text-2xl font-semibold">{c.comparison.iul}</h4>
           <dl className="space-y-3">
             {ROWS.map((r) => (
               <div key={r.label}>
