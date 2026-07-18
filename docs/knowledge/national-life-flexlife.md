@@ -210,7 +210,12 @@ Per the current **NLG Foreign National Guidelines** (Cat No 69798, rev 11-25):
 ## 8. Corrections the audit flagged in Arlindo's shipped data
 
 These are the concrete fixes to `products.ts` / `riders.ts` / `IulProjectionEngine.ts` and the
-pt-BR copy (see the audit JSON for exact recommendations):
+pt-BR copy (see the audit JSON for exact recommendations).
+
+> **Status (v3, applied 2026-07-18):** ✅ #1 shared caps, #3 LIBR, #4 AG 49-B, #5 Children's Term
+> age 25, #7 Premium Chronic Care wording — **done**. ⏳ **Pending / deferred:** #6 foreign-national
+> $500k min face (deferred by product decision), plus the "up to 100%" headline nuance (#2), the
+> Terminal 12-month state footnote (#6 in the list below), and the minor precision items (#9).
 
 1. **ABR caps → shared pools** (not independent): Pool A (Terminal+Chronic+Alzheimer's) $1.5M
    shared; Pool B (Critical Illness+Injury) $1.0M shared; add NY/IL/NJ variants. *(riders.ts)*

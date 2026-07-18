@@ -39,7 +39,7 @@ export function HeadlineSlide({ derived }: { derived: DerivedPresentation }) {
       value: h.incomeOptionAnnual
         ? `${formatMoney(h.incomeOptionAnnual, currency)} /ano`
         : '—',
-      subtitle: h.incomeToAge ? `até os ${h.incomeToAge} anos` : undefined,
+      subtitle: h.incomeToAge ? `ilustrada até os ${h.incomeToAge} anos` : undefined,
     },
     {
       emoji: '❤️',

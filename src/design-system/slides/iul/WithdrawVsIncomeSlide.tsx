@@ -27,8 +27,8 @@ export function WithdrawVsIncomeSlide({ derived }: { derived: DerivedPresentatio
               : '—'}
           </div>
           <p className="mt-4 font-sans text-lg text-muted">
-            Renda projetada
-            {headline.incomeToAge ? `, potencialmente até os ${headline.incomeToAge} anos` : ''}.
+            Renda projetada por toda a vida
+            {headline.incomeToAge ? ` (ilustrada até os ${headline.incomeToAge} anos)` : ''}.
           </p>
         </Card>
       </div>

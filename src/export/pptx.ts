@@ -237,8 +237,8 @@ function optionsSlide(pptx: pptxgen, d: DerivedPresentation) {
   // Opção 2 (white)
   s.addShape('roundRect', { x: 6.9, y: top + 0.3, w: 5.6, h: 3, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.08 })
   s.addText('OPÇÃO 2 · DEIXAR RENDENDO', { x: 7.1, y: top + 0.6, w: 5.2, h: 0.3, fontFace: SANS, fontSize: 10, bold: true, color: C.orange, align: 'center', charSpacing: 1 })
-  s.addText(h.incomeOptionAnnual != null ? `${formatMoney(h.incomeOptionAnnual, cur)} /ano` : '—', { x: 7.1, y: top + 1.1, w: 5.2, h: 0.9, fontFace: SERIF, fontSize: 28, bold: true, color: C.orange, align: 'center' })
-  s.addText(`Renda projetada${h.incomeToAge ? `, potencialmente até os ${h.incomeToAge} anos` : ''}.`, { x: 7.1, y: top + 2.1, w: 5.2, h: 0.8, fontFace: SANS, fontSize: 12, color: C.muted, align: 'center' })
+  s.addText(h.incomeOptionAnnual != null ? `${formatMoney(h.incomeOptionAnnual, cur)} /ano` : '—', { x: 7.1, y: top + 1.1, w: 5.2, h: 0.9, fontFace: SERIF, fontSize: 28, bold: true, color: C.navy, align: 'center' })
+  s.addText(`Renda projetada por toda a vida${h.incomeToAge ? ` (ilustrada até os ${h.incomeToAge} anos)` : ''}.`, { x: 7.1, y: top + 2.1, w: 5.2, h: 0.8, fontFace: SANS, fontSize: 12, color: C.muted, align: 'center' })
 }
 
 function comparisonSlide(pptx: pptxgen, d: DerivedPresentation) {
@@ -272,9 +272,19 @@ function disclaimersSlide(pptx: pptxgen, d: DerivedPresentation) {
   s.addText('INFORMAÇÕES IMPORTANTES', { x: 0.8, y: 0.7, w: 9, h: 0.3, fontFace: SANS, fontSize: 10, bold: true, color: C.orange, charSpacing: 2 })
   s.addText('Avisos legais', { x: 0.8, y: 1.05, w: 9, h: 0.6, fontFace: SERIF, fontSize: 26, bold: true, color: C.white })
   const items = d.disclaimers.length ? d.disclaimers : ['Documento ilustrativo. Valores projetados, não garantidos.']
+  // Shrink type + spacing when the list is long so it never runs into the footer.
+  const dense = items.length > 6
   s.addText(
     items.map((t) => ({ text: t, options: { bullet: { characterCode: '2022' }, color: 'D6DAE4' } })),
-    { x: 0.9, y: 2, w: 10.5, h: 3.5, fontFace: SANS, fontSize: 13, lineSpacingMultiple: 1.3 },
+    {
+      x: 0.9,
+      y: 2,
+      w: 10.5,
+      h: dense ? 4.4 : 3.5,
+      fontFace: SANS,
+      fontSize: dense ? 11 : 13,
+      lineSpacingMultiple: dense ? 1.15 : 1.3,
+    },
   )
   s.addText(`${d.meta.branding.company} · ${d.meta.branding.carrier}`, { x: 0.9, y: 6.6, w: 10, h: 0.4, fontFace: SANS, fontSize: 10, color: '9AA1B2' })
 }
