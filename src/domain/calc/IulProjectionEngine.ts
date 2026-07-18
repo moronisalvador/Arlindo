@@ -80,6 +80,7 @@ export class IulProjectionEngine implements CalculationEngine {
 
     const last = rows[rows.length - 1]
     const projectedAccumulatedValue = last?.accumulatedValue
+    const projectedCashSurrenderValue = last?.cashSurrenderValue
 
     // LIBR is realistic only when the policy is in force ~10 years AND the
     // insured's attained age at the projection end is within the 60–85 exercise
@@ -103,6 +104,7 @@ export class IulProjectionEngine implements CalculationEngine {
       iul: {
         ...inputs.iul,
         projectedAccumulatedValue,
+        projectedCashSurrenderValue,
         incomeOptionAnnual,
         incomeToAge: inputs.iul.incomeToAge,
       },
