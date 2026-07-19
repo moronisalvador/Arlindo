@@ -3,6 +3,11 @@ import { defaultRidersForProduct } from '@domain/model/products'
 import { DEFAULT_IUL_DISCLAIMERS, DEFAULT_TERM_DISCLAIMERS } from '@domain/model/riders'
 import type { ParsedIllustration } from './types'
 
+// Note: riders are intentionally NOT auto-toggled from the illustration. The
+// rider list wraps across a two-column layout, so its extraction is only partial
+// — acting on it risks removing a rider the client actually has. Riders stay at
+// the product defaults; the agent reconciles them in the riders section.
+
 /**
  * Merges a parsed illustration into an existing presentation. Called after the
  * agent reviews and confirms the extracted values. Numbers go in via the TYPED
@@ -54,6 +59,7 @@ export function applyIllustration(
   }
 
   const riders = existing.iul.riders.length ? existing.iul.riders : defaultRidersForProduct(productId)
+  const maxYear = parsed.rows.reduce((mx, r) => Math.max(mx, r.policyYear), 0)
   return {
     ...existing,
     productType: 'iul',
@@ -65,10 +71,13 @@ export function applyIllustration(
       premium: parsed.premium ?? existing.iul.premium,
       premiumMode: parsed.premiumMode ?? existing.iul.premiumMode,
       deathBenefit: parsed.deathBenefit ?? existing.iul.deathBenefit,
+      paymentYears: parsed.paymentYears ?? existing.iul.paymentYears,
       assumedRatePct: parsed.assumedRatePct ?? existing.iul.assumedRatePct,
-      projectionYears: parsed.rows.length || existing.iul.projectionYears,
+      projectionYears: maxYear || existing.iul.projectionYears,
       projectedAccumulatedValue: parsed.projectedAccumulatedValue ?? existing.iul.projectedAccumulatedValue,
       projectedCashSurrenderValue: parsed.projectedCashSurrenderValue ?? existing.iul.projectedCashSurrenderValue,
+      incomeOptionAnnual: parsed.incomeOptionAnnual ?? existing.iul.incomeOptionAnnual,
+      incomeToAge: parsed.incomeToAge ?? existing.iul.incomeToAge,
       riders,
     },
     yearlyRows: parsed.rows.length ? parsed.rows : existing.yearlyRows,
