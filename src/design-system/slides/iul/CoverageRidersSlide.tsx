@@ -15,7 +15,7 @@ export function CoverageRidersSlide({ derived }: { derived: DerivedPresentation 
   const stats: Array<{ label: string; value: string; sub?: string }> = [
     {
       label: c.coverage.deposit,
-      value: h.premium != null ? `${formatMoney(h.premium, currency, { locale })} ${perLabel}` : '—',
+      value: h.premium != null ? `${formatMoney(h.premium, currency, { locale })}${perLabel}` : '—',
       sub: h.paymentYears ? c.coverage.duringYears(h.paymentYears) : undefined,
     },
     { label: c.coverage.death, value: formatMoney(h.deathBenefit, currency, { locale }) },
@@ -32,7 +32,7 @@ export function CoverageRidersSlide({ derived }: { derived: DerivedPresentation 
       <div className="mb-8 grid grid-cols-3 gap-5">
         {stats.map((s) => (
           <Card key={s.label} headerStrip={s.label}>
-            <div className="py-2 text-center">
+            <div className="flex h-full flex-col justify-center py-2 text-center">
               <span className="font-serif text-4xl font-semibold text-navy tabular-nums">
                 {s.value}
               </span>
@@ -56,7 +56,7 @@ export function CoverageRidersSlide({ derived }: { derived: DerivedPresentation 
               <span className="font-sans text-xs text-muted">{c.coverage.additionalCost}</span>
             )}
             {r.percent > 0 && (
-              <span className="ml-auto font-sans text-sm font-semibold text-navy">
+              <span className="font-sans text-sm font-semibold text-navy">
                 {c.coverage.upTo(formatPercent(r.percent, { locale }))}
               </span>
             )}

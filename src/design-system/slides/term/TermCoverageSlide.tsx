@@ -15,7 +15,7 @@ export function TermCoverageSlide({ derived }: { derived: DerivedPresentation })
   const stats: Array<{ label: string; value: string; sub?: string }> = [
     {
       label: t.coverage.premium,
-      value: h.premium != null ? `${formatMoney(h.premium, currency, { locale })} ${perLabel}` : '—',
+      value: h.premium != null ? `${formatMoney(h.premium, currency, { locale })}${perLabel}` : '—',
       sub: h.termLengthYears ? t.coverage.forYears(h.termLengthYears) : undefined,
     },
     { label: t.coverage.death, value: formatMoney(h.deathBenefit, currency, { locale }) },
@@ -31,7 +31,7 @@ export function TermCoverageSlide({ derived }: { derived: DerivedPresentation })
       <div className="mb-6 grid grid-cols-3 gap-5">
         {stats.map((s) => (
           <Card key={s.label} headerStrip={s.label}>
-            <div className="py-2 text-center">
+            <div className="flex h-full flex-col justify-center py-2 text-center">
               <span className="font-serif text-4xl font-semibold text-navy tabular-nums">{s.value}</span>
               {s.sub && <span className="mt-1 block font-sans text-sm text-muted">{s.sub}</span>}
             </div>
@@ -40,10 +40,11 @@ export function TermCoverageSlide({ derived }: { derived: DerivedPresentation })
       </div>
 
       {/* Conversion privilege callout */}
-      <div className="mb-5 flex items-center gap-3 rounded-card bg-surface px-5 py-3 shadow-card">
+      <div className="mb-5 flex items-baseline gap-3 rounded-card bg-surface px-5 py-3 shadow-card">
         <span className="text-2xl">🔄</span>
         <span className="font-sans text-lg font-semibold text-navy">{t.coverage.conversion}</span>
-        <span className="ml-auto font-sans text-lg text-ink">
+        <span className="font-sans text-lg text-muted">·</span>
+        <span className="font-sans text-lg text-ink">
           {t.coverage.conversionWindow(h.conversionYears ?? null, h.conversionToAge ?? null)}
         </span>
       </div>

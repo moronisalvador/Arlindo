@@ -26,7 +26,7 @@ export function Card({
   return (
     <div
       className={cn(
-        'overflow-hidden rounded-card border border-line/60 shadow-card',
+        'flex flex-col overflow-hidden rounded-card border border-line/60 shadow-card',
         tones[tone],
         className,
       )}
@@ -38,7 +38,9 @@ export function Card({
           <span>{headerStrip}</span>
         </div>
       )}
-      <div className="p-5">{children}</div>
+      {/* flex-1 lets the body fill when the card is stretched in a grid row, so
+          content can be vertically centered and cards with less text don't float. */}
+      <div className="flex-1 p-5">{children}</div>
     </div>
   )
 }

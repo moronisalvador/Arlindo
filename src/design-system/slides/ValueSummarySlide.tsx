@@ -29,7 +29,7 @@ export function ValueSummarySlide({ derived }: { derived: DerivedPresentation })
     { when: v.whenProtection, label: v.protection, value: money(headline.deathBenefit), sub: v.taxFree },
   ]
   if (!isTerm && headline.incomeOptionAnnual != null)
-    gets.push({ when: v.whenIncome, label: v.income, value: `${money(headline.incomeOptionAnnual)} ${v.perYear}`, sub: v.taxFree })
+    gets.push({ when: v.whenIncome, label: v.income, value: `${money(headline.incomeOptionAnnual)}${v.perYear}`, sub: v.taxFree })
   if (headline.livingBenefit != null) gets.push({ when: v.whenLiving, label: v.living, value: money(headline.livingBenefit) })
   if (!isTerm && headline.projectedAccumulatedValue != null)
     gets.push({ when: v.whenAccumulated, label: v.accumulated, value: money(headline.projectedAccumulatedValue) })
@@ -47,10 +47,10 @@ export function ValueSummarySlide({ derived }: { derived: DerivedPresentation })
           <div className="grid grid-cols-2 gap-3">
             {gets.map((g, i) => (
               <div key={i} className="rounded-card bg-surface p-4">
-                <div className="font-sans text-xs font-semibold uppercase tracking-wide text-orange">{g.when}</div>
+                <div className="font-sans text-xs font-semibold uppercase tracking-wide text-orange-dark">{g.when}</div>
                 <div className="mt-0.5 font-sans text-base text-muted">{g.label}</div>
                 <div className="font-serif text-2xl font-semibold text-navy tabular-nums">{g.value}</div>
-                {g.sub && <div className="mt-0.5 font-sans text-xs font-semibold text-orange">{g.sub}</div>}
+                {g.sub && <div className="mt-0.5 font-sans text-xs font-semibold text-orange-dark">{g.sub}</div>}
               </div>
             ))}
           </div>

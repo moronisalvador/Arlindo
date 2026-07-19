@@ -20,7 +20,7 @@ export function ComparisonSlide({ derived }: { derived: DerivedPresentation }) {
           <dl className="space-y-3">
             {ROWS.map((r) => (
               <div key={r.label}>
-                <dt className="font-sans text-sm font-semibold uppercase tracking-wide text-muted">
+                <dt className="font-sans text-sm font-semibold uppercase tracking-wide text-orange-dark">
                   {r.label}
                 </dt>
                 <dd className="font-sans text-lg text-ink">{r.term}</dd>

@@ -46,12 +46,17 @@ export function DataTable<Row>({
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, i) => (
+          {rows.map((row, i) => {
+            const highlighted = highlightRow?.(row, i)
+            return (
             <tr
               key={rowKey(row, i)}
               className={cn(
                 'border-b border-line',
-                highlightRow?.(row, i) && 'bg-navy/5 font-semibold',
+                // Subtle zebra striping aids row tracking across wide tables; the
+                // highlighted row's stronger tint takes precedence over it.
+                !highlighted && i % 2 === 1 && 'bg-navy/[0.03]',
+                highlighted && 'bg-navy/10 font-semibold',
               )}
             >
               {columns.map((c) => (
@@ -67,7 +72,8 @@ export function DataTable<Row>({
                 </td>
               ))}
             </tr>
-          ))}
+            )
+          })}
         </tbody>
       </table>
     </div>

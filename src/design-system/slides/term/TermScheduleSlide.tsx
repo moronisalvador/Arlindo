@@ -4,13 +4,7 @@ import { formatMoney, formatNumber, localeFor } from '@domain/format'
 import { slideCopy } from '@domain/presentationCopy'
 import { DataTable, type Column } from '@design-system/primitives'
 import { ContentSlide } from '../ContentSlide'
-
-/** Evenly samples rows down to `max` so the table always fits one slide. */
-function sample<T>(rows: T[], max: number): T[] {
-  if (rows.length <= max) return rows
-  const step = (rows.length - 1) / (max - 1)
-  return Array.from({ length: max }, (_, i) => rows[Math.round(i * step)])
-}
+import { sampleRows } from '../sampleRows'
 
 /**
  * Term premium schedule: Policy Year · Age · Guaranteed Premium · Guaranteed Death
@@ -20,7 +14,6 @@ export function TermScheduleSlide({ derived }: { derived: DerivedPresentation })
   const currency = derived.meta.currency
   const t = slideCopy(derived.meta.language).term
   const locale = localeFor(derived.meta.language)
-  const rows = sample(derived.table, 16)
 
   const columns: Array<Column<YearlyRow>> = [
     { key: 'year', header: t.schedule.year, render: (r) => formatNumber(r.policyYear, { locale }) },
@@ -55,6 +48,10 @@ export function TermScheduleSlide({ derived }: { derived: DerivedPresentation })
     firstJump?.premiumPaid != null &&
     levelYears != null &&
     peak.premiumPaid > level * 1.5
+
+  // Fewer rows when the cliff banner is present — it eats vertical space, so the
+  // table must stay shorter to avoid the last row clipping off the slide bottom.
+  const rows = sampleRows(all, showCliff ? 10 : 12)
 
   return (
     <ContentSlide eyebrow={t.schedule.eyebrow} title={t.schedule.title}>

@@ -1,6 +1,6 @@
 import type { DerivedPresentation } from '@domain/model/derived'
 import { formatMoney, formatPercent, localeFor } from '@domain/format'
-import { slideCopy } from '@domain/presentationCopy'
+import { slideCopy, conversionShort } from '@domain/presentationCopy'
 import { Card } from '@design-system/primitives'
 import { ContentSlide } from '../ContentSlide'
 
@@ -49,7 +49,9 @@ export function TermHeadlineSlide({ derived }: { derived: DerivedPresentation })
       emoji: '🔄',
       when: t.headline.whenConvert,
       label: t.headline.labelConvert,
-      value: t.coverage.conversionWindow(h.conversionYears ?? null, h.conversionToAge ?? null),
+      // Short, parallel token (e.g. "Até os 70 anos") — the full window text would
+      // wrap to 4 lines in the big serif value slot and break the 3-card rhythm.
+      value: conversionShort(derived.meta.language, h.conversionYears ?? null, h.conversionToAge ?? null),
       subtitle: t.headline.convertBody,
     },
   ]
@@ -61,7 +63,7 @@ export function TermHeadlineSlide({ derived }: { derived: DerivedPresentation })
           <Card key={card.when} className="h-full">
             <div className="flex h-full flex-col items-center text-center">
               <div className="text-5xl">{card.emoji}</div>
-              <div className="mt-4 font-sans text-lg font-semibold text-orange">{card.when}</div>
+              <div className="mt-4 font-sans text-lg font-semibold text-orange-dark">{card.when}</div>
               <div className="mt-1 font-sans text-base text-muted">{card.label}</div>
               <div className="mt-5 font-serif text-3xl font-semibold leading-tight text-navy tabular-nums">
                 {card.value}

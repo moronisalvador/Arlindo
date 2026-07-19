@@ -10,6 +10,11 @@ dev-dist
 *.log
 .vite
 
+# Local slide screenshots (npm run shot) + Playwright browser cache
+screenshots/
+test-results/
+playwright-report/
+
 # Client illustration samples (contain PII) — keep local, never commit
 Dave Miller.pdf
 /samples/
