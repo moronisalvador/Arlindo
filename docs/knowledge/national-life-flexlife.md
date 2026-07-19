@@ -73,6 +73,22 @@ RapidProtect newsroom.
   $3M" headline belongs to the **separate, paid Premium Chronic Care Rider** — do not conflate
   it with the no-cost suite.
 
+> **Sample cross-check (real FlexLife illustration, "jose" — DB $55,407, male 63, UT).**
+> The projected **discounted** ABR values printed in the illustration were: **Terminal Illness
+> $44,401 ≈ 80% of DB**, **Critical Illness/Injury up to $44,303 ≈ 80%**, and **Chronic a
+> monthly benefit** ($886/mo), not a lump percentage. So the real terminal figure lands
+> **~80% for this IUL case** — compare the term Term-30 case at **~86%** (see
+> [`national-life-term.md`](./national-life-term.md) §6.1). The document's own words: *"You
+> can accelerate up to 100% of the death benefit … A discount factor will be applied … the
+> actual benefit paid will be less than the amount accelerated."* **Takeaway: present ~80%,
+> never a flat 100%** — 100% is the gross acceleration ceiling before discount, and only the
+> paid Premium Chronic Care Rider targets the full benefit. (This is why Arlindo's headline
+> slide was changed on 2026-07-19 to show the real `livingBenefitPercent`, default 80% — see §8 #2.)
+>
+> ⚠️ Note: Arlindo's `riders.ts` still lists **Terminal Illness at 90%**, which neither
+> illustration supports (jose ~80%, Term-30 ~86%). Consider aligning it to 80% for the rider
+> list too — pending product-owner (agent) confirmation.
+
 ### 3.2 ABR lifetime dollar caps  ·  verdict: PARTIAL (high)
 
 The four dollar figures are correct, **but the caps are SHARED aggregate pools, not
@@ -216,6 +232,12 @@ pt-BR copy (see the audit JSON for exact recommendations).
 > age 25, #7 Premium Chronic Care wording — **done**. ⏳ **Pending / deferred:** #6 foreign-national
 > $500k min face (deferred by product decision), plus the "up to 100%" headline nuance (#2), the
 > Terminal 12-month state footnote (#6 in the list below), and the minor precision items (#9).
+>
+> **Status (v4, applied 2026-07-19):** ✅ **#2 done** — the IUL headline "Se você adoecer" card
+> no longer hard-codes "até 100%"; it now shows the real `livingBenefitPercent` (default **80%**),
+> matching the coverage slide and the ~80% measured in the jose illustration (see §3.1 cross-check).
+> ⏳ Still open: the rider-list **Terminal Illness 90% → 80%** alignment (awaiting agent confirmation),
+> #6 foreign-national min face, and the Terminal 12-month state footnote.
 
 1. **ABR caps → shared pools** (not independent): Pool A (Terminal+Chronic+Alzheimer's) $1.5M
    shared; Pool B (Critical Illness+Injury) $1.0M shared; add NY/IL/NJ variants. *(riders.ts)*
