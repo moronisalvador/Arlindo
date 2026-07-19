@@ -21,7 +21,7 @@ export function TermCoverageSlide({ derived }: { derived: DerivedPresentation })
     { label: t.coverage.death, value: formatMoney(h.deathBenefit, currency, { locale }) },
     {
       label: t.coverage.living,
-      value: h.livingBenefit != null ? formatMoney(h.livingBenefit, currency, { locale }) : formatMoney(h.deathBenefit, currency, { locale }),
+      value: t.coverage.upTo(formatMoney(h.livingBenefit ?? h.deathBenefit, currency, { locale })),
       sub: t.coverage.livingSub,
     },
   ]

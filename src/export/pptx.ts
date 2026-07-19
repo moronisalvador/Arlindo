@@ -414,11 +414,12 @@ function termScheduleSlide(pptx: pptxgen, d: DerivedPresentation) {
   const all = d.table
   const level = all[0]?.premiumPaid
   const peak = all.reduce((mx, r) => ((r.premiumPaid ?? 0) > (mx.premiumPaid ?? 0) ? r : mx), all[0])
+  const firstJump = level != null ? all.find((r) => (r.premiumPaid ?? 0) > level * 1.5) : undefined
   const levelYears = d.headline.termLengthYears
-  if (level != null && peak?.premiumPaid != null && levelYears != null && peak.premiumPaid > level * 1.5) {
+  if (level != null && peak?.premiumPaid != null && firstJump?.premiumPaid != null && levelYears != null && peak.premiumPaid > level * 1.5) {
     s.addShape('roundRect', { x: 0.6, y: top, w: 12.1, h: 0.95, fill: { color: C.white }, line: { color: C.orange }, rectRadius: 0.05 })
     s.addText(t.schedule.cliffTitle, { x: 0.8, y: top + 0.08, w: 11.7, h: 0.3, fontFace: SANS, fontSize: 11, bold: true, color: C.navy })
-    s.addText(t.schedule.cliffBody(levelYears, formatMoney(level, cur, { locale: loc }), formatMoney(peak.premiumPaid, cur, { locale: loc }), peak.age ?? 0), { x: 0.8, y: top + 0.38, w: 11.7, h: 0.5, fontFace: SANS, fontSize: 12, color: C.ink })
+    s.addText(t.schedule.cliffBody(levelYears, formatMoney(level, cur, { locale: loc }), formatMoney(firstJump.premiumPaid, cur, { locale: loc }), firstJump.age ?? 0, formatMoney(peak.premiumPaid, cur, { locale: loc }), peak.age ?? 0), { x: 0.8, y: top + 0.38, w: 11.7, h: 0.5, fontFace: SANS, fontSize: 12, color: C.ink })
     top += 1.15
   }
   const rows = sample(d.table, 12)

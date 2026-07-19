@@ -105,6 +105,12 @@ export interface SlideCopy {
     taxFree: string
     tagline: string
     perYear: string
+    // Scenario labels — frame the benefits by situation (not a simultaneous sum).
+    whenProtection: string
+    whenIncome: string
+    whenLiving: string
+    whenAccumulated: string
+    whenConversion: string
   }
   /** Closing call-to-action slide. */
   nextSteps: {
@@ -149,6 +155,8 @@ export interface TermSlideCopy {
     conversionWindow: (years: number | null, age: number | null) => string
     includedTitle: string
     additionalCost: string
+    /** "up to {money}" — frames a living-benefit ceiling honestly. */
+    upTo: (money: string) => string
   }
   schedule: {
     eyebrow: string
@@ -158,7 +166,14 @@ export interface TermSlideCopy {
     premium: string
     death: string
     cliffTitle: string
-    cliffBody: (levelYears: number, level: string, peak: string, peakAge: number) => string
+    cliffBody: (
+      levelYears: number,
+      level: string,
+      firstJump: string,
+      firstAge: number,
+      peak: string,
+      peakAge: number,
+    ) => string
   }
   comparison: {
     eyebrow: string
@@ -277,8 +292,13 @@ const pt: SlideCopy = {
     accumulated: 'Valor acumulado',
     conversion: 'Opção de converter para permanente',
     taxFree: 'Livre de imposto de renda',
-    tagline: 'Muito mais do que você coloca — e no momento em que a família mais precisa.',
+    tagline: 'Muito mais do que você coloca — proteção para cada momento da vida.',
     perYear: '/ano',
+    whenProtection: 'Se você partir cedo',
+    whenIncome: 'Se você viver muito',
+    whenLiving: 'Se você adoecer',
+    whenAccumulated: 'Disponível para resgate',
+    whenConversion: 'Quando quiser',
   },
   nextSteps: {
     eyebrow: 'Vamos Começar',
@@ -316,6 +336,7 @@ const pt: SlideCopy = {
       conversionWindow: (years, age) => conversionWindowText('pt', years, age),
       includedTitle: 'Benefícios em Vida inclusos',
       additionalCost: '(custo adicional)',
+      upTo: (money) => `até ${money}`,
     },
     schedule: {
       eyebrow: 'Detalhamento',
@@ -325,8 +346,8 @@ const pt: SlideCopy = {
       premium: 'Prêmio',
       death: 'Proteção por morte',
       cliffTitle: 'Por que converter?',
-      cliffBody: (levelYears, level, peak, peakAge) =>
-        `Prêmio nivelado de ${level}/ano por ${levelYears} anos — depois sobe a cada ano, chegando a ${peak}/ano aos ${peakAge}. Converter para permanente evita esse salto.`,
+      cliffBody: (levelYears, level, firstJump, firstAge, peak, peakAge) =>
+        `Prêmio nivelado de ${level}/ano por ${levelYears} anos. Depois sobe todo ano — já ${firstJump}/ano aos ${firstAge}, chegando a ${peak}/ano aos ${peakAge}. Converter para permanente trava o custo e evita esse aumento.`,
     },
     comparison: {
       eyebrow: 'Comparando os Produtos',
@@ -453,8 +474,13 @@ const en: SlideCopy = {
     accumulated: 'Accumulated value',
     conversion: 'Option to convert to permanent',
     taxFree: 'Income-tax-free',
-    tagline: 'Far more than you put in — right when your family needs it most.',
+    tagline: 'Far more than you put in — protection for every stage of life.',
     perYear: '/yr',
+    whenProtection: 'If you pass early',
+    whenIncome: 'If you live a long life',
+    whenLiving: 'If you become ill',
+    whenAccumulated: 'Available to withdraw',
+    whenConversion: 'Whenever you choose',
   },
   nextSteps: {
     eyebrow: "Let's Get Started",
@@ -492,6 +518,7 @@ const en: SlideCopy = {
       conversionWindow: (years, age) => conversionWindowText('en', years, age),
       includedTitle: 'Living Benefits included',
       additionalCost: '(additional cost)',
+      upTo: (money) => `up to ${money}`,
     },
     schedule: {
       eyebrow: 'Detail',
@@ -501,8 +528,8 @@ const en: SlideCopy = {
       premium: 'Premium',
       death: 'Death protection',
       cliffTitle: 'Why convert?',
-      cliffBody: (levelYears, level, peak, peakAge) =>
-        `Level premium of ${level}/yr for ${levelYears} years — then it rises every year, reaching ${peak}/yr at age ${peakAge}. Converting to permanent avoids that jump.`,
+      cliffBody: (levelYears, level, firstJump, firstAge, peak, peakAge) =>
+        `Level premium of ${level}/yr for ${levelYears} years. Then it rises every year — already ${firstJump}/yr at age ${firstAge}, reaching ${peak}/yr at age ${peakAge}. Converting to permanent locks in the cost and avoids that increase.`,
     },
     comparison: {
       eyebrow: 'Comparing the Products',
@@ -629,8 +656,13 @@ const es: SlideCopy = {
     accumulated: 'Valor acumulado',
     conversion: 'Opción de convertir a permanente',
     taxFree: 'Libre de impuesto sobre la renta',
-    tagline: 'Mucho más de lo que aporta — justo cuando la familia más lo necesita.',
+    tagline: 'Mucho más de lo que aporta — protección para cada etapa de la vida.',
     perYear: '/año',
+    whenProtection: 'Si parte pronto',
+    whenIncome: 'Si vive muchos años',
+    whenLiving: 'Si enferma',
+    whenAccumulated: 'Disponible para retirar',
+    whenConversion: 'Cuando quiera',
   },
   nextSteps: {
     eyebrow: 'Comencemos',
@@ -668,6 +700,7 @@ const es: SlideCopy = {
       conversionWindow: (years, age) => conversionWindowText('es', years, age),
       includedTitle: 'Beneficios en Vida incluidos',
       additionalCost: '(costo adicional)',
+      upTo: (money) => `hasta ${money}`,
     },
     schedule: {
       eyebrow: 'Detalle',
@@ -677,8 +710,8 @@ const es: SlideCopy = {
       premium: 'Prima',
       death: 'Protección por muerte',
       cliffTitle: '¿Por qué convertir?',
-      cliffBody: (levelYears, level, peak, peakAge) =>
-        `Prima nivelada de ${level}/año por ${levelYears} años — luego sube cada año, llegando a ${peak}/año a los ${peakAge}. Convertir a permanente evita ese salto.`,
+      cliffBody: (levelYears, level, firstJump, firstAge, peak, peakAge) =>
+        `Prima nivelada de ${level}/año por ${levelYears} años. Luego sube cada año — ya ${firstJump}/año a los ${firstAge}, llegando a ${peak}/año a los ${peakAge}. Convertir a permanente fija el costo y evita ese aumento.`,
     },
     comparison: {
       eyebrow: 'Comparando los Productos',

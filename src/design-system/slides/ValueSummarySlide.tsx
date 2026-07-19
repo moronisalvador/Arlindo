@@ -22,15 +22,18 @@ export function ValueSummarySlide({ derived }: { derived: DerivedPresentation })
       ? annualPrem * headline.termLengthYears
       : headline.totalPremiumsPaid
 
-  const gets: Array<{ label: string; value: string; sub?: string }> = [
-    { label: v.protection, value: money(headline.deathBenefit), sub: v.taxFree },
+  // Each benefit is scoped to its life scenario, so the list reads as "what the
+  // plan does in each situation" — not a simultaneous payout (using one can reduce
+  // another). Honest, and reinforces that the plan covers every case.
+  const gets: Array<{ when: string; label: string; value: string; sub?: string }> = [
+    { when: v.whenProtection, label: v.protection, value: money(headline.deathBenefit), sub: v.taxFree },
   ]
   if (!isTerm && headline.incomeOptionAnnual != null)
-    gets.push({ label: v.income, value: `${money(headline.incomeOptionAnnual)} ${v.perYear}`, sub: v.taxFree })
-  if (headline.livingBenefit != null) gets.push({ label: v.living, value: money(headline.livingBenefit) })
+    gets.push({ when: v.whenIncome, label: v.income, value: `${money(headline.incomeOptionAnnual)} ${v.perYear}`, sub: v.taxFree })
+  if (headline.livingBenefit != null) gets.push({ when: v.whenLiving, label: v.living, value: money(headline.livingBenefit) })
   if (!isTerm && headline.projectedAccumulatedValue != null)
-    gets.push({ label: v.accumulated, value: money(headline.projectedAccumulatedValue) })
-  if (isTerm) gets.push({ label: v.conversion, value: '✓' })
+    gets.push({ when: v.whenAccumulated, label: v.accumulated, value: money(headline.projectedAccumulatedValue) })
+  if (isTerm) gets.push({ when: v.whenConversion, label: v.conversion, value: '✓' })
 
   return (
     <ContentSlide eyebrow={v.eyebrow} title={v.title}>
@@ -44,7 +47,8 @@ export function ValueSummarySlide({ derived }: { derived: DerivedPresentation })
           <div className="grid grid-cols-2 gap-3">
             {gets.map((g, i) => (
               <div key={i} className="rounded-card bg-surface p-4">
-                <div className="font-sans text-base text-muted">{g.label}</div>
+                <div className="font-sans text-xs font-semibold uppercase tracking-wide text-orange">{g.when}</div>
+                <div className="mt-0.5 font-sans text-base text-muted">{g.label}</div>
                 <div className="font-serif text-2xl font-semibold text-navy tabular-nums">{g.value}</div>
                 {g.sub && <div className="mt-0.5 font-sans text-xs font-semibold text-orange">{g.sub}</div>}
               </div>

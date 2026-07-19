@@ -45,9 +45,16 @@ export function TermScheduleSlide({ derived }: { derived: DerivedPresentation })
   const all = derived.table
   const level = all[0]?.premiumPaid
   const peak = all.reduce((mx, r) => ((r.premiumPaid ?? 0) > (mx.premiumPaid ?? 0) ? r : mx), all[0])
+  // The FIRST post-level jump is the decision-relevant number (near the conversion
+  // window); the peak is the dramatic end. We cite both, honestly.
+  const firstJump = level != null ? all.find((r) => (r.premiumPaid ?? 0) > level * 1.5) : undefined
   const levelYears = derived.headline.termLengthYears
   const showCliff =
-    level != null && peak?.premiumPaid != null && levelYears != null && peak.premiumPaid > level * 1.5
+    level != null &&
+    peak?.premiumPaid != null &&
+    firstJump?.premiumPaid != null &&
+    levelYears != null &&
+    peak.premiumPaid > level * 1.5
 
   return (
     <ContentSlide eyebrow={t.schedule.eyebrow} title={t.schedule.title}>
@@ -58,6 +65,8 @@ export function TermScheduleSlide({ derived }: { derived: DerivedPresentation })
             {t.schedule.cliffBody(
               levelYears,
               formatMoney(level, currency, { locale }),
+              formatMoney(firstJump?.premiumPaid, currency, { locale }),
+              firstJump?.age ?? 0,
               formatMoney(peak.premiumPaid, currency, { locale }),
               peak.age ?? 0,
             )}
