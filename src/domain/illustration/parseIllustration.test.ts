@@ -72,7 +72,9 @@ describe('parseIllustration — IUL', () => {
     expect(applied.iul.incomeOptionAnnual).toBe(3166)
     expect(applied.iul.incomeToAge).toBe(78)
     expect(applied.iul.paymentYears).toBe(15)
-    expect(applied.iul.projectionYears).toBe(16) // max policy year, not row count
+    // The projected value ($44,281) is the year-15 figure, so the horizon is 15 —
+    // NOT the ledger's max year (16). Labeling it "em 16 anos" would misstate it.
+    expect(applied.iul.projectionYears).toBe(15)
     expect(applied.client.name).toBe('Jose L Lopes Da Graca')
   })
 })
