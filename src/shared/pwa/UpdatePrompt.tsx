@@ -7,26 +7,39 @@ import { Button } from '@design-system'
 // re-check every time the app is brought back to the foreground.
 const UPDATE_CHECK_INTERVAL_MS = 60 * 60 * 1000 // hourly
 
+// Safety net: if the new worker somehow never fires `controllerchange` after we
+// tell it to activate, reload anyway so the button is never a dead end.
+const RELOAD_FALLBACK_MS = 3000
+
 /**
  * Registers the service worker and, when a new deploy is detected, shows a
  * small non-intrusive banner. Tapping "Atualizar" activates the new version and
  * reloads. Nothing reloads on its own — safe to keep on screen during a live
  * client presentation. This is why releases no longer need a manual Shift+R.
+ *
+ * We intentionally do NOT use the `updateSW` function returned by registerSW to
+ * apply the update: because we detect updates with a plain `registration.update()`
+ * (see below), workbox-window's internal bookkeeping isn't populated the way its
+ * `updateSW()` expects, so it would post nothing and the button would look dead.
+ * Instead we drive skip-waiting + reload ourselves against the live registration,
+ * which is deterministic. (`clientsClaim: true` in vite.config makes the newly
+ * activated worker take control of this tab, which is what fires
+ * `controllerchange` — the event we reload on.)
  */
 export function UpdatePrompt() {
   const [needRefresh, setNeedRefresh] = useState(false)
-  // registerSW returns the "apply update + reload" function.
-  const applyUpdate = useRef<(reload?: boolean) => Promise<void>>()
+  const registrationRef = useRef<ServiceWorkerRegistration | null>(null)
   const cleanup = useRef<() => void>()
 
   useEffect(() => {
-    applyUpdate.current = registerSW({
+    registerSW({
       immediate: true,
       onNeedRefresh() {
         setNeedRefresh(true)
       },
       onRegisteredSW(_swUrl, registration) {
         if (!registration) return
+        registrationRef.current = registration
         const check = () => {
           // Skip if offline or an install is already in flight.
           if (!navigator.onLine || registration.installing) return
@@ -46,6 +59,25 @@ export function UpdatePrompt() {
     return () => cleanup.current?.()
   }, [])
 
+  function applyUpdate() {
+    const waiting = registrationRef.current?.waiting
+    // No worker in the wings — a plain reload gets whatever's newest.
+    if (!waiting) {
+      window.location.reload()
+      return
+    }
+    let reloaded = false
+    const reload = () => {
+      if (reloaded) return
+      reloaded = true
+      window.location.reload()
+    }
+    // The new worker takes control (thanks to clientsClaim) → controllerchange.
+    navigator.serviceWorker.addEventListener('controllerchange', reload)
+    window.setTimeout(reload, RELOAD_FALLBACK_MS)
+    waiting.postMessage({ type: 'SKIP_WAITING' })
+  }
+
   if (!needRefresh) return null
 
   return (
@@ -63,7 +95,7 @@ export function UpdatePrompt() {
       >
         Depois
       </Button>
-      <Button size="md" variant="primary" onClick={() => void applyUpdate.current?.(true)}>
+      <Button size="md" variant="primary" onClick={applyUpdate}>
         Atualizar
       </Button>
     </div>
