@@ -15,6 +15,7 @@ import {
   Loading,
   Modal,
   NavyHeaderBar,
+  TextInput,
 } from '@design-system'
 import {
   presentationRepository,
@@ -41,6 +42,7 @@ export default function PresentationsPage() {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
 
+  const [search, setSearch] = useState('')
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null)
   const [feedback, setFeedback] = useState<BackupFeedback>(null)
   const [isExporting, setIsExporting] = useState(false)
@@ -233,6 +235,8 @@ export default function PresentationsPage() {
 
       <ListBody
         query={query}
+        search={search}
+        onSearchChange={setSearch}
         onCreate={() => createMutation.mutate('iul')}
         creating={createMutation.isPending}
         onOpen={(id) => navigate(routes.editor(id))}
@@ -306,8 +310,29 @@ function BackupBar({
   )
 }
 
+/** Accent- and case-insensitive normalization for friendly search matching. */
+function normalize(s: string): string {
+  return s
+    .normalize('NFD')
+    .replace(/\p{Diacritic}/gu, '')
+    .toLowerCase()
+}
+
+/** Words a presentation should be findable by: client, title, and product. */
+function searchHaystack(p: PresentationInputs, t: (k: string) => string): string {
+  const productLabel =
+    p.productType === 'annuity'
+      ? t('product.annuity')
+      : p.productType === 'term'
+        ? t('product.term')
+        : t('product.iul')
+  return normalize([p.client.name, p.title, productLabel].filter(Boolean).join(' '))
+}
+
 function ListBody({
   query,
+  search,
+  onSearchChange,
   onCreate,
   creating,
   onOpen,
@@ -318,6 +343,8 @@ function ListBody({
   onAskDelete,
 }: {
   query: UseQueryResult<PresentationInputs[]>
+  search: string
+  onSearchChange: (value: string) => void
   onCreate: () => void
   creating: boolean
   onOpen: (id: string) => void
@@ -359,20 +386,51 @@ function ListBody({
     )
   }
 
+  const q = normalize(search.trim())
+  const filtered = q ? items.filter((p) => searchHaystack(p, t).includes(q)) : items
+
+  // Only worth showing the search box once there's a handful to sift through.
+  const showSearch = items.length > 3
+
   return (
-    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-      {items.map((p) => (
-        <PresentationCard
-          key={p.id}
-          presentation={p}
-          onOpen={() => onOpen(p.id)}
-          onPresent={() => onPresent(p.id)}
-          onExportPdf={() => onExportPdf(p.id)}
-          onDuplicate={() => onDuplicate(p.id)}
-          duplicating={duplicatingId === p.id}
-          onAskDelete={() => onAskDelete(p.id)}
+    <div className="space-y-4">
+      {showSearch && (
+        <TextInput
+          type="search"
+          value={search}
+          onChange={(e) => onSearchChange(e.target.value)}
+          placeholder={t('search.placeholder')}
+          aria-label={t('search.label')}
         />
-      ))}
+      )}
+
+      {filtered.length === 0 ? (
+        <EmptyState
+          icon="🔍"
+          title={t('search.noResults.title')}
+          description={t('search.noResults.description')}
+          action={
+            <Button variant="ghost" onClick={() => onSearchChange('')}>
+              {t('search.clear')}
+            </Button>
+          }
+        />
+      ) : (
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+          {filtered.map((p) => (
+            <PresentationCard
+              key={p.id}
+              presentation={p}
+              onOpen={() => onOpen(p.id)}
+              onPresent={() => onPresent(p.id)}
+              onExportPdf={() => onExportPdf(p.id)}
+              onDuplicate={() => onDuplicate(p.id)}
+              duplicating={duplicatingId === p.id}
+              onAskDelete={() => onAskDelete(p.id)}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }

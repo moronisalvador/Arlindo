@@ -12,6 +12,15 @@ export const ptBR = {
   },
   creating: 'Criando…',
   noName: 'Sem nome',
+  search: {
+    label: 'Buscar apresentações',
+    placeholder: '🔍 Buscar por cliente, produto ou título…',
+    clear: 'Limpar busca',
+    noResults: {
+      title: 'Nenhum resultado',
+      description: 'Nenhuma apresentação corresponde à sua busca.',
+    },
+  },
   product: {
     iul: 'IUL',
     term: 'Termo',
