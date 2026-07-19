@@ -127,6 +127,12 @@ export interface SlideCopy {
 }
 
 export interface TermSlideCopy {
+  explainer: {
+    eyebrow: string
+    title: string
+    intro: (name: string) => { pre: string; strong: string; post: string }
+    pillars: Array<{ title: string; body: string }>
+  }
   headline: {
     eyebrow: string
     title: string
@@ -309,6 +315,21 @@ const pt: SlideCopy = {
     close: 'Estou aqui para responder qualquer pergunta.',
   },
   term: {
+    explainer: {
+      eyebrow: 'Entendendo o Produto',
+      title: 'O que é o Seguro Temporário?',
+      intro: (name) => ({
+        pre: `O seguro temporário protege ${name} por um período definido com o `,
+        strong: 'maior valor de proteção pelo menor custo',
+        post: ' — e pode ser convertido em permanente, sem novo exame de saúde.',
+      }),
+      pillars: [
+        { title: 'Proteção Máxima', body: 'O maior benefício por morte pelo menor prêmio.' },
+        { title: 'Custo Baixo e Nivelado', body: 'Prêmio fixo durante todo o período contratado.' },
+        { title: 'Benefícios em Vida', body: 'Antecipe parte do benefício em caso de doença grave.' },
+        { title: 'Conversível', body: 'Troque por proteção vitalícia, sem novo exame, dentro do prazo.' },
+      ],
+    },
     headline: {
       eyebrow: 'Proteção Quando Você Precisa',
       title: 'O que este plano faz por você',
@@ -491,6 +512,21 @@ const en: SlideCopy = {
     close: "I'm here to answer any questions.",
   },
   term: {
+    explainer: {
+      eyebrow: 'Understanding the Product',
+      title: 'What is Term Life Insurance?',
+      intro: (name) => ({
+        pre: `Term insurance protects ${name} for a set period at the `,
+        strong: 'most protection for the lowest cost',
+        post: ' — and it can be converted to permanent coverage, with no new health exam.',
+      }),
+      pillars: [
+        { title: 'Maximum Protection', body: 'The highest death benefit for the lowest premium.' },
+        { title: 'Low, Level Cost', body: 'A fixed premium for the entire term you choose.' },
+        { title: 'Living Benefits', body: 'Access part of the benefit early in case of serious illness.' },
+        { title: 'Convertible', body: 'Switch to lifelong coverage, no new exam, within the window.' },
+      ],
+    },
     headline: {
       eyebrow: 'Protection When You Need It',
       title: 'What this plan does for you',
@@ -673,6 +709,21 @@ const es: SlideCopy = {
     close: 'Estoy aquí para responder cualquier pregunta.',
   },
   term: {
+    explainer: {
+      eyebrow: 'Entendiendo el Producto',
+      title: '¿Qué es el Seguro Temporal?',
+      intro: (name) => ({
+        pre: `El seguro temporal protege a ${name} por un período definido con la `,
+        strong: 'mayor protección al menor costo',
+        post: ' — y puede convertirse en permanente, sin nuevo examen de salud.',
+      }),
+      pillars: [
+        { title: 'Protección Máxima', body: 'El mayor beneficio por muerte con la prima más baja.' },
+        { title: 'Costo Bajo y Nivelado', body: 'Prima fija durante todo el período contratado.' },
+        { title: 'Beneficios en Vida', body: 'Acceda a parte del beneficio ante una enfermedad grave.' },
+        { title: 'Convertible', body: 'Cambie a protección de por vida, sin examen, dentro del plazo.' },
+      ],
+    },
     headline: {
       eyebrow: 'Protección Cuando la Necesita',
       title: 'Lo que este plan hace por usted',

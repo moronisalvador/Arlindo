@@ -130,16 +130,52 @@ function coverSlide(pptx: pptxgen, d: DerivedPresentation) {
   s.addText(monthYear(d.meta.preparedOn, loc), { x: 0.8, y: 5.5, w: 6, h: 0.4, fontFace: SANS, fontSize: 12, color: 'C7CCD6' })
 }
 
+function headlineSlide(pptx: pptxgen, d: DerivedPresentation) {
+  const s = pptx.addSlide()
+  const c = slideCopy(d.meta.language)
+  const loc = localeFor(d.meta.language)
+  const top = addHeader(s, c.headline.eyebrow, c.headline.title)
+  const cur = d.meta.currency
+  const h = d.headline
+  const cards: Array<[string, string, string, string]> = [
+    ['🛡️', c.headline.whenEarly, formatMoney(h.deathBenefit, cur, { locale: loc }), c.headline.subDeath],
+    [
+      '💵',
+      c.headline.whenLong,
+      h.incomeOptionAnnual != null ? `${formatMoney(h.incomeOptionAnnual, cur, { locale: loc })} ${c.options.perYear}` : '—',
+      h.incomeToAge != null ? c.headline.illustratedToAge(h.incomeToAge) : '',
+    ],
+    [
+      '❤️',
+      c.headline.whenIll,
+      h.livingBenefitPercent != null ? c.headline.livingUpToPercent(formatPercent(h.livingBenefitPercent, { locale: loc })) : c.headline.livingEarly,
+      h.livingBenefit != null ? c.headline.livingUpTo(formatMoney(h.livingBenefit, cur, { locale: loc })) : '',
+    ],
+  ]
+  const cardW = 3.9
+  const gap = 0.2
+  cards.forEach(([emoji, when, value, sub], i) => {
+    const x = 0.6 + i * (cardW + gap)
+    s.addShape('roundRect', { x, y: top, w: cardW, h: 4, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.08 })
+    s.addText(emoji, { x, y: top + 0.25, w: cardW, h: 0.7, fontSize: 30, align: 'center' })
+    s.addText(when, { x: x + 0.15, y: top + 1.05, w: cardW - 0.3, h: 0.4, fontFace: SANS, fontSize: 13, bold: true, color: C.orange, align: 'center' })
+    s.addText(value, { x: x + 0.15, y: top + 1.6, w: cardW - 0.3, h: 1, fontFace: SERIF, fontSize: 22, bold: true, color: C.navy, align: 'center', valign: 'middle' })
+    s.addText(sub, { x: x + 0.2, y: top + 2.7, w: cardW - 0.4, h: 1, fontFace: SANS, fontSize: 11, color: C.muted, align: 'center' })
+  })
+}
+
 function explainerSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
   const c = slideCopy(d.meta.language)
-  const top = addHeader(s, c.explainer.eyebrow, c.explainer.title)
+  // Product-aware: term and IUL each have their own explainer copy block.
+  const ex = d.meta.productType === 'term' ? c.term.explainer : c.explainer
+  const top = addHeader(s, ex.eyebrow, ex.title)
   const name = d.meta.clientName || c.clientFallback
-  const intro = c.explainer.intro(name)
+  const intro = ex.intro(name)
   s.addText(`${intro.pre}${intro.strong}${intro.post}`, {
     x: 0.6, y: top, w: 12.1, h: 0.9, fontFace: SANS, fontSize: 13, color: C.ink,
   })
-  const pillars = c.explainer.pillars.map((p) => [p.title, p.body] as const)
+  const pillars = ex.pillars.map((p) => [p.title, p.body] as const)
   const cardW = 2.9
   const gap = 0.18
   const startX = 0.6
@@ -544,6 +580,7 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
   if (derived.meta.productType === 'term') {
     coverSlide(pptx, derived)
     termHeadlineSlide(pptx, derived)
+    explainerSlide(pptx, derived)
     termCoverageSlide(pptx, derived)
     if (derived.table.length > 0) termScheduleSlide(pptx, derived)
     termComparisonSlide(pptx, derived)
@@ -552,6 +589,7 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
     disclaimersSlide(pptx, derived)
   } else {
     coverSlide(pptx, derived)
+    headlineSlide(pptx, derived)
     explainerSlide(pptx, derived)
     coverageSlide(pptx, derived)
     projectionSlide(pptx, derived)

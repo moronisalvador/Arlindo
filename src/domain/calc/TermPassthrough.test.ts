@@ -49,6 +49,7 @@ describe('PassthroughEngine — term', () => {
     const slides = buildSlides(derive(sampleTermPresentation()))
     const ids = slides.map((s) => s.id)
     expect(ids).toContain('cover')
+    expect(ids).toContain('explainer') // term has its own "O que é o Seguro Temporário?"
     expect(ids).toContain('coverage')
     expect(ids).toContain('schedule')
     expect(ids).toContain('comparison')
@@ -56,6 +57,6 @@ describe('PassthroughEngine — term', () => {
     // No IUL projection / accumulated-value table / withdraw-vs-income.
     expect(ids).not.toContain('projection')
     expect(ids).not.toContain('options')
-    expect(ids).not.toContain('explainer')
+    expect(ids).not.toContain('table')
   })
 })
