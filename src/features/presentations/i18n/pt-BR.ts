@@ -5,6 +5,11 @@ export const ptBR = {
   new: 'Nova apresentação',
   newIul: 'Nova (IUL)',
   newTerm: 'Nova (Termo)',
+  importPdf: {
+    button: '📄 Importar ilustração (PDF)',
+    reading: 'Lendo o PDF…',
+    error: 'Não foi possível ler esta ilustração. Verifique se é um PDF do National Life (FlexLife ou Termo) ou crie manualmente.',
+  },
   creating: 'Criando…',
   noName: 'Sem nome',
   product: {

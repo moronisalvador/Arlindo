@@ -5,7 +5,7 @@ import { formatMoney } from '@domain/format'
 import type { CurrencyCode } from '@domain/model/presentation'
 import { parseIllustration } from '@domain/illustration/parseIllustration'
 import type { ParsedIllustration } from '@domain/illustration/types'
-import { extractIllustrationText } from './pdfExtract'
+import { extractIllustrationText } from '@shared/pdfExtract'
 
 type Status = 'idle' | 'reading' | 'review' | 'error'
 

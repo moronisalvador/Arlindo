@@ -178,6 +178,52 @@ describe('parseIllustration — robustness (agent findings)', () => {
     expect(p.rows[0]).toMatchObject({ policyYear: 1, age: 0 })
   })
 
+  it('term ledger survives a trailing $0 cash-value column', () => {
+    const p = parseIllustration([
+      'Term 20-G Term Life Insurance',
+      'Face Amount: $500,000',
+      '1 45 $480.00 $500,000 $0',
+      '2 46 480.00 500,000 0',
+    ].join('\n'))!
+    expect(p.rows).toHaveLength(2)
+    expect(p.rows[0]).toMatchObject({ premiumPaid: 480, deathBenefit: 500_000 })
+  })
+
+  it('picks the main schedule over a comparison table printed first', () => {
+    const p = parseIllustration([
+      'Term 30-G Face Amount: $500,000',
+      '1 45 300 400 480 600 500,000', // rate-class comparison (5 premiums) FIRST
+      '1 45 480 500,000', // main schedule (2 cols) after
+    ].join('\n'))!
+    expect(p.rows.find((r) => r.policyYear === 1)?.premiumPaid).toBe(480)
+  })
+
+  it('does not misclassify an IUL that mentions "level term"', () => {
+    const p = parseIllustration([
+      'FlexLife Indexed Universal Life',
+      'Compared to level term insurance, this policy builds Accumulated Value.',
+      '1 40 $3,000.00 $0 $0 $0 6.00 % $2,500 $0 $250,000',
+    ].join('\n'))!
+    expect(p.productType).toBe('iul')
+    expect(p.rows).toHaveLength(1)
+  })
+
+  it('detects Term 15-NG and reads its term length', () => {
+    const p = parseIllustration([
+      'Term 15-NG Term Life Insurance',
+      'Face Amount: $250,000',
+      '1 50 $600.00 $250,000',
+    ].join('\n'))!
+    expect(p.productType).toBe('term')
+    expect(p.termLengthYears).toBe(15)
+  })
+
+  it('does not coerce Semi-Annual premium to annual', () => {
+    const p = parseIllustration('X Face Amount: $1 FlexLife\nInitial Premium: $500.00 Semi-Annual\nMale 40 Standard')!
+    expect(p.premiumMode).toBeUndefined()
+    expect(p.warnings.some((w) => /frequência/i.test(w))).toBe(true)
+  })
+
   it('handles junk input', () => {
     expect(parseIllustration('')).toBeNull()
     expect(parseIllustration('hello')).toBeNull()
