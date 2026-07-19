@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { AppProviders } from '@app/providers'
 import { AppRouter } from '@app/router'
 import { requestPersistentStorage } from '@persistence/index'
+import { UpdatePrompt } from '@shared/pwa/UpdatePrompt'
 
 export default function App() {
   useEffect(() => {
@@ -12,6 +13,7 @@ export default function App() {
   return (
     <AppProviders>
       <AppRouter />
+      <UpdatePrompt />
     </AppProviders>
   )
 }

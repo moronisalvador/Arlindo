@@ -28,7 +28,12 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: 'autoUpdate',
+      // 'prompt' (not 'autoUpdate') so a new release never reloads the app
+      // mid-presentation. The app detects the update in the background and shows
+      // an "Atualizar" banner (src/shared/pwa/UpdatePrompt.tsx) that the agent
+      // taps when ready. This is what removes the need to hard-refresh (Shift+R)
+      // after every deploy.
+      registerType: 'prompt',
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
         name: 'Arlindo',
