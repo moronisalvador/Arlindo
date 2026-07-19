@@ -21,6 +21,7 @@ import {
   type BackupFile,
 } from '@persistence'
 import type { PresentationInputs } from '@domain/model/presentation'
+import { formatMoney } from '@domain/format'
 import { parseIllustration } from '@domain/illustration/parseIllustration'
 import { applyIllustration } from '@domain/illustration/applyIllustration'
 import { extractIllustrationText } from '@shared/pdfExtract'
@@ -375,6 +376,32 @@ function ListBody({
   )
 }
 
+/** A few at-a-glance numbers for a presentation tile (only the ones that exist). */
+function tileStats(
+  p: PresentationInputs,
+  t: (k: string) => string,
+): Array<{ label: string; value: string }> {
+  const cur = p.displayCurrency
+  const per = (mode: 'monthly' | 'annual') => (mode === 'annual' ? t('tile.perYear') : t('tile.perMonth'))
+  const stats: Array<{ label: string; value: string }> = []
+  if (p.productType === 'term') {
+    const term = p.term
+    if (term.deathBenefit != null) stats.push({ label: t('tile.protection'), value: formatMoney(term.deathBenefit, cur) })
+    if (term.premium != null) stats.push({ label: t('tile.premium'), value: `${formatMoney(term.premium, cur)}${per(term.premiumMode)}` })
+    if (term.termLengthYears != null) stats.push({ label: t('tile.term'), value: `${term.termLengthYears} ${t('tile.years')}` })
+  } else {
+    const iul = p.iul
+    if (iul.deathBenefit != null) stats.push({ label: t('tile.protection'), value: formatMoney(iul.deathBenefit, cur) })
+    if (iul.premium != null) stats.push({ label: t('tile.premium'), value: `${formatMoney(iul.premium, cur)}${per(iul.premiumMode)}` })
+    if (iul.incomeOptionAnnual != null) {
+      stats.push({ label: t('tile.income'), value: `${formatMoney(iul.incomeOptionAnnual, cur)}${t('tile.perYear')}` })
+    } else if (iul.projectedAccumulatedValue != null) {
+      stats.push({ label: t('tile.value'), value: formatMoney(iul.projectedAccumulatedValue, cur) })
+    }
+  }
+  return stats
+}
+
 function PresentationCard({
   presentation,
   onOpen,
@@ -400,9 +427,9 @@ function PresentationCard({
       : presentation.productType === 'term'
         ? t('product.term')
         : t('product.iul')
-  const subtitle = presentation.title.trim()
-    ? `${presentation.title} · ${productLabel}`
-    : productLabel
+  const ageBit = presentation.client.age ? ` · ${presentation.client.age} ${t('tile.years')}` : ''
+  const subtitle = (presentation.title.trim() ? `${presentation.title} · ${productLabel}` : productLabel) + ageBit
+  const stats = tileStats(presentation, t)
 
   return (
     <Card>
@@ -416,6 +443,16 @@ function PresentationCard({
             {t('updated', { date: formatDate(presentation.updatedAt) })}
           </p>
         </div>
+        {stats.length > 0 && (
+          <div className="flex flex-wrap gap-x-6 gap-y-2 border-t border-line pt-3">
+            {stats.map((s) => (
+              <div key={s.label} className="min-w-0">
+                <div className="text-xs font-semibold uppercase tracking-wide text-muted">{s.label}</div>
+                <div className="font-serif text-lg font-semibold text-navy tabular-nums">{s.value}</div>
+              </div>
+            ))}
+          </div>
+        )}
         <div className="flex flex-wrap gap-3">
           <Button variant="primary" onClick={onOpen}>
             {t('actions.open')}

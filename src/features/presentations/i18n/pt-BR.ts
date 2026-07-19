@@ -17,6 +17,16 @@ export const ptBR = {
     term: 'Termo',
     annuity: 'Anuidade',
   },
+  tile: {
+    protection: 'Proteção',
+    premium: 'Prêmio',
+    income: 'Renda vitalícia',
+    value: 'Valor projetado',
+    term: 'Duração',
+    perMonth: '/mês',
+    perYear: '/ano',
+    years: 'anos',
+  },
   updated: 'Atualizado {{date}}',
   actions: {
     open: 'Abrir',
