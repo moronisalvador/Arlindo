@@ -1,5 +1,5 @@
 import type { DerivedPresentation } from '@domain/model/derived'
-import { formatMoney, localeFor } from '@domain/format'
+import { formatMoney, formatPercent, localeFor } from '@domain/format'
 import { slideCopy } from '@domain/presentationCopy'
 import { Card } from '@design-system/primitives'
 import { ContentSlide } from '../ContentSlide'
@@ -15,6 +15,13 @@ export function TermHeadlineSlide({ derived }: { derived: DerivedPresentation })
   const t = slideCopy(derived.meta.language).term
   const locale = localeFor(derived.meta.language)
 
+  // Living benefit: lead with the accessible % (like the IUL headline), amount below.
+  // Prefer an explicit percent; else derive it honestly from amount ÷ death benefit.
+  const livingAmount = h.livingBenefit ?? h.deathBenefit
+  const livingPct =
+    h.livingBenefitPercent ??
+    (h.livingBenefit != null && h.deathBenefit ? Math.round((h.livingBenefit / h.deathBenefit) * 100) : null)
+
   const cards: Array<{ emoji: string; when: string; label: string; value: string; subtitle?: string }> = [
     {
       emoji: '🛡️',
@@ -27,10 +34,16 @@ export function TermHeadlineSlide({ derived }: { derived: DerivedPresentation })
       emoji: '❤️',
       when: t.headline.whenIll,
       label: t.headline.labelLiving,
-      // "up to" — the figure is the terminal-illness maximum; other conditions pay
-      // less (the subtitle notes it's discounted and condition-dependent).
-      value: t.coverage.upTo(formatMoney(h.livingBenefit ?? h.deathBenefit, currency, { locale })),
-      subtitle: t.headline.livingDiscounted,
+      // Percentage headline + amount subtitle (mirrors IUL); the % is a ceiling
+      // ("até") for the terminal max — the subtitle keeps the discount/condition note.
+      value:
+        livingPct != null
+          ? t.coverage.upToPercent(formatPercent(livingPct, { locale }))
+          : t.coverage.upTo(formatMoney(livingAmount, currency, { locale })),
+      subtitle:
+        livingPct != null
+          ? t.headline.livingAmountSub(formatMoney(livingAmount, currency, { locale }))
+          : t.headline.livingDiscounted,
     },
     {
       emoji: '🔄',
