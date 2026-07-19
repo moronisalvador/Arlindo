@@ -1,4 +1,5 @@
 import type {
+  AbrBenefits,
   Branding,
   CurrencyCode,
   ProductType,
@@ -53,5 +54,7 @@ export interface DerivedPresentation {
   }
   table: YearlyRow[]
   riders: Rider[]
+  /** Per-condition ABR values from the illustration (product-agnostic; optional). */
+  abrBenefits?: AbrBenefits
   disclaimers: string[]
 }

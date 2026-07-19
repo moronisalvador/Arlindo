@@ -121,12 +121,32 @@ export interface SlideCopy {
     step3: string
     close: string
   }
+  /** Per-condition living-benefits detail slide (behind a flag; both products). */
+  livingBenefitsDetail: {
+    eyebrow: string
+    title: string
+    intro: string
+    terminal: string
+    chronic: string
+    critical: string
+    criticalInjury: string
+    alzheimer: string
+    perMonth: string
+    upTo: (money: string) => string
+    note: string
+  }
   /** Term-only slide copy (term has no cash value, no accumulation, no income). */
   term: TermSlideCopy
   clientFallback: string
 }
 
 export interface TermSlideCopy {
+  explainer: {
+    eyebrow: string
+    title: string
+    intro: (name: string) => { pre: string; strong: string; post: string }
+    pillars: Array<{ title: string; body: string }>
+  }
   headline: {
     eyebrow: string
     title: string
@@ -138,6 +158,8 @@ export interface TermSlideCopy {
     labelConvert: string
     subDeath: string
     livingDiscounted: string
+    /** Living-benefit subtitle when the % is the headline: "up to {amount} — discounted…". */
+    livingAmountSub: (amount: string) => string
     convertBody: string
   }
   coverage: {
@@ -157,6 +179,8 @@ export interface TermSlideCopy {
     additionalCost: string
     /** "up to {money}" — frames a living-benefit ceiling honestly. */
     upTo: (money: string) => string
+    /** "up to {pct} of the benefit" — the accessible-percent headline. */
+    upToPercent: (pct: string) => string
   }
   schedule: {
     eyebrow: string
@@ -308,7 +332,35 @@ const pt: SlideCopy = {
     step3: 'Sua proteção começa',
     close: 'Estou aqui para responder qualquer pergunta.',
   },
+  livingBenefitsDetail: {
+    eyebrow: 'Benefícios em Vida',
+    title: 'Cobertura por Tipo de Doença',
+    intro: 'Se você adoecer, pode antecipar parte do benefício — o valor depende da condição.',
+    terminal: 'Doença Terminal',
+    chronic: 'Doença Crônica',
+    critical: 'Doença Crítica',
+    criticalInjury: 'Lesão Crítica / Acidentes',
+    alzheimer: 'Alzheimer',
+    perMonth: '/mês',
+    upTo: (money) => `até ${money}`,
+    note: 'Valores ilustrados, com desconto e conforme a condição. Usar um benefício pode reduzir os demais.',
+  },
   term: {
+    explainer: {
+      eyebrow: 'Entendendo o Produto',
+      title: 'O que é o Seguro Temporário?',
+      intro: (name) => ({
+        pre: `O seguro temporário protege ${name} por um período definido com o `,
+        strong: 'maior valor de proteção pelo menor custo',
+        post: ' — e pode ser convertido em permanente, sem novo exame de saúde.',
+      }),
+      pillars: [
+        { title: 'Proteção Máxima', body: 'O maior benefício por morte pelo menor prêmio.' },
+        { title: 'Custo Baixo e Nivelado', body: 'Prêmio fixo durante todo o período contratado.' },
+        { title: 'Benefícios em Vida', body: 'Antecipe parte do benefício em caso de doença grave.' },
+        { title: 'Conversível', body: 'Troque por proteção vitalícia, sem novo exame, dentro do prazo.' },
+      ],
+    },
     headline: {
       eyebrow: 'Proteção Quando Você Precisa',
       title: 'O que este plano faz por você',
@@ -320,6 +372,7 @@ const pt: SlideCopy = {
       labelConvert: 'Conversão para Permanente',
       subDeath: 'Pago à sua família, livre de imposto de renda',
       livingDiscounted: 'Acesso antecipado ao benefício — com desconto, conforme a condição',
+      livingAmountSub: (amount) => `até ${amount} — com desconto, conforme a condição`,
       convertBody: 'Converta para uma apólice permanente, sem novo exame de saúde.',
     },
     coverage: {
@@ -337,6 +390,7 @@ const pt: SlideCopy = {
       includedTitle: 'Benefícios em Vida inclusos',
       additionalCost: '(custo adicional)',
       upTo: (money) => `até ${money}`,
+      upToPercent: (pct) => `até ${pct} do benefício`,
     },
     schedule: {
       eyebrow: 'Detalhamento',
@@ -490,7 +544,35 @@ const en: SlideCopy = {
     step3: 'Your protection begins',
     close: "I'm here to answer any questions.",
   },
+  livingBenefitsDetail: {
+    eyebrow: 'Living Benefits',
+    title: 'Coverage by Type of Illness',
+    intro: 'If you become ill, you can access part of the benefit early — the amount depends on the condition.',
+    terminal: 'Terminal Illness',
+    chronic: 'Chronic Illness',
+    critical: 'Critical Illness',
+    criticalInjury: 'Critical Injury / Accidents',
+    alzheimer: "Alzheimer's",
+    perMonth: '/mo',
+    upTo: (money) => `up to ${money}`,
+    note: 'Illustrated values, discounted and condition-dependent. Using one benefit may reduce the others.',
+  },
   term: {
+    explainer: {
+      eyebrow: 'Understanding the Product',
+      title: 'What is Term Life Insurance?',
+      intro: (name) => ({
+        pre: `Term insurance protects ${name} for a set period at the `,
+        strong: 'most protection for the lowest cost',
+        post: ' — and it can be converted to permanent coverage, with no new health exam.',
+      }),
+      pillars: [
+        { title: 'Maximum Protection', body: 'The highest death benefit for the lowest premium.' },
+        { title: 'Low, Level Cost', body: 'A fixed premium for the entire term you choose.' },
+        { title: 'Living Benefits', body: 'Access part of the benefit early in case of serious illness.' },
+        { title: 'Convertible', body: 'Switch to lifelong coverage, no new exam, within the window.' },
+      ],
+    },
     headline: {
       eyebrow: 'Protection When You Need It',
       title: 'What this plan does for you',
@@ -502,6 +584,7 @@ const en: SlideCopy = {
       labelConvert: 'Conversion to Permanent',
       subDeath: 'Paid to your family, income-tax-free',
       livingDiscounted: 'Early access to the benefit — discounted, based on the condition',
+      livingAmountSub: (amount) => `up to ${amount} — discounted, based on the condition`,
       convertBody: 'Convert to a permanent policy with no new medical exam.',
     },
     coverage: {
@@ -519,6 +602,7 @@ const en: SlideCopy = {
       includedTitle: 'Living Benefits included',
       additionalCost: '(additional cost)',
       upTo: (money) => `up to ${money}`,
+      upToPercent: (pct) => `up to ${pct} of the benefit`,
     },
     schedule: {
       eyebrow: 'Detail',
@@ -672,7 +756,35 @@ const es: SlideCopy = {
     step3: 'Su protección comienza',
     close: 'Estoy aquí para responder cualquier pregunta.',
   },
+  livingBenefitsDetail: {
+    eyebrow: 'Beneficios en Vida',
+    title: 'Cobertura por Tipo de Enfermedad',
+    intro: 'Si enferma, puede acceder a parte del beneficio anticipadamente — el monto depende de la condición.',
+    terminal: 'Enfermedad Terminal',
+    chronic: 'Enfermedad Crónica',
+    critical: 'Enfermedad Crítica',
+    criticalInjury: 'Lesión Crítica / Accidentes',
+    alzheimer: 'Alzheimer',
+    perMonth: '/mes',
+    upTo: (money) => `hasta ${money}`,
+    note: 'Valores ilustrados, con descuento y según la condición. Usar un beneficio puede reducir los demás.',
+  },
   term: {
+    explainer: {
+      eyebrow: 'Entendiendo el Producto',
+      title: '¿Qué es el Seguro Temporal?',
+      intro: (name) => ({
+        pre: `El seguro temporal protege a ${name} por un período definido con la `,
+        strong: 'mayor protección al menor costo',
+        post: ' — y puede convertirse en permanente, sin nuevo examen de salud.',
+      }),
+      pillars: [
+        { title: 'Protección Máxima', body: 'El mayor beneficio por muerte con la prima más baja.' },
+        { title: 'Costo Bajo y Nivelado', body: 'Prima fija durante todo el período contratado.' },
+        { title: 'Beneficios en Vida', body: 'Acceda a parte del beneficio ante una enfermedad grave.' },
+        { title: 'Convertible', body: 'Cambie a protección de por vida, sin examen, dentro del plazo.' },
+      ],
+    },
     headline: {
       eyebrow: 'Protección Cuando la Necesita',
       title: 'Lo que este plan hace por usted',
@@ -684,6 +796,7 @@ const es: SlideCopy = {
       labelConvert: 'Conversión a Permanente',
       subDeath: 'Pagado a su familia, libre de impuesto sobre la renta',
       livingDiscounted: 'Acceso anticipado al beneficio — con descuento, según la condición',
+      livingAmountSub: (amount) => `hasta ${amount} — con descuento, según la condición`,
       convertBody: 'Convierta a una póliza permanente, sin nuevo examen médico.',
     },
     coverage: {
@@ -701,6 +814,7 @@ const es: SlideCopy = {
       includedTitle: 'Beneficios en Vida incluidos',
       additionalCost: '(costo adicional)',
       upTo: (money) => `hasta ${money}`,
+      upToPercent: (pct) => `hasta ${pct} del beneficio`,
     },
     schedule: {
       eyebrow: 'Detalle',

@@ -11,11 +11,14 @@ import { ComparisonSlide } from './iul/ComparisonSlide'
 import { TimelineSlide } from './iul/TimelineSlide'
 import { DisclaimersSlide } from './iul/DisclaimersSlide'
 import { TermHeadlineSlide } from './term/TermHeadlineSlide'
+import { TermExplainerSlide } from './term/TermExplainerSlide'
 import { TermCoverageSlide } from './term/TermCoverageSlide'
 import { TermScheduleSlide } from './term/TermScheduleSlide'
 import { TermComparisonSlide } from './term/TermComparisonSlide'
 import { ValueSummarySlide } from './ValueSummarySlide'
 import { NextStepsSlide } from './NextStepsSlide'
+import { LivingBenefitsDetailSlide } from './LivingBenefitsDetailSlide'
+import { hasAbrDetail } from './abrDetailFlag'
 
 export interface BuiltSlide {
   id: string
@@ -44,8 +47,13 @@ function buildTermSlides(derived: DerivedPresentation): BuiltSlide[] {
   const slides: BuiltSlide[] = [
     { id: 'cover', title: 'Capa', node: <CoverSlide derived={derived} /> },
     { id: 'headline', title: 'Resumo', node: <TermHeadlineSlide derived={derived} /> },
+    { id: 'explainer', title: 'O que é Termo', node: <TermExplainerSlide derived={derived} /> },
     { id: 'coverage', title: 'Cobertura', node: <TermCoverageSlide derived={derived} /> },
   ]
+
+  if (hasAbrDetail(derived)) {
+    slides.push({ id: 'livingDetail', title: 'Benefícios por doença', node: <LivingBenefitsDetailSlide derived={derived} /> })
+  }
 
   if (derived.table.length > 0) {
     slides.push({ id: 'schedule', title: 'Cronograma', node: <TermScheduleSlide derived={derived} /> })
@@ -69,6 +77,10 @@ function buildIulSlides(derived: DerivedPresentation): BuiltSlide[] {
     { id: 'coverage', title: 'Cobertura', node: <CoverageRidersSlide derived={derived} /> },
     { id: 'projection', title: 'Projeção', node: <ProjectionSlide derived={derived} /> },
   ]
+
+  if (hasAbrDetail(derived)) {
+    slides.push({ id: 'livingDetail', title: 'Benefícios por doença', node: <LivingBenefitsDetailSlide derived={derived} /> })
+  }
 
   if (derived.table.length > 0) {
     slides.push({ id: 'table', title: 'Ano a ano', node: <TableSlide derived={derived} /> })

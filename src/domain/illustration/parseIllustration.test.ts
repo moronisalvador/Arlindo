@@ -108,6 +108,11 @@ const DAVE_TERM = [
   'Term 30-G Term Life Insurance Form Series ICC18-20522',
   'Dave Miller Face Amount: $600,000',
   'Male 39 Elite Non-Tobacco Initial Premium: $71.54 Monthly (EFT) Riders: ABR State: Virginia',
+  'Terminal Illness Benefit: $515,807 Lump Sum',
+  'Chronic Illness Benefit: $5,508 Per Month',
+  'Critical Illness Benefit: Up to $474,549 Lump Sum',
+  'Critical Injury Benefit: Up to $474,549 Lump Sum',
+  "Alzheimer's Disease Benefit: $371,786 Lump Sum",
   'The conversion period ends 20 years from the term policy date of issue or age 70 if sooner.',
   'This policy has no cash value.',
   '1 39 $858.48 $600,000',
@@ -136,6 +141,33 @@ describe('parseIllustration — real Term format (Dave Miller)', () => {
     expect(p.rows.find((r) => r.policyYear === 30)?.premiumPaid).toBe(858.48) // not 15,038.52
     expect(p.rows.find((r) => r.policyYear === 31)?.premiumPaid).toBe(16_622.52)
     expect(p.rows.find((r) => r.policyYear === 56)?.premiumPaid).toBe(318_393.48)
+  })
+  it('extracts the terminal-illness living benefit and the product name', () => {
+    expect(p.livingBenefit).toBe(515_807)
+    expect(p.productName).toBe('Term 30')
+  })
+  it('extracts per-condition ABR benefits', () => {
+    expect(p.abrBenefits).toEqual({
+      terminal: 515_807,
+      chronicMonthly: 5_508,
+      critical: 474_549,
+      criticalInjury: 474_549,
+      alzheimer: 371_786,
+    })
+  })
+  it('applies onto a presentation (typed path; term fields + family switch)', () => {
+    // Start from an IUL default to exercise the switching-family branch.
+    const applied = applyIllustration(p, makeNewPresentation({ productType: 'iul' }))
+    expect(applied.productType).toBe('term')
+    expect(applied.term.deathBenefit).toBe(600_000)
+    expect(applied.term.premium).toBe(71.54)
+    expect(applied.term.termLengthYears).toBe(30)
+    expect(applied.term.conversionYears).toBe(20)
+    expect(applied.term.conversionToAge).toBe(70)
+    expect(applied.term.livingBenefit).toBe(515_807)
+    expect(applied.term.riders.length).toBeGreaterThan(0) // term riders seeded on switch
+    expect(applied.yearlyRows.length).toBeGreaterThan(0)
+    expect(applied.client.name).toBe('Dave Miller')
   })
 })
 

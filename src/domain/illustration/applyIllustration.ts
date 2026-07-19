@@ -54,7 +54,8 @@ export function applyIllustration(
         conversionToAge: parsed.conversionToAge ?? existing.term.conversionToAge,
         riders,
       },
-      yearlyRows: parsed.rows.length ? parsed.rows : existing.yearlyRows,
+      abrBenefits: parsed.abrBenefits ?? existing.abrBenefits,
+    yearlyRows: parsed.rows.length ? parsed.rows : existing.yearlyRows,
       disclaimers,
     }
   }
@@ -92,6 +93,7 @@ export function applyIllustration(
       incomeToAge: parsed.incomeToAge ?? existing.iul.incomeToAge,
       riders,
     },
+    abrBenefits: parsed.abrBenefits ?? existing.abrBenefits,
     yearlyRows: parsed.rows.length ? parsed.rows : existing.yearlyRows,
     disclaimers,
   }

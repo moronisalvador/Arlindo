@@ -3,6 +3,7 @@ import type { DerivedPresentation } from '@domain/model/derived'
 import type { YearlyRow } from '@domain/model/presentation'
 import { formatMoney, formatNumber, formatPercent, localeFor } from '@domain/format'
 import { slideCopy } from '@domain/presentationCopy'
+import { hasAbrDetail } from '@design-system/slides/abrDetailFlag'
 
 /**
  * Generates an EDITABLE native .pptx (real text, tables, and a chart) from a
@@ -130,16 +131,82 @@ function coverSlide(pptx: pptxgen, d: DerivedPresentation) {
   s.addText(monthYear(d.meta.preparedOn, loc), { x: 0.8, y: 5.5, w: 6, h: 0.4, fontFace: SANS, fontSize: 12, color: 'C7CCD6' })
 }
 
+function livingBenefitsDetailSlide(pptx: pptxgen, d: DerivedPresentation) {
+  const s = pptx.addSlide()
+  const c = slideCopy(d.meta.language).livingBenefitsDetail
+  const loc = localeFor(d.meta.language)
+  const cur = d.meta.currency
+  const top = addHeader(s, c.eyebrow, c.title)
+  const money = (n: number) => formatMoney(n, cur, { locale: loc })
+  const a = d.abrBenefits ?? {}
+  s.addText(c.intro, { x: 0.6, y: top, w: 12.1, h: 0.5, fontFace: SANS, fontSize: 12, color: C.ink })
+  const items: Array<[string, string, string]> = []
+  if (a.terminal != null) items.push(['🕊️', c.terminal, money(a.terminal)])
+  if (a.chronicMonthly != null) items.push(['🩺', c.chronic, `${money(a.chronicMonthly)} ${c.perMonth}`])
+  if (a.critical != null) items.push(['🫀', c.critical, c.upTo(money(a.critical))])
+  if (a.criticalInjury != null) items.push(['🤕', c.criticalInjury, c.upTo(money(a.criticalInjury))])
+  if (a.alzheimer != null) items.push(['🧠', c.alzheimer, money(a.alzheimer)])
+  const cardW = 3.9
+  const gap = 0.2
+  items.forEach(([emoji, label, value], i) => {
+    const col = i % 3
+    const row = Math.floor(i / 3)
+    const x = 0.6 + col * (cardW + gap)
+    const y = top + 0.7 + row * 1.9
+    s.addShape('roundRect', { x, y, w: cardW, h: 1.7, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.06 })
+    s.addText(emoji, { x, y: y + 0.15, w: cardW, h: 0.5, fontSize: 22, align: 'center' })
+    s.addText(label, { x: x + 0.15, y: y + 0.72, w: cardW - 0.3, h: 0.35, fontFace: SANS, fontSize: 12, color: C.muted, align: 'center' })
+    s.addText(value, { x: x + 0.15, y: y + 1.05, w: cardW - 0.3, h: 0.5, fontFace: SERIF, fontSize: 18, bold: true, color: C.navy, align: 'center' })
+  })
+  s.addText(c.note, { x: 0.6, y: PH - 0.9, w: 12.1, h: 0.5, fontFace: SANS, fontSize: 9, color: C.muted })
+}
+
+function headlineSlide(pptx: pptxgen, d: DerivedPresentation) {
+  const s = pptx.addSlide()
+  const c = slideCopy(d.meta.language)
+  const loc = localeFor(d.meta.language)
+  const top = addHeader(s, c.headline.eyebrow, c.headline.title)
+  const cur = d.meta.currency
+  const h = d.headline
+  const cards: Array<[string, string, string, string]> = [
+    ['🛡️', c.headline.whenEarly, formatMoney(h.deathBenefit, cur, { locale: loc }), c.headline.subDeath],
+    [
+      '💵',
+      c.headline.whenLong,
+      h.incomeOptionAnnual != null ? `${formatMoney(h.incomeOptionAnnual, cur, { locale: loc })} ${c.options.perYear}` : '—',
+      h.incomeToAge != null ? c.headline.illustratedToAge(h.incomeToAge) : '',
+    ],
+    [
+      '❤️',
+      c.headline.whenIll,
+      h.livingBenefitPercent != null ? c.headline.livingUpToPercent(formatPercent(h.livingBenefitPercent, { locale: loc })) : c.headline.livingEarly,
+      h.livingBenefit != null ? c.headline.livingUpTo(formatMoney(h.livingBenefit, cur, { locale: loc })) : '',
+    ],
+  ]
+  const cardW = 3.9
+  const gap = 0.2
+  cards.forEach(([emoji, when, value, sub], i) => {
+    const x = 0.6 + i * (cardW + gap)
+    s.addShape('roundRect', { x, y: top, w: cardW, h: 4, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.08 })
+    s.addText(emoji, { x, y: top + 0.25, w: cardW, h: 0.7, fontSize: 30, align: 'center' })
+    s.addText(when, { x: x + 0.15, y: top + 1.05, w: cardW - 0.3, h: 0.4, fontFace: SANS, fontSize: 13, bold: true, color: C.orange, align: 'center' })
+    s.addText(value, { x: x + 0.15, y: top + 1.6, w: cardW - 0.3, h: 1, fontFace: SERIF, fontSize: 22, bold: true, color: C.navy, align: 'center', valign: 'middle' })
+    s.addText(sub, { x: x + 0.2, y: top + 2.7, w: cardW - 0.4, h: 1, fontFace: SANS, fontSize: 11, color: C.muted, align: 'center' })
+  })
+}
+
 function explainerSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
   const c = slideCopy(d.meta.language)
-  const top = addHeader(s, c.explainer.eyebrow, c.explainer.title)
+  // Product-aware: term and IUL each have their own explainer copy block.
+  const ex = d.meta.productType === 'term' ? c.term.explainer : c.explainer
+  const top = addHeader(s, ex.eyebrow, ex.title)
   const name = d.meta.clientName || c.clientFallback
-  const intro = c.explainer.intro(name)
+  const intro = ex.intro(name)
   s.addText(`${intro.pre}${intro.strong}${intro.post}`, {
     x: 0.6, y: top, w: 12.1, h: 0.9, fontFace: SANS, fontSize: 13, color: C.ink,
   })
-  const pillars = c.explainer.pillars.map((p) => [p.title, p.body] as const)
+  const pillars = ex.pillars.map((p) => [p.title, p.body] as const)
   const cardW = 2.9
   const gap = 0.18
   const startX = 0.6
@@ -544,7 +611,9 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
   if (derived.meta.productType === 'term') {
     coverSlide(pptx, derived)
     termHeadlineSlide(pptx, derived)
+    explainerSlide(pptx, derived)
     termCoverageSlide(pptx, derived)
+    if (hasAbrDetail(derived)) livingBenefitsDetailSlide(pptx, derived)
     if (derived.table.length > 0) termScheduleSlide(pptx, derived)
     termComparisonSlide(pptx, derived)
     valueSummarySlide(pptx, derived)
@@ -552,9 +621,11 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
     disclaimersSlide(pptx, derived)
   } else {
     coverSlide(pptx, derived)
+    headlineSlide(pptx, derived)
     explainerSlide(pptx, derived)
     coverageSlide(pptx, derived)
     projectionSlide(pptx, derived)
+    if (hasAbrDetail(derived)) livingBenefitsDetailSlide(pptx, derived)
     if (derived.table.length > 0) tableSlide(pptx, derived)
     if (
       derived.headline.paymentYears != null &&
