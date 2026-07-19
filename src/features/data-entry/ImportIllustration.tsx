@@ -1,4 +1,4 @@
-import { useRef, useState, type ChangeEvent } from 'react'
+import { useEffect, useRef, useState, type ChangeEvent } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button, Card, Modal } from '@design-system'
 import { formatMoney } from '@domain/format'
@@ -6,6 +6,7 @@ import type { CurrencyCode } from '@domain/model/presentation'
 import { parseIllustration } from '@domain/illustration/parseIllustration'
 import type { ParsedIllustration } from '@domain/illustration/types'
 import { extractIllustrationText } from '@shared/pdfExtract'
+import { takePendingImport } from '@shared/pendingImport'
 
 type Status = 'idle' | 'reading' | 'review' | 'error'
 
@@ -16,9 +17,11 @@ type Status = 'idle' | 'reading' | 'review' | 'error'
  * authoritative document.
  */
 export function ImportIllustration({
+  presentationId,
   currency,
   onApply,
 }: {
+  presentationId: string
   currency: CurrencyCode
   onApply: (parsed: ParsedIllustration) => void
 }) {
@@ -26,6 +29,17 @@ export function ImportIllustration({
   const inputRef = useRef<HTMLInputElement>(null)
   const [status, setStatus] = useState<Status>('idle')
   const [parsed, setParsed] = useState<ParsedIllustration | null>(null)
+
+  // If the agent started the import from the home page, the file was already
+  // parsed there and handed off — open the review dialog straight away so nothing
+  // is applied without a confirmation. Consumed once (cleared on read).
+  useEffect(() => {
+    const pending = takePendingImport(presentationId)
+    if (pending) {
+      setParsed(pending)
+      setStatus('review')
+    }
+  }, [presentationId])
 
   async function onFile(e: ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0]

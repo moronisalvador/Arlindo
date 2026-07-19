@@ -308,6 +308,7 @@ function Editor({ id }: { id: string }) {
 
       {/* Import a carrier illustration PDF → autofill (in-browser, review first). */}
       <ImportIllustration
+        presentationId={working.id}
         currency={currency}
         onApply={(parsed) => update((prev) => applyIllustration(parsed, prev))}
       />
