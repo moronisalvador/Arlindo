@@ -91,6 +91,30 @@ export interface SlideCopy {
     step3: string
     step3Body: (income: string) => string
   }
+  /** "What you get for what you invest" value summary (motivation/close). */
+  valueSummary: {
+    eyebrow: string
+    title: string
+    youInvest: string
+    youGet: string
+    protection: string
+    income: string
+    living: string
+    accumulated: string
+    conversion: string
+    taxFree: string
+    tagline: string
+    perYear: string
+  }
+  /** Closing call-to-action slide. */
+  nextSteps: {
+    eyebrow: string
+    title: string
+    step1: string
+    step2: string
+    step3: string
+    close: string
+  }
   /** Term-only slide copy (term has no cash value, no accumulation, no income). */
   term: TermSlideCopy
   clientFallback: string
@@ -241,6 +265,28 @@ const pt: SlideCopy = {
     step2Body: (age) => `aos ${age} anos`,
     step3: 'Renda para toda a vida',
     step3Body: (income) => `${income}/ano, a partir daí`,
+  },
+  valueSummary: {
+    eyebrow: 'O Retorno do Seu Plano',
+    title: 'O que você recebe pelo que investe',
+    youInvest: 'Você investe',
+    youGet: 'Você recebe',
+    protection: 'Proteção por morte',
+    income: 'Renda vitalícia',
+    living: 'Benefícios em vida',
+    accumulated: 'Valor acumulado',
+    conversion: 'Opção de converter para permanente',
+    taxFree: 'Livre de imposto de renda',
+    tagline: 'Muito mais do que você coloca — e no momento em que a família mais precisa.',
+    perYear: '/ano',
+  },
+  nextSteps: {
+    eyebrow: 'Vamos Começar',
+    title: 'Próximos Passos',
+    step1: 'Revise os números com seu agente',
+    step2: 'Assine a proposta',
+    step3: 'Sua proteção começa',
+    close: 'Estou aqui para responder qualquer pergunta.',
   },
   term: {
     headline: {
@@ -396,6 +442,28 @@ const en: SlideCopy = {
     step3: 'Income for life',
     step3Body: (income) => `${income}/yr, from then on`,
   },
+  valueSummary: {
+    eyebrow: 'What Your Plan Returns',
+    title: 'What you get for what you put in',
+    youInvest: 'You invest',
+    youGet: 'You receive',
+    protection: 'Death protection',
+    income: 'Lifetime income',
+    living: 'Living benefits',
+    accumulated: 'Accumulated value',
+    conversion: 'Option to convert to permanent',
+    taxFree: 'Income-tax-free',
+    tagline: 'Far more than you put in — right when your family needs it most.',
+    perYear: '/yr',
+  },
+  nextSteps: {
+    eyebrow: "Let's Get Started",
+    title: 'Next Steps',
+    step1: 'Review the numbers with your agent',
+    step2: 'Sign the proposal',
+    step3: 'Your protection begins',
+    close: "I'm here to answer any questions.",
+  },
   term: {
     headline: {
       eyebrow: 'Protection When You Need It',
@@ -549,6 +617,28 @@ const es: SlideCopy = {
     step2Body: (age) => `a los ${age} años`,
     step3: 'Renta de por vida',
     step3Body: (income) => `${income}/año, a partir de ahí`,
+  },
+  valueSummary: {
+    eyebrow: 'El Retorno de Su Plan',
+    title: 'Lo que recibe por lo que invierte',
+    youInvest: 'Usted invierte',
+    youGet: 'Usted recibe',
+    protection: 'Protección por muerte',
+    income: 'Renta de por vida',
+    living: 'Beneficios en vida',
+    accumulated: 'Valor acumulado',
+    conversion: 'Opción de convertir a permanente',
+    taxFree: 'Libre de impuesto sobre la renta',
+    tagline: 'Mucho más de lo que aporta — justo cuando la familia más lo necesita.',
+    perYear: '/año',
+  },
+  nextSteps: {
+    eyebrow: 'Comencemos',
+    title: 'Próximos Pasos',
+    step1: 'Revise los números con su agente',
+    step2: 'Firme la propuesta',
+    step3: 'Su protección comienza',
+    close: 'Estoy aquí para responder cualquier pregunta.',
   },
   term: {
     headline: {
