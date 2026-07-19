@@ -27,7 +27,9 @@ export function TermHeadlineSlide({ derived }: { derived: DerivedPresentation })
       emoji: '❤️',
       when: t.headline.whenIll,
       label: t.headline.labelLiving,
-      value: h.livingBenefit != null ? formatMoney(h.livingBenefit, currency, { locale }) : formatMoney(h.deathBenefit, currency, { locale }),
+      // "up to" — the figure is the terminal-illness maximum; other conditions pay
+      // less (the subtitle notes it's discounted and condition-dependent).
+      value: t.coverage.upTo(formatMoney(h.livingBenefit ?? h.deathBenefit, currency, { locale })),
       subtitle: t.headline.livingDiscounted,
     },
     {
