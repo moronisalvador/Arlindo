@@ -198,7 +198,8 @@ export function parseIllustration(text: string): ParsedIllustration | null {
   }
   const state = firstMatch(text, /State:\s*([A-Za-z][A-Za-z .]+?)(?:\s{2,}|\s+Initial|\s+Tax|\n|$)/m)
   const productName = productType === 'term'
-    ? undefined
+    ? // e.g. "Term 30-G" → "Term 30" (drop the guaranteed-form suffix); generic fallback.
+      firstMatch(text, /\b(Term\s*\d+)\s*-?\s*N?G?\b/i)?.replace(/\s+/g, ' ').trim()
     : firstMatch(text, /\b(FlexLife|PeakLife|SummitLife|SurvivorLife|RapidProtect)\b/)
 
   // Client name (Unicode letters; allow lower-case Portuguese particles da/de/dos/e).

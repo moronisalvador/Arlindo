@@ -11,6 +11,7 @@ import { ComparisonSlide } from './iul/ComparisonSlide'
 import { TimelineSlide } from './iul/TimelineSlide'
 import { DisclaimersSlide } from './iul/DisclaimersSlide'
 import { TermHeadlineSlide } from './term/TermHeadlineSlide'
+import { TermExplainerSlide } from './term/TermExplainerSlide'
 import { TermCoverageSlide } from './term/TermCoverageSlide'
 import { TermScheduleSlide } from './term/TermScheduleSlide'
 import { TermComparisonSlide } from './term/TermComparisonSlide'
@@ -44,6 +45,7 @@ function buildTermSlides(derived: DerivedPresentation): BuiltSlide[] {
   const slides: BuiltSlide[] = [
     { id: 'cover', title: 'Capa', node: <CoverSlide derived={derived} /> },
     { id: 'headline', title: 'Resumo', node: <TermHeadlineSlide derived={derived} /> },
+    { id: 'explainer', title: 'O que é Termo', node: <TermExplainerSlide derived={derived} /> },
     { id: 'coverage', title: 'Cobertura', node: <TermCoverageSlide derived={derived} /> },
   ]
 

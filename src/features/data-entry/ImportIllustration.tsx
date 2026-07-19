@@ -130,7 +130,7 @@ function ReviewDialog({
   })()
 
   const rows: Array<[string, string]> = [
-    [t('import.field.product'), isTerm ? t('sections.planTerm') : `IUL${parsed.productName ? ` · ${parsed.productName}` : ''}`],
+    [t('import.field.product'), `${isTerm ? t('sections.planTerm') : 'IUL'}${parsed.productName ? ` · ${parsed.productName}` : ''}`],
     [t('import.field.client'), [parsed.client.name, parsed.client.age ? `${parsed.client.age} ${t('plan.years')}` : null, parsed.rateClass].filter(Boolean).join(' · ') || '—'],
     [t('import.field.premium'), parsed.premium != null ? `${money(parsed.premium)} ${parsed.premiumMode === 'annual' ? t('plan.annual') : t('plan.monthly')}` : '—'],
     [t('import.field.death'), money(parsed.deathBenefit)],
