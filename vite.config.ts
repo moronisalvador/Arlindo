@@ -61,6 +61,13 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,svg,png,ico,woff2}'],
         navigateFallback: 'index.html',
         cleanupOutdatedCaches: true,
+        // With registerType: 'prompt', tapping "Atualizar" posts SKIP_WAITING to
+        // the waiting worker. clientsClaim lets that newly-activated worker take
+        // control of the already-open tab, which fires `controllerchange` — the
+        // event workbox-window waits on before reloading. Without it the reload
+        // never fires and the update button appears dead (in every browser, not
+        // just installed PWAs).
+        clientsClaim: true,
       },
     }),
   ],
