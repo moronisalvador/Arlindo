@@ -220,12 +220,16 @@ export function parseIllustration(text: string): ParsedIllustration | null {
     result.termLengthYears =
       numFrom(firstMatch(text, /level\s+for\s+the\s+first\s+(\d+)\s+years/i)) ??
       numFrom(firstMatch(text, /Term\s*(\d+)-?G/i))
+    // Conversion window — many phrasings across NLG/LSW term forms.
     result.conversionYears =
-      numFrom(firstMatch(text, /first\s+(\d+)\s+(?:policy\s+)?years?\s+from\s+(?:the\s+)?date\s+of\s+issue/i)) ??
-      numFrom(firstMatch(text, /convertible\s+(?:during\s+)?(?:the\s+first\s+)?(\d+)\s+(?:policy\s+)?years/i))
+      numFrom(firstMatch(text, /first\s+(\d+)\s+(?:policy\s+)?years?\s+from\s+(?:the\s+)?(?:term\s+policy\s+)?date\s+of\s+issue/i)) ??
+      numFrom(firstMatch(text, /conversion\s+period\s+ends\s+(\d+)\s+years/i)) ??
+      numFrom(firstMatch(text, /convert(?:ible)?[^.]{0,60}?within\s+(\d+)\s+years/i)) ??
+      numFrom(firstMatch(text, /convert(?:ible)?[^.]{0,40}?(?:during\s+)?(?:the\s+first\s+)?(\d+)\s+(?:policy\s+)?years/i))
     result.conversionToAge =
-      numFrom(firstMatch(text, /age\s+(\d+)\s+if\s+earlier/i)) ??
-      numFrom(firstMatch(text, /convertible\s+to\s+age\s+(\d+)/i))
+      numFrom(firstMatch(text, /age\s+(\d+)\s+if\s+(?:earlier|sooner)/i)) ??
+      numFrom(firstMatch(text, /convert(?:ible)?\s+to\s+age\s+(\d+)/i)) ??
+      numFrom(firstMatch(text, /or\s+(?:until\s+)?age\s+(\d+)/i))
   }
 
   return result

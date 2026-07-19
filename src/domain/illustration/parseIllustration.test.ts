@@ -98,6 +98,45 @@ describe('parseIllustration — Term', () => {
   })
 })
 
+// Mirrors the REAL Dave Miller Term 30-G format: the "if sooner" conversion
+// phrasing, the annually-renewable premium ramp after year 30, and a trailing
+// rate-class comparison table (extra premium columns) that must NOT overwrite the
+// main schedule.
+const DAVE_TERM = [
+  'Term 30-G Term Life Insurance Form Series ICC18-20522',
+  'Dave Miller Face Amount: $600,000',
+  'Male 39 Elite Non-Tobacco Initial Premium: $71.54 Monthly (EFT) Riders: ABR State: Virginia',
+  'The conversion period ends 20 years from the term policy date of issue or age 70 if sooner.',
+  'This policy has no cash value.',
+  '1 39 $858.48 $600,000',
+  '30 68 858.48 600,000',
+  '31 69 16,622.52 600,000', // annually-renewable ramp begins
+  '56 94 318,393.48 600,000',
+  // trailing rate-class comparison table (must not clobber year 30 above)
+  '30 68 15,038.52 15,038.52 15,038.52 858.48 600,000',
+].join('\n')
+
+describe('parseIllustration — real Term format (Dave Miller)', () => {
+  const p = parseIllustration(DAVE_TERM)!
+  it('detects term + client + $600k/$71.54', () => {
+    expect(p.productType).toBe('term')
+    expect(p.client).toMatchObject({ name: 'Dave Miller', age: 39, sex: 'M' })
+    expect(p.face).toBe(600_000)
+    expect(p.premium).toBe(71.54)
+    expect(p.premiumMode).toBe('monthly')
+  })
+  it('reads the conversion window from "ends 20 years... or age 70 if sooner"', () => {
+    expect(p.conversionYears).toBe(20)
+    expect(p.conversionToAge).toBe(70)
+    expect(p.termLengthYears).toBe(30)
+  })
+  it('keeps the main premium schedule (level then ART ramp), not the rate-class table', () => {
+    expect(p.rows.find((r) => r.policyYear === 30)?.premiumPaid).toBe(858.48) // not 15,038.52
+    expect(p.rows.find((r) => r.policyYear === 31)?.premiumPaid).toBe(16_622.52)
+    expect(p.rows.find((r) => r.policyYear === 56)?.premiumPaid).toBe(318_393.48)
+  })
+})
+
 describe('parseIllustration — robustness (agent findings)', () => {
   it('reads Brazilian names with accents and lower-case particles', () => {
     const p = parseIllustration('Maria da Conceição Face Amount: $500,000 Indexed Universal Life\nFlexLife')!
