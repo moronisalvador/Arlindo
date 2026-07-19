@@ -1,0 +1,125 @@
+{
+  "summary": "National Life Group (NLG) and its subsidiary Life Insurance Company of the Southwest (LSW) market term life insurance as the \"Guaranteed Series\" \u2014 four fully-guaranteed level-premium contracts (G10, G15, G20, G30, current form era ICC18-20522) plus an Annual Renewable Term (ART) product; older LSW materials also expose 15-NG/20-NG/30-NG variants (10-year guarantee, current-level thereafter) and label the section \"Term LSW and Term NL Life.\" Term is level-benefit with no cash value and the lowest initial cost in the lineup; issue ages run 18 to 75 for shorter terms and shorten as term lengthens (30-year to 18-55 NT / 18-50 tobacco; ART to 18-85), with coverage on all plans extending to age 95. Rate classes are Elite (max age 75), Preferred/Select/Standard/Express NT and Preferred/Standard/Express tobacco (to age 85, Express capped at $2M face), and policies convert to permanent coverage with no evidence of insurability provided face is not increased and no riders are added. All term plans carry a no-additional-cost Accelerated Benefit Rider suite \u2014 Terminal, Chronic, Critical Illness, Critical Injury, and (added Jan 2023) Alzheimer's/Lewy Body Dementia \u2014 paying an actuarially discounted (not dollar-for-dollar) benefit, subject to per-insured lifetime maximums (Terminal $1.5M, Chronic $1.5M / $2M NY, Critical $1M, reduced to $500K in IL/NJ). Critically, term is NOT available to foreign nationals \u2014 NLG/LSW offers permanent products only to non-US-residents (A/B countries, $500K minimum / $15M maximum face), so Brazil (\"B\" country) applicants cannot buy term.",
+  "findings": [
+    {
+      "claim": "The current NLG/LSW term lineup is the 'Guaranteed Series' \u2014 four fully-guaranteed level-premium contracts branded G10, G15, G20, G30 (level premiums guaranteed for 10/15/20/30 years respectively) \u2014 plus a separate Annual Renewable Term (ART) product with premiums that increase annually. Older LSW product guides additionally expose 15-NG/20-NG/30-NG variants (current-level premiums with only a 10-year guarantee). The current marketing form series is ICC18-20522 ('Level Term xx-G'); the same products appear under the underwriting-document framing 'Term LSW and Term NL Life.'",
+      "confidence": "high",
+      "evidence": "The NLG Life Product Quick Reference Chart (item 63236, rev 10-25) states verbatim that the 'Guaranteed Series provides the longest guaranteed premium period through four level term life insurance contracts -- G10, G15, G20, G30' with premiums 'guaranteed to remain level for 10, 15, 20, or 30 years, respectively,' and describes ART as 'annually renewable term life insurance policy with guaranteed premiums that increase annually.' The 2013 LSW Level Term Product Guide describes 'seven level premium, level benefit term life products' \u2014 fully guaranteed 10/15/20/30-G plus 15/20/30-year plans with a 10-year guarantee (15-NG/20-NG/30-NG). The 2023 NLG Underwriting Guide contains a section 'Term LSW and Term NL Life' covering the 10/15/20/30-Year Term + ART lineup \u2014 the same products under a different document framing.",
+      "sources": [
+        "https://www.fmiagent.com/wp-content/uploads/2025-11-12_National_Life_Group_Life_Product_Quick_Reference_Chart_63236_10-25.pdf",
+        "http://theinsgroup.net/images/stories/LSW/Life/LSW_Level_Term_Product_Guide.pdf",
+        "http://www.cassaniinsurance.com/wp-content/uploads/2023/12/National-Life-Group-Underwriting-Guide-2023.pdf",
+        "https://www.totalfinancial.com/carriers/downloads/lsw/lsw-uw1.pdf"
+      ],
+      "vote": "3-0 (merged from claims 0, 6, 11, 19)"
+    },
+    {
+      "claim": "Term products provide a level amount of coverage during the term period with NO cash value accumulation or dividends, and offer the lowest initial cost of all NLG products. The level-premium period is followed by an annually-renewable structure with coverage extending to the policy anniversary following the insured's 95th birthday.",
+      "confidence": "high",
+      "evidence": "The NLG Life Product Quick Reference Chart (form 63236, rev 10-25) states verbatim: 'Term offers the lowest initial cost of all our products and a level amount of life insurance coverage during the term period with no cash value accumulation.' The 2013 LSW Level Term Product Guide confirms on all four product pages that 'coverage under [this] plan extends to age 95' and 'the policy remains in force until the policy anniversary following the insured's 95th birthday.' No cash value is a structural feature of term, corroborated by the chart contrasting term against WL/IUL products that cite guaranteed cash-value growth.",
+      "sources": [
+        "https://www.fmiagent.com/wp-content/uploads/2025-11-12_National_Life_Group_Life_Product_Quick_Reference_Chart_63236_10-25.pdf",
+        "http://theinsgroup.net/images/stories/LSW/Life/LSW_Level_Term_Product_Guide.pdf"
+      ],
+      "vote": "3-0 (merged from claims 7, 19)"
+    },
+    {
+      "claim": "Issue ages for level-term products start at age 18 and the maximum issue age shortens as the term lengthens: 10-G to age 75; 15-G/NG to 75 (18-70 tobacco); 20-G/NG to 70 (18-65 tobacco); 30-G/NG to 55 non-tobacco / 50 tobacco; ART issues 18-85.",
+      "confidence": "high",
+      "evidence": "The LSW Life Insurance Underwriting Guide product/issue-age table reads: 'Ages 18-75: 10-G ... Ages 18-75: 15-G/NG ... Ages 18-70: 20-G/NG ... Ages 18-55: 30G/NG.' The 2023 NLG Underwriting Guide 'ISSUE AGES OFFERED' block states: 'ART 18-85 / 10 Year Term 18-75 / 15 Year Term 18-75 Non-tobacco 18-70 Tobacco / 20 Year Term 18-70 Non-tobacco 18-65 Tobacco / 30 Year Term 18-55 Non-tobacco 18-50 Tobacco.' Two independent primary sources agree on the load-bearing figures.",
+      "sources": [
+        "https://www.totalfinancial.com/carriers/downloads/lsw/lsw-uw1.pdf",
+        "http://www.cassaniinsurance.com/wp-content/uploads/2023/12/National-Life-Group-Underwriting-Guide-2023.pdf",
+        "http://theinsgroup.net/images/stories/LSW/Life/LSW_Level_Term_Product_Guide.pdf"
+      ],
+      "vote": "3-0 (merged from claims 0, 11)"
+    },
+    {
+      "claim": "Term is offered across an Elite / Preferred / Select / Standard / Express rate-class structure split by tobacco use (Elite, Preferred NT, Select NT, Standard NT, Express Standard NT, Preferred Tobacco, Standard Tobacco, Express Standard Tobacco). Elite has a maximum issue age of 75; all other classes extend to 85. Express Standard classes are limited to total face amounts of $2,000,000 or less.",
+      "confidence": "high",
+      "evidence": "The 2023 NLG Underwriting Guide 'Term products rate class offerings' table lists exactly: Elite (All Face Amounts, 18-75), Preferred NT (18-85), Select NT (18-85), Standard NT (18-85), Express Standard NT 1 and 2 (Total Face <= $2,000,000, 18-85), Preferred Tobacco (18-85), Standard Tobacco (18-85), Express Standard Tobacco (Total Face <= $2,000,000, 18-85). Elite max age 75 vs 85 for others, and the $2M Express cap, are confirmed exactly. These are structural underwriting facts, not volatile rate-sheet figures.",
+      "sources": [
+        "http://www.cassaniinsurance.com/wp-content/uploads/2023/12/National-Life-Group-Underwriting-Guide-2023.pdf"
+      ],
+      "vote": "3-0 (claim 1)"
+    },
+    {
+      "claim": "NLG term policies convert to permanent coverage with no underwriting / no evidence of insurability required, provided the coverage amount is not increased and no additional riders are added. Conversion is to a single-life permanent plan then offered by the company, during a conversion window (e.g. first 15-20 years or to age 70, whichever is earlier).",
+      "confidence": "high",
+      "evidence": "The NLG Term2Perm ekit states verbatim: 'No underwriting required*' with the asterisk defined as '*Additional underwriting will be required if coverage amount is being increased or additional riders are being added.' Corroborated by the LSW Level Term 20-G specimen/product materials describing conversion 'without evidence of insurability to any single life permanent plan of life insurance then sold' during the conversion window (first 15 yrs or to age 70, whichever earlier).",
+      "sources": [
+        "https://www.nationallife.com/docs/digital/ekit/Term2Perm/index.html",
+        "http://theinsgroup.net/images/stories/LSW/Life/LSW_Level_Term_Product_Guide.pdf"
+      ],
+      "vote": "3-0 (claim 5)"
+    },
+    {
+      "claim": "All NLG/LSW term plans include an Accelerated Benefit Rider (living-benefits) suite at NO additional premium cost. As of January 2023 the suite covers Terminal, Chronic, Critical Illness, Critical Injury, and Alzheimer's Disease / Lewy Body Dementia (the Alzheimer's/Lewy Body addition expanded the prior four-condition set effective Jan 28, 2023). NLG markets itself as the only major carrier including Critical Injury as a standard rider on term. A Children's Term rider and Waiver of Premium rider (which waives premium on the converted policy) are also available.",
+      "confidence": "high",
+      "evidence": "The NLG newsroom press release (Jan 30, 2023, effective Jan 28, 2023) states the suite provides protection for 'a qualifying terminal, chronic, critical illness, critical injury or a diagnosis of Alzheimer's Disease or Lewy Body Dementia,' available on all life products subject to state approval. The NLG Life Product Quick Reference Chart (10-25) lists in the term row: 'ABR Terminal, Chronic, Critical Illness, Critical Injury, Alzheimer's Disease and Lewy Body Dementia, Children's Term ... Conversion Privileges. Waiver of Premium Rider waives premium on converted policy.' The 2014 LSW Living Benefits guide confirms ABRs are 'no additional cost riders.' Corroborated by InsuranceNewsNet and Wink Intel trade press.",
+      "sources": [
+        "https://www.nationallife.com/Our-Story/newsroom/NLG-expand-suite-of-living-benefits-adds-Alzheimers-and-Fertility-Riders",
+        "https://www.fmiagent.com/wp-content/uploads/2025-11-12_National_Life_Group_Life_Product_Quick_Reference_Chart_63236_10-25.pdf",
+        "https://theinsgroup.net/images/stories/LSW/Life/LSW_Living_Benefits_Rider.pdf"
+      ],
+      "vote": "3-0 (merged from claims 3, 8, 9)"
+    },
+    {
+      "claim": "The Accelerated Benefit Rider pays a discounted benefit \u2014 the actuarially discounted value of the death benefit being accelerated, less a pro-rata portion of any policy debt \u2014 NOT a dollar-for-dollar acceleration. The degree of discounting reflects the insured's life expectancy/age and, for the Critical Illness rider (ABR3), the severity of the qualifying condition; a per-election administrative fee (historically up to $500) may apply.",
+      "confidence": "high",
+      "evidence": "The NLG rider help page states the benefit is 'the actuarially discounted value of the death benefit being accelerated less a pro-rata portion of any policy debt.' The LSW 'Living Benefits' brochure states 'With ABR3, the level of discounting applied to the death benefit varies depending upon the insured's age and the severity of the critical illness' and 'the actual ABR payment you receive will be less than the death benefit you accelerate.' Multiple independent NLG/LSW product guides corroborate the discounted-value mechanism.",
+      "sources": [
+        "https://www.nationallife.com/NWI/Help/en-US/Peach/Riders_ChronicABR2_CriticalABR3.htm",
+        "https://www.marketingresources.us.com/core/lsw/LBrider.pdf",
+        "https://theinsgroup.net/images/stories/LSW/Life/LSW_Living_Benefits_Rider.pdf"
+      ],
+      "vote": "3-0 (merged from claims 4, 13, 14)"
+    },
+    {
+      "claim": "Per-insured maximum lifetime accelerated-benefit limits apply across all contracts on a single insured: Terminal $1,500,000; Chronic $1,500,000 ($2,000,000 in NY); Critical Illness/Injury $1,000,000. These limits vary by state \u2014 notably reduced to $500,000 in Illinois and New Jersey for terminal, chronic, and critical benefits.",
+      "confidence": "high",
+      "evidence": "The LSW Accelerated Benefits Riders Agent Guide states National Life 'limits the amount of death benefit that may be accelerated under all contracts made over the entire lifetime of the insured to $1,500,000 for terminal or chronic illness, and $1,000,000 for critical illness or injury,' with 'Chronic For NY Only: $2,000,000.' The $500,000 IL/NJ limit is independently confirmed in the same guide.",
+      "sources": [
+        "https://theinsgroup.net/images/stories/LSW/Life/LSW_Living_Benefits_Rider.pdf"
+      ],
+      "vote": "3-0 (claim 10)"
+    },
+    {
+      "claim": "NLG/LSW does NOT offer term insurance to foreign nationals / non-US-residents \u2014 only permanent life insurance products are eligible (up to Class 4 / 200% table rating). The RapidProtect/RapidProtect NL term line is explicitly excluded for foreign nationals. Eligibility is limited to citizens/residents of 'A' or 'B' classified countries (Brazil is a 'B' country, so eligible for permanent but not term; C countries get individual facultative consideration; D and E countries cannot be covered).",
+      "confidence": "high",
+      "evidence": "The current NLG Foreign National Guidelines (Cat No 69798, rev 11-25), page 4 Product/Life column, states verbatim: 'Permanent Products Only -- up to Class 4 (200%)' and 'RapidProtect/RapidProtect NL not available for Foreign Nationals.' Riders are 'ABRs Only -- A & B countries only'; 'In D & E countries, we cannot offer coverage.' Brazil is listed as a B country (p.7). The older totalfinancial.com LSW underwriting guide states 'Only permanent plans of insurance will be considered. No term insurance is eligible... Only citizens/residents of countries classified as A or B.' Independent web sources confirm NLG offers permanent-only to foreign nationals.",
+      "sources": [
+        "https://www.fmiagent.com/wp-content/uploads/2025-11-12_National_Life_Group_Foreign_National_Guidelines_69798_11-25.pdf",
+        "https://nfgbrokerage.com/wp-content/uploads/National-Life-Foreign-National-Guidelines.pdf",
+        "https://www.totalfinancial.com/carriers/downloads/lsw/lsw-uw1.pdf"
+      ],
+      "vote": "3-0 (merged from claims 12, 15, 16)"
+    },
+    {
+      "claim": "Foreign-national life policies (permanent only) carry a minimum face amount of $500,000 and a maximum of $15,000,000 ($2,000,000 for students). They require a documented US nexus, US delivery to a valid address in the state of issue, all solicitation/sales activity conducted within the US (no marketing or policy materials transmitted outside the US), and English-language application and policy forms. NLG defines a foreign national as anyone (including US citizens living abroad) spending more than 4 months outside the US in a consecutive 12-month period, and requires significant documented US assets (minimum $500,000).",
+      "confidence": "high",
+      "evidence": "The NLG Foreign National Guidelines PDF states verbatim: 'Face amount minimum: $500,000 / Face amount maximum: $15,000,000 (for students the maximum is $2,000,000)'; 'Policy must be delivered in U.S. to a valid address in the state of issue'; 'All solicitation and sales activities must take place in the U.S.; no marketing or policy materials may be transmitted or delivered outside the U.S.'; 'All application and policy forms must be in English'; and defines a foreign national as anyone spending 'more than 4 months (in a consecutive 12 month period) outside the U.S.' These face amounts apply to permanent products since term is not offered to foreign nationals.",
+      "sources": [
+        "https://nfgbrokerage.com/wp-content/uploads/National-Life-Foreign-National-Guidelines.pdf",
+        "https://www.fmiagent.com/wp-content/uploads/2025-11-12_National_Life_Group_Foreign_National_Guidelines_69798_11-25.pdf"
+      ],
+      "vote": "3-0 (merged from claims 17, 18)"
+    },
+    {
+      "claim": "CAUTION: The document circulated as 'NLG guide IM10743' (cpasy.com/files/82918/im_10743.pdf) is actually an American National Insurance Company document, NOT an NLG/LSW source. It should be excluded from any NLG/LSW term reference.",
+      "confidence": "high",
+      "evidence": "Text extraction of the PDF confirms it is produced by 'American National Insurance Company, Galveston, Texas' with rider forms in American National's ABR14-TM/ABR14-CH/ABR14-CT series (not NLG/LSW's ICC18 forms). A full-text search found zero occurrences of 'National Life Group', 'LSW', or 'Life Insurance Company of the Southwest.' All product examples are American National products.",
+      "sources": [
+        "https://www.cpasy.com/files/82918/im_10743.pdf"
+      ],
+      "vote": "3-0 (claim 2)"
+    }
+  ],
+  "caveats": "Time-sensitivity: Actual premium dollar amounts are rate-sheet-driven and change frequently \u2014 this report deliberately covers only structural/guaranteed facts (product names, issue ages, structure, rate-class labels, conversion terms, rider triggers and lifetime limits), not current rates. Document currency varies: the strongest structural sources range from the 2013 LSW Level Term Product Guide (form MK2303) and 2014 LSW Living Benefits guide (which predate the Critical Injury and Alzheimer's rider additions) through the 2023 NLG Underwriting Guide to the current Oct/Nov 2025 Quick Reference Chart and Foreign National Guidelines (69798, 11-25). Where a fact is scoped to a specific older document (e.g., the three-rider ABR set), that reflects that document's vintage, not the current offering; the current suite is the six-condition set (Terminal, Chronic, Critical Illness, Critical Injury, Alzheimer's, Lewy Body). Several primary PDFs are hosted on independent agent/brokerage websites (mirrors of genuine NLG/LSW forms) rather than nationallife.com directly, but form numbers and content match NLG's own materials. State-availability of individual riders (which states exclude Chronic or Critical) could not be confirmed \u2014 the specific state-exclusion lists from the legacy brochure were refuted (0-3 and 1-2 votes) and should not be relied upon. The conversion window duration (15 vs 20 years, to age 70) may differ by product and state. One widely-listed source (im_10743.pdf) was confirmed to be an American National document, not NLG/LSW, and was excluded.",
+  "openQuestions": [
+    "What are the current (2025-26) full state-availability exclusion lists for each individual ABR (Terminal, Chronic, Critical Illness, Critical Injury, Alzheimer's) on term \u2014 the legacy state-exclusion lists were refuted and no current authoritative list was verified?",
+    "Does the conversion window differ by specific product (10-G vs 30-G) and state \u2014 is it uniformly 'first 20 years or to age 70 whichever is earlier,' or does the specimen's '15 years' apply to shorter-term products?",
+    "What is the exact current marketing form series across all four G-products and ART (the ICC18-20522 series was referenced for 'Level Term xx-G' but per-product form numbers and any state variations were not individually verified)?",
+    "What are the minimum face amounts and band/policy-fee structures for US-resident term applicants (as distinct from the $500K foreign-national minimum), and how do Express-class face caps interact with the ART product?"
+  ]
+}
