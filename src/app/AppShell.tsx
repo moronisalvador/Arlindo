@@ -6,7 +6,7 @@ import { cn } from '@shared/cn'
 
 function navClass({ isActive }: { isActive: boolean }): string {
   return cn(
-    'flex-1 whitespace-nowrap rounded-lg px-2.5 py-2 text-center font-sans text-sm font-semibold transition-colors sm:flex-none sm:text-base',
+    'inline-flex min-h-[2.75rem] flex-1 items-center justify-center whitespace-nowrap rounded-lg px-2.5 py-3 text-center font-sans text-sm font-semibold transition-colors sm:flex-none sm:text-base',
     isActive ? 'bg-white/15 text-white' : 'text-white/80 hover:text-white',
   )
 }

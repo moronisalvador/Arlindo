@@ -778,6 +778,8 @@ function SaveIndicator({ status }: { status: SaveStatus }) {
         : 'h-2.5 w-2.5 rounded-full bg-green-500'
   return (
     <span
+      role="status"
+      aria-live={status === 'error' ? 'assertive' : 'polite'}
       className={
         status === 'error'
           ? 'flex items-center gap-2 text-sm font-medium text-red-600'
