@@ -113,6 +113,7 @@ export class PassthroughEngine implements CalculationEngine {
           iul.projectedAccumulatedValue ?? lastValue(rows, 'accumulatedValue'),
         projectedCashSurrenderValue:
           iul.projectedCashSurrenderValue ?? lastValue(rows, 'cashSurrenderValue'),
+        guaranteedProjectedValue: iul.guaranteedProjectedValue,
         deathBenefit: resolvedDeathBenefit,
         livingBenefit,
         livingBenefitPercent: iul.livingBenefitPercent,

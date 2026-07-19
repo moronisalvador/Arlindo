@@ -34,6 +34,8 @@ export interface SlideCopy {
     projectedLabel: (years: number | null) => string
     sub: string
     empty: string
+    guaranteedLabel: string
+    guaranteedSub: string
   }
   table: {
     eyebrow: string
@@ -78,6 +80,17 @@ export interface SlideCopy {
     livingEarly: string
     livingUpTo: (money: string) => string
   }
+  /** IUL "plan over time" timeline (pay N years → stop → income for life). */
+  timeline: {
+    eyebrow: string
+    title: string
+    step1: string
+    step1Body: (prem: string, years: number) => string
+    step2: string
+    step2Body: (age: number) => string
+    step3: string
+    step3Body: (income: string) => string
+  }
   /** Term-only slide copy (term has no cash value, no accumulation, no income). */
   term: TermSlideCopy
   clientFallback: string
@@ -120,6 +133,8 @@ export interface TermSlideCopy {
     age: string
     premium: string
     death: string
+    cliffTitle: string
+    cliffBody: (levelYears: number, level: string, peak: string, peakAge: number) => string
   }
   comparison: {
     eyebrow: string
@@ -166,6 +181,8 @@ const pt: SlideCopy = {
     projectedLabel: (years) => `Valor projetado${years ? ` em ${years} anos` : ''}`,
     sub: 'Disponível para resgate ou para continuar rendendo.',
     empty: 'Adicione a tabela ano a ano para ver o gráfico.',
+    guaranteedLabel: 'Valor garantido',
+    guaranteedSub: 'Mesmo no cenário mínimo garantido.',
   },
   table: {
     eyebrow: 'Detalhamento',
@@ -215,6 +232,16 @@ const pt: SlideCopy = {
     livingEarly: 'Acesso antecipado ao benefício',
     livingUpTo: (money) => `até ${money}`,
   },
+  timeline: {
+    eyebrow: 'O Plano ao Longo do Tempo',
+    title: 'Como funciona, passo a passo',
+    step1: 'Você deposita',
+    step1Body: (prem, years) => `${prem} por ${years} anos`,
+    step2: 'Para de depositar',
+    step2Body: (age) => `aos ${age} anos`,
+    step3: 'Renda para toda a vida',
+    step3Body: (income) => `${income}/ano, a partir daí`,
+  },
   term: {
     headline: {
       eyebrow: 'Proteção Quando Você Precisa',
@@ -251,6 +278,9 @@ const pt: SlideCopy = {
       age: 'Idade',
       premium: 'Prêmio',
       death: 'Proteção por morte',
+      cliffTitle: 'Por que converter?',
+      cliffBody: (levelYears, level, peak, peakAge) =>
+        `Prêmio nivelado de ${level}/ano por ${levelYears} anos — depois sobe a cada ano, chegando a ${peak}/ano aos ${peakAge}. Converter para permanente evita esse salto.`,
     },
     comparison: {
       eyebrow: 'Comparando os Produtos',
@@ -305,6 +335,8 @@ const en: SlideCopy = {
     projectedLabel: (years) => `Projected value${years ? ` in ${years} years` : ''}`,
     sub: 'Available to withdraw or to keep growing.',
     empty: 'Add the year-by-year table to see the chart.',
+    guaranteedLabel: 'Guaranteed value',
+    guaranteedSub: 'Even in the guaranteed-minimum scenario.',
   },
   table: {
     eyebrow: 'Detail',
@@ -354,6 +386,16 @@ const en: SlideCopy = {
     livingEarly: 'Early access to the benefit',
     livingUpTo: (money) => `up to ${money}`,
   },
+  timeline: {
+    eyebrow: 'The Plan Over Time',
+    title: 'How it works, step by step',
+    step1: 'You deposit',
+    step1Body: (prem, years) => `${prem} for ${years} years`,
+    step2: 'You stop depositing',
+    step2Body: (age) => `at age ${age}`,
+    step3: 'Income for life',
+    step3Body: (income) => `${income}/yr, from then on`,
+  },
   term: {
     headline: {
       eyebrow: 'Protection When You Need It',
@@ -390,6 +432,9 @@ const en: SlideCopy = {
       age: 'Age',
       premium: 'Premium',
       death: 'Death protection',
+      cliffTitle: 'Why convert?',
+      cliffBody: (levelYears, level, peak, peakAge) =>
+        `Level premium of ${level}/yr for ${levelYears} years — then it rises every year, reaching ${peak}/yr at age ${peakAge}. Converting to permanent avoids that jump.`,
     },
     comparison: {
       eyebrow: 'Comparing the Products',
@@ -444,6 +489,8 @@ const es: SlideCopy = {
     projectedLabel: (years) => `Valor proyectado${years ? ` en ${years} años` : ''}`,
     sub: 'Disponible para retirar o para seguir creciendo.',
     empty: 'Agregue la tabla año por año para ver el gráfico.',
+    guaranteedLabel: 'Valor garantizado',
+    guaranteedSub: 'Incluso en el escenario mínimo garantizado.',
   },
   table: {
     eyebrow: 'Detalle',
@@ -493,6 +540,16 @@ const es: SlideCopy = {
     livingEarly: 'Acceso anticipado al beneficio',
     livingUpTo: (money) => `hasta ${money}`,
   },
+  timeline: {
+    eyebrow: 'El Plan a lo Largo del Tiempo',
+    title: 'Cómo funciona, paso a paso',
+    step1: 'Usted deposita',
+    step1Body: (prem, years) => `${prem} por ${years} años`,
+    step2: 'Deja de depositar',
+    step2Body: (age) => `a los ${age} años`,
+    step3: 'Renta de por vida',
+    step3Body: (income) => `${income}/año, a partir de ahí`,
+  },
   term: {
     headline: {
       eyebrow: 'Protección Cuando la Necesita',
@@ -529,6 +586,9 @@ const es: SlideCopy = {
       age: 'Edad',
       premium: 'Prima',
       death: 'Protección por muerte',
+      cliffTitle: '¿Por qué convertir?',
+      cliffBody: (levelYears, level, peak, peakAge) =>
+        `Prima nivelada de ${level}/año por ${levelYears} años — luego sube cada año, llegando a ${peak}/año a los ${peakAge}. Convertir a permanente evita ese salto.`,
     },
     comparison: {
       eyebrow: 'Comparando los Productos',

@@ -125,6 +125,26 @@ function parseLedger(
   return { rows: [...rows.values()].sort((a, b) => a.policyYear - b.policyYear), rate }
 }
 
+/** Guaranteed-scenario accumulated value at a given policy year (rows WITHOUT a
+ * rate column = the guaranteed table). Used for the "worst case" floor. */
+function parseGuaranteedIulValue(text: string, atYear?: number): number | undefined {
+  if (atYear == null) return undefined
+  for (const line of text.split('\n')) {
+    const toks = line.trim().split(/\s+/)
+    if (int(toks[0]) !== atYear) continue
+    if (toks.some((t) => t.endsWith('%') || t === '%')) continue // skip current-scenario rows
+    const moneys: number[] = []
+    toks.forEach((t, i) => {
+      if (i < 2) return
+      const m = money(t)
+      if (m != null) moneys.push(m)
+    })
+    // structure: premium, [zeros], AccumulatedValue, SurrenderValue, DeathBenefit
+    if (moneys.length >= 4) return moneys[moneys.length - 3]
+  }
+  return undefined
+}
+
 const NAME_LABEL_PREFIX = /^(Total|Initial|Base|Minimum|Maximum|Net|Group|Planned|Death|Cash|Accumulated|Face|Guaranteed)\b/i
 
 export function parseIllustration(text: string): ParsedIllustration | null {
@@ -211,6 +231,10 @@ export function parseIllustration(text: string): ParsedIllustration | null {
   const deathBenefit = face ?? firstRow?.deathBenefit
   const paymentRows = rows.filter((r) => (r.premiumPaid ?? 0) > 0)
   const paymentYears = paymentRows.length ? paymentRows[paymentRows.length - 1].policyYear : undefined
+  // Real printed accelerated living benefit (Terminal Illness), discounted vs DB.
+  const livingBenefit = numFrom(
+    firstMatch(text, /Terminal Illness Benefit[:\s]+(?:up to\s+)?\$?([\d,]+)/i),
+  )
 
   const result: ParsedIllustration = {
     productType,
@@ -223,6 +247,7 @@ export function parseIllustration(text: string): ParsedIllustration | null {
     premium,
     premiumMode,
     deathBenefit,
+    livingBenefit,
     paymentYears,
     rows,
     warnings,
@@ -230,6 +255,7 @@ export function parseIllustration(text: string): ParsedIllustration | null {
 
   if (productType === 'iul') {
     result.assumedRatePct = rate
+    result.guaranteedValue = parseGuaranteedIulValue(text, paymentYears)
     // Peak accumulated value before the income phase (premium stops being paid).
     const peak = paymentRows[paymentRows.length - 1] ?? rows[rows.length - 1]
     result.projectedAccumulatedValue = peak?.accumulatedValue

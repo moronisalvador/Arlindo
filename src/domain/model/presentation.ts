@@ -81,6 +81,8 @@ export const iulSchema = z.object({
   projectedAccumulatedValue: z.number().optional(),
   /** Cash surrender value at the projection year — what the client actually gets on withdrawal. */
   projectedCashSurrenderValue: z.number().optional(),
+  /** Guaranteed-scenario value at the projection year — the "worst case" floor. */
+  guaranteedProjectedValue: z.number().optional(),
   incomeOptionAnnual: z.number().optional(),
   incomeToAge: z.number().int().optional(),
   riders: z.array(riderSchema).default([]),
