@@ -118,17 +118,31 @@ function ReviewDialog({
   const money = (n?: number) => (n != null ? formatMoney(n, currency) : '—')
   const isTerm = parsed.productType === 'term'
 
+  // A conversion-window summary from whatever the illustration stated (years,
+  // to-age, both, or nothing) — never an invented number.
+  const conversionText = (() => {
+    const y = parsed.conversionYears
+    const a = parsed.conversionToAge
+    const yStr = y != null ? `${y} ${t('plan.years')}` : null
+    const aStr = a != null ? `${a} ${t('plan.age')}` : null
+    if (yStr && aStr) return `${yStr} · ${aStr}`
+    return yStr ?? aStr ?? null
+  })()
+
   const rows: Array<[string, string]> = [
     [t('import.field.product'), isTerm ? t('sections.planTerm') : `IUL${parsed.productName ? ` · ${parsed.productName}` : ''}`],
     [t('import.field.client'), [parsed.client.name, parsed.client.age ? `${parsed.client.age} ${t('plan.years')}` : null, parsed.rateClass].filter(Boolean).join(' · ') || '—'],
     [t('import.field.premium'), parsed.premium != null ? `${money(parsed.premium)} ${parsed.premiumMode === 'annual' ? t('plan.annual') : t('plan.monthly')}` : '—'],
     [t('import.field.death'), money(parsed.deathBenefit)],
   ]
+  if (parsed.livingBenefit != null) rows.push([t('import.field.living'), money(parsed.livingBenefit)])
   if (isTerm) {
     rows.push([t('planTerm.termLength'), parsed.termLengthYears ? `${parsed.termLengthYears} ${t('plan.years')}` : '—'])
+    if (conversionText) rows.push([t('import.field.conversion'), conversionText])
   } else {
     if (parsed.paymentYears) rows.push([t('import.field.paymentYears'), `${parsed.paymentYears} ${t('plan.years')}`])
     rows.push([t('import.field.projected'), money(parsed.projectedAccumulatedValue)])
+    if (parsed.guaranteedValue != null) rows.push([t('import.field.guaranteed'), money(parsed.guaranteedValue)])
     rows.push([
       t('import.field.income'),
       parsed.incomeOptionAnnual != null
