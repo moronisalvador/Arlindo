@@ -39,6 +39,8 @@ import { RidersEditor } from './RidersEditor'
 import { YearTableEditor } from './YearTableEditor'
 import { SlidePreview } from './SlidePreview'
 import { CollapsibleSection } from './CollapsibleSection'
+import { ImportIllustration } from './ImportIllustration'
+import { applyIllustration } from '@domain/illustration/applyIllustration'
 
 registerNamespace('dataEntry', dataEntry)
 
@@ -303,6 +305,12 @@ function Editor({ id }: { id: string }) {
           </p>
         )}
       </header>
+
+      {/* Import a carrier illustration PDF → autofill (in-browser, review first). */}
+      <ImportIllustration
+        currency={currency}
+        onApply={(parsed) => update((prev) => applyIllustration(parsed, prev))}
+      />
 
       <div className="space-y-4">
       {/* 1) Produto */}
