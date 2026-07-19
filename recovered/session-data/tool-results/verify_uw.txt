@@ -1,0 +1,2328 @@
+                   Life Insurance Underwriting Guide
+
+Table of Contents
+
+Doing Business with National Life Group  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 2                                                                                       Accelerated Elite/Preferred/Select Criteria
+                                                                                                                                                                                         (Permanent Products) 28  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Quick Tips for Efficient Processing .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 3
+                                                                                                                                                                                         Fully Underwritten Elite/Preferred/Select Criteria
+Insurance Basics 9  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  (Permanent Products) 29  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+
+Insurable Interest -- Owner/Beneficiary .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 11                                                                                    Accelerated Elite/Preferred/Select Criteria
+                                                                                                                                                                                         (Term Products) 30  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Financial Underwriting 12  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+                                                                                                                                                                                         Fully Underwritten Elite/Preferred/Select Criteria
+Underwriting Programs 17 .   .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .                          (Term Products) 31  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+  Full Medical/Financial Underwriting .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 17
+  Accelerated Underwriting Products                                                                                                                                                      Table of Height and Weight, Ages 16 and Older
+  (EZ Underwriting) 18  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .                (Permanent Products) 32  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+  Simplified Underwriting Products
+  (RapidProtect/RapidProtect NL) .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 19                                                                Table of Height and Weight, Ages 18 and Older
+                                                                                                                                                                                         (Term Products) 33  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+Life Underwriting Requirements .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 21
+  SummitLife/Advanced Markets IUL .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 21                                                                              Uninsurable and Problematic Risks .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 34
+  PeakLife/Advanced Markets IUL .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 22
+  FlexLife and FlexLife NL 23  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .                                 Medical Condition & Potential Ratings . . . . . . . . . . . . . . . . . . . . . . 35
+  BasicSecure, BasicSecure NL, TotalSecure, and
+  TotalSecure NL 24  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .    Advanced Sales 38  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+  SurvivorLife and SurvivorLife NL SIUL .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 25
+  Term LSW and Term NL Life .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 26                                                   Underwriting Quotes 39  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+
+Underwriting Rate Classes Explained .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 27                                                                         Informal Applications 40  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .
+
+                                                                                                                                                                                         Foreign National Guidelines .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 41
+
+                                                                                                                                                                                         After-Issue Contract Changes .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  . 41
+
+Products issued by
+
+National Life Insurance Company® | Life Insurance Company of the Southwest®
+
+National Life Group® is a trade name of National Life Insurance Company, Montpelier, VT, Life Insurance Company of the Southwest (LSW), Addison, TX, and their affiliates. Each
+company of National Life Group is solely responsible for its own financial condition and contractual obligations. LSW is not an authorized insurer in New York and does not conduct
+insurance business in New York.
+
+                                 Centralized Mailing Address: One National Life Drive, Montpelier, VT 05604 | 800-906-3310 | www.NationalLife.com
+
+TC8725743(0126)3   For Agent Use Only ­ Not For Use With The Public                                                                                                                      Cat No 62797(0126)
+                                                            LIFE INSURANCE UNDERWRITING GUIDE
+
+Doing Business with National Life Group
+
+Company Website: www.NationalLife.com                       New Business Submission:
+                                                            For applications submitted through eApp, use the
+National Life Group Contact Center: 800-906-3310            Agent Portal.
+                                                            For paper applications, email:
+National Life Group Technical Help Desk:                    NBApplicationImages@NationalLife.com
+HelpDesk@NationalLife.com | 877-654-3499
+                                                            Large Case New Business Submission (Face amounts
+Customer Relations                                          $2,000,000 and/or greater than $35,000 of CTP premium):
+Life Insurance: LifeCustomerService@NationalLife.com        LargeCase@NationalLife.com
+Annuities: Service@NationalLife.com
+Phone: 800-732-8939                                         Outstanding Requirements (exams, lab slips,
+                                                            questionnaires, and policy forms requested by new
+Contacting an employee at NLG: initial of first name        business or underwriting):
+followed by last name@nationallife.com                      For applications submitted through eApp, use the
+                                                            Agent Portal.
+Sales                                                       For paper applications, email:
+                                                            NBRequirementImages@NationalLife.com
+Life & Annuity Sales Desk:
+NLGSalesDesk@NationalLife.com                               Rewrites:
+                                                            Rewrites@NationalLife.com
+Agent Services
+                                                            Not Taken:
+Compensation (commissions and debt inquiries):              Agent Portal or Disbursements@NationalLife.com
+NLGCompensation@NationalLife.com
+                                                            Underwriting Risk Assessments --
+Contracting (contracting status, training, AML, E&O,        XRAE Underwriting Quote Tool
+terminations, servicing agent changes, and
+outstanding requirements):                                  (not for use with RapidProtect)
+Contracting@NationalLife.com
+                                                            Instructional PDF: Getting Started with the XRAE field
+New Fact Finders, Web Access:                               Underwriting Tool
+NAgencyUpdates@NationalLife.com
+                                                            Annuity New Business & Inforce Contacts
+Billing
+                                                            Annuity Forms on Delivery:
+Automatic Payments (EFT) Requests & General Life            Imaging-New@NationalLife.com
+Billing Questions:
+EFTTeam@NationalLife.com                                    Annuity Inforce Customer Service:
+                                                            AgentServices@NationalLife.com
+Group Bill Questions & Requests:
+GroupBill-Life@Nationallife.com                             Annuity Billing Requests & Questions:
+                                                            InboundAnnuityPayment@NationalLife.com
+Manual Billing Requests & Specific Life Billing Questions:
+LifeBilling@NationalLife.com                                New Business Annuity Submission
+
+Life New Business                                           (including applications and transfer forms)
+Life Forms on Delivery (policy receipt, amendments,
+and statement of health): Use Agent Portal.                 Imaging-New@NationalLife.com
+
+                                                            Centralized Mailing Address
+
+                                                            One National Life Drive, Montpelier, VT 05604
+
+2  For Agent Use Only ­ Not For Use With The Public
+                                                            LIFE INSURANCE UNDERWRITING GUIDE
+
+Quick Tips for Efficient Processing
+
+Familiarizing yourself with National Life Group's New       Other Ways to Submit an Application
+Business and Underwriting Department will inevitably
+make you a success with the company and help set            · Applications via eApp should use the secure
+realistic expectations with your client.                      upload on the Agent Portal
+
+Our top priority and promise to you are to provide first-   · Paper applications only can be submitted by:
+class service. With this in mind, we have developed           ­ Email: NBApplicationImages@NationalLife.com
+this comprehensive field underwriting guide. Whether
+it is your first time sending an application or you are a   · U.S. Mail: National Life Group
+seasoned agent, you will know ahead of time what you          Attention: New Business Department M300,
+and your client can expect. We believe using this guide       One National Life Drive
+will help you get your business through faster and close      Montpelier, VT 05604
+the sale you worked so hard to earn!
+                                                              Choosing to submit an application using a method
+Good field underwriting is essential to our partnership.      other than eApp can slow down the underwriting time
+Thorough field underwriting practices help to set             due to inaccurate state paperwork being submitted,
+expectations and make the process more efficient.             missing forms, and missing answers to questions. This
+· Make sure your client gathers all information before        could significantly impact the time it takes a file to get
+                                                              through new business and underwriting.
+  the application is taken (i.e., Social Security numbers,
+  addresses, medication information, driver's license,      Completing an Application
+  passport information, physician's name and contact
+  information, date of last physician's visit, etc.).       · Agents should complete applications with the
+· The information provided on the application is critical     proposed insured (face to face or virtually).
+  for consideration of life insurance coverage. Your
+  responses must be complete and accurate to ensure         · Agents should be fluent in their clients' native
+  the best coverage possible.                                 language. Agents should not use an interpreter
+                                                              to complete an application.
+Submitting an Application
+                                                            · Ask every question on the application. A life insurance
+We are focused on helping you improve productivity.           policy is a legal and binding contract. We will uphold
+As part of our journey to Straight through Processing,        our promise to provide your client with the best
+we have eApp available through iPipeline. eApp is a           possible solution based on their needs. The insurance
+dynamic interface that poses the questions the client         application asks each question for a particular reason.
+needs to answer and alerts the agent to potential errors      It helps the underwriter to conduct a proper risk
+in the responses captured. Since the interface will guide     assessment and provides your client with the best
+agents through all the required questions, agents will        offer with the information in hand. Please collect
+no longer have to decide if a question is appropriate.        all information regarding your client's financial and
+eApp supports the submission of applications in Good          medical history during the application process to
+Order. eApp integrates with our new business platform.        ensure this assessment is accurate.
+Once you submit the application, the interface will send
+you a policy number.                                          Did you know? If a client does not provide their
+                                                              accurate financial and medical history upfront and it
+                                                              is later discovered to be material misrepresentation,
+                                                              the client could risk having their policy rescinded if
+                                                              approved and issued.
+
+3  For Agent Use Only ­ Not For Use With The Public
+                                                              LIFE INSURANCE UNDERWRITING GUIDE
+
+Required Questions Commonly Missed on                         Status Inquiries
+an Application
+                                                              You can check the status of all your pending business
+· Has the insured applied for life or disability              by following up on your cases through the Agent Portal
+  insurance elsewhere?                                        under Book of Business: New Business >> Pending
+                                                              New Business Outstanding Requirements
+· Will the client replace any life insurance coverage         Using the Agent Portal grants you access to the current
+  inforce? Does the insured have any inforce life insurance   status of your case. The agent web portal will display
+  coverage? Will any existing coverage be replaced?           which requirements are outstanding, if any.
+
+· Has the insured been convicted of a misdemeanor               Did you know? The agent portal will tell you if action
+  (including but not limited to DUI or disorderly               is required on your part and what outstanding items
+  conduct)?                                                     New Business and Underwriting may need from you.
+
+· Name and address of personal physician or name of           Where to Send Outstanding Requirements
+  clinic client last visited and outcome of the visit*
+                                                              Agents should submit any questionnaires, exams,
+  NLG requires adults ages 60 and over to have routine        attending physician statements, cover letters, financial
+  health care and a physical within the last 24 months.       documents, EFT, 1035,and replacement or rewrite forms
+  Otherwise, NLG will need to reject the file.                by using the Agent Portal.
+
+· Name and purpose of each current prescription                 Did you know? As requirements come in, they are
+  medication*                                                   attached to the file automatically as they are received
+                                                                and date stamped. This reduces mistakes and allows
+· Past and present medical conditions, date diagnosed,          for timely processing of the requirements.
+  and treatment received*
+                                                              Need to Speak with Someone in New
+· Upcoming medical appointments, procedures, and              Business or Underwriting Regarding
+  follow-ups*                                                 Your File?
+
+By taking the extra necessary time with your client           We want to hear from you and love talking to you. Please
+up-front during the underwriting process, you will            know, however, we are busy trying to review, approve, and
+experience faster turnaround times!                           issue your business! If your case manager or underwriter
+                                                              cannot pick up the phone, please leave a message. They
+  Did you know? By providing the client's past and            will return your phone call within one (1) business day.
+  current medical history, along with the date the
+  condition was diagnosed, the treatment required,
+  and the control of the condition, you can speed
+  up the underwriting process by up to five (5)
+  business days.
+
+* The health questions on the application must be completed.
+
+4  For Agent Use Only ­ Not For Use With The Public
+                                                           LIFE INSURANCE UNDERWRITING GUIDE
+
+Want to Reduce the Number of Emails                        If it is determined that a material misrepresentation
+Between You and the Home Office?                           was made in the application for the policy, the policy
+                                                           may be rescinded. The policy and all attached riders
+Please read all communication sent from the home           are deemed null and void, according to applicable state
+office to you. Please answer each question(s) in           laws and regulations, all premiums are refunded, and
+its entirety with one email for the most efficient         commissions are reversed. What constitutes a material
+processing. Avoid answering one question at a time.        misrepresentation is governed by state law, but it
+Also, please remember to provide full details!             generally means that information was omitted or not
+                                                           presented at the time of application which would have
+Illustrations                                              changed the underwriting decision made at the time.
+
+Contact the Sales Desk for assistance with running         Examples of circumstances that may trigger a
+illustrations at NLGSalesDesk@NationalLife.com.            contestable review include:
+                                                           · Third party information received after issue
+States that have adopted the NAIC Illustration             · After issue requests that require new underwriting
+Regulation require a signed illustration or valid sales
+certification along with the application. Agents do not      evidence
+need to submit these requirements if a state hasn't        · Claims that occur during the 2-year contestable period
+adopted the NAIC Model Regulation and the regulations
+do not require a signed illustration. Agents are required  Agent Commissions and Contracting
+to familiarize themselves with their state's regulations.
+                                                           · LSW and National Life commissions are generated
+TotalSecure applications also require an illustration        weekly. Please see the website www.NationalLife.com
+to be submitted with the application.                        for a Life commission cutoff schedule.
+
+Policy Delivery                                            · Please note that Pennsylvania requires us to appoint
+                                                             you in their state before solicitation.
+Once the agent receives the policy, unless otherwise
+directed, they should deliver it to the policy owner         Visit the Agent Portal or the NLG Mobile App for
+in person as soon as possible. A policy transmittal          commission, contracting, website, or forms-related items.
+accompanies the policy, which outlines all delivery
+requirements and receipts needed to complete the sale.
+Return the requirements by:
+· Uploading them to the Agent Portal
+· Using the self-addressed envelope enclosed with
+
+  the printed policy
+· Emailing them to: FormsOnDelivery@NationalLife.com
+
+Contestable Reviews & Rescissions
+
+Policies generally become incontestable once they
+have been in force during the lifetime of the insured
+for a period of two (2) years from the issue date of a
+policy. Prior to that time, during a policy's contestable
+period, the Company reserves the right to perform a
+contestable review or investigation. This review may
+include obtaining additional medical and/or financial
+information regarding the insured and/or policy owner.
+
+5  For Agent Use Only ­ Not For Use With The Public
+                                                             LIFE INSURANCE UNDERWRITING GUIDE
+
+When Medical Testing is Required                             When a paramedical exam is required, please
+                                                             guide your client about the process and help to set
+Depending on the product, issue age, face amount,            realistic expectations.
+and medical history, the policy may require complete
+testing (paramedical exam, blood specimen, urinalysis        The medical examiner must be fluent in the client's
+specimen, and electrocardiograms). The medical exam          language, or the paramedical company must provide an
+is made part of the policy and can be used during a          interpreter. Examiners cannot use a family member or
+contestable review. Unless otherwise noted, NLG will         anyone benefiting from the policy as a translator.
+order exams and labs when they are required
+                                                             The client should do the following:
+An agent should not order medical testing without            · Bring a photo ID such as a driver's license
+authorization from a home office underwriter if it is not    · Fast for at least 12 hours
+an age and amount requirement. Doing so could result         · Avoid strenuous exercise for at least 12 hours prior
+in the agent being charged for the expense incurred.
+                                                               to the exam
+  Testing should not be ordered until the applicant          · Bring a list of all medications
+  has completed an application, and has signed the
+  authorization, HIPAA, and HIV consent form. Having
+  the client complete the testing ahead of time is against
+  state insurance regulations. The state in which the
+  contract is signed in can impose significant fines to the
+  insurer. This could result in extra expense being charged
+  to your client in the form of premium increases. If the
+  testing is ordered without the client signing any of the
+  above, please know you may be liable for the charges
+  incurred that we did not specifically ask for.
+
+6  For Agent Use Only ­ Not For Use With The Public
+                                                            LIFE INSURANCE UNDERWRITING GUIDE
+
+Approved Paramed Vendors                                    Medical Testing Protocol
+
+Depending on the product, issue age, rate class, face       Medical Testing Orders
+amount, and medical history, Underwriting may require
+complete testing. Please review the Life Underwriting       National Life Group does not authorize ordering or
+Requirements in this guide. Unless otherwise noted,         completing medical testing, such as paramedical
+National Life/LSW will order exams and labs when            exam or laboratory tests (blood/urine), until after the
+they are required. If instructed by the Home Office to      proposed insured has completed and signed NL or
+order an exam and/or labs, agents must use one of           LSW application forms, including an authorization
+the following companies; reference LSW/National Life        and appropriate HIPAA form.
+when making contact:
+· APPS-Portamedic                                           Certain products may not require initial routine medical
+                                                            testing. Please refer to the product-specific charts for
+  ­ www.appslive.com | 800-727-2101                         more information. Unless otherwise noted, National Life/
+· Exam One                                                  LSW will order exams and labs when they are required.
+                                                            We reserve the right to request medical testing for cause
+  ­ www.examone.com | 877-933-9261                          (such as diabetes, morbid obesity, etc.) National Life
+                                                            Group will request age- appropriate medicals anytime the
+  If a translator is needed for your client, make sure to   amount of the NL/LSW exceeds the maximum non-fluid
+  indicate it on the Agent's Report.                        coverage amount.
+
+Occasionally, medical records from the proposed             Existing coverage with National Life will impact
+insured's physician may be needed due to the face           the needed requirements. Please consult with
+amount applied for or because of the client's medical       your underwriter.
+history. National Life Group uses Parameds.com to
+retrieve those records.                                     Release of Medical Testing
+
+  ­ www.parameds.com | 800-872-3674                         Our standard protocol is for the paramedical service
+                                                            providers to send the exam, EKG, senior assessment,
+Attending Physician Statements can range from 10­2,000      and lab slip along with the specimens to the lab for
+pages. Please allow up to 5 business days from the date     timely processing when medical testing is required. The
+records are received for underwriting to review.            Home Office will receive testing results, and any policy
+                                                            issued will include a copy of the paramedical exam.
+Laboratory Testing Services
+                                                            Requests for Lab Results to be Sent
+Clinical Reference Lab is the approved testing service      to a Client
+for blood profiles and urinalyses. Use of our approved lab
+helps ensure the timely transmission of test results. A     Lab results can be received in one of two ways:
+urinalysis is required whenever blood testing is needed.    · The Paramed Examiner will provide a slip with
+Please refer to the product-specific charts in this guide
+for additional information. HIV consent forms must            information and code to retrieve it directly from the lab.
+be submitted in those states where required for all         · Submit a Form 7935 Release for Medical Information
+proposed insureds that require laboratory testing.
+Completion of these forms is the agent's responsibility.      signed by the client to the Home Office. Lab results
+                                                              will be sent via U.S. Postal Service to the client's
+  Did you know that the Agent Portal can provide              address on record within five (5) business days of
+  Underwriting Guidance?                                      receipt of the information.
+
+  Click on the link to navigate to Underwriting Guidance.
+
+7  For Agent Use Only ­ Not For Use With The Public
+                                                             LIFE INSURANCE UNDERWRITING GUIDE
+
+Medical Testing Completed by                                 Routine (APS) Guidelines
+Other Companies
+                                                             Ages 0­17     $1,000,001 and up
+We will consider using another carrier's paramedical         Ages 18­40    $5,000,001 and up
+exam, EKG, and/or lab results completed within the           Ages 41­60    $2,000,001 and up
+last 12 months through age 69, and within the last           Ages 61­69    $1,000,001 and up
+six months for ages 70 and above, if copies are made         Ages 70 & up  All face amounts
+available to us. We reserve the right to request current
+testing at older ages, for large face amounts, and at        Certain medical impairments may require an APS
+the underwriter's discretion.                                regardless of face amount. These may include, but
+                                                             are not limited to:
+Attending Physician Statement (APS)                          · Alcohol/Drug Abuse and/or treatment
+                                                             · Cardiovascular or Coronary Artery Disease
+An APS (copy of the client's medical records) may be         · Cancer
+required by the underwriter in order to complete the         · Diabetes treated by insulin/with tobacco use
+underwriting process. Obtaining these records can take       · Emphysema, COPD, Chronic Bronchitis
+2­6 weeks, depending on the physician. The application       · Heart Murmur
+should include the complete information (full name,          · Hepatitis
+address, phone number) for the personal physician as         · Kidney/Renal Disease
+well as for all other physicians and specialists seen.       · Lupus
+                                                             · Mental Disorders requiring multiple
+The Home Office will order medical records, unless
+otherwise noted, through Parameds.com.                         or psychotropic medications
+                                                             · Multiple Sclerosis
+Attending Physician Statement (APS)                          · Peripheral Vascular Disease
+Guidelines                                                   · Stroke, TIA, CVA, Cerebral Hemorrhage
+                                                             · Ulcerative Colitis/Crohn's Disease
+Medical records should not be ordered unless requested       · Opioid/Narcotic/Chronic Pain Medication
+by the underwriter after initial review of the application.  · History of incarceration
+Because it can be cost prohibitive to order multiple         · PTSD
+APSs on smaller face amounts, all applications should        · Multiple chronic medical conditions
+be submitted with all medical questions answered             · Emergency room visit or hospitalization in
+completely and details provided whenever possible.
+You should also consult the listing of Uninsurable             the last 6 months
+& Problematic Risks in this guide before completing
+an application on a prospective client with complex          Requests for medical records may also be at the
+medical issues.                                              underwriter's discretion due to third party information,
+                                                             abnormal lab findings, etc., or based on older ages
+The underwriter will make every effort to use the            and/or face amounts.
+application, medical questionnaires, prescription
+database, and other tools to assess the risk while
+considering the total amount of the insurance
+applied for.
+
+                                                             Motor Vehicle Report
+
+                                                             (Ordered by Home Office)
+
+                                                             Motor Vehicle Reports are ordered on all applicants
+                                                             ages 16 and up, all face amounts.
+
+8  For Agent Use Only ­ Not For Use With The Public
+                                                             LIFE INSURANCE UNDERWRITING GUIDE
+
+Insurance Basics
+
+The Life Insurance Application                               Medical Information Bureau
+
+Once executed and signed by all parties involved, life       The Medical Information Bureau (MIB) is a non-profit
+insurance applications are a legal and binding document      company owned by members that helps prevent
+between the applicant, the owner, and the company.           insurance fraud. It is an essential underwriting tool
+The insurance company agrees to pay for the claim if         that our company uses for every life application we
+something were to happen to the proposed insured,            receive. If an applicant omits pertinent information
+provided the applicant answered all questions on the         about their health, financial, or avocation history on
+application truthfully and all underwriting requirements     the application, MIB will alert the insurance company
+are completed. Therefore, it's important to take care        of the errors and omissions who will then investigate.
+when filling out the application. Not taking the time to     Preventing fraud helps drive down the cost of life and
+ensure that the insurance company has the most relevant      health insurance. The underwriter can never make an
+information about the insured will delay the application     adverse decision based on MIB information. The MIB
+in the underwriting process, and will result in a less than  information is FCRA regulated.
+favorable pricing, or could cause the insured's policy to
+be rescinded due to material misrepresentation.              Prescription Data Base Report
+
+Two-Year Contestability Period                               This report is an electronic query of an individual's
+                                                             past and current prescription history provided in real
+If an insured passes away or if a claim is submitted within  time, quickly identifying the number of prescriptions
+the first two years of the coverage being in effect, the     prescribed by a provider, the name of the provider,
+insurance company has a right to contest or question the     and the address.
+claim. If the applicant provides inaccurate information on
+the application in order to receive an offer for coverage      Did you know the prescription database captures
+or to get better rates, this is misrepresentation and could    prescription fills going back seven years? So be sure
+result in the denial of the benefit or claim.                  to not only ask your client about what medications
+                                                               they are currently taking ,but also what medications
+Rescission                                                     they've taken in the past.
+
+The revocation or cancellation of an insurance contract      Rewrite
+due to material misrepresentation. All premiums paid
+into the contract plus interest will be refunded to the      The process of making a change to a contract that has
+insured. The policy will be cancelled. A rescission results  been issued within 120 days of the signing date of
+in the agent receiving a chargeback on commissions.          the application.
+
+Third Party Medical Evidence
+
+Additional databases are used to find medical
+information when available, such as lab results,
+routine health care, and physician information.
+
+9  For Agent Use Only ­ Not For Use With The Public
+                                                           LIFE INSURANCE UNDERWRITING GUIDE
+
+Nexus
+
+Nexus comes into play when an application is executed      Agent Licensing
+in a state other than the Owner or Insured's residence
+state. Because states have their own laws that govern      All of the scenarios noted above are subject to the
+life insurance companies, the states want to make sure     appropriate agent licensing in both states. Some
+their residents are issued policies in accordance with     states require the agent(s) to be licensed in both the
+that state's laws. When an application is executed in      insured and proposed owner's resident state and the
+a state other than the state of residence of the Owner     state of execution.
+or Insured, we require that there be an acceptable
+connection (nexus) between the state of execution and      Product Availability
+the Owner/Insured.
+                                                           All of the scenarios noted above are subject to the
+Acceptable Scenarios                                       product availability in both states. Also, if the state of
+                                                           execution is a border state to the insured's or proposed
+Many state insurance departments are sensitive to          owner's residence state and the residence state has
+business written on their residents in other states, so    either disapproved the policy form or approved a
+it is critical that the connection is clearly stated when  materially different policy form, the residence state
+an application with a nexus situation is submitted.        insurance department may require the sale to be
+The following are acceptable scenarios for writing an      canceled and/or require it to be changed to the policy
+application in a state different from the resident state:  form approved by the residence state.
+· The Insured/Owner owns real estate or another
+                                                           Application Forms
+  residence in that state
+· The company that the Insured/Owner works for             When writing an application that has met the nexus
+                                                           guidelines and is executed in a state other than the
+  is based in that state                                   residence state, the application forms used must be the
+· The Insured/Owner owns a company based in                approved forms for the state of execution.
+
+  that state                                               State of Execution Certification
+· The Owner is a trust governed by the laws of the
+                                                           Form 9928 must be completed when a life insurance
+  state where the application is to be completed           or annuity application is completed and signed in a
+· The Insured/Owner is a foreign national that does        state other than the state of residence of the insured
+                                                           or proposed Owner. This form is available on the
+  not have a state of residence but meets the nexus        Company website.
+  requirements to qualify for US based life insurance
+  (see Foreign National Guidelines)
+  ­ Since the Insured/Owner isn't a resident of any
+
+     particular state, state nexus rules do not apply
+  ­ If the foreign national does have a state of
+
+     residence, state nexus rules do apply
+
+Exception
+
+An exception to this rule would be if the Insured/Owner
+was a relative of the agent. Relatives would only include
+immediate family members such as spouse, parent,
+sibling, or child.
+
+10     For Agent Use Only ­ Not For Use With The Public
+                                                              LIFE INSURANCE UNDERWRITING GUIDE
+
+Insurable Interest -- Owner/Beneficiary
+
+Insurance law and public policy in the various states         Generally accepted ownership arrangements include
+require that we establish an Insurable Interest between       Insured, Spouse, Parent of Minor Child, Grandparent,
+the Proposed Insured and the Owner and/or Beneficiary         Business Partner, Business/Corporation Owned by the
+exists at the time we issue a life insurance policy. The      Insured, and Trusts.
+strictest definition of insurable interest suggests that
+the Owner and/or Beneficiary must suffer a quantifiable       When a minor becomes owner, by reason of the death
+financial loss at the Insured's death. In other words,        of the current owner, a court-appointed legal guardian
+the Owner and/or Beneficiary must be better off if the        is required to act on behalf of the child for all dealings
+Insured lives rather than dies.                               with the policy. Additionally, most transactions would
+                                                              require a court order authorizing action requested by
+Because the Owner controls several aspects of the policy,     the legal guardian.
+such as the right to change the beneficiary, change the
+face amount or riders, or cancel the policy, the insurance    You can avoid this situation by including a contingent
+company is charged with assuring there is insurable           owner on the policy.
+interest of the owner for any policy issued.
+                                                              To add a contingent owner prior to policy issue, submit
+The simplest, most common relationship we insure is           a request through the Agent Portal with the following
+that between spouses. Survivor income, debt repayment,        information:
+tuition costs, and final expenses are all quantifiable needs  · Name
+that become readily apparent at death in this situation       · Date of birth
+and are perfectly appropriate purposes for life insurance.    · Social Security number
+Loan repayment in debtor relationships, key-person and        · Relationship to the insured
+buy-sell agreements in business relationships, and estate
+protection are other fairly quantifiable needs that can be    To add a contingent owner after a policy is issued,
+supported by life insurance.                                  please complete a 1492 Ownership Change form and
+                                                              email it to TitleDepartment@NationalLife.com.
+The law also makes allowance for the bonds of love and
+affection that exist between spouses (or "significant
+others"), when parents insure minor children, and
+when grandparents insure grandchildren (with parental
+approval).
+
+The relationships between cousins, nieces/nephews,
+and aunts/uncles are more difficult to insure because
+the financial and emotional ties are hard to identify
+and quantify.
+
+Except when spouses insure each other or when parents
+insure minor children, it is the Agent's responsibility to
+carefully describe the insurable interest supporting any
+application where the Owner is someone other than the
+Proposed Insured and if the relationship of the Owner
+to the Beneficiary is questionable. It's important that
+the explanation include the financial loss incurred at
+the Proposed Insured's death.
+
+The owner and beneficiaries on their contract often
+change over the life of the policy.
+
+11  For Agent Use Only ­ Not For Use With The Public
+                                                              LIFE INSURANCE UNDERWRITING GUIDE
+
+Financial Underwriting
+
+Financial Underwriting is the evaluation of the               New York Financial Suitability Review
+proposed insured's personal and business financial            (all cases)
+background. During the analysis we need to confirm
+that the need for insurance as applied for, as well as        Effective February 1, 2020, all New York contracts are
+any inforce coverage with our company and/or other            subject to enhanced suitability review per Regulation 187.
+carriers, is reasonable and in line with the insured's        In order to perform this additional level of suitability
+needs. It is the underwriter's responsibility to make         review, we will require that the Confidential Financial
+sure the policy will be affordable in order to sustain        Questionnaire (form 1392) be completed on all NY
+premium payments. It is necessary to establish the            applications. To avoid delays, include this questionnaire
+insurable interest of the beneficiary in the life of the      when submitting any NY applications.
+prospective insured at the time of underwriting, and
+the financial loss that will occur in the event of an         Juvenile coverage for children ages 0­17:
+unexpected and untimely death of that insured.
+                                                              For all juvenile coverage:
+While life insurance can have other specialty uses such
+as cash value accumulation, the primary purpose of life       · Child must be at least 14 days old and be U.S. citizen
+insurance is to protect against a loss and the death benefit    or permanent resident.
+cannot exceed the client's economic ("human life") value.
+                                                              · Acceptable ownership is limited to parents/legal
+The writing agent is an important source of information.        guardians or grandparents only (guardianship
+Through a cover letter, he/she can provide an explanation       paperwork will be necessary).
+of the purpose, need, and method used to establish the
+requested face amount and total line of coverage, as          National Life will consider permanent coverage on a
+well as any unusual aspects of the case and competitive       juvenile up to a face amount of $500,000, regardless of
+situations. Copies of the needs analysis and financial        the amount of coverage in force (and/or applied for) on
+statement should accompany applications with large            parents or siblings.
+face amounts.
+                                                              For requested coverage amounts that result in a total
+Financial Documentation                                       line of insurance coverage from $500,001 to $1,000,000,
+                                                              National Life can consider up to the amount of insurance
+Depending on the face amount requested, we may need           in force on the breadwinning parent* (non-breadwinning
+additional documentation to financially justify coverage.     parent should also be adequately insured). Siblings need
+This documentation includes, but is not limited to:           to have like coverage (equal face amount or premium
+                                                              contribution).
+· E-inspection reports ordered by Underwriting
+                                                              Juvenile applicants for greater than $1,000,000 will be
+· Confidential Financial Questionnaire/CFQ (Form 1392)        considered on an individual basis. National Life can
+                                                              consider amounts up to 50% of insurance in force on
+· Income Verification (IV) includes items such as (but        the breadwinning parent* (non-breadwinning parent
+  not limited to):                                            should be adequately insured). Siblings need to have like
+                                                              coverage (equal face amount or premium contribution).
+    ­ 1392 signed by CPA  ­ Tax Return
+      (can be used as IV  ­ W2                                For total line requests greater than $3,000,000, sufficient
+      and/or TPV)         ­ 1099                              financial/estate planning needs to be in place and
+                                                              documentation of the planning will need to be shared
+· Third Party Verified Financials (TPV) includes items        with underwriting.
+  such as (but not limited to):
+
+    ­ 1392 signed by CPA (can be used as IV and/or TPV)
+
+    ­ Third party business valuation reports
+
+    ­ Brokerage/Bank statements
+
+    ­ Real estate holding documentation                       * PLEASE NOTE: Proof of in-force coverage on the breadwinning parent may be
+                                                               requested at underwriter's discretion.
+
+12                        For Agent Use Only ­ Not For Use With The Public
+                                                            LIFE INSURANCE UNDERWRITING GUIDE
+
+Juvenile coverage (continued):                              Other Personal Insurance
+
+New York contracts have special rules that                  For larger face amounts requested, it is the agent's
+must be followed on Juveniles up to age 14 and              responsibility to inform the client that the purchase of
+6 months.                                                   a life insurance policy is a binding financial contract
+                                                            that requires disclosure of personal and/or business
+· For ages 0­4 years and 6 months, it's the maximum         financial information. Depending on the insurance
+  of $50,000 or 25% of the inforce coverage on the life     need, specific concrete forms of financial verification or
+  of the parent who is applying. whichever is greater.      attestation(s) may be required. Below are National Life
+                                                            Group's Financial Underwriting Requirements:
+· For ages 4 years and 6 months­14 years and 6
+  months, it's the maximum of $50,000 or 50% of                  $2,000,001+ $5,000,001+ $10,000,001+
+  the inforce coverage on the life of the parent who is
+  applying, whichever is greater.                           EI
+
+· If parents are joint owners, it's the maximum of          CFQ  ­
+  $50,000, 25% or 50% on the life of the parent with
+  the greater coverage, whichever is greater.               IV   ­             ­
+
+These limits do not apply if a grandparent is purchasing    TPV  ­             (age 70+)            (age 18+)
+the coverage on the child and the child is not dependent
+on that grandparent for support. In this situation we are   EI   E-Inspection
+able to follow our normal juvenile guidelines.
+                                                            CFQ  Confidential Financial Questionnaire (Form 1392)*
+New York contracts for juveniles ages 14 and 6
+months to age 17.                                           IV   Income Verification (see page 12)
+
+Refer to guidelines in "For all juvenile coverage" section  TPV  Third Party-Verification Financials (see page 12)
+on page 12.
+                                                            If you have a family applying for life insurance, it is
+                                                            important that the total premium does not exceed
+                                                            10% of the client's annual income. If it does, the
+                                                            underwriter will reserve the right to ask for additional
+                                                            financial documentation.
+
+Personal Insurance
+
+Income Replacement Multipliers
+
+Age    Factor Time Income
+18­30  40x annual earned income
+31­40  35x annual earned income
+41­50  25x annual earned income
+51­60  15x annual earned income
+61­65  10x annual earned income
+66­69  5x annual earned income
+
+    Earned income is money received from paid work.
+    It is not income from investments, rental property,
+    alimony, savings accounts etc. Underwriters take into
+    the consideration earned income only.
+
+* All NY applications must include this form at all face amounts.
+
+These are general guidelines. We reserve the right to request financial requirements at the underwriter's discretion. See Business Insurance Guidelines for additional underwriting
+requirements that may be requested
+
+13                  For Agent Use Only ­ Not For Use With The Public
+                        LIFE INSURANCE UNDERWRITING GUIDE
+
+Personal Insurance
+
+Estate Protection/      Purpose of insurance:
+Estate Planning         Life insurance coverage to protect the assets from sale for estate tax purposes. The
+                        personal net worth of an individual or family is used as the basis for a calculation of
+Final Expense Coverage  an approximate estate tax liability and related expenses. The underwriter will consider
+                        the nature of the assets and how their value has changed over time at a reasonable rate
+Coverage on             of growth, compounded up to 10 to 20 years depending on the clients' ages and risk
+Older-Age Applicants    class and offset by expected interest rate.
+& Dependent Parents
+                        National Life Group does not offer a stand-alone final expense or burial coverage.
+                        (With appropriate financial justification to a maximum up to $100,000 may be
+                        considered with final expenses being considered as part of the overall need
+                        for coverage.)
+
+                        Purpose of insurance:
+                        Personal insurance on older-age applicants may be needed for estate tax situations
+                        (see estate planning) or asset repositioning. Final expenses may be considered in the
+                        overall need for coverage. Income replacement is not applicable at ages 70+.
+
+                        Retirement income: Cash value may be used for retirement income. However, the death
+                        benefit must be financially justifiable.
+
+                        Coverage on dependent parents: A limited amount of coverage may be considered on
+                        dependent parents if a financial loss is demonstrated -- what is the quantifiable financial
+                        loss that the family must replace?
+                        · If services provided to the family by the dependent parent would require significant
+
+                          expense to replace, how was that amount determined?
+                        · The head of household (adult child of dependent parent) must have sufficient life
+
+                          insurance coverage in force at an amount greater than being applied for one parent.
+                        · The head of household's income must be sufficient to support the family finances
+
+                          and total line of coverage for household members.
+                        · Coverage cannot be used to create an estate at death. With appropriate financial
+
+                          justification a maximum up to $100,000 (total with all carriers) may be considered.
+                          However, if no financial justification is demonstrated no coverage will be issued.
+
+State & Federal         Premium to income ratio
+Assistance Recipients   In order to sustain long term premium payments, generally households with modest
+                        annual income should not exceed 10% of income for life insurance premiums.
+Non-Working             Households with greater annual income may put a larger percentage of their income
+Spouse Coverage         in their policies; this will be considered on an individual basis.
+
+                        Individuals whose primary source of income is state or federal aid programs,
+                        Supplemental Security Income (SSI), or Social Security Disability Income (SSDI)
+                        generally have a minimal need for life insurance other than a nominal final expense
+                        policy. If this is their only source of income, we would not offer coverage.
+
+                        If the working spouse has inforce/pending coverage, we can match their coverage up to
+                        $1,000,000. Any amount greater than $1,000,000 will require financial justification. If the
+                        working spouse is uninsurable, we would allow the non-working spouse coverage in line
+                        with earned household annual income.
+
+14                      For Agent Use Only ­ Not For Use With The Public
+                        LIFE INSURANCE UNDERWRITING GUIDE
+
+ Charitable Coverage    At National Life we will consider Charitable Giving with the following guidelines:
+                        · We will consider up to 20x the average annual charitable gift or remaining life
+ Asset Repositioning
+ Creditor (Personal)      expectancy (ages: 21­70: 20x, ages 71+ up to a maximum of 10x). The average annual
+ IOLI/STOLI (Investor     charitable gift will be determined by averaging the charitable gift given to the charity
+ Owned Life Insurance/    over the past 3 years.
+ Stranger Owned Life    · The individual's personal life insurance needs must be met.
+ Insurance)             · We will consider up to 50% of existing personal coverage.
+ Bankruptcy             · If the proposed insured does not have a historical pattern of gifting to the charity,
+                          the maximum death benefit considered will be:
+15                        ­ Individual consideration based on the connection to the charity. We would want to
+
+                             see a detailed cover letter explaining the relationship to the charity.
+                          ­ We may consider up to a maximum of 50% of existing personal coverage, however
+
+                             if there is not a significant relationship to the charity, we may be unable to consider
+                             the charitable policy.
+                          ­ If the proposed insured is considered a High-Net-Worth individual consideration
+                             can be given based upon their proven net worth as follows:
+                             · Net Worth < $5 Million: Individual consideration based on the connection to the
+
+                               charity. We would want to see a detailed cover letter explaining the relationship
+                               to the charity. A cover letter explaining the client's relationship to the charity and
+                               the details regarding the contribution should be provided with the application.
+                             · Net Worth $5 to $10 Million: Allow up to 10% of Net Worth.
+                             · Net Worth $11 Million to $50 Million: Allow up to 20% of Net Worth.
+                             · Net Worth $51 Million to $100 Million: Allow up to 30% of Net Worth.
+                             · Net Worth greater than $100 Million: Allow up to 40% of Net Worth.
+                             · The Charitable giving policy should not exceed 50% of existing personal coverage.
+
+                        Any assets or income being repositioned into life insurance to enhance or leverage a
+                        legacy for wealth transfer purposes should not cause future financial hardship for the
+                        client and family.
+
+                        Must qualify for death benefit using financial guidelines above.
+
+                        A copy of the loan document should be submitted with the agent's cover letter
+                        outlining details of loan terms and status of loan. Personal home mortgages will
+                        be considered up to 100%; other personal loans up to 75% of loan amount. Use of
+                        collateral assignment for outstanding loan amount to lender is recommended.
+
+                        It is the policy of National Life Group not to support any form of Investor Owned Life
+                        Insurance (IOLI), including "non-recourse premium financing", Stranger Owned Life
+                        Insurance (STOLI), or Charity Owned Life Insurance (CHOLI), where the intention
+                        of the proposed owner at the time of sale is to sell the policy to an investor, group
+                        of investors, life settlement company, or charity. Applications for life insurance that
+                        involve such arrangements should not be submitted.
+
+                        There are different types of bankruptcy filings but the most common are Chapters 7,
+                        11, and 13. From an underwriting perspective, they can be viewed differently. We will
+                        not offer coverage to an individual with a history of Chapter 7 bankruptcy until the
+                        bankruptcy proceedings have been discharged, and the client is working full time and
+                        demonstrates a financial need for a reasonable amount of coverage. We will consider
+                        coverage for applicants currently in Chapter 11 or 13 once the applicant is making
+                        regular debt payments and they are not subject to any court-imposed restrictions. All
+                        applicants will be underwritten on their own merit, taking into consideration stable
+                        employment, annual income, net worth, purpose, and need for coverage, as well as
+                        any medical concerns.
+
+                         For Agent Use Only ­ Not For Use With The Public
+                          LIFE INSURANCE UNDERWRITING GUIDE
+
+Business Insurance
+
+Insurance is frequently used to protect against financial loss in a business relationship. The most common are
+Key Person, Buy/Sell, and Deferred Compensation. The amount of death benefit must be suitable for the given
+business financial situation. Each business sale should include a detailed cover letter and Business Insurance
+Worksheet (form 20098). If the contract is employer owned, the Insured Notification and Consent Form (form 8453)
+must be filled out and submitted prior to issue.
+
+Key Person                Individuals who make significant contributions to the profitability of a business and
+Buy-Sell Cross Purchase/  cannot readily be replaced may be considered Key Persons. Generally, a multiple of
+Stock Redemption          annual salary, such as five (5) times income, would be considered -- 10 times for
+Deferred Compensation     well-established businesses. Stock options, bonuses, and certain benefits, such as
+                          housing and automobile allowances, will also be factored into compensation.
+Loan Protection/Creditor
+(Business)                All owners should be proportionately insured based on their established business
+Executive Bonus           interest and the fair market value outlined in the buy-sell agreement. If there is no
+                          buy-sell agreement, a cover letter is needed with details on how fair market value
+                          was determined. In addition, the last two years of income statements and balance
+                          sheet information is needed -- or a third party business valuation.
+
+                          Deferred compensation can be divided into two broad categories: qualified plans
+                          and non-qualified plans. Qualified plans allow the employer to take a tax deduction
+                          (as a normal business expense) when contributions are made to the plan. These
+                          contributions are made on a before-tax basis and the employee is not subject to
+                          income taxes at the time of the contribution, but is instead allowed to defer taxes
+                          until benefits are distributed from the plan. Non-qualified plans do not receive
+                          this tax savings: the employer cannot take a deduction for contributions and the
+                          employee must pay income taxes on contributions in the year in which they are made.
+
+                          Because a key benefit of this concept is that the cash value buildup of the policy
+                          grows income tax deferred and can potentially be accessed using policy loans or
+                          withdrawals* as a supplement to retirement benefits, a product with a lower face
+                          amount and maximum funding best meets the deferred compensation concept.
+
+                          The Underwriter will require salaries, benefit being refunded, and amount of
+                          insurance being applied for. Long term financial outlook of the business is also
+                          a financial consideration.
+
+                          A maximum of 75% of the outstanding loan amount will be considered. Complete
+                          details regarding the purpose and terms of the loan must be provided. Collateral
+                          assignment of the death benefit for the loan balance should be used.
+
+                          Employers may offer an executive bonus plan to provide additional incentives
+                          by paying life insurance premiums for the executive employee's personally owned
+                          policy. The amount may be defined in a deferred compensation agreement
+                          and should be justified by personal insurance needs. A copy of any deferred
+                          compensation agreement should be submitted as well as documentation of salary
+                          (including bonuses) for past two years.
+
+* P olicy loans and withdrawals reduce the policy's cash value and death benefit and may result in a taxable event. Surrender charges may reduce the policy's cash value in early years.
+
+16                        For Agent Use Only ­ Not For Use With The Public
+                                                                LIFE INSURANCE UNDERWRITING GUIDE
+
+Underwriting Programs
+
+Full Medical/Financial Underwriting                             Are there other requirements that I may need to
+                                                                have my client furnish?
+National Life Group has a wide range of products
+that are underwritten using traditional underwriting            Depending on the type of and purpose of the life
+requirements such as blood profile, urinalysis                  insurance sale, the underwriter may request additional
+specimen, paramedical exam, and EKGs. Applications              financial information to justify the face amount being
+requiring full medical underwriting to properly assess          requested. This information we request, may be in the
+the mortality risk the client represents are often on           form of:
+larger face amounts and older age applicants. Please            · Personal Financial Questionnaire
+refer to www.NationalLife.com for the most current              · 2-year tax returns, W-2s, or 1099s
+listing of these products.                                      · Third Party Verified Financial Statements prepared by
+
+What does the agent need to know?                                 CPA or Tax Attorney
+                                                                · Cover letter explaining the purpose of sale and how
+NLG will review the application containing your client's
+financial and medical information. The information will           the total line of coverage was determined
+be cross-referenced with several databases used for the
+risk assessment such as:                                          Do you know how powerful a cover letter can be?
+· Medical Information Bureau (MIB)                                If you have a client who is applying for insurance
+· Milliman Intelliscript® Prescription Data, Medical              for reasons other than straight income replacement
+                                                                  needs, it is best to submit a cover letter. The cover
+  Claims Data, and Criminal History Data                          letter will tell the underwriter how the sale was made,
+· Motor Vehicle Report                                            the purpose of the sale, and the intended use of the
+· Electronic Inspection Report                                    funds and/or riders. A well-crafted cover letter helps
+· LabPiQture, providing clinical laboratory results               the underwriter better understand your client's needs.
+· Clinical Reference Laboratory Prescription Database             If you submit an application via eApp, you can type
+                                                                  this information in the cover letter.
+What medical requirements might be requested
+for my client to complete?
+
+· Blood profile and urinalysis specimen
+· Paramedical exam
+· Senior Assessment
+· EKG
+· Attending Physician Statement
+
+    Did you know?
+    · An application is good for 6 months from the
+
+      application signing date
+      ­ A Statement of Health (form 5230 for appropriate
+
+         state) will be required after 90 days of the date of
+         last evidence (exam or health section of application)
+    · Parameds and Labs are good for:
+      ­ Ages up to 70: 12 months
+      ­ Ages 70 and up: 6 months
+    · Rewrites: A policy can be rewritten up to
+      120 days from the application signing date
+
+17  For Agent Use Only ­ Not For Use With The Public
+                                                            LIFE INSURANCE UNDERWRITING GUIDE
+
+Accelerated Underwriting Products                           What does the agent need to know?
+(EZ Underwriting)
+                                                            NLG will review your client's financial and medical
+National Life Group is pleased to offer accelerated         information contained in the application, cross-
+underwriting to applicants. This means your client          referencing the information with several risk assessment
+may be eligible for our best class without the need         databases such as:
+to complete medical requirements (blood profile,            · Medical Information Bureau (MIB)
+urinalysis, paramedical exam, and EKG).                     · Milliman Intelliscript® Prescription Data,
+
+EZ underwriting is available to applicants ages               Medical Claims Data, and Criminal History Data
+18­50 applying for face amounts up to and including         · LabPiQture, providing clinical laboratory results
+$3,000,000 on permanent products ($2,000,000 on             · Motor Vehicle Report
+term products); to applicants ages 51­60 applying for
+face amounts up to and including $1,000,000; and to           Do you know?
+applicants ages 61­65 applying for face amounts up to         · An application is good for 6 months from the
+and including $250,000.
+                                                                 application signing date
+Existing coverage with National Life Group will impact the       ­ A Statement of Health (form 5230 for appropriate
+needed requirements. Please consult with your underwriter.
+                                                                   state) will be required after 90 days of the date of
+Please consult the product's age and face amount grid for          last evidence (health section of application)
+current guidelines beginning on page 21.                      · Rewrites: A policy can be rewritten up to 120 days
+                                                                 from the application to signing date.
+Applicants Applying for the Following Face Amounts:
+
+FlexLife     Ages 18­50  Ages 51­60    Ages 61­65
+             Up to $5M   Up to $3M   Up to $250,000
+
+SummitLife Up to $5M Up to $3M       n/a
+
+PeakLife NL Up to $5M Up to $3M      n/a
+
+TotalSecure  Up to $5M   Up to $3M Up to $250,000
+BasicSecure  Up to $5M   Up to $3M Up to $250,000
+
+Term         Up to $2M Up to $1M Up to $250,000
+
+Expanded EZ Underwriting on permanent
+products for applicants with a physical exam in
+the past 12 months
+
+For permanent products, EZ underwriting availability
+may be expanded to applicants if they have had a
+routine physical exam with age-appropriate screening
+tests completed within the last 12 months.
+
+Applicants ages 18­50 applying for face amounts
+between $3,000,001 and including $5,000,000 and ages
+51­60 applying for face amounts between $1,000,001 and
+including $3,000,000 may be eligible for our best class
+without the need to complete medical requirements
+(blood profile, urinalysis, paramedical exam, and EKG).
+EZ Underwriting remains available for face amounts up
+to and including $250,000 for applicants ages 61­65.
+
+18                       For Agent Use Only ­ Not For Use With The Public
+                                                      LIFE INSURANCE UNDERWRITING GUIDE
+
+Simplified Underwriting Products                      Applicants Applying for the Following Face Amounts:
+(RapidProtect/RapidProtect NL --
+Indexed Universal Life (IUL))                         Rate Classes               Face Amount                 Ages
+
+National Life Group is proud to offer RapidProtect,   Standard NT                $50,000­$500,000 0­60
+a simplified issue IUL product with an instant
+underwriting decision. Your client may qualify for    Express Standard NT 1      $50,000­$500,000 0­60
+valuable protection using a quick and easy customer
+experience -- only answering a few application        Standard Tobacco           $50,000­$500,000 18­60
+questions and no medical exam.
+                                                      Express Standard Tobacco   $50,000­$500,000 18­60
+RapidProtect is available to applicants up to age
+60, applying for face amounts between $50,000 and     Table ratings and flat extras are not available.
+$500,000. Standard Non-Tobacco and Standard           ABRs are not available with Express Standard classes.
+Tobacco classes are available as well as substandard
+Express Non-Tobacco 1 and Express Tobacco classes.    What does the agent need to know?
+
+Please consult the product's age and face amount      NLG will review your client's financial and medical
+grid for current guidelines. (See NLG's website for   information contained in the application, cross-
+current listing).                                     referencing the information with several risk
+                                                      assessment databases such as:
+
+                                                      · Medical Information Bureau (MIB)
+                                                      · Milliman Intelliscript® Prescription Data,
+
+                                                        Medical Claims Data, and Criminal History Data
+
+                                                      · Motor Vehicle Report
+
+Potential Underwriting Outcomes
+
+Not all medical conditions or non-medical conditions will qualify for RapidProtect. The following lists of impairments
+represent examples that will not qualify and other impairments that will qualify. Neither list is intended to be all-inclusive
+and specific details of each case will determine final eligibility.
+
+Non-Qualifying Conditions/Issues
+
+Applications should not be written on persons with the following impairments/issues. This list is not intended to be
+all inclusive.
+
+                                                            Medical Conditions
+
+ALS (Lou Gehrig's Disease)             Congestive Heart Failure                 Organ Transplant
+Alcoholism                             Crohn's Disease                          Pacemaker/Defibrillator
+Alzheimer's Disease or Dementia        Diabetes, Type 1                         Parkinson's Disease
+Autism                                 Dialysis                                 Paralysis
+Cancer (except Basal Cell Carcinoma)   Diagnostic testing in the last 3 months  Peripheral Vascular Disease
+                                       except for colonoscopy, pap smear,
+Cardiac arrhythmias                    or mammogram                             Polycystic Kidney Disease
+Coronary artery disease/heart attack   Down's syndrome                          Sarcoidosis
+Chronic Kidney Disease                 Heart valve disorders                    Stroke (CVA or TIA)
+Chronic Obstructive Pulmonary          HIV/AIDS                                 Suicide attempt
+Disease (COPD)                         Hospital admission in past 12 months
+Cirrhosis of the liver                 (except childbirth)                      Ulcerative Colitis
+                                       Intellectual Disability
+
+                                                 Non-Medical Risks
+
+Driver's license currently suspended or revoked       Single misdemeanor conviction with less than 1 year since
+                                                      the end of probation
+
+Single DUI within the past year                       Multiple misdemeanor convictions with the last conviction
+                                                      less than 7 years ago
+
+Multiple DUIs within the past 5 years                 Disability (receiving SSDI or DI due to mental health or
+                                                      other medical issues)
+
+Criminal charges pending                              Violent criminal activity
+
+Any felony conviction
+
+19                        For Agent Use Only ­ Not For Use With The Public
+                                                      LIFE INSURANCE UNDERWRITING GUIDE
+
+Qualifying Conditions/Issues
+
+The following impairments may qualify for coverage under RapidProtect. This list is not intended to be all-inclusive.
+
+Medical Conditions
+Possible eligibility is presented assuming the applicant's best possible condition (treatment, control, etc.) without complications.
+Specific case details will dictate final rating.
+
+ Anemia, mild iron-deficient (fully investigated and resolved)
+ Anxiety, mild (stable & well-controlled  6 months, depends on age)
+ Asthma, mild (depends on age, attacks, medications)
+ Back disorder/pain, mild (non-disabling, depends on use/amount of opiods for control)
+ Basal Cell Carcinoma
+ Bronchiectasis, mild (no surgery or complications)
+ Cerebral Palsy (age > 8 years, no epilepsy or intellectual disability)
+ Cystitis (fully recovered, no complications)
+ Depression, mild (stable & well-controlled  6 months, depends on age)
+ Diabetes, Type 2 (well controlled, without complications)
+ Epilepsy (depends on age, treatment)
+ Fibromyalgia, mild (no current narcotic medication use)
+ Gall bladder disorder (fully recovered > 3 months, no complications)
+ Gastric bypass (varies based on procedure, > 6 months since surgery, no complications)
+ Gestational diabetes, not currently pregnant (no complications)
+ Glaucoma (corrected, no complications)
+ Gout, mild (only NSAID use, no physical impairments or complications)
+ Hepatitis B, chronic (treated and resolved)
+ Hepatitis C, chronic (treated and resolved)
+ Hypertension (well controlled)
+ Hyperthyroid (fully investigated, well controlled & stable, no complications)
+ Hypothyroid (well controlled and stable, no complications)
+ Joint replacement (fully recovered, > 3 months since surgery, no complications)
+ Lupus, systemic (mild with no complications)
+ Lupus, discoid (skin only; in remission, no steroid use)
+ Meningitis (fully recovered > 6 months, no complications)
+ Migraine headaches (mild, fully investigated & stable with no complications)
+ Osteoarthritis, mild (non-disabiling, no complications or opiod use for treatment)
+ Pregnancy, current (no complications - past or present)
+ Prostatic hypertrophy, benign (minor symptoms, no obstruction nor complications)
+ Prostatitis (mild symptoms, no complications)
+ Raynaud's disease (full recovery, > 2 years since last complication, no complications)
+ Rheumatoid arthritis (no disability -- depends on age)
+ Rheumatic fever (no murmur, heart damage or other complications)
+ Sleep Apnea (consistent CPAP use, no complications)
+ Tuberculosis (fully investigated, complete recovery with no complications nor residuals)
+ Varicose veins (located in leg with no complications)
+
+20  For Agent Use Only ­ Not For Use With The Public
+                                                                                   LIFE INSURANCE UNDERWRITING GUIDE
+
+Life Underwriting Requirements
+
+SummitLife/Advanced Markets IUL
+
+(SummitLife)
+
+                                                                                      Issue Ages1
+
+Underwriting Amount        0­17      18­30                              31­40      41­50  51­60               61­65    66­69      70+
+$1,000,000                  A          A                                  A                                     D        D      ME/APS
+$1,000,001 ­ $2,000,000                A                                  A        A               A                            ME/APS
+$2,000,001 ­ $3,000,000   A/APS        A                                  A                                   D/APS    D/APS    ME/APS
+$3,000,001 ­ $5,000,000   A/APS        D                                  D        A               D          D/APS    D/APS    ME/APS
+$5,000,001 ­ $10,000,000  A/APS                                                                               D/APS    D/APS    ME/APS
+$10,000,001 & Up          A/APS      D/APS                              D/APS      A/APS  D/APS               D/APS    D/APS    ME/APS
+                          A/APS      D/APS                              D/APS                                 D/APS    D/APS
+                                                                                   D/APS  D/APS
+
+                                                                                   D/APS  D/APS
+
+                                                                                   D/APS  D/APS
+
+Category/Medical Requirements                                                      Available Rate Classes2,3
+
+ A ­ Application                                                                    Rate Classes              Face Amount*      Ages1
+ D ­ Application, Exam, Blood Profile, Urine                                        Elite                     All Face Amounts  18­75
+ M ­ Application, Exam, Blood Profile, Urine, Mature                                Preferred NT              All Face Amounts  18­85
+                                                                                    Select NT                 All Face Amounts  18­85
+       Assessment                                                                   Standard NT               All Face Amounts  0­85
+ ME ­ A pplication, Exam, Blood Profile, Urine, EKG, Mature                         Express Standard NT 1     Total Face  $2M   0­85
+                                                                                    Express Standard NT 2     Total Face  $2M   18­85
+        Assessment                                                                  Preferred Tobacco         All Face Amounts  18­85
+ APS ­ Attending Physician Statement                                                Standard Tobacco          All Face Amounts  18­85
+                                                                                    Express Standard Tobacco  Total Face  $2M   18­85
+Financial Underwriting Requirements
+                                                                                   Substandard Ratings
+                   $2,000,001+ $5,000,001+ $10,000,001+
+
+EI                                                                                                        Non-Tobacco
+
+CFQ  ­                                                                             Substandard Ratings        Total Face  $2M Total Face > $2M
+                                                                                   Permanent Flat extras       All rate classes All rate classes
+
+IV   ­                        ­                                                    Temporary Flat extras        Available with  Available with
+TPV  ­                                                                                                        Standard NT and   Standard NT
+                          (age 70+)                                     (age 18+)                              Express classes   and/or with
+                                                                                                                                table ratings
+
+EI   E-Inspection                                                                  Table Ratings up to 200%     Available with  Available with
+CFQ  Confidential Financial Questionnaire (Form 1392)                              (table B to D)             Express Standard  Standard NT
+
+                                                                                                                  NT 1 only
+
+IV   Income Verification (see page 12)                                             Table Ratings 225%­300%      Available with  and temporary
+TPV  Third Party-Verification Financials (see page 12)                             (table E to H)             Express Standard     flat extras
+
+                                                                                                                  NT 2 only
+
+                                                                                                              Tobacco
+
+                                                                                   Substandard Ratings        Total Face  $2M Total Face > $2M
+
+                                                                                   Permanent Flat extras      All rate classes All rate classes
+
+                                                                                   Temporary Flat extras       Available with   Available with
+                                                                                                                  Standard        Standard
+                                                                                                                                   Tobacco
+                                                                                                                Tobacco and
+                                                                                                              Express Tobacco    and/or with
+                                                                                                                                table ratings
+                                                                                                                   classes
+
+* Minimum Face $1,000,000                                                          Table Ratings up to 200%     Available with  Available with
+1 Age Nearest Birthday                                                             (table B to D)             Express Standard    Standard
+2 See product specific information for rate classes and ages available
+3 See product specifications for applicable juvenile rates                                                      Tobacco only    Tobacco and
+                                                                                                                                  temporary
+                                                                                                                                  flat extras
+
+                                                                                   Table Ratings 225%­300%    Not Available     Not Available
+                                                                                   (table E to H)
+
+21                        For Agent Use Only ­ Not For Use With The Public
+                                                                                   LIFE INSURANCE UNDERWRITING GUIDE
+
+Life Underwriting Requirements
+
+PeakLife/Advanced Markets IUL
+
+(PeakLife NL)
+
+Underwriting Amount                  18­30                              31­40      41­50  Issue Ages1         61­65    66­69      70+
+$1,000,000                             A                                  A          A      51­60               D        D      ME/APS
+$1,000,001 ­ $2,000,000                A                                  A          A         A                                ME/APS
+$2,000,001 ­ $3,000,000                A                                  A                   D               D/APS    D/APS    ME/APS
+$3,000,001 ­ $5,000,000                D                                  D        A/APS    D/APS             D/APS    D/APS    ME/APS
+$5,000,001 ­ $10,000,000                                                           D/APS    D/APS             D/APS    D/APS    ME/APS
+$10,000,001 & Up                     D/APS                              D/APS      D/APS    D/APS             D/APS    D/APS    ME/APS
+                                     D/APS                              D/APS      D/APS    D/APS             D/APS    D/APS
+
+Category/Medical Requirements                                                      Available Rate Classes2
+
+ A ­ Application                                                                    Rate Classes              Face Amount*      Ages1
+ D ­ Application, Exam, Blood Profile, Urine                                        Elite                     All Face Amounts  18­75
+ M ­ A pplication, Exam, Blood Profile, Urine, Mature                               Preferred NT              All Face Amounts  18­85
+                                                                                    Select NT                 All Face Amounts  18­85
+       Assessment                                                                   Standard NT               All Face Amounts  18­85
+ ME ­ A pplication, Exam, Blood Profile, Urine, EKG, Mature                         Express Standard NT 1     Total Face  $2M   18­85
+                                                                                    Express Standard NT 2     Total Face  $2M   18­85
+        Assessment                                                                  Preferred Tobacco         All Face Amounts  18­85
+ APS ­ Attending Physician Statement                                                Standard Tobacco          All Face Amounts  18­85
+                                                                                    Express Standard Tobacco  Total Face  $2M   18­85
+Financial Underwriting Requirements
+                                                                                   Substandard Ratings
+                   $2,000,001+ $5,000,001+ $10,000,001+
+
+EI                                                                                                        Non-Tobacco
+
+CFQ  ­                                                                             Substandard Ratings        Total Face  $2M Total Face > $2M
+                                                                                   Permanent Flat extras       All rate classes All rate classes
+
+IV   ­                        ­                                                    Temporary Flat extras        Available with  Available with
+TPV  ­                                                                                                        Standard NT and   Standard NT
+                          (age 70+)                                     (age 18+)                              Express classes   and/or with
+                                                                                                                                table ratings
+
+EI   E-Inspection                                                                  Table Ratings up to 200%     Available with  Available with
+CFQ  Confidential Financial Questionnaire (Form 1392)                              (table B to D)             Express Standard  Standard NT
+
+                                                                                                                  NT 1 only
+
+IV   Income Verification (see page 12)                                             Table Ratings 225%­300%      Available with  and temporary
+TPV  Third Party-Verification Financials (see page 12)                             (table E to H)             Express Standard     flat extras
+
+                                                                                                                  NT 2 only
+
+                                                                                                              Tobacco
+
+                                                                                   Substandard Ratings        Total Face  $2M Total Face > $2M
+
+                                                                                   Permanent Flat extras      All rate classes All rate classes
+
+                                                                                   Temporary Flat extras       Available with   Available with
+                                                                                                                  Standard        Standard
+                                                                                                                                   Tobacco
+                                                                                                                Tobacco and
+                                                                                                              Express Tobacco    and/or with
+                                                                                                                                table ratings
+                                                                                                                   classes
+
+                                                                                   Table Ratings up to 200%     Available with  Available with
+                                                                                   (table B to D)             Express Standard    Standard
+
+* Minimum Face $1,000,000                                                                                       Tobacco only    Tobacco and
+1 Age Nearest Birthday                                                                                                            temporary
+2 See product specific information for rate classes and ages available                                                            flat extras
+
+                                                                                   Table Ratings 225%­300%    Not Available     Not Available
+                                                                                   (table E to H)
+
+22                        For Agent Use Only ­ Not For Use With The Public
+                                                                                     LIFE INSURANCE UNDERWRITING GUIDE
+
+Life Underwriting Requirements
+
+FlexLife and FlexLife NL (Available in NY only)
+
+Underwriting Amount        0­17         18­30                                 31­40  Issue Ages1  51­60        61­65     66­69     70+
+Through $250,000            A             A                                     A    41­50          A            A         D     ME/APS
+$250,001 ­ $1,000,000       A             A                                     A                   A            D         D     ME/APS
+$1,000,001 ­ $2,000,000                   A                                     A      A            D                            ME/APS
+$2,000,001 ­ $3,000,000   A/APS           A                                     A      A                       D/APS     D/APS   ME/APS
+$3,000,001 ­ $5,000,000   A/APS           D                                     D      A          D/APS        D/APS     D/APS   ME/APS
+$5,000,001 ­ $10,000,000  A/APS                                                      A/APS        D/APS        D/APS     D/APS   ME/APS
+$10,000,001 & Up          A/APS         D/APS                                 D/APS  D/APS        D/APS        D/APS     D/APS   ME/APS
+                          A/APS         D/APS                                 D/APS  D/APS        D/APS        D/APS     D/APS
+                                                                                     D/APS
+
+Category/Medical Requirements                                                        Available Rate Classes2
+
+ A ­ Application                                                                     Rate Classes              Face Amount*      Ages1
+ D ­ Application, Exam, Blood Profile, Urine                                         Elite                     All Face Amounts  18­75
+ M ­ A pplication, Exam, Blood Profile, Urine, Mature                                Preferred NT              All Face Amounts  18­85
+                                                                                     Select NT                 All Face Amounts  18­85
+       Assessment                                                                    Standard NT               All Face Amounts  0­85
+ ME ­ Application, Exam, Blood Profile, Urine, EKG, Mature                           Express Standard NT 1     Total Face  $3M*  0­85
+                                                                                     Express Standard NT 2     Total Face  $3M*  18­85
+        Assessment                                                                   Preferred Tobacco         All Face Amounts  18­85
+ APS ­ Attending Physician Statement                                                 Standard Tobacco          All Face Amounts  18­85
+                                                                                     Express Standard Tobacco  Total Face  $3M*  18­85
+Financial Underwriting Requirements
+
+     $2,000,001+ $5,000,001+ $10,000,001+                                            Substandard Ratings
+
+EI                                                                                                          Non-Tobacco
+
+CFQ  ­                                                                               Substandard Ratings       Total Face  $3M* Total Face > $3M*
+                                                                                     Permanent Flat extras
+                                                                                                               All rate classes All rate classes
+                                                                                     Temporary Flat extras
+IV   ­                           ­                                                                             Available with    Available with
+                                                                                     Table Ratings up to       Standard NT       Standard NT
+TPV  ­                    (age 70+)                                (age 18+)         200% (table B to D)        and Express       and/or with
+
+                                                                                     Table Ratings 225%­       classes           table ratings
+                                                                                     300% (table E to H)
+EI   E-Inspection                                                                                              Available with
+
+CFQ  Confidential Financial Questionnaire (Form 1392)                                                          Express Standard  Available with
+                                                                                                                   NT 1 only      Standard NT
+IV   Income Verification (see page 12)                                                                                           and temporary
+                                                                                                                 Available with
+TPV  Third Party-Verification Financials (see page 12)                                                         Express Standard     flat extras
+
+                                                                                                                   NT 2 only
+
+                                                                                                               Tobacco
+
+                                                                                     Substandard Ratings Total Face  $3M* Total Face > $3M*
+
+                                                                                     Permanent Flat extras     All rate classes All rate classes
+
+                                                                                     Temporary Flat extras      Available with   Available with
+                                                                                                                   Standard        Standard
+                                                                                                                                    Tobacco
+                                                                                                                 Tobacco and
+                                                                                                               Express Tobacco    and/or with
+                                                                                                                                 table ratings
+                                                                                                                    classes
+
+                                                                                     Table Ratings up to         Available with  Available with
+                                                                                     200% (table B to D)       Express Standard    Standard
+
+                                                                                                                 Tobacco only    Tobacco and
+                                                                                                                                   temporary
+1 Issue Age Nearest Birthday                                                                                                       flat extras
+2 200% rating added to Standard NT for tobacco users under age 18
+* $2M maximum limit in New York                                                      Table Ratings 225%­300%   Not Available     Not Available
+                                                                                     (table E to H)
+
+23                        For Agent Use Only ­ Not For Use With The Public
+                                                                                     LIFE INSURANCE UNDERWRITING GUIDE
+
+Life Underwriting Requirements
+
+BasicSecure, BasicSecure NL, TotalSecure, and TotalSecure NL
+
+Underwriting Amount        0­17         18­30                                 31­40  Issue Ages1  51­60        61­65  66­69          70+
+Through $250,000            A             A                                     A    41­50          A            A      D          ME/APS
+$250,001 ­ $1,000,000       A             A                                     A                   A            D      D          ME/APS
+$1,000,001 ­ $2,000,000                   A                                     A      A            D                              ME/APS
+$2,000,001 ­ $3,000,000   A/APS           A                                     A      A                       D/APS  D/APS        ME/APS
+$3,000,001 ­ $5,000,000   A/APS           D                                     D      A          D/APS        D/APS  D/APS        ME/APS
+$5,000,001 ­ $10,000,000  A/APS                                                      A/APS        D/APS        D/APS  D/APS        ME/APS
+$10,000,001 & Up          A/APS         D/APS                                 D/APS  D/APS        D/APS        D/APS  D/APS        ME/APS
+                          A/APS         D/APS                                 D/APS  D/APS        D/APS        D/APS  D/APS
+                                                                                     D/APS
+
+Category/Medical Requirements                                                        Available Rate Classes2
+
+ A ­ Application                                                                     Rate Classes              Face Amount*        Ages1
+ D ­ Application, Exam, Blood Profile, Urine                                         Elite                     All Face Amounts    18­75
+ M ­ A pplication, Exam, Blood Profile, Urine, Mature                                Preferred NT              All Face Amounts    18­85
+                                                                                     Select NT                 All Face Amounts    18­85
+       Assessment                                                                    Standard NT               All Face Amounts    0­85
+ ME ­ A pplication, Exam, Blood Profile, Urine, EKG, Mature                          Express Standard NT 1     Total Face  $2M     0­85
+                                                                                     Express Standard NT 2     Total Face  $2M     18­85
+        Assessment                                                                   Preferred Tobacco         All Face Amounts    18­85
+ APS ­ Attending Physician Statement                                                 Standard Tobacco          All Face Amounts    18­85
+                                                                                     Express Standard Tobacco  Total Face  $2M     18­85
+Financial Underwriting Requirements
+
+     $2,000,001+ $5,000,001+ $10,000,001+                                            Substandard Ratings
+
+EI                                                                                                          Non-Tobacco
+
+CFQ  ­                                                                               Substandard Ratings       Total Face  $2M     Total Face > $2M
+                                                                                     Permanent Flat extras                          All rate classes
+IV   ­                           ­                                                                               All rate classes   Available with
+                                                                                     Temporary Flat extras                           Standard NT
+TPV  ­                    (age 70+)                                (age 18+)                                     Available with
+                                                                                     Table Ratings up to          Standard NT         and/or with
+EI   E-Inspection                                                                    200% (table B to D)          and Express        table ratings
+
+CFQ  Confidential Financial Questionnaire (Form 1392)                                Table Ratings 225%­             classes        Available with
+                                                                                     300% (table E to H)                             Standard NT
+IV   Income Verification (see page 12)                                                                           Available with     and temporary
+                                                                                                               Express Standard
+TPV  Third Party-Verification Financials (see page 12)                                                                                 flat extras
+                                                                                                                    NT 1 only
+
+                                                                                                                 Available with
+                                                                                                               Express Standard
+
+                                                                                                                    NT 2 only
+
+1 Issue Age Nearest Birthday                                                         Substandard Ratings       Tobacco             Total Face > $2M
+2 200% rating added to Standard NT for tobacco users under age 18                    Permanent Flat extras     Total Face  $2M      All rate classes
+                                                                                                                All rate classes    Available with
+                                                                                     Temporary Flat extras
+                                                                                                                 Available with        Standard
+                                                                                     Table Ratings up to            Standard            Tobacco
+                                                                                     200% (table B to D)                              and/or with
+                                                                                                                 Tobacco and         table ratings
+                                                                                     Table Ratings 225%­300%   Express Tobacco      Available with
+                                                                                     (table E to H)                                    Standard
+                                                                                                                     classes         Tobacco and
+                                                                                                                                      temporary
+                                                                                                                 Available with        flat extras
+                                                                                                               Express Standard
+                                                                                                                                     Not Available
+                                                                                                                 Tobacco only
+
+                                                                                                                 Not Available
+
+24                        For Agent Use Only ­ Not For Use With The Public
+                                                                                     LIFE INSURANCE UNDERWRITING GUIDE
+
+Life Underwriting Requirements
+
+SurvivorLife and SurvivorLife NL SIUL
+
+Underwriting Amount            0­17      18­30                                31­40  Issue Ages1  51­60      61­65  66­69                  70+
+$250,000 ­ $1,000,000           A          D                                    D    41­50          D          D      D                  ME/APS
+$1,000,001 ­ $2,000,000                    D                                    D                   D                                    ME/APS
+$2,000,001 ­ $3,000,000       A/APS        D                                    D      D                     D/APS  D/APS                ME/APS
+$3,000,001 ­ $5,000,000       A/APS        D                                    D      D          D/APS      D/APS  D/APS                ME/APS
+$5,000,001 ­ $10,000,000      A/APS                                                  D/APS        D/APS      D/APS  D/APS                ME/APS
+$10,000,001 and up            A/APS      D/APS                                D/APS  D/APS        D/APS      D/APS  D/APS                ME/APS
+                              A/APS      D/APS                                D/APS  D/APS        D/APS      D/APS  D/APS
+                                                                                     D/APS
+
+Category/Medical Requirements                                                        Available Rate Classes  Face Amount                 Ages1
+                                                                                                             All Face Amounts            18­75
+ A ­ Application                                                                      Rate Classes           All Face Amounts            18­85
+ D ­ Application, Exam, Blood Profile, Urine                                          Elite                  All Face Amounts            18­85
+ M ­ A pplication, Exam, Blood Profile, Urine, Mature                                 Preferred NT           All Face Amounts            0­85
+                                                                                      Select NT              All Face Amounts            18­85
+       Assessment                                                                     Standard NT            All Face Amounts            18­85
+ ME ­ A pplication, Exam, Blood Profile, Urine, EKG, Mature                           Preferred Tobacco      All Face Amounts            0­85
+                                                                                      Standard Tobacco
+        Assessment                                                                    Uninsurable
+ APS ­ Attending Physician Statement
+                                                                                     Substandard Ratings
+· This product will be available under full medical
+  underwriting, required of both insureds (refer to                                  150% ­ Table B                 225% ­ Table E
+  Requirement Chart)                                                                 175% ­ Table C                 250% ­ Table F
+                                                                                     200% ­ Table D                 300% ­ Table H
+· Application is not available through eApp process.
+  Paper only
+
+Financial Underwriting Requirements                                                  Ages 18­69: All substandard ratings are available.
+
+     $2,000,001+ $5,000,001+ $10,000,001+                                            Ages 0­17    Only Tables B, C, & D are available2
+                                                                                     & 70­75:
+EI
+
+CFQ  ­                                                                               Ages 76­85: Must be rated Standard or better
+
+                                                                                     If one life is uninsurable, the other must be rated 200% or better.
+
+IV   ­                               ­                                               · Express classes are not available.
+
+TPV  ­                        (age 70+)                            (age 18+)         · Table ratings and permanent flat extras are available
+                                                                                       with all rate classifications. Temporary flat extras are
+EI   E-Inspection                                                                      available with Standard classes.
+
+CFQ  Confidential Financial Questionnaire (Form 1392)
+
+IV   Income Verification (see page 12)
+
+TPV  Third Party-Verification Financials (see page 12)
+
+1 Issue Age Nearest Birthday
+
+2 200% rating added to Standard NT for tobacco users under age 18
+
+25                            For Agent Use Only ­ Not For Use With The Public
+                                                                 LIFE INSURANCE UNDERWRITING GUIDE
+
+Life Underwriting Requirements
+
+Term LSW and Term NL Life
+
+Underwriting Amount           18­30             31­40            41­50         Issue Ages1     61­65        66­69        70+
+Through $250,000                A                 A                A             51­60           A            D        ME/APS
+$250,001 ­ $1,000,000           A                 A                A                A            D            D        ME/APS
+$1,000,001 ­ $2,000,000         A                 A                A                A                                  ME/APS
+$2,000,001 ­ $5,000,000         D                 D                                D           D/APS        D/APS      ME/APS
+$5,000,001 ­ $10,000,000                                         D/APS           D/APS         D/APS        D/APS      ME/APS
+$10,000,001 and up            D/APS             D/APS            D/APS           D/APS         D/APS        D/APS      ME/APS
+                              D/APS             D/APS            D/APS           D/APS         D/APS        D/APS
+
+Available Rate Classes
+
+                                                                               Issue Ages1
+
+Rate Classes                  Face Amount              ART              10 YR               15 YR     20 YR            30 YR
+
+Elite                         All Face Amounts         18­85            18­75               18­75     18­70            18­55
+
+Preferred NT                  All Face Amounts         18­85            18­75               18­75     18­70            18­55
+
+Standard NT                   All Face Amounts         18­85            18­75               18­75     18­70            18­55
+
+Express Standard NT 1         Total Face  $2M          18­85            18­75               18­75     18­70            18­55
+
+Express Standard NT 2         Total Face  $2M          18­85            18­75               18­75     18­65            18­55
+
+Preferred Tobacco             All Face Amounts         18­85            18­75               18­70     18­65            18­50
+
+Standard Tobacco              All Face Amounts         18­85            18­75               18­70     18­65            18­50
+
+Express Standard Tobacco      Total Face  $2M          18­85            18­75               18­70     18­65            18­50
+
+Category/Medical Requirements                                           Substandard Ratings
+
+A ­ Application                                                                                    Non-Tobacco
+
+D ­ Application, Exam, Blood Profile, Urine                             Substandard Ratings        Total Face  $2M Total Face > $2M
+
+M ­ A pplication, Exam, Blood Profile, Urine, Mature                    Permanent Flat extras         All rate classes All rate classes
+     Assessment
+                                                                        Temporary Flat extras        Available with    Available with
+ME ­ Application, Exam, Blood Profile, Urine, EKG, Mature                                          Standard NT and     Standard NT
+       Assessment                                                                                   Express classes     and/or with
+                                                                                                                       table ratings
+APS ­ A ttending Physician Statement
+                                                                        Table Ratings up to 200%     Available with    Available with
+Financial Underwriting Requirements                                     (table B to D)             Express Standard     Standard NT
+                                                                                                                       and temporary
+                                                                        Table Ratings 225%­300%        NT 1 only
+                                                                        (table E to H)                                    flat extras
+                                                                                                     Available with
+              $2,000,001+ $5,000,001+ $10,000,001+                                                 Express Standard
+
+                                                                                                       NT 2 only
+
+EI                                                                                                 Tobacco
+
+CFQ                    ­                                                Substandard Ratings        Total Face  $2M Total Face > $2M
+
+                       ­             ­                                  Permanent Flat extras         All rate classes All rate classes
+
+IV                                                                                                     Available with  Available with
+                                                                                                          Standard       Standard
+TPV                    ­      (age 70+)          (age 18+)              Temporary Flat extras                             Tobacco
+                                                                                                        Tobacco and
+EI            E-Inspection                                                                            Express Tobacco   and/or with
+                                                                                                                       table ratings
+                                                                                                           classes
+
+CFQ           Confidential Financial Questionnaire (Form 1392)                                       Available with    Available with
+                                                                                                   Express Standard      Standard
+IV            Income Verification (see page 12)                         Table Ratings up to 200%
+                                                                        (table B to D)               Tobacco only      Tobacco and
+TPV           Third Party-Verification Financials (see page 12)                                                          temporary
+                                                                                                                         flat extras
+
+                                                                        Table Ratings 225%­300%       Not Available    Not Available
+                                                                        (table E to H)
+
+1 Issue Age Nearest Birthday
+
+26                            For Agent Use Only ­ Not For Use With The Public
+                                                                                       LIFE INSURANCE UNDERWRITING GUIDE
+
+Underwriting Rate Classes Explained
+
+Elite Preferred Non-Tobacco                                                            Express Standard Non-Tobacco 2
+
+See guidelines on next pages.                                                          Available to applicants who do not use products
+                                                                                       containing tobacco or nicotine that qualify with rating
+Preferred Non-Tobacco                                                                  of 225% to 300%. Living Benefits and Lifetime Income
+                                                                                       Benefit Riders are not available. Limited availability
+See guidelines on next pages.                                                          by product.
+
+Select Non-Tobacco                                                                     Preferred Tobacco
+
+Offered for those clients who do not meet all criteria for                             Available to applicants who use products containing
+preferred but meet the special standard "plus" criteria                                tobacco or nicotine but meet all the other preferred
+for this well-priced non-tobacco/non-nicotine class.                                   guidelines (see following pages).
+
+Standard Non-Tobacco                                                                   Standard Tobacco
+
+Offers competitive rates for applicants who are standard                               Applicants who use tobacco or nicotine products that
+risk and have not used tobacco or nicotine products                                    do not otherwise meet the preferred guidelines will use
+within the past 12 months. If additional table ratings                                 this rate class. If additional table ratings are applicable,
+are applicable, use this rate class as the platform for                                use this rate class as the platform for tobacco class
+non-tobacco class illustrations with ratings.                                          illustrations with ratings.
+
+Express Standard Non-Tobacco 1                                                         Express Standard Tobacco
+
+Available to applicants who do not use products                                        Available to tobacco users that rate four tables or less.
+containing tobacco or nicotine that qualify with                                       Limited availability by product.
+rating of four tables or less who would otherwise
+be substandard. Limited availability by product.                                       Tobacco Use Includes*
+
+Table Ratings1 converted to Percent Ratings
+
+Table 2                        Table B  150%                                           Betel Nut        Nicotine Gum
+Table 3                        Table C  175%                                           Chewing Tobacco  Nicotine Patch
+Table 4                        Table D  200%                                           Cigarettes       Nicotine Pouches (ZynTM)
+Table 5                        Table E  225%                                           Cigars           Pipe
+Table 6                        Table F  250%                                           E-Cigarettes     Vaping
+Table 8                        Table H  300%                                           Hookah
+
+Ratings are illustrated using Standard or Verified Standard class as the platform for  *Tobacco rates may be applicable for marijuana use depending on delivery method and
+Non-Smoker clients or using Standard Tobacco class as the platform for tobacco users.   frequency of use.
+Some products may show Standard Tobacco vs. Standard Smoker. Please refer to
+product guides for specific rate classes available.
+
+1 See product-specific tables           For Agent Use Only ­ Not For Use With The Public
+27
+                                                    LIFE INSURANCE UNDERWRITING GUIDE
+
+Accelerated Elite/Preferred/Select Criteria
+(Permanent Products)
+
+EZ Underwriting
+
+              Elite                                 Preferred                                                               Select
+
+              Non-Tobacco                           Non-Tobacco and Tobacco                                                 Non-Tobacco
+
+Tobacco or No use of tobacco or nicotine of         Non Tobacco: No use of tobacco                                          No use of tobacco or nicotine of any
+Nicotine Use any kind within last 60 months.        or nicotine of any kind within last                                     kind within last 12 months.
+                                                    36 months.1
+                                                    Tobacco: Use of qualifying tobacco
+                                                    products are allowed.1
+
+Family History No family history (parents or siblings) No family history (parents or siblings) No family history (parents or siblings)
+
+              of death from coronary heart disease of death from coronary heart disease of death from coronary heart disease
+
+              or cancer prior to age 65.            or cancer prior to age 60.                                              or cancer prior to age 60.
+
+Health        Standard risks with no personal       Standard risks with no personal                                         Standard risks with no current
+History       health history of coronary artery     health history of coronary artery                                       borderline medical problems. No
+              disease, hepatitis B or C, diabetes,  disease, hepatitis B or C, diabetes,                                    currently ratable medical history.
+              melanoma, or cancer (except skin      melanoma, or cancer (except skin
+              cancer in situ).                      cancer in situ).
+
+Driving       No reckless driving (includes no      No reckless driving or alcohol-                                         No reckless driving or alcohol-related
+History       excessive speed) or alcohol-related   related moving violation within 5                                       moving violation within 5 years, no
+              moving violation within 5 years, no   years, no license suspension within                                     license suspension within 3 years, and
+              license suspension within 3 years,    3 years, and no more than two                                           no more than three moving violations
+              and no more than one moving           moving violations within last                                           within last 3 years.
+              violation within last 3 years.        3 years.2
+
+Prescription  No medications in past 5 years        No medications in past 5 years for                                      No medications in past 5 years for
+Drug History  for heart disease, cancer, mood       heart disease, cancer, depression,                                      heart disease, cancer, depression,
+              disorders, rheumatoid arthritis,      rheumatoid arthritis, liver disease,                                    rheumatoid arthritis, liver disease,
+              kidney or liver disease, hepatitis,   hepatitis, diabetes, dementia,                                          hepatitis, diabetes, dementia,
+              diabetes, dementia, alcohol or drug   alcohol or drug abuse, lung disease,                                    alcohol or drug abuse, lung disease,
+              abuse, lung disease, autoimmune       autoimmune disease, vascular                                            autoimmune disease, vascular disease
+              disease, vascular disease, and        disease and neurological disease.                                       and neurological disease. (One
+              neurological disease. (One            (One hypertensive medication                                            hypertensive medication allowed,
+              hypertensive medication allowed,      allowed and one medication for                                          and one medication for cholesterol
+              and one medication for cholesterol    cholesterol is allowed.)                                                is allowed.)
+              is allowed.)
+
+Aviation/     No aviation, no ratable hazardous     No aviation, no ratable hazardous                                       No ratable aviation, hazardous
+Avocation     avocation or occupation.              avocation or occupation.                                                avocation or occupation.
+              Commercial pilots for major U.S.      Commercial pilots for major U.S.
+              carriers permitted.                   carriers permitted.
+
+Alcohol/Drug No history of drug or alcohol abuse No history of drug or alcohol abuse No ratable history of drug or
+
+              or treatment at any time.             or treatment within last 10 years. alcohol abuse.
+
+BMI           > 18.5 and < 27.1                     > 18.5 and < 29.9                                                       > 18.5 and < 32.7
+
+1 See "Tobacco Use Includes" section on page 27
+2 For ages 18­25 if one moving violation results in points assessed by underwriting manual, preferred will not be allowed.
+
+28                         For Agent Use Only ­ Not For Use With The Public
+                                                      LIFE INSURANCE UNDERWRITING GUIDE
+
+Fully Underwritten Elite/Preferred/Select Criteria
+(Permanent Products)1
+
+Citizenship     Elite Preferred                         Preferred                                  Select
+
+                Non-Tobacco                             Non-Tobacco and Tobacco                    Non-Tobacco
+
+                U.S. Resident.*                         U.S. Resident.                             U.S. Resident.
+
+Tobacco         No use of tobacco or nicotine-          Non Tobacco: No use of tobacco or          No use of tobacco or nicotine-
+or Nicotine     containing products of any kind         nicotine containing products3 within       containing products3 of any kind
+Products2       within the last 60 months. Current      last 36 months. Current lab testing        within the past 12 months. Current
+                lab testing negative for nicotine.      negative for nicotine.                     lab testing negative for nicotine.
+                                                        Tobacco: Use of qualifying tobacco
+                                                        products are allowed.3
+
+Health          Standard risks with no current          Standard risks with no current             Standard risk with no current
+                borderline medical problems. No         borderline medical problems. No            borderline medical problems. No
+                personal health history of coronary     personal health history of coronary        currently ratable medical history.
+                artery disease, hepatitis B or C,       artery disease, hepatitis B or C,
+                diabetes, melanoma, or cancer           diabetes, melanoma, or cancer
+                (except skin cancer in situ).           (except skin cancer in situ).
+
+Alcohol/        No history of drug or alcohol abuse     No history of drug or alcohol abuse No ratable history of drug or
+Drugs           or treatment at any time, and no        or treatment within the last 10 years, alcohol abuse.
+                current use of drugs.                   and no current use of drugs.
+
+Aviation/       No aviation, no ratable hazardous       No aviation, no ratable hazardous          No ratable aviation, hazardous
+Avocation       avocation or occupation. This does      avocation or occupation. This does         avocation or occupation.
+                not include major commercial airline    not include major commercial
+                pilots or holiday scuba diving.         airline pilots or holiday scuba diving.
+
+Family History  No parental family history of death     No parental family history of death        Parental family history of no more
+                from coronary artery disease or         from coronary artery disease or            than one death from coronary artery
+                cancer prior to age 65. Criteria does   cancer prior to age 60. Criteria does      disease or cancer prior to age 60.
+                not apply if applicant has reached      not apply if applicant has reached         Criteria does not apply if applicant
+                the age of 65 or for gender-specific    the age of 60 or for gender-specific       has reached the age of 60 or for
+                cancers where the applicant is the      cancers where the applicant is the         gender-specific cancers where the
+                opposite gender.                        opposite gender.                           applicant is the opposite gender.
+
+Blood           Current blood pressure with a           Current blood pressure with a              Current blood pressure with a
+Pressure        12-month average reading of 135/85      12-month average reading of 140/90         12-month average reading of 150/90
+                or better. Blood pressure treatment     or better. Blood pressure treatment        or better.
+                is acceptable if treated by only        is acceptable if treated by only
+                one drug.                               one drug.
+
+Cholesterol     Current cholesterol/HDL ratio of        Current cholesterol/HDL ratio of           Current cholesterol/HDL ratio of 6.5
+                4.5 or less, or 5.0 or less for issue   5.5 or less, or 6.0 or less for issue      or less, or 7.0 or less for issue ages
+                ages 65 and up. Cholesterol must        ages 65 and up. Cholesterol must           65 and up. Cholesterol must also
+                also be 260mg/dl or less. Cholesterol   also be 280mg/dl or less. Cholesterol      be 300mg/dl or less. Cholesterol
+                treatment is acceptable if treated by   treatment is acceptable if treated by      treatment is acceptable if treated by
+                only one drug and cholesterol/HDL       only one drug and cholesterol/HDL          only one drug and cholesterol/HDL
+                ratio is maintained for 12 months.      ratio is maintained for 12 months.         ratio is maintained for 12 months.
+
+Driving         No reckless driving or alcohol-related  No reckless driving or alcohol-            No reckless driving or alcohol-related
+History         moving violations within five years,    related moving violations within five      moving violations within five years,
+                no license suspension within three      years, no license suspension within        no license suspension within three
+                years, and no more than one moving      three years, and no more than two          years, and no more than three moving
+                violation within the last three years.  moving violations within the last          violations within the last three years.
+                                                        three years.
+
+* Some Foreign Nationals may qualify for best class. Please refer to Foreign National guidelines.
+1 Please refer to the National Life and LSW product guides for classes available.
+2 Not applicable for Preferred Tobacco class.
+3 See "Tobacco Use Includes" section on page 27.
+
+29              For Agent Use Only ­ Not For Use With The Public
+                                                          LIFE INSURANCE UNDERWRITING GUIDE
+
+Accelerated Elite/Preferred/Select Criteria
+(Term Products)
+
+EZ Underwriting
+
+              Elite                                       Preferred                                                          Select
+
+              Non-Tobacco                                 Non-Tobacco and Tobacco                                            Non-Tobacco
+
+Tobacco or No use of tobacco or nicotine of               Non Tobacco: No use of tobacco                                     No use of tobacco or nicotine of any
+Nicotine Use any kind within last 60 months.              or nicotine of any kind within last                                kind within last 36 months.
+                                                          60 months.2
+                                                          Tobacco: Use of qualifying tobacco
+                                                          products are allowed.2
+
+Family History No family history (parents or              No family history (parents or                                      No family history (parents or siblings)
+                     siblings) of coronary heart disease  siblings) of death from coronary                                   of death from coronary heart disease
+                     or cancer prior to age 65.           heart disease or cancer prior to                                   or cancer prior to age 60.
+                                                          age 65.
+
+Health        Standard risks with no personal             Standard risks with no personal                                    Standard risks with no personal health
+History       health history of coronary artery           health history of coronary artery                                  history of coronary artery disease,
+              disease, hepatitis B or C, diabetes,        disease, hepatitis B or C, diabetes,                               hepatitis B or C, diabetes, melanoma,
+              melanoma, or cancer (except skin            melanoma, or cancer (except skin                                   or cancer (except skin cancer in situ).
+              cancer in situ).                            cancer in situ).
+
+Driving       No reckless driving (includes no            No reckless driving (includes no                                   No reckless driving or alcohol-related
+History       excessive speed) or alcohol-related         excessive speed) or alcohol-related                                moving violation within 5 years, no
+              moving violation within 5 years, no         moving violation within 5 years, no                                license suspension within 3 years, and
+              license suspension within 3 years,          license suspension within 3 years,                                 no more than two moving violations
+              and no moving violation within last         and no more than one moving                                        within last 3 years.
+              3 years.                                    violation within last 3 years.1
+
+Prescription  No medications in past 5 years              No medications in past 5 years                                     No medications in past 5 years for
+Drug History  for heart disease, cancer, mood             for heart disease, cancer, mood                                    heart disease, cancer, mood disorders,
+              disorders, rheumatoid arthritis,            disorders, rheumatoid arthritis,                                   rheumatoid arthritis, kidney or liver
+              kidney or liver disease, hepatitis,         kidney or liver disease, hepatitis,                                disease, hepatitis, diabetes, dementia,
+              diabetes, dementia, alcohol or drug         diabetes, dementia, alcohol or drug                                alcohol or drug abuse, lung disease,
+              abuse, lung disease, autoimmune             abuse, lung disease, autoimmune                                    autoimmune disease, vascular disease
+              disease, vascular disease,                  disease, vascular disease and/                                     and/or neurological disease. (One
+              hypertension, cholesterol treatment,        or neurological disease. (One                                      hypertensive medication allowed and
+              and/or neurological disease.                hypertensive medication allowed                                    one medication for cholesterol
+                                                          and one medication for cholesterol                                 is allowed.)
+                                                          is allowed.)
+
+Aviation/     No aviation, no ratable hazardous           No aviation, no ratable hazardous                                  No aviation, no ratable hazardous
+Avocation     avocation or occupation.                    avocation or occupation.                                           avocation or occupation. Commercial
+              Commercial pilots for major US              Commercial pilots for major US                                     pilots for major US carriers permitted.
+              carriers permitted.                         carriers permitted.
+
+Alcohol/Drug No history of drug or alcohol abuse No history of drug or alcohol abuse No history of drug or alcohol abuse or
+
+              or treatment at any time.                   or treatment at any time.                                          treatment within last 10 years.
+
+BMI           > 18.5 and < 24.9                           > 18.5 and < 27.1                                                  > 18.5 and < 29.9
+
+1 For ages 18­25, if one moving violation results in points assessed by underwriting manual, preferred will not be allowed.
+2 See "Tobacco Use Includes" section on page 27.
+
+30                         For Agent Use Only ­ Not For Use With The Public
+                                                      LIFE INSURANCE UNDERWRITING GUIDE
+
+Fully Underwritten Elite/Preferred/Select Criteria
+(Term Products)1
+
+                Elite Preferred                         Preferred                                  Select
+
+                Non-Tobacco                             Non-Tobacco and Tobacco                    Non-Tobacco
+
+Citizenship U.S. Resident.*                             U.S. Resident.                             U.S. Resident.
+
+Tobacco         No use of tobacco or nicotine-          Non Tobacco: No use of tobacco or          No use of tobacco or nicotine-
+or Nicotine     containing products of any kind         nicotine containing products3 within       containing products of any kind
+Products1,2     within the last 60 months. Current      last 60 months. Current lab testing        within the past 36 months. Current
+                lab testing negative for nicotine.      negative for nicotine.                     lab testing negative for nicotine.
+                                                        Tobacco: Use of qualifying tobacco
+                                                        products are allowed.3
+
+Health          Standard risks with no current          Standard risks with no current             Standard risk with no current
+History         borderline medical problems. No         borderline medical problems. No            borderline medical problems. No
+                personal health history of coronary     personal health history of coronary        personal health history of coronary
+                artery disease, hepatitis B or C,       artery disease, hepatitis B or C,          artery disease, hepatitis B or C,
+                diabetes, melanoma, or cancer           diabetes, melanoma, or cancer              diabetes, melanoma, or cancer
+                (except skin cancer in situ).           (except skin cancer in situ).              (except skin cancer in situ).
+
+Alcohol/        No history of drug or alcohol abuse     No history of drug or alcohol abuse        No history of drug or alcohol abuse
+Drugs           or treatment at any time, and no        or treatment at any time, and no           or treatment within the last 10 years,
+                current use of drugs.                   current use of drugs.                      and no current use of drugs.
+
+Aviation/       No aviation, no ratable hazardous       No aviation, no ratable hazardous          No aviation, no ratable hazardous
+Avocation       avocation or occupation. This does      avocation or occupation. This does         avocation or occupation. This does
+                not include major commercial airline    not include major commercial               not include major commercial airline
+                pilots or holiday scuba diving.         airline pilots or holiday scuba diving.    pilots or holiday scuba diving.
+
+Family History  No parental family history of           No parental family history of death        No parental family history of death
+                coronary artery disease or cancer       from coronary artery disease or            from coronary artery disease or
+                prior to age 65. Criteria does not      cancer prior to age 65. Criteria does      cancer prior to age 60. Criteria does
+                apply if applicant has reached the      not apply if applicant has reached         not apply if applicant has reached
+                age of 65 or for gender-specific        the age of 65 or for gender-specific       the age of 60 or for gender-specific
+                cancers where the applicant is the      cancers where the applicant is the         cancers where the applicant is the
+                opposite gender.                        opposite gender.                           opposite gender.
+
+Blood           Current blood pressure with a           Current blood pressure with a              Current blood pressure with a
+Pressure        12-month average reading of             12-month average reading of 135/85         12-month average reading of 140/90
+                135/85 or better. No treatment          or better. Blood pressure treatment        or better. Blood pressure treatment is
+                by medication.                          is acceptable if treated by only           acceptable if treated by only
+                                                        one drug.                                  one drug.
+
+Cholesterol     Current cholesterol/HDL ratio of 4.5    Current cholesterol/HDL ratio of           Current cholesterol/HDL ratio of 5.5
+                or less, or 5.0 or less for issue ages  4.5 or less, or 5.0 or less for issue      or less, or 6.0 or less for issue ages
+                65 and up. Cholesterol must also        ages 65 and up. Cholesterol must           65 and up. Cholesterol must also
+                be 260mg/dl or less. No treatment       also be 260mg/dl or less. Cholesterol      be 280mg/dl or less. Cholesterol
+                by medication.                          treatment is acceptable if treated by      treatment is acceptable if treated by
+                                                        only one drug and cholesterol/HDL          only one drug and cholesterol/HDL
+                                                        ratio is maintained for 12 months.         ratio is maintained for 12 months.
+
+Driving         No reckless driving (includes no        No reckless driving (includes no           No reckless driving or alcohol-related
+History         excessive speed) or alcohol-related     excessive speed) or alcohol-related        moving violations within 5 years, no
+                moving violations within 5 years, no    moving violations within 5 years, no       license suspension within 3 years, and
+                license suspension within 3 years,      license suspension within 3 years,         no more than 2 moving violations
+                and no moving violation within the      and no more than one moving                within the last 3 years.
+                last 3 years.                           violations within the last 3 years.
+
+* Some Foreign Nationals may qualify for best class. Please refer to Foreign National guidelines.
+1 Please refer to the National Life and LSW product guides for classes available.
+2 Not applicable for Preferred Tobacco class.
+3 See "Tobacco Use Includes" section on page 27.
+
+31                           For Agent Use Only ­ Not For Use With The Public
+                                    LIFE INSURANCE UNDERWRITING GUIDE
+
+Table of Height and Weight, Ages 16 and Older
+(Permanent Products)
+
+This chart is used as a guideline to identify the weights that are usually acceptable within the rate classes shown.
+Other factors, including age or disproportion in body measurements (girth of chest and abdomen), may impact the
+final decision.
+
+    Rate Class  Elite    Preferred  Select   Standard   Express                      Express
+                                                       Standard 1                   Standard 2
+
+    BMI         18.5 to <27.1 27.1 to <29.9 29.9 to <32.7 32.7 to <37.5 37.5 to <42.5 42.5 to <46.5
+
+    Height                          Weight (lbs.)
+
+    4' 8"       83­120   121­133    134­145  146­167                       168­189  190­207
+
+    4' 9"       86­125   126­138    139­151  152­173                       174­196  197­214
+
+    4' 10"      89­129   130­143    144­156  157­179                       180­203  204­222
+
+    4' 11"      92­134   135­148    149­161  162­185                       186­210  211­230
+
+    5' 0"       95­138   139­153    154­167  168­191                       192­217  218­238
+
+    5' 1"       98­143   144­158    159­173  174­198                       199­224  225­246
+
+    5' 2"       102­148  149­163    164­178  179­205                       206­232  233­254
+
+    5' 3"       105­152  153­168    169­184  185­211                       212­239  240­262
+
+    5' 4"       108­157  158­174    175­190  191­218                       219­247  248­270
+
+    5' 5"       112­162  163­179    180­196  197­225                       226­255  256­279
+
+    5' 6"       115­167  168­185    186­202  203­232                       233­263  264­288
+
+    5' 7"       119­172  173­190    191­208  209­239                       240­271  272­296
+
+    5' 8"       122­177  178­196    197­215  216­246                       247­279  280­305
+
+    5' 9"       126­183  184­202    203­221  222­253                       254­287  288­314
+
+    5' 10"      129­188  189­208    209­227  228­261                       262­296  297­324
+
+    5' 11"      133­194  195­214    215­234  235­268                       269­304  305-­333
+
+    6' 0"       137­199  200­220    221­241  242­276                       277­313  314­342
+
+    6' 1"       141­205  206­226    227­247  248­284                       285­322  323­352
+
+    6' 2"       145­211  212­232    233­254  255­292                       293­330  331­362
+
+    6' 3"       148­216  217­239    240­261  262­299                       300­339  340­371
+
+    6' 4"       152­222  223­245    246­268  269­308                       309­349  350­381
+
+    6' 5"       156­228  229­252    253­275  276­316                       317­358  359­392
+
+    6' 6"       161­234  235­258    259­282  283­324                       325­367  368­402
+
+    6' 7"       165­240  241­265    266­290  291­332                       333­377  378­412
+
+    6' 8"       169­246  247­272    273­297  298­341                       342­386  387­423
+
+Individual consideration will be given for low BMIs. Please use the Underwriting Quote Tool XRAE (Instructional PDF: Getting Started with the XRAE Field Underwriting Tool).
+XRAE is not available for RapidProtect.
+
+32                       For Agent Use Only ­ Not For Use With The Public
+                                    LIFE INSURANCE UNDERWRITING GUIDE
+
+Table of Height and Weight, Ages 18 and Older
+(Term Products)
+
+This chart is used as a guideline to identify the weights that are usually acceptable within the rate classes shown.
+Other factors, including age or disproportion in body measurements (girth of chest and abdomen), may impact the
+final decision.
+
+    Rate Class  Elite    Preferred  Select   Standard   Express                      Express
+                                                       Standard 1                   Standard 2
+
+    BMI         18.5 to <24.9 24.9 to <27.1 27.1 to <29.9 29.9 to <37.5 37.5 to <42.5 42.5 to <46.5
+
+    Height                          Weight (lbs.)
+
+    4' 8"       83­111   112­120    121­133  134­167                       168­189  190­207
+
+    4' 9"       86­115   116­125    126­138  139­173                       174­196  197­214
+
+    4' 10"      89­119   120­129    130­143  144­179                       180­203  204­222
+
+    4' 11"      92­123   124­134    135­148  149­185                       186­210  211­230
+
+    5' 0"       95­127   128­138    139­153  154­192                       193­217  218­238
+
+    5' 1"       98­131   132­143    144­158  159­198                       199­224  225­246
+
+    5' 2"       102­136  137­148    149­163  164­205                       206­232  233­254
+
+    5' 3"       105­140  141­152    153­168  169­211                       212­239  240­262
+
+    5' 4"       108­145  146­157    158­174  175­218                       219­247  248­270
+
+    5' 5"       112­149  150­162    163­179  180­225                       226­255  256­279
+
+    5' 6"       115­154  155­167    168­185  186­232                       233­263  264­288
+
+    5' 7"       119­158  159­173    174­190  191­239                       240­271  272­296
+
+    5' 8"       122­163  164­178    179­196  197­246                       247­279  280­305
+
+    5' 9"       126­168  169­183    184­202  203­253                       254­287  288­314
+
+    5' 10"      129­173  174­188    189­208  209­261                       262­296  297­324
+
+    5' 11"      133­178  179­194    195­214  215­268                       269­304  305­333
+
+    6' 0"       137­183  184­199    200­220  221­276                       277­313  314­342
+
+    6' 1"       141­188  189­205    206­226  227­284                       285­322  323­352
+
+    6' 2"       145­193  194­211    212­232  233­292                       293­330  331­362
+
+    6' 3"       148­199  200­216    217­239  240­300                       301­339  340­371
+
+    6' 4"       152­204  205­222    223­245  246­308                       309­349  350­381
+
+    6' 5"       156­209  210­228    229­252  253­316                       317­358  359­392
+
+    6' 6"       161­215  216­234    235­258  259­324                       325­367  368­402
+
+    6' 7"       165­221  222­240    241­265  266­332                       333­377  378­412
+
+    6' 8"       169­226  227­246    247­272  273­341                       342­386  387­423
+
+Individual consideration will be given for low BMIs. Please use the Underwriting Quote Tool XRAE (Instructional PDF: Getting Started with the XRAE Field Underwriting Tool).
+XRAE is not available for RapidProtect.
+
+33                       For Agent Use Only ­ Not For Use With The Public
+                                                         LIFE INSURANCE UNDERWRITING GUIDE
+
+Uninsurable and Problematic Risks
+
+Non-Qualifying Conditions/Issues
+
+Applications should not be written on individuals presenting the following impairments or issues. This list is not
+intended to be all inclusive.
+
+Applicants age 60 and over must have routine health care and a physical exam within the past 24 months;
+otherwise, the application will be declined.
+
+                       Medical Conditions                                       Non-Medical Risks
+Abdominal Aortic Aneurysm (present or surgery <6
+months ago)                                              Bankruptcy, Chapter 7, that has not been discharged
+Alcohol Treatment within the past 2 years
+ALS (Lou Gehrig's Disease)                               Driver's License currently suspended or revoked
+Alzheimer's Disease                                      Single DUI within the past year
+Cancer currently under treatment (any type)              Multiple DUIs within the past 5 years
+                                                         Criminal charges pending
+Cirrhosis of the Liver                                   Probation or parole, current or <12 months since
+                                                         ending
+Cystic Fibrosis                                          Multiple criminal convictions, <7 years since last
+                                                         conviction
+Dementia                                                 Violent criminal activity
+Down Syndrome                                            IOLI/SOLI ­ Investor or Stranger Owned Life Insurance
+Epilepsy/seizures diagnosed within the past 6 months     Disability (receiving SSDI or DI)
+Gastric bypass surgery within the past 6 months
+Heart attack and/or heart surgery within the past
+6 months
+Heart disorder requiring a defibrillator
+Heart valve surgery within the past 12 months
+Illegal drug use within the past 3 years
+Kidney failure requiring dialysis
+Lung disease, severe or requiring oxygen
+Mental health disorder requiring hospitalization within
+the past 12 months
+Organ transplant, awaiting or recipient
+Pregnancy with current or past complications
+Suicide attempt within the past year; or more than one
+attempt within the past 2 years
+Surgery, pending
+
+34  For Agent Use Only ­ Not For Use With The Public
+    LIFE INSURANCE UNDERWRITING GUIDE
+
+Medical Conditions & Potential Ratings
+
+Qualifying Conditions/Issues
+
+The potential rate classes listed here are based on the applicant's best possible condition (treatment, control, etc.)
+and specific case details will dictate final rating. If your applicant has multiple conditions or a serious condition not
+listed here, please contact your Underwriting Team for a tentative quote. This list is not intended to be all-inclusive.
+
+                                     Medical Conditions                                            Potential Best Offer
+
+Potential rate classes shown assume the condition has been fully evaluated and is optimally         Better   Standard                                               Substandard
+controlled without complications or residual effects. Multiple conditions may alter the potential    than
+offer, and final rating will depend on the specific details of the individual case.                Standard
+Alcohol use disorder with treatment (total abstinence >5 years, no relapses)
+Anemia, Iron-deficient (mild, single episode, resolved, no splenectomy)
+Anemia, Sickle-cell (mild, adults only, last episode > 5 years ago, no organ damage)
+Aneurysm (surgically corrected >6 months ago, resolved with no ongoing symptoms)
+Anxiety (depends on age, mild & stable, not chronic, diagnosis  6 months ago)
+Aortic insufficiency (mild, age  50, no underlying disease, aortic valve only & no surgery)
+Atrial fibrillation (mild, not chronic, no underlying disease, depends on frequency & cause)
+Asthma (mild, depends on age, treatment, number & frequency of attacks, no limitations)
+Autism (mild, age >8 years, no other mental health disorders or epilepsy)
+Back disorder/pain (mild, non-disabling, depends on dosage/number of opioid medications)
+Basal cell carcinoma (in-situ or 2 cm, no invasion or lymph node involvement)
+Bronchiectasis (mild to moderate without daily symptoms, no surgery or hospitalization)
+Bronchitis, chronic (mild, minimal dyspnea, no home oxygen treatment or hospitalization)
+Bundle Branch Block (mild, stable, normal cardiac evaluation. No complete Left BBB)
+Cancer (depends on pathology, in remission & not currently under treatment)
+Cardiomyopathy (depends on type and age, diagnosis >2 years ago, stable/resolved)
+Cerebral palsy (age >6 years, no epilepsy or intellectual disability)
+COPD (mild, minimal dyspnea, no home oxygen treatment or hospitalization)
+Congestive Heart Failure (mild, diastolic dysfunction only, resolved without symptoms)
+Coronary Artery Disease (mild, depends on treatment, age & artery(ies) involved)
+Crohn's disease (mild, age >30, more than 5 years since diagnosis or last major attack)
+Cystitis (single episode, fully recovered, no ongoing symptoms or treatment)
+Deep Vein Thrombosis (single episode, no underlying disease, recovered >2 months ago)
+Depression (mild, stable & well-controlled for >6 months, no relapses)
+Diabetes, Type 1 (depends on age & disease duration, stable, no complications)
+Diabetes, Type 2 (depends on age & disease duration, stable, no complications)
+
+This listing is not meant to be all inclusive. Please use XRAE (Instructional PDF: Getting Started with the XRAE Field Underwriting Tool) for an underwriting quote. XRAE is not
+available for RapidProtect.
+
+The "Potential Best Offer" guidelines are provided as a courtesy for information purposes and should not be interpreted as tentative quotes or binding in any way.
+
+35  For Agent Use Only ­ Not For Use With The Public
+    LIFE INSURANCE UNDERWRITING GUIDE
+
+Diverticulitis (mild, no planned surgery, no current treatment, resolved)
+Drug abuse (depends on substance(s), total abstinence for >6 years, no relapses)
+Emphysema (mild, minimal dyspnea, no home oxygen treatment or hospitalization)
+Endocarditis (diagnosis >1 year ago, normal heart valves and no heart damage)
+Epilepsy (diagnosis >6 months ago, average 12 seizures per year, last seizure >1 year ago)
+Esophageal stricture (mild, confirmed benign, no ongoing symptoms)
+Fibromyalgia (mild, no physical or psychiatric impairments, no narcotic medication use)
+Gall gladder disorder (mild, recovery >3 months ago, no pending investigation or surgery)
+Gastric bypass (depends on procedure, >6 months since surgery, no re-hospitalizations)
+Gestational diabetes, not currently pregnant (fully resolved, normal A1c)
+Glaucoma (corrected, no recurrence)
+Gout (mild, only NSAID use, no ongoing therapy, no physical impairments)
+Head injury (single event, mild and >3 months since injury, fully recovered, no limitations)
+Heart valve surgery (single valve, depends on age, fully recovered, >1 year since surgery)
+Hepatitis B, chronic (fully resolved with normal liver enzymes and no liver damage)
+Hepatitis C, chronic (fully resolved with normal liver enzymes and no liver damage)
+Hypertension (see guidelines on pages 28-31, no other ratable health conditions)
+HIV (age >18, CD4 counts stable for 2 years, undetectable viral load, no hepatitis or AIDS)
+Hodgkin's disease (stage 1A or better, remission for >3 years, no recurrence)
+Hyperthyroid (stable  1 year, not current anti-thyroid medication, no atrial fibrillation)
+Hypothyroid (stable with no ratable hypertension or cardiovascular abnormalities)
+Intellectual disability (mild, age >8, no physical or psychiatric impairments or limitations)
+Joint replacement (fully recovered, surgery >3 months ago, no chronic pain or disease)
+Kidney disease, chronic (mild, controlled blood pressure, normal kidney function)
+Leukemia (varies based on age, type & severity, remission >5 years with no recurrence)
+Lupus, systemic (mild, fully resolved >6 months ago, no current symptoms or treatment)
+Lupus, discoid (mild, skin only, no current treatment with corticosteroid medications)
+Melanoma (single occurrence, stage 1A, completely excised and resolved >2 years ago)
+Meningitis (non-tuberculous variant only, fully recovered >6 months, no current symptoms)
+Migraine headaches (mild, stable with no underlying disease or adverse features)
+Mitral valve prolapse (mild, no symptoms, no disease, regurgitation or stenosis, no surgery)
+Mitral regurgitation (mild, stable, depends on age, no underlying disease, no surgery)
+Multiple Sclerosis (mild, stable, >1 year since diagnosis, non-disabling or progressive )
+Muscular dystrophy (depends on type, mild with slow progression and minimal disability)
+Myositis (malignancy excluded, treatment completed >3 years ago, fully recovered)
+
+This listing is not meant to be all inclusive. Please use XRAE (Instructional PDF: Getting Started with the XRAE Field Underwriting Tool) for an underwriting quote. XRAE is not
+available for RapidProtect.
+
+The "Potential Best Offer" guidelines are provided as a courtesy for information purposes and should not be interpreted as tentative quotes or binding in any way.
+
+36  For Agent Use Only ­ Not For Use With The Public
+                                                     LIFE INSURANCE UNDERWRITING GUIDE
+
+Myasthenia Gravis (mild, stable, diagnosis >1 year ago)
+Myocarditis (single episode, no underlying disease, resolution >3 months ago)
+Nephritis, Acute (fully recovered >1 year ago, no ongoing treatment or underlying disease)
+Non-Hodgkin's lymphoma (stage 1 or better, remission for >3 years, no recurrence)
+Osteoarthritis (mild, non-disabling, no continuous opioid use for treatment)
+Osteomyelitis (mild, <2 attacks total, last attack >1 year ago, no history of amputation)
+Pacemaker (depends on underlying condition, normal pulse, >3 months since implanted)
+Pancreatitis, Acute (no alcohol concerns, fully recovered, last episode >3 years ago)
+Paralysis (no paraparesis, > 3 years since injury, fully adjusted, not wheelchair dependent)
+Parkinson's disease (mild, age >59, tremor only in fingers, no treatment, no dementia)
+Pericarditis (viral, single episode, recovered >3 months ago, normal EKG, no effusion)
+Peripheral vascular disease (mild, no evidence of diabetes or cardiovascular disease)
+Phlebitis (fully recovered, no ongoing treatment, pulmonary embolism or underlying disease)
+Polycystic kidney disease (diagnosis age >20, normal renal function, no kidney damage)
+Polycythemia vera (no thrombosis, no myelosuppressive drug use, diagnosis >2 years ago)
+Pregnancy, current (age <40, in good health, no past or current pregnancy complications)
+Prostatic hypertrophy, Benign (stable minor symptoms only, no obstruction or neoplasia)
+Prostatitis (mild infrequent symptoms, no obstruction or neoplasia, normal urinalysis)
+Raynaud's syndrome (no disability, no underlying disease, last complication >2 years ago)
+Rheumatoid arthritis (mild, depends on age & duration, no disability, only NSAID use)
+Rheumatic fever (single episode, no residual heart murmur, no heart damage)
+Sarcoidosis (depends on organs involved, mild/stage 1, >6 months since diagnosis)
+Seizures (mild, stable, average of 12 seizures per year, last seizure >1 year ago)
+Sleep Apnea (mild, not central or mixed apnea, consistent CPAP use, no adverse factors)
+Stroke (CVA) (varies based on type, fully recovered, single episode >6 months ago)
+Suicide attempt (single attempt >5 years ago, stable with no ongoing symptoms)
+Thalassemia (trait only, stable hemoglobin 10.0 for 5 years, no anemia treatment)
+Transient ischemic attack (TIA) (single episode, no underlying disease, fully recovered)
+Tuberculosis (treatment completed >3 months ago, normal lung function, negative HIV)
+Tumors, Benign (varies by organ, no obstruction, underlying disease, or pending surgery)
+Ulcerative Colitis (mild, diagnosis >6 months ago, no immunosuppressive medications)
+Varicose veins (located on leg, no underlying disease or thrombosis)
+
+This listing is not meant to be all inclusive. Please use XRAE (Instructional PDF: Getting Started with the XRAE Field Underwriting Tool) for an underwriting quote. XRAE is not
+available for RapidProtect.
+
+The "Potential Best Offer" guidelines are provided as a courtesy for information purposes and should not be interpreted as tentative quotes or binding in any way.
+
+37  For Agent Use Only ­ Not For Use With The Public
+                                                           LIFE INSURANCE UNDERWRITING GUIDE
+
+Advanced Sales
+
+National Life Group's Advanced Sales is here to help you work more effectively in the
+advanced markets space. If you have questions about business insurance needs, qualified
+plans, executive benefit plans, or premium finance cases, we can help!
+
+With more than 180 years of combined industry              We are committed to supporting your needs and the
+experience our Advanced Sales Team is here to help         needs of your clients. We stay current in the market and
+you grow your business.                                    understand what people are thinking from Main Street
+                                                           to Wall Street. At the end of the day, our job is to simplify
+We specialize in working with high net worth individuals,  the sales process and make doing business with us easy.
+business owners, and their families along with charitable
+and non-profit organizations.
+
+We provide your team with:
+· Direct access to our in-house team for case
+
+  consultation and point-of-sale support
+· Simplified sales concepts to help you sell
+· Case design and presentation
+· Consultation with strategic advisors --
+
+  CPAs and attorneys
+· Ongoing education and training
+
+    Here are some of the programs the Advanced Sales Team can help you with!
+
+    · Planning with Small Business Owners                  · Basic and Advanced Estate Planning Strategies
+
+    · Nonqualified Employee Benefit Plans                  · Legacy IRA Planning Strategy
+
+    · Deferred Compensation Plans                          · Planning for Foreign Nationals
+
+    · Executive Bonus Plans                                · MultiLife Program Guaranteed Issue
+
+    · Split Dollar Arrangements                            · Premium Finance
+
+    · Qualified Plans                                      · Special Needs Planning Strategies
+
+                             For help, contact our Sales Desk: 800-906-3310
+
+38                               For Agent Use Only ­ Not For Use With The Public
+                                                            LIFE INSURANCE UNDERWRITING GUIDE
+
+Underwriting Quotes
+
+Introduction                                                Quotes Requiring Underwriter Review
+
+Certain medical or non-medical impairments may              If XRAE is unable to make a risk assessment, the
+require "pre-qualifying" a proposed client for insurance    following outcome will be presented to the agent:
+coverage. The Underwriting Quick Quote process will         · A dditional Review Required -- Click the Messaging
+now be handled through the XRAE "Express Risk
+Assessment Exchange" management tool. This will               link to request UW review
+allow for instantaneous assessments by evaluating
+a client's medical conditions against proprietary           A manual submission of the quote will be required
+underwriting rules.                                         through the messaging tool in XRAE. These requests will
+                                                            be handled by Underwriting within one (1) business day.
+All quotes are tentative, non-binding, and subject to
+change after a full underwriting workup and company         Please Note: Do NOT attach quotes to e-applications
+retention limits.                                           unless directed by Underwriting.
+                                                            · XRAE saves all quotes and you can refer back to them
+Requirements
+                                                              at a later date if needed.
+XRAE tool requires the following fields:                    · XRAE quotes cannot be used for RapidProtect.
+· Agent name
+· Client name
+· Gender
+· Date of birth
+· Face amount
+· Product type
+
+Beyond the required fields above, the ability to provide
+details around the client's medical and non-medical
+history will be available. Medical conditions offered will
+have impairment-based reflexive questions for "best
+case" underwriting classifications. The more information
+provided, the more complete the assessment.
+
+39  For Agent Use Only ­ Not For Use With The Public
+                                                      LIFE INSURANCE UNDERWRITING GUIDE
+
+Informal Applications
+
+Introduction                                               Submit Forms to Home Office
+
+National Life Group is willing to consider informal/trial  Forms can be emailed to National Life Group at
+applications on a very limited basis, subject to the       LargeCase@NationalLife.com
+following parameters:
+· Permanent products only.                                 Placement
+· Minimum face amount: $2,000,000
+· Maximum age: 75                                          · Informal applications as a percentage of submitted
+· Time service: 5 business days                              business: No more than 5%
+· Do not submit informal paperwork on cases that
+                                                           · Informal-to-formal conversion rate: 50%
+  have been previously declined                            · Review will be done on a monthly, quarterly, and
+· Tentative offers good for 90 days.
+                                                             year-to-date basis
+What to submit                                             · We will consider alternative action with one quarter
+
+Information needed for an Informal A pplication are:         of data if parameters are not met. We will require, at
+· Form 1386 Informal Inquiry and Authorization               the firm's expense, that they pay for APS summary
+· Form 8164 -- HIPAA-compliant authorization or              service, and they cannot submit full papers.
+
+  properly signed HIPAA Compliant Authorization form
+  identifying National Life/LSW as an authorized carrier
+· Client information: Name, date of birth, Social
+  Security number
+· Agent information: Agent code, agency office code to
+  allow communication through the agent portal.
+· Summary page required, including case design
+  (product and face amount requested), rate needed
+  to place, and outline of medical history. Financial
+  documentation is required at the time of trial in
+  order to be considered for review
+
+Important: No medical testing should be ordered
+or money collected.
+
+40  For Agent Use Only ­ Not For Use With The Public
+                                                      LIFE INSURANCE UNDERWRITING GUIDE
+
+Foreign National Guidelines
+
+Who Is Considered a Foreign National?
+
+National Life Group products are priced for the U.S. population. Our risk tolerance is measured based on the client's
+resident country and their permanency of residence in the U.S.
+
+View current Foreign National Guidelines for life insurance and annuity sales.
+
+After-Issue Contract Changes
+
+NL and LSW Life Insurance Products
+
+Contract changes (after the rewrite period of 120 days from the application signing date) are considered
+"after issue" changes. These changes are processed in Contract Change -- Inforce Customer Service.
+Three forms unique to after-issue contract changes:
+· Policy Change Application (used for contract changes only)
+· Term Conversion Application
+· Policy Change/Term Conversion Supplement to The Application is used anytime the after issue change or term
+
+  conversion requires underwriting. It should be noted that additional underwriting requirements may be needed at the
+  underwriter's discretion.
+All changes should be submitted with a completed Customer Services Agency Transmittal (form 8042) via email to:
+ContractChange@NationalLife.com or Fax to 802-229-3131.
+View the After-Issue Contract Change Quick Reference Guide.
+
+41  For Agent Use Only ­ Not For Use With The Public
+
