@@ -1,5 +1,5 @@
 import type { DerivedPresentation } from '@domain/model/derived'
-import { formatMoney, localeFor } from '@domain/format'
+import { formatMoney, formatPercent, localeFor } from '@domain/format'
 import { slideCopy } from '@domain/presentationCopy'
 import { Card } from '@design-system/primitives'
 import { ContentSlide } from '../ContentSlide'
@@ -48,7 +48,14 @@ export function HeadlineSlide({ derived }: { derived: DerivedPresentation }) {
       emoji: '❤️',
       when: c.headline.whenIll,
       label: c.headline.labelLiving,
-      value: largestCap != null ? c.headline.livingUpToFull : c.headline.livingEarly,
+      // Show the real accessible % (typically 80% for the included ABRs), not a
+      // blanket "up to 100%" — that gross figure is only reached with the
+      // additional-cost Premium Chronic Care Rider, and the paid amount is
+      // discounted below it anyway. Falls back to a neutral phrase if unset.
+      value:
+        h.livingBenefitPercent != null
+          ? c.headline.livingUpToPercent(formatPercent(h.livingBenefitPercent, { locale }))
+          : c.headline.livingEarly,
       subtitle:
         largestCap != null
           ? c.headline.livingUpTo(formatMoney(largestCap, currency, { compact: true, locale }))

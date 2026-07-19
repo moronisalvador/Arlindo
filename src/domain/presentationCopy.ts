@@ -76,7 +76,7 @@ export interface SlideCopy {
     labelLiving: string
     subDeath: string
     illustratedToAge: (age: number) => string
-    livingUpToFull: string
+    livingUpToPercent: (pct: string) => string
     livingEarly: string
     livingUpTo: (money: string) => string
   }
@@ -252,7 +252,7 @@ const pt: SlideCopy = {
     labelLiving: 'Benefícios em vida',
     subDeath: 'Pago à sua família, livre de imposto de renda',
     illustratedToAge: (age) => `ilustrada até os ${age} anos`,
-    livingUpToFull: 'até 100% do benefício',
+    livingUpToPercent: (pct) => `até ${pct} do benefício`,
     livingEarly: 'Acesso antecipado ao benefício',
     livingUpTo: (money) => `até ${money}`,
   },
@@ -428,7 +428,7 @@ const en: SlideCopy = {
     labelLiving: 'Living benefits',
     subDeath: 'Paid to your family, income-tax-free',
     illustratedToAge: (age) => `illustrated to age ${age}`,
-    livingUpToFull: 'up to 100% of the benefit',
+    livingUpToPercent: (pct) => `up to ${pct} of the benefit`,
     livingEarly: 'Early access to the benefit',
     livingUpTo: (money) => `up to ${money}`,
   },
@@ -604,7 +604,7 @@ const es: SlideCopy = {
     labelLiving: 'Beneficios en vida',
     subDeath: 'Pagado a su familia, libre de impuesto sobre la renta',
     illustratedToAge: (age) => `ilustrada hasta los ${age} años`,
-    livingUpToFull: 'hasta 100% del beneficio',
+    livingUpToPercent: (pct) => `hasta ${pct} del beneficio`,
     livingEarly: 'Acceso anticipado al beneficio',
     livingUpTo: (money) => `hasta ${money}`,
   },
