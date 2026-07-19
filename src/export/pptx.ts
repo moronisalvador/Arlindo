@@ -213,8 +213,14 @@ function projectionSlide(pptx: pptxgen, d: DerivedPresentation) {
     x: 0.6, y: top + 0.35, w: 3.4, h: 0.9, fontFace: SERIF, fontSize: 30, bold: true, color: C.navy,
   })
   s.addText(c.projection.sub, {
-    x: 0.6, y: top + 1.35, w: 3.3, h: 1, fontFace: SANS, fontSize: 12, color: C.muted,
+    x: 0.6, y: top + 1.35, w: 3.3, h: 0.8, fontFace: SANS, fontSize: 12, color: C.muted,
   })
+  if (d.headline.guaranteedProjectedValue != null) {
+    s.addShape('roundRect', { x: 0.6, y: top + 2.2, w: 3.3, h: 1.5, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.06 })
+    s.addText(c.projection.guaranteedLabel.toUpperCase(), { x: 0.75, y: top + 2.35, w: 3, h: 0.3, fontFace: SANS, fontSize: 9, bold: true, color: C.orange, charSpacing: 1 })
+    s.addText(formatMoney(d.headline.guaranteedProjectedValue, cur, { locale: loc }), { x: 0.75, y: top + 2.6, w: 3, h: 0.6, fontFace: SERIF, fontSize: 20, bold: true, color: C.navy })
+    s.addText(c.projection.guaranteedSub, { x: 0.75, y: top + 3.2, w: 3, h: 0.5, fontFace: SANS, fontSize: 10, color: C.muted })
+  }
   const years = d.series.policyYears
   const values = d.series.accumulatedValue ?? []
   if (years.length > 1 && values.length > 0) {
@@ -402,9 +408,20 @@ function termScheduleSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
   const t = slideCopy(d.meta.language).term
   const loc = localeFor(d.meta.language)
-  const top = addHeader(s, t.schedule.eyebrow, t.schedule.title)
+  let top = addHeader(s, t.schedule.eyebrow, t.schedule.title)
   const cur = d.meta.currency
-  const rows = sample(d.table, 14)
+  // Premium-cliff callout (level then annually-renewable ramp).
+  const all = d.table
+  const level = all[0]?.premiumPaid
+  const peak = all.reduce((mx, r) => ((r.premiumPaid ?? 0) > (mx.premiumPaid ?? 0) ? r : mx), all[0])
+  const levelYears = d.headline.termLengthYears
+  if (level != null && peak?.premiumPaid != null && levelYears != null && peak.premiumPaid > level * 1.5) {
+    s.addShape('roundRect', { x: 0.6, y: top, w: 12.1, h: 0.95, fill: { color: C.white }, line: { color: C.orange }, rectRadius: 0.05 })
+    s.addText(t.schedule.cliffTitle, { x: 0.8, y: top + 0.08, w: 11.7, h: 0.3, fontFace: SANS, fontSize: 11, bold: true, color: C.navy })
+    s.addText(t.schedule.cliffBody(levelYears, formatMoney(level, cur, { locale: loc }), formatMoney(peak.premiumPaid, cur, { locale: loc }), peak.age ?? 0), { x: 0.8, y: top + 0.38, w: 11.7, h: 0.5, fontFace: SANS, fontSize: 12, color: C.ink })
+    top += 1.15
+  }
+  const rows = sample(d.table, 12)
   const head = [t.schedule.year, t.schedule.age, t.schedule.premium, t.schedule.death].map((txt) => ({
     text: txt,
     options: { bold: true, color: C.white, fill: { color: C.navy }, fontFace: SANS, fontSize: 11, align: 'center' as const },
@@ -442,6 +459,32 @@ function termComparisonSlide(pptx: pptxgen, d: DerivedPresentation) {
   })
 }
 
+function timelineSlide(pptx: pptxgen, d: DerivedPresentation) {
+  const s = pptx.addSlide()
+  const c = slideCopy(d.meta.language).timeline
+  const loc = localeFor(d.meta.language)
+  const cur = d.meta.currency
+  const top = addHeader(s, c.eyebrow, c.title)
+  const per = d.headline.premiumMode === 'annual' ? '/yr' : '/mo'
+  const premium = d.headline.premium != null ? `${formatMoney(d.headline.premium, cur, { locale: loc })} ${per}` : '—'
+  const stopAge = (d.meta.clientAge ?? 0) + (d.headline.paymentYears ?? 0)
+  const income = formatMoney(d.headline.incomeOptionAnnual, cur, { locale: loc })
+  const steps: Array<[string, string, string]> = [
+    ['💰', c.step1, c.step1Body(premium, d.headline.paymentYears ?? 0)],
+    ['⏸️', c.step2, c.step2Body(stopAge)],
+    ['💵', c.step3, c.step3Body(income)],
+  ]
+  const cardW = 3.9
+  const gap = 0.2
+  s.addShape('line', { x: 1.6, y: top + 0.5, w: 9.4, h: 0, line: { color: C.orange, width: 2 } })
+  steps.forEach(([emoji, label, body], i) => {
+    const x = 0.6 + i * (cardW + gap)
+    s.addText(emoji, { x, y: top, w: cardW, h: 1, fontSize: 30, align: 'center' })
+    s.addText(label, { x: x + 0.15, y: top + 1.1, w: cardW - 0.3, h: 0.4, fontFace: SANS, fontSize: 13, bold: true, color: C.orange, align: 'center' })
+    s.addText(body, { x: x + 0.15, y: top + 1.6, w: cardW - 0.3, h: 1, fontFace: SERIF, fontSize: 20, bold: true, color: C.navy, align: 'center' })
+  })
+}
+
 /** Build and trigger download of the editable .pptx (branches IUL vs Term). */
 export async function downloadPptx(derived: DerivedPresentation): Promise<void> {
   const pptx = new pptxgen()
@@ -465,6 +508,13 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
     coverageSlide(pptx, derived)
     projectionSlide(pptx, derived)
     if (derived.table.length > 0) tableSlide(pptx, derived)
+    if (
+      derived.headline.paymentYears != null &&
+      derived.headline.incomeOptionAnnual != null &&
+      derived.meta.clientAge != null
+    ) {
+      timelineSlide(pptx, derived)
+    }
     optionsSlide(pptx, derived)
     comparisonSlide(pptx, derived)
     disclaimersSlide(pptx, derived)

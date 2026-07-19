@@ -28,6 +28,20 @@ export function ProjectionSlide({ derived }: { derived: DerivedPresentation }) {
             />
           </div>
           <p className="mt-4 font-sans text-lg text-muted">{c.projection.sub}</p>
+          {headline.guaranteedProjectedValue != null && (
+            <div className="mt-5 rounded-card bg-surface p-4">
+              <EyebrowLabel>{c.projection.guaranteedLabel}</EyebrowLabel>
+              <div className="mt-1">
+                <CurrencyDisplay
+                  amount={headline.guaranteedProjectedValue}
+                  currency={meta.currency}
+                  locale={locale}
+                  className="text-3xl text-navy"
+                />
+              </div>
+              <p className="mt-1 font-sans text-sm text-muted">{c.projection.guaranteedSub}</p>
+            </div>
+          )}
         </div>
         <div className="flex-1">
           {hasChart ? (
