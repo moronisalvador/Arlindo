@@ -17,7 +17,7 @@ export function DisclaimersSlide({ derived }: { derived: DerivedPresentation }) 
     <SlideRoot className="bg-navy text-white">
       <span aria-hidden className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-navy-soft/50" />
       <div className="relative flex h-full flex-col justify-center px-20">
-        <EyebrowLabel>{c.disclaimers.eyebrow}</EyebrowLabel>
+        <EyebrowLabel className="text-orange">{c.disclaimers.eyebrow}</EyebrowLabel>
         <h2 className="mt-2 font-serif text-3xl font-semibold">{c.disclaimers.title}</h2>
         <ul className={cn('mt-6 max-w-[960px]', dense ? 'space-y-2' : 'space-y-3')}>
           {items.map((d, i) => (

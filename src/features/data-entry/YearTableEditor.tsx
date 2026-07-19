@@ -85,6 +85,7 @@ export function YearTableEditor({
                 {columns.map((col) => (
                   <th
                     key={col.key}
+                    scope="col"
                     className="whitespace-nowrap px-3 py-3 font-sans text-sm font-semibold text-muted"
                   >
                     {t(col.labelKey)}
@@ -101,6 +102,7 @@ export function YearTableEditor({
                       <CellInput
                         value={row[col.key]}
                         integer={col.integer}
+                        aria-label={`${t(col.labelKey)} — ${t('years.policyYear')} ${row.policyYear}`}
                         onChange={(raw) => editCell(index, col.key, raw, col.integer)}
                       />
                     </td>
@@ -134,15 +136,18 @@ function CellInput({
   value,
   integer,
   onChange,
+  'aria-label': ariaLabel,
 }: {
   value: number | undefined
   integer?: boolean
   onChange: (raw: string) => void
+  'aria-label'?: string
 }) {
   const [text, setText] = useState(value == null ? '' : String(value))
   return (
     <input
       inputMode={integer ? 'numeric' : 'decimal'}
+      aria-label={ariaLabel}
       value={text}
       onChange={(e) => {
         setText(e.target.value)

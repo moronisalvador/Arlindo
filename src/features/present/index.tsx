@@ -289,7 +289,7 @@ export default function PresentPage() {
           A swipe sets swipedRef so the trailing click here does not double-advance. */}
       <button
         type="button"
-        aria-label={t('previous')}
+        aria-hidden="true"
         onClick={() => {
           if (swipedRef.current) return
           goPrev()
@@ -300,7 +300,7 @@ export default function PresentPage() {
       />
       <button
         type="button"
-        aria-label={t('next')}
+        aria-hidden="true"
         onClick={() => {
           if (swipedRef.current) return
           goNext()
