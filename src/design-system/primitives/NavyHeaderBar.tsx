@@ -22,7 +22,7 @@ export function NavyHeaderBar({
   return (
     <div className={cn('flex items-center justify-between gap-4 bg-navy px-6 py-4', className)}>
       <div className="min-w-0">
-        {eyebrow && <EyebrowLabel>{eyebrow}</EyebrowLabel>}
+        {eyebrow && <EyebrowLabel className="text-orange">{eyebrow}</EyebrowLabel>}
         <h2 className="truncate font-serif text-2xl font-semibold text-white">{title}</h2>
       </div>
       <div className="flex shrink-0 items-center gap-3">

@@ -24,17 +24,21 @@
     @apply font-serif;
   }
 
-  /* Large, obvious focus ring — accessibility for an older user. */
+  /* Large, obvious focus ring — navy so it's visible on both light surfaces AND
+     the gold primary buttons (an orange ring on an orange fill was invisible). */
   :focus-visible {
-    outline: 3px solid rgb(var(--orange));
+    outline: 3px solid rgb(var(--navy));
     outline-offset: 2px;
   }
 }
 
 @layer components {
-  /* Small uppercase, letter-spaced orange eyebrow label (SCF motif). */
+  /* Small uppercase, letter-spaced eyebrow label (SCF motif). Uses a darker gold
+     that meets contrast on light surfaces; navy-background callers override with
+     `text-orange` for the brighter brand gold. */
   .eyebrow {
-    @apply font-sans text-xs font-semibold uppercase tracking-eyebrow text-orange;
+    @apply font-sans text-xs font-semibold uppercase tracking-eyebrow;
+    color: rgb(var(--gold-text));
   }
 }
 
