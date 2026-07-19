@@ -1,5 +1,6 @@
+import { useSearchParams } from 'react-router-dom'
 import { derive } from '@domain/calc'
-import { sampleIulPresentation } from '@domain/model/sample'
+import { sampleIulPresentation, sampleTermPresentation } from '@domain/model/sample'
 import {
   buildSlides,
   Button,
@@ -24,8 +25,32 @@ import {
  * deck so the design system can be reviewed at /preview. Not a wave feature.
  */
 export default function DesignPreviewPage() {
-  const derived = derive(sampleIulPresentation())
+  const [params] = useSearchParams()
+  const only = params.get('only')
+  const product = params.get('product') === 'term' ? 'term' : 'iul'
+  const derived = derive(
+    product === 'term' ? sampleTermPresentation() : sampleIulPresentation(),
+  )
   const slides = buildSlides(derived)
+
+  // Single-slide mode (?only=<id>): a full-viewport 16:9 stage over the app chrome,
+  // so one slide can be captured cleanly (light page for screenshots / Playwright).
+  if (only != null) {
+    const slide = slides.find((s) => s.id === only)
+    return (
+      <div className="fixed inset-0 z-50 grid place-items-center bg-white">
+        <RenderModeProvider mode="preview">
+          <div data-slide-stage={only} className="aspect-video max-h-screen w-full overflow-hidden">
+            {slide ? (
+              <FitSlide>{slide.node}</FitSlide>
+            ) : (
+              <ErrorState description={`Slide "${only}" não encontrado.`} />
+            )}
+          </div>
+        </RenderModeProvider>
+      </div>
+    )
+  }
 
   return (
     <div className="space-y-12">
