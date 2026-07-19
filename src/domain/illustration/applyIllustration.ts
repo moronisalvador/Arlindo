@@ -61,6 +61,15 @@ export function applyIllustration(
 
   const riders = existing.iul.riders.length ? existing.iul.riders : defaultRidersForProduct(productId)
   const maxYear = parsed.rows.reduce((mx, r) => Math.max(mx, r.policyYear), 0)
+  // The projection horizon must match the value we headline. Illustrations print a
+  // specific projected value (e.g. "Cash Value at Age 77 = $44,281"), which belongs
+  // to that value's policy year — NOT the last ledger row. Label it with the year
+  // whose accumulated value matches; only fall back to the full ledger length when
+  // no headline value was parsed (then the last row is the projected value).
+  const projectionYear =
+    parsed.projectedAccumulatedValue != null
+      ? parsed.rows.find((r) => r.accumulatedValue === parsed.projectedAccumulatedValue)?.policyYear
+      : undefined
   return {
     ...existing,
     productType: 'iul',
@@ -76,7 +85,7 @@ export function applyIllustration(
       paymentYears: parsed.paymentYears ?? existing.iul.paymentYears,
       assumedRatePct: parsed.assumedRatePct ?? existing.iul.assumedRatePct,
       guaranteedProjectedValue: parsed.guaranteedValue ?? existing.iul.guaranteedProjectedValue,
-      projectionYears: maxYear || existing.iul.projectionYears,
+      projectionYears: projectionYear ?? (maxYear || existing.iul.projectionYears),
       projectedAccumulatedValue: parsed.projectedAccumulatedValue ?? existing.iul.projectedAccumulatedValue,
       projectedCashSurrenderValue: parsed.projectedCashSurrenderValue ?? existing.iul.projectedCashSurrenderValue,
       incomeOptionAnnual: parsed.incomeOptionAnnual ?? existing.iul.incomeOptionAnnual,
