@@ -14,6 +14,8 @@ import { TermHeadlineSlide } from './term/TermHeadlineSlide'
 import { TermCoverageSlide } from './term/TermCoverageSlide'
 import { TermScheduleSlide } from './term/TermScheduleSlide'
 import { TermComparisonSlide } from './term/TermComparisonSlide'
+import { ValueSummarySlide } from './ValueSummarySlide'
+import { NextStepsSlide } from './NextStepsSlide'
 
 export interface BuiltSlide {
   id: string
@@ -51,6 +53,8 @@ function buildTermSlides(derived: DerivedPresentation): BuiltSlide[] {
 
   slides.push(
     { id: 'comparison', title: 'Temporário vs Permanente', node: <TermComparisonSlide derived={derived} /> },
+    { id: 'value', title: 'O que você recebe', node: <ValueSummarySlide derived={derived} /> },
+    { id: 'nextSteps', title: 'Próximos passos', node: <NextStepsSlide derived={derived} /> },
     { id: 'disclaimers', title: 'Avisos', node: <DisclaimersSlide derived={derived} /> },
   )
 
@@ -86,6 +90,8 @@ function buildIulSlides(derived: DerivedPresentation): BuiltSlide[] {
       node: <WithdrawVsIncomeSlide derived={derived} />,
     },
     { id: 'comparison', title: 'Termo vs IUL', node: <ComparisonSlide derived={derived} /> },
+    { id: 'value', title: 'O que você recebe', node: <ValueSummarySlide derived={derived} /> },
+    { id: 'nextSteps', title: 'Próximos passos', node: <NextStepsSlide derived={derived} /> },
     { id: 'disclaimers', title: 'Avisos', node: <DisclaimersSlide derived={derived} /> },
   )
 
