@@ -24,8 +24,8 @@ import {
 import type { PresentationInputs } from '@domain/model/presentation'
 import { formatMoney } from '@domain/format'
 import { parseIllustration } from '@domain/illustration/parseIllustration'
-import { applyIllustration } from '@domain/illustration/applyIllustration'
 import { extractIllustrationText } from '@shared/pdfExtract'
+import { setPendingImport } from '@shared/pendingImport'
 import { routes } from '@app/routes'
 import { queryKeys } from '@app/queryKeys'
 import { registerNamespace } from '@i18n/index'
@@ -92,9 +92,10 @@ export default function PresentationsPage() {
     },
   })
 
-  // Import a carrier illustration PDF from the home page: parse it in-browser,
-  // create a presentation of the auto-detected product type, apply the values,
-  // then open the editor for review. Nothing is created if parsing fails.
+  // Import a carrier illustration PDF from the home page: parse it in-browser to
+  // validate it and detect the product type, create the presentation, then open
+  // the editor — which shows the review dialog before applying anything. Nothing
+  // is created if parsing fails.
   async function handleImportPdf(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
     event.target.value = ''
@@ -113,9 +114,11 @@ export default function PresentationsPage() {
         branding: profile,
         productType: parsed.productType,
       })
-      const saved = await presentationRepository.save(applyIllustration(parsed, created))
+      // Don't apply yet — hand the parsed result to the editor, which shows the
+      // review dialog ("Confira os dados encontrados") before anything is applied.
+      setPendingImport(created.id, parsed)
       void invalidate()
-      navigate(routes.editor(saved.id))
+      navigate(routes.editor(created.id))
     } catch {
       setFeedback({ kind: 'error', message: t('importPdf.error') })
     } finally {
