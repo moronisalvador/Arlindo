@@ -19,10 +19,15 @@ export interface ParsedIllustration {
   premium?: number
   premiumMode?: 'monthly' | 'annual'
   deathBenefit?: number
+  /** How many years premium is actually paid (last premium-paying ledger year). */
+  paymentYears?: number
   // IUL-only
   projectedAccumulatedValue?: number
   projectedCashSurrenderValue?: number
   assumedRatePct?: number
+  /** LIBR lifetime income (annualized) and the age the illustration runs to. */
+  incomeOptionAnnual?: number
+  incomeToAge?: number
   // Term-only
   termLengthYears?: number
   conversionYears?: number
