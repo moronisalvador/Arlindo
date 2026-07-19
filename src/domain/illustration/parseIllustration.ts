@@ -237,6 +237,17 @@ export function parseIllustration(text: string): ParsedIllustration | null {
     firstMatch(text, /Terminal Illness Benefit[:\s]+(?:up to\s+)?\$?([\d,]+)/i),
   )
 
+  // Per-condition ABR values from the summary block ("If I Become Ill..."), each
+  // discounted and condition-specific. Any may be absent.
+  const abr = {
+    terminal: livingBenefit,
+    chronicMonthly: numFrom(firstMatch(text, /Chronic Illness Benefit[:\s]+\$?([\d,]+)\s*Per Month/i)),
+    critical: numFrom(firstMatch(text, /Critical Illness Benefit[:\s]+(?:up to\s+)?\$?([\d,]+)/i)),
+    criticalInjury: numFrom(firstMatch(text, /Critical Injury Benefit[:\s]+(?:up to\s+)?\$?([\d,]+)/i)),
+    alzheimer: numFrom(firstMatch(text, /Alzheimer'?s(?:\s+Disease)? Benefit[:\s]+(?:up to\s+)?\$?([\d,]+)/i)),
+  }
+  const abrBenefits = Object.values(abr).some((v) => v != null) ? abr : undefined
+
   const result: ParsedIllustration = {
     productType,
     confidence: face != null && premium != null && rows.length > 3 ? 'high' : 'low',
@@ -249,6 +260,7 @@ export function parseIllustration(text: string): ParsedIllustration | null {
     premiumMode,
     deathBenefit,
     livingBenefit,
+    abrBenefits,
     paymentYears,
     rows,
     warnings,

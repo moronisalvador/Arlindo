@@ -133,6 +133,22 @@ export const annuitySchema = z
   .partial()
 export type AnnuityInputs = z.infer<typeof annuitySchema>
 
+/**
+ * Per-condition accelerated-benefit (ABR) values, as printed on the illustration's
+ * summary (discounted, condition-specific). Product-agnostic — the same five ABRs
+ * apply to IUL and Term. Any field may be absent (the illustration didn't print it).
+ */
+export const abrBenefitsSchema = z
+  .object({
+    terminal: z.number().optional(), // lump sum
+    chronicMonthly: z.number().optional(), // per month
+    critical: z.number().optional(), // "up to" lump sum
+    criticalInjury: z.number().optional(), // "up to" lump sum
+    alzheimer: z.number().optional(), // lump sum
+  })
+  .partial()
+export type AbrBenefits = z.infer<typeof abrBenefitsSchema>
+
 export const presentationInputsSchema = z.object({
   schemaVersion: z.number().int().default(CURRENT_SCHEMA_VERSION),
   id: z.string(),
@@ -150,6 +166,8 @@ export const presentationInputsSchema = z.object({
   iul: iulSchema.default({}),
   term: termSchema.default({}),
   annuity: annuitySchema.optional(),
+  /** Per-condition ABR values from the illustration (product-agnostic). */
+  abrBenefits: abrBenefitsSchema.optional(),
   yearlyRows: z.array(yearlyRowSchema).default([]),
   highlightYears: z.array(z.number().int()).default([]),
   disclaimers: z.array(z.string()).default([]),

@@ -121,6 +121,20 @@ export interface SlideCopy {
     step3: string
     close: string
   }
+  /** Per-condition living-benefits detail slide (behind a flag; both products). */
+  livingBenefitsDetail: {
+    eyebrow: string
+    title: string
+    intro: string
+    terminal: string
+    chronic: string
+    critical: string
+    criticalInjury: string
+    alzheimer: string
+    perMonth: string
+    upTo: (money: string) => string
+    note: string
+  }
   /** Term-only slide copy (term has no cash value, no accumulation, no income). */
   term: TermSlideCopy
   clientFallback: string
@@ -317,6 +331,19 @@ const pt: SlideCopy = {
     step2: 'Assine a proposta',
     step3: 'Sua proteção começa',
     close: 'Estou aqui para responder qualquer pergunta.',
+  },
+  livingBenefitsDetail: {
+    eyebrow: 'Benefícios em Vida',
+    title: 'Cobertura por Tipo de Doença',
+    intro: 'Se você adoecer, pode antecipar parte do benefício — o valor depende da condição.',
+    terminal: 'Doença Terminal',
+    chronic: 'Doença Crônica',
+    critical: 'Doença Crítica',
+    criticalInjury: 'Lesão Crítica / Acidentes',
+    alzheimer: 'Alzheimer',
+    perMonth: '/mês',
+    upTo: (money) => `até ${money}`,
+    note: 'Valores ilustrados, com desconto e conforme a condição. Usar um benefício pode reduzir os demais.',
   },
   term: {
     explainer: {
@@ -517,6 +544,19 @@ const en: SlideCopy = {
     step3: 'Your protection begins',
     close: "I'm here to answer any questions.",
   },
+  livingBenefitsDetail: {
+    eyebrow: 'Living Benefits',
+    title: 'Coverage by Type of Illness',
+    intro: 'If you become ill, you can access part of the benefit early — the amount depends on the condition.',
+    terminal: 'Terminal Illness',
+    chronic: 'Chronic Illness',
+    critical: 'Critical Illness',
+    criticalInjury: 'Critical Injury / Accidents',
+    alzheimer: "Alzheimer's",
+    perMonth: '/mo',
+    upTo: (money) => `up to ${money}`,
+    note: 'Illustrated values, discounted and condition-dependent. Using one benefit may reduce the others.',
+  },
   term: {
     explainer: {
       eyebrow: 'Understanding the Product',
@@ -715,6 +755,19 @@ const es: SlideCopy = {
     step2: 'Firme la propuesta',
     step3: 'Su protección comienza',
     close: 'Estoy aquí para responder cualquier pregunta.',
+  },
+  livingBenefitsDetail: {
+    eyebrow: 'Beneficios en Vida',
+    title: 'Cobertura por Tipo de Enfermedad',
+    intro: 'Si enferma, puede acceder a parte del beneficio anticipadamente — el monto depende de la condición.',
+    terminal: 'Enfermedad Terminal',
+    chronic: 'Enfermedad Crónica',
+    critical: 'Enfermedad Crítica',
+    criticalInjury: 'Lesión Crítica / Accidentes',
+    alzheimer: 'Alzheimer',
+    perMonth: '/mes',
+    upTo: (money) => `hasta ${money}`,
+    note: 'Valores ilustrados, con descuento y según la condición. Usar un beneficio puede reducir los demás.',
   },
   term: {
     explainer: {
