@@ -126,6 +126,113 @@ export const DEFAULT_IUL_RIDERS: Rider[] = [
 ]
 
 /**
+ * National Life Group / LSW TERM living-benefit rider suite (pt-BR), from verified
+ * primary sources (docs/knowledge/national-life-term.md). Term carries the SAME
+ * no-cost ABR suite as IUL — Terminal, Chronic, Critical Illness, Critical Injury,
+ * Alzheimer's — but NOT the IUL-only riders (Value-Added Services, Fertility,
+ * Premium Chronic Care). Optional paid riders on term: Children's Term and Waiver
+ * of Premium (which waives premium on the CONVERTED policy).
+ *
+ * ⚠️ Term ABRs pay a DISCOUNTED, per-condition amount (not a flat %). The `percent`
+ * here is only the accessible share the agent chooses to present; the copy frames it
+ * as "up to … (discounted)". No cash-value / LIBR concepts apply to term.
+ */
+export const DEFAULT_TERM_RIDERS: Rider[] = [
+  {
+    id: 'terminal_illness',
+    label: 'Doença Terminal',
+    englishLabel: 'Accelerated Benefits Rider — Terminal Illness',
+    included: true,
+    percent: 80,
+    additionalCost: false,
+    category: 'included',
+    lifetimeMax: 1_500_000,
+    note: 'Sem custo. Antecipação com desconto em caso de doença terminal (expectativa de até 24 meses). Limite vitalício de US$ 1,5 mi compartilhado com Doença Crônica e Alzheimer.',
+  },
+  {
+    id: 'chronic_illness',
+    label: 'Doença Crônica',
+    englishLabel: 'Accelerated Benefits Rider — Chronic Illness',
+    included: true,
+    percent: 80,
+    additionalCost: false,
+    category: 'included',
+    lifetimeMax: 1_500_000,
+    note: 'Sem custo. Incapacidade de realizar 2 de 6 atividades diárias por 90 dias, ou comprometimento cognitivo severo. Benefício mensal. Limite vitalício de US$ 1,5 mi compartilhado com Doença Terminal e Alzheimer.',
+  },
+  {
+    id: 'critical_illness',
+    label: 'Doença Crítica',
+    englishLabel: 'Accelerated Benefits Rider — Critical Illness',
+    included: true,
+    percent: 80,
+    additionalCost: false,
+    category: 'included',
+    lifetimeMax: 1_000_000,
+    note: 'Sem custo. Câncer, AVC, infarto, ELA, transplante e outras. Valor antecipado varia com a gravidade. Limite vitalício US$ 1 mi (compartilhado com Lesão Crítica).',
+  },
+  {
+    id: 'critical_injury',
+    label: 'Lesão Crítica / Acidentes',
+    englishLabel: 'Accelerated Benefits Rider — Critical Injury',
+    included: true,
+    percent: 80,
+    additionalCost: false,
+    category: 'included',
+    lifetimeMax: 1_000_000,
+    note: 'Sem custo. Coma, paralisia, queimaduras graves, traumatismo craniano. Limite vitalício US$ 1 mi (compartilhado com Doença Crítica).',
+  },
+  {
+    id: 'alzheimers',
+    label: 'Alzheimer',
+    englishLabel: "Accelerated Benefits Rider — Alzheimer's Disease",
+    included: true,
+    percent: 80,
+    additionalCost: false,
+    category: 'included',
+    lifetimeMax: 1_500_000,
+    note: 'Sem custo. Diagnóstico de Alzheimer/demência (incl. Lewy Body) elegível por especialista. Limite vitalício de US$ 1,5 mi compartilhado com Doença Terminal e Crônica.',
+  },
+  {
+    id: 'childrens_term',
+    label: 'Seguro Temporário para Filhos',
+    englishLabel: "Children's Term Rider",
+    included: false,
+    percent: 0,
+    additionalCost: true,
+    category: 'optional',
+    lifetimeMax: 25_000,
+    note: 'Custo adicional. Cobertura de US$ 5 mil a US$ 25 mil por filho (múltiplos de US$ 1.000), até os 25 anos; taxa única independente do nº de filhos.',
+  },
+  {
+    id: 'waiver_of_premium',
+    label: 'Isenção de Prêmio por Invalidez',
+    englishLabel: 'Waiver of Premium Rider',
+    included: false,
+    percent: 0,
+    additionalCost: true,
+    category: 'optional',
+    note: 'Custo adicional. Dispensa o prêmio em caso de invalidez total; também isenta o prêmio da apólice permanente convertida.',
+  },
+]
+
+/**
+ * Standard NLG/LSW TERM illustration disclaimers (pt-BR). Term-specific: NO AG49-B /
+ * indexed-rate / cash-value language (term has none). Adds the discounted-ABR note,
+ * the claims-paying-ability caveat, and the foreign-national / US-solicitation note.
+ */
+export const DEFAULT_TERM_DISCLAIMERS: string[] = [
+  'Esta é apenas uma ilustração e não pretende prever valores reais. Consulte a apólice para os detalhes completos; em caso de conflito, prevalece a apólice.',
+  'O seguro temporário oferece proteção por um período determinado, não acumula valor em dinheiro e não paga dividendos. Após o período de prêmio nivelado, o prêmio aumenta anualmente até a idade 95.',
+  'Os benefícios acelerados (em vida) são pagos com desconto, podem ser tributáveis e podem afetar a elegibilidade a programas de assistência pública. O uso de um benefício pode reduzir ou eliminar outros benefícios da apólice e dos riders.',
+  'Os limites vitalícios dos benefícios acelerados são compartilhados por grupo de rider e por segurado, e variam por estado (por exemplo: NY US$ 2 mi; IL e NJ US$ 500 mil).',
+  'O privilégio de conversão permite converter para uma apólice permanente sem novas provas de segurabilidade, dentro do período e das condições previstos na apólice (variam por produto e estado).',
+  'Riders são opcionais e podem exigir prêmio adicional; sujeitos a underwriting, exclusões e limitações, podendo não estar disponíveis em todos os estados.',
+  'As garantias dependem da capacidade de pagamento de sinistros da companhia emissora (National Life Insurance Company / Life Insurance Company of the Southwest). O benefício por morte é geralmente isento de imposto de renda (IRC §101(a)(1)).',
+  'Apólice em dólares (US$). A solicitação, a ilustração, a assinatura e a entrega devem ocorrer nos Estados Unidos. Observação: o seguro temporário da NLG/LSW não está disponível para estrangeiros não residentes — clientes no Brasil qualificam-se apenas para produtos permanentes.',
+]
+
+/**
  * Standard NLG/LSW illustration disclaimers (pt-BR). Rendered on slides + PDF +
  * PPTX. Includes AG49-B, non-guaranteed language, and the foreign-national /
  * US-solicitation compliance note relevant to a Brazil-based agent.

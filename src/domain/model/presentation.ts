@@ -15,7 +15,7 @@ export const CURRENT_SCHEMA_VERSION = 1
 export const currencyCodeSchema = z.enum(['USD', 'BRL'])
 export type CurrencyCode = z.infer<typeof currencyCodeSchema>
 
-export const productTypeSchema = z.enum(['iul', 'annuity'])
+export const productTypeSchema = z.enum(['iul', 'term', 'annuity'])
 export type ProductType = z.infer<typeof productTypeSchema>
 
 /** Agent / company / carrier branding. Lives in Foundation; slides render it. */
@@ -94,6 +94,33 @@ export const iulSchema = z.object({
 })
 export type IulInputs = z.infer<typeof iulSchema>
 
+/**
+ * Term-life fields (present when productType === 'term'). Term has NO cash value,
+ * no accumulation, and no estimator — the ledger is Policy Year · Age · Guaranteed
+ * Premium · Guaranteed Death Benefit only. The level-premium schedule reuses the
+ * top-level `yearlyRows` (policyYear/age/premiumPaid/deathBenefit; accumulated/CSV
+ * stay empty). See docs/knowledge/national-life-term.md.
+ */
+export const termSchema = z.object({
+  premium: z.number().nonnegative().optional(),
+  premiumMode: z.enum(['monthly', 'annual']).default('monthly'),
+  deathBenefit: z.number().nonnegative().optional(),
+  /** Level-premium period in years (10 / 15 / 20 / 30); the Guaranteed Series. */
+  termLengthYears: z.number().int().positive().optional(),
+  /**
+   * Living benefit via the no-cost ABR suite. Term pays a DISCOUNTED, per-condition
+   * amount (not a flat %); percent is optional and, when shown, must be framed as
+   * "up to … (discounted)". Kept for the rare illustration that prints a figure.
+   */
+  livingBenefit: z.number().nonnegative().optional(),
+  livingBenefitPercent: z.number().min(0).max(100).optional(),
+  /** Conversion privilege window: first N years from issue, or to a given age if earlier. */
+  conversionYears: z.number().int().positive().optional(),
+  conversionToAge: z.number().int().positive().optional(),
+  riders: z.array(riderSchema).default([]),
+})
+export type TermInputs = z.infer<typeof termSchema>
+
 /** Annuity fields — reserved for a later wave; not built in the first release. */
 export const annuitySchema = z
   .object({
@@ -119,6 +146,7 @@ export const presentationInputsSchema = z.object({
   branding: brandingSchema.default({}),
   client: clientSchema.default({}),
   iul: iulSchema.default({}),
+  term: termSchema.default({}),
   annuity: annuitySchema.optional(),
   yearlyRows: z.array(yearlyRowSchema).default([]),
   highlightYears: z.array(z.number().int()).default([]),
@@ -135,6 +163,10 @@ export function isPresentable(p: PresentationInputs): boolean {
       iul.deathBenefit != null ||
       iul.projectedAccumulatedValue != null ||
       p.yearlyRows.length > 0
+    return hasClient && hasNumbers
+  }
+  if (p.productType === 'term') {
+    const hasNumbers = p.term.deathBenefit != null || p.yearlyRows.length > 0
     return hasClient && hasNumbers
   }
   return hasClient

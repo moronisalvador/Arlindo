@@ -78,7 +78,56 @@ export interface SlideCopy {
     livingEarly: string
     livingUpTo: (money: string) => string
   }
+  /** Term-only slide copy (term has no cash value, no accumulation, no income). */
+  term: TermSlideCopy
   clientFallback: string
+}
+
+export interface TermSlideCopy {
+  headline: {
+    eyebrow: string
+    title: string
+    whenEarly: string
+    whenIll: string
+    whenConvert: string
+    labelDeath: string
+    labelLiving: string
+    labelConvert: string
+    subDeath: string
+    livingDiscounted: string
+    convertBody: string
+  }
+  coverage: {
+    eyebrow: string
+    title: string
+    premium: string
+    perMonth: string
+    perYear: string
+    forYears: (n: number) => string
+    death: string
+    living: string
+    livingSub: string
+    conversion: string
+    /** Assembles the conversion window from the illustration's years / to-age. */
+    conversionWindow: (years: number | null, age: number | null) => string
+    includedTitle: string
+    additionalCost: string
+  }
+  schedule: {
+    eyebrow: string
+    title: string
+    year: string
+    age: string
+    premium: string
+    death: string
+  }
+  comparison: {
+    eyebrow: string
+    title: string
+    term: string
+    permanent: string
+    rows: Array<{ label: string; term: string; permanent: string }>
+  }
 }
 
 const pt: SlideCopy = {
@@ -165,6 +214,57 @@ const pt: SlideCopy = {
     livingUpToFull: 'até 100% do benefício',
     livingEarly: 'Acesso antecipado ao benefício',
     livingUpTo: (money) => `até ${money}`,
+  },
+  term: {
+    headline: {
+      eyebrow: 'Proteção Quando Você Precisa',
+      title: 'O que este plano faz por você',
+      whenEarly: 'Se você partir cedo',
+      whenIll: 'Se você adoecer',
+      whenConvert: 'Se seus planos mudarem',
+      labelDeath: 'Proteção por Morte',
+      labelLiving: 'Benefícios em Vida',
+      labelConvert: 'Conversão para Permanente',
+      subDeath: 'Pago à sua família, livre de imposto de renda',
+      livingDiscounted: 'Acesso antecipado ao benefício — com desconto, conforme a condição',
+      convertBody: 'Converta para uma apólice permanente, sem novo exame de saúde.',
+    },
+    coverage: {
+      eyebrow: 'Sua Cobertura',
+      title: 'Estrutura do Plano',
+      premium: 'Prêmio',
+      perMonth: '/mês',
+      perYear: '/ano',
+      forYears: (n) => `nivelado por ${n} anos`,
+      death: 'Proteção por Morte',
+      living: 'Benefícios em Vida',
+      livingSub: 'Sem custo — antecipação com desconto em caso de doença grave',
+      conversion: 'Privilégio de Conversão',
+      conversionWindow: (years, age) => conversionWindowText('pt', years, age),
+      includedTitle: 'Benefícios em Vida inclusos',
+      additionalCost: '(custo adicional)',
+    },
+    schedule: {
+      eyebrow: 'Detalhamento',
+      title: 'Cronograma de Prêmios',
+      year: 'Ano',
+      age: 'Idade',
+      premium: 'Prêmio',
+      death: 'Proteção por morte',
+    },
+    comparison: {
+      eyebrow: 'Comparando os Produtos',
+      title: 'Temporário vs. Permanente',
+      term: 'Seguro Temporário ★',
+      permanent: 'Seguro Permanente (IUL)',
+      rows: [
+        { label: 'Custo inicial', term: 'Mais baixo', permanent: 'Mais alto' },
+        { label: 'Proteção por dólar', term: 'Máxima imediata', permanent: 'Menor' },
+        { label: 'Valor acumulado', term: 'Não possui', permanent: 'Sim, cresce ao longo do tempo' },
+        { label: 'Duração', term: 'Período determinado; depois sobe até os 95', permanent: 'Vitalícia, sem expiração' },
+        { label: 'Melhor para', term: 'Máxima proteção a baixo custo, por um período', permanent: 'Proteção vitalícia + patrimônio' },
+      ],
+    },
   },
   clientFallback: 'o cliente',
 }
@@ -254,6 +354,57 @@ const en: SlideCopy = {
     livingEarly: 'Early access to the benefit',
     livingUpTo: (money) => `up to ${money}`,
   },
+  term: {
+    headline: {
+      eyebrow: 'Protection When You Need It',
+      title: 'What this plan does for you',
+      whenEarly: 'If you pass away early',
+      whenIll: 'If you become ill',
+      whenConvert: 'If your plans change',
+      labelDeath: 'Death Protection',
+      labelLiving: 'Living Benefits',
+      labelConvert: 'Conversion to Permanent',
+      subDeath: 'Paid to your family, income-tax-free',
+      livingDiscounted: 'Early access to the benefit — discounted, based on the condition',
+      convertBody: 'Convert to a permanent policy with no new medical exam.',
+    },
+    coverage: {
+      eyebrow: 'Your Coverage',
+      title: 'Plan Structure',
+      premium: 'Premium',
+      perMonth: '/mo',
+      perYear: '/yr',
+      forYears: (n) => `level for ${n} years`,
+      death: 'Death Protection',
+      living: 'Living Benefits',
+      livingSub: 'No cost — discounted acceleration in case of serious illness',
+      conversion: 'Conversion Privilege',
+      conversionWindow: (years, age) => conversionWindowText('en', years, age),
+      includedTitle: 'Living Benefits included',
+      additionalCost: '(additional cost)',
+    },
+    schedule: {
+      eyebrow: 'Detail',
+      title: 'Premium Schedule',
+      year: 'Year',
+      age: 'Age',
+      premium: 'Premium',
+      death: 'Death protection',
+    },
+    comparison: {
+      eyebrow: 'Comparing the Products',
+      title: 'Term vs. Permanent',
+      term: 'Term Insurance ★',
+      permanent: 'Permanent Insurance (IUL)',
+      rows: [
+        { label: 'Initial cost', term: 'Lowest', permanent: 'Higher' },
+        { label: 'Protection per dollar', term: 'Highest immediate', permanent: 'Lower' },
+        { label: 'Accumulated value', term: 'None', permanent: 'Yes, grows over time' },
+        { label: 'Duration', term: 'Fixed period; then rises to age 95', permanent: 'Lifelong, no expiration' },
+        { label: 'Best for', term: 'Maximum protection at low cost, for a period', permanent: 'Lifelong protection + wealth' },
+      ],
+    },
+  },
   clientFallback: 'the client',
 }
 
@@ -342,6 +493,57 @@ const es: SlideCopy = {
     livingEarly: 'Acceso anticipado al beneficio',
     livingUpTo: (money) => `hasta ${money}`,
   },
+  term: {
+    headline: {
+      eyebrow: 'Protección Cuando la Necesita',
+      title: 'Lo que este plan hace por usted',
+      whenEarly: 'Si fallece temprano',
+      whenIll: 'Si se enferma',
+      whenConvert: 'Si sus planes cambian',
+      labelDeath: 'Protección por Muerte',
+      labelLiving: 'Beneficios en Vida',
+      labelConvert: 'Conversión a Permanente',
+      subDeath: 'Pagado a su familia, libre de impuesto sobre la renta',
+      livingDiscounted: 'Acceso anticipado al beneficio — con descuento, según la condición',
+      convertBody: 'Convierta a una póliza permanente, sin nuevo examen médico.',
+    },
+    coverage: {
+      eyebrow: 'Su Cobertura',
+      title: 'Estructura del Plan',
+      premium: 'Prima',
+      perMonth: '/mes',
+      perYear: '/año',
+      forYears: (n) => `nivelada por ${n} años`,
+      death: 'Protección por Muerte',
+      living: 'Beneficios en Vida',
+      livingSub: 'Sin costo — anticipación con descuento en caso de enfermedad grave',
+      conversion: 'Privilegio de Conversión',
+      conversionWindow: (years, age) => conversionWindowText('es', years, age),
+      includedTitle: 'Beneficios en Vida incluidos',
+      additionalCost: '(costo adicional)',
+    },
+    schedule: {
+      eyebrow: 'Detalle',
+      title: 'Cronograma de Primas',
+      year: 'Año',
+      age: 'Edad',
+      premium: 'Prima',
+      death: 'Protección por muerte',
+    },
+    comparison: {
+      eyebrow: 'Comparando los Productos',
+      title: 'Temporal vs. Permanente',
+      term: 'Seguro Temporal ★',
+      permanent: 'Seguro Permanente (IUL)',
+      rows: [
+        { label: 'Costo inicial', term: 'Más bajo', permanent: 'Más alto' },
+        { label: 'Protección por dólar', term: 'Máxima inmediata', permanent: 'Menor' },
+        { label: 'Valor acumulado', term: 'No tiene', permanent: 'Sí, crece con el tiempo' },
+        { label: 'Duración', term: 'Período fijo; luego sube hasta los 95', permanent: 'Vitalicia, sin vencimiento' },
+        { label: 'Mejor para', term: 'Máxima protección a bajo costo, por un período', permanent: 'Protección vitalicia + patrimonio' },
+      ],
+    },
+  },
   clientFallback: 'el cliente',
 }
 
@@ -358,6 +560,42 @@ export function defaultProductNameFor(lang: PresentationLanguage | undefined): s
     : lang === 'es'
       ? 'Seguro de Vida Universal Indexado (IUL)'
       : 'Seguro de Vida Universal Indexado (IUL)'
+}
+
+/** Localized default TERM product name. */
+export function defaultTermProductNameFor(lang: PresentationLanguage | undefined): string {
+  return lang === 'en'
+    ? 'Term Life Insurance'
+    : lang === 'es'
+      ? 'Seguro de Vida a Término'
+      : 'Seguro de Vida Temporário'
+}
+
+/** Assembles the conversion-privilege window ("first 20 years or to age 70") per language. */
+function conversionWindowText(
+  lang: PresentationLanguage,
+  years: number | null,
+  age: number | null,
+): string {
+  const firstYears = (n: number) =>
+    lang === 'en' ? `first ${n} years` : lang === 'es' ? `primeros ${n} años` : `primeiros ${n} anos`
+  const toAge = (a: number) =>
+    lang === 'en' ? `to age ${a}` : lang === 'es' ? `hasta los ${a} años` : `até os ${a} anos`
+  const orEarlier = lang === 'en' ? ', whichever is earlier' : lang === 'es' ? ', lo que ocurra primero' : ', o que ocorrer primeiro'
+  const perPolicy =
+    lang === 'en'
+      ? 'As provided in the policy'
+      : lang === 'es'
+        ? 'Según lo previsto en la póliza'
+        : 'Conforme previsto na apólice'
+  if (years != null && age != null) return `${cap(firstYears(years))} ${toAge(age)}${orEarlier}`
+  if (years != null) return cap(firstYears(years))
+  if (age != null) return cap(toAge(age))
+  return perPolicy
+}
+
+function cap(s: string): string {
+  return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
 /** Self-labeling note the estimate engine prepends, per language. */
@@ -381,6 +619,7 @@ const RIDER_I18N: Record<'en' | 'es', Record<string, { label: string; note: stri
     fertility_journey: { label: 'Fertility Journey Support', note: 'No cost. Accumulated-value credit after eligible fertility treatment.' },
     premium_chronic_care: { label: 'Premium Chronic Care', note: 'Additional cost. Accelerates a larger share — up to the full death benefit (~$3M limit), 2% or 4% per month (chosen at issue). Not available in CA or NY.' },
     waiver_monthly_deductions: { label: 'Waiver of Monthly Deductions', note: 'Additional cost. Waives monthly deductions in case of total disability (~6-month waiting period / LSW).' },
+    waiver_of_premium: { label: 'Waiver of Premium', note: 'Additional cost. Waives the premium in case of total disability; also waives the premium on the converted permanent policy.' },
     childrens_term: { label: "Children's Term", note: 'Additional cost. Coverage of $5,000 to $25,000 per child (in $1,000 increments), to age 25; single rate regardless of the number of children.' },
   },
   es: {
@@ -393,6 +632,7 @@ const RIDER_I18N: Record<'en' | 'es', Record<string, { label: string; note: stri
     fertility_journey: { label: 'Apoyo al Camino de Fertilidad', note: 'Sin costo. Crédito al valor acumulado tras un tratamiento de fertilidad elegible.' },
     premium_chronic_care: { label: 'Cuidado Crónico Premium', note: 'Costo adicional. Anticipa una porción mayor — hasta el beneficio por muerte completo (límite ~US$ 3 M), 2% o 4% por mes (elegido en la emisión). No disponible en CA ni NY.' },
     waiver_monthly_deductions: { label: 'Exención de Costos por Invalidez', note: 'Costo adicional. Exime las deducciones mensuales en caso de invalidez total (carencia ~6 meses / LSW).' },
+    waiver_of_premium: { label: 'Exención de Prima por Invalidez', note: 'Costo adicional. Exime la prima en caso de invalidez total; también exime la prima de la póliza permanente convertida.' },
     childrens_term: { label: 'Seguro Temporal para Hijos', note: 'Costo adicional. Cobertura de US$ 5 mil a US$ 25 mil por hijo (múltiplos de US$ 1.000), hasta los 25 años; tarifa única independiente del número de hijos.' },
   },
 }
@@ -421,6 +661,30 @@ const DISCLAIMERS_I18N: Record<'en' | 'es', string[]> = {
   ],
 }
 
+/** Canonical TERM disclaimer sets for en/es (no AG49-B / cash-value language). */
+const DISCLAIMERS_TERM_I18N: Record<'en' | 'es', string[]> = {
+  en: [
+    'This is an illustration only and is not intended to predict actual values. Refer to the policy for full details; in case of conflict, the policy controls.',
+    'Term insurance provides protection for a set period, builds no cash value and pays no dividends. After the level-premium period the premium increases annually to age 95.',
+    'Accelerated (living) benefits are paid at a discount, may be taxable, and may affect eligibility for public-assistance programs. Using a benefit may reduce or eliminate other policy and rider benefits.',
+    'The lifetime limits of the accelerated benefits are shared by rider group and per insured, and vary by state (for example: NY $2M; IL and NJ $500k).',
+    'The conversion privilege allows conversion to a permanent policy with no new evidence of insurability, within the period and conditions set in the policy (which vary by product and state).',
+    'Riders are optional and may require an additional premium; they are subject to underwriting, exclusions and limitations, and may not be available in all states.',
+    'Guarantees depend on the claims-paying ability of the issuing company (National Life Insurance Company / Life Insurance Company of the Southwest). The death benefit is generally income-tax-free (IRC §101(a)(1)).',
+    'Policy denominated in U.S. dollars (USD). Solicitation, illustration, signing and delivery must take place in the United States. Note: NLG/LSW term insurance is not available to non-resident foreign nationals — clients in Brazil qualify for permanent products only.',
+  ],
+  es: [
+    'Esta es solo una ilustración y no pretende predecir valores reales. Consulte la póliza para los detalles completos; en caso de conflicto, prevalece la póliza.',
+    'El seguro temporal ofrece protección por un período determinado, no acumula valor en efectivo y no paga dividendos. Tras el período de prima nivelada, la prima aumenta anualmente hasta la edad 95.',
+    'Los beneficios acelerados (en vida) se pagan con descuento, pueden ser tributables y pueden afectar la elegibilidad a programas de asistencia pública. El uso de un beneficio puede reducir o eliminar otros beneficios de la póliza y de los riders.',
+    'Los límites vitalicios de los beneficios acelerados se comparten por grupo de rider y por asegurado, y varían por estado (por ejemplo: NY US$ 2 M; IL y NJ US$ 500 mil).',
+    'El privilegio de conversión permite convertir a una póliza permanente sin nuevas pruebas de asegurabilidad, dentro del período y las condiciones previstos en la póliza (que varían por producto y estado).',
+    'Los riders son opcionales y pueden requerir una prima adicional; están sujetos a suscripción, exclusiones y limitaciones, y pueden no estar disponibles en todos los estados.',
+    'Las garantías dependen de la capacidad de pago de siniestros de la compañía emisora (National Life Insurance Company / Life Insurance Company of the Southwest). El beneficio por muerte es generalmente libre de impuesto sobre la renta (IRC §101(a)(1)).',
+    'Póliza en dólares (US$). La solicitud, la ilustración, la firma y la entrega deben realizarse en los Estados Unidos. Nota: el seguro temporal de NLG/LSW no está disponible para extranjeros no residentes — los clientes en Brasil califican solo para productos permanentes.',
+  ],
+}
+
 /** Translate a rider's label/note into `lang` by stable id; falls back to the stored text. */
 export function translateRider<T extends { id: string; label: string; note?: string }>(
   rider: T,
@@ -432,11 +696,17 @@ export function translateRider<T extends { id: string; label: string; note?: str
   return { ...rider, label: t.label, note: rider.note != null ? t.note : rider.note }
 }
 
-/** Disclaimers for a language: en/es use the canonical set; pt uses the stored one. */
+/**
+ * Disclaimers for a language: en/es use the canonical set (term vs IUL); pt uses the
+ * stored one (the term/IUL default set is seeded at creation in newPresentation).
+ */
 export function disclaimersFor(
   lang: PresentationLanguage | undefined,
   ptFallback: string[],
+  productType: 'iul' | 'term' = 'iul',
 ): string[] {
-  if (lang === 'en' || lang === 'es') return DISCLAIMERS_I18N[lang]
+  if (lang === 'en' || lang === 'es') {
+    return productType === 'term' ? DISCLAIMERS_TERM_I18N[lang] : DISCLAIMERS_I18N[lang]
+  }
   return ptFallback
 }

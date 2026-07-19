@@ -17,9 +17,16 @@ import {
   type IulInputs,
   type PresentationInputs,
   type Rider,
+  type TermInputs,
   type YearlyRow,
 } from '@domain/model/presentation'
-import { availableProducts, getProduct } from '@domain/model/products'
+import { availableProducts, getProduct, productTypeOf } from '@domain/model/products'
+import {
+  DEFAULT_IUL_RIDERS,
+  DEFAULT_IUL_DISCLAIMERS,
+  DEFAULT_TERM_RIDERS,
+  DEFAULT_TERM_DISCLAIMERS,
+} from '@domain/model/riders'
 import { formatMoney } from '@domain/format'
 import { presentationRepository, profileRepository } from '@persistence'
 import { routes } from '@app/routes'
@@ -156,14 +163,46 @@ function Editor({ id }: { id: string }) {
     [scheduleSave],
   )
 
-  const setProduct = (productId: string) => update((p) => ({ ...p, productId }))
+  // Changing product can switch the product FAMILY (iul ↔ term). On a family
+  // switch we set productType, seed that family's default riders (unless already
+  // present) and swap the default disclaimer set — so the deck is valid at once.
+  const setProduct = (productId: string) =>
+    update((p) => {
+      const nextType = productTypeOf(productId)
+      if (nextType === p.productType) return { ...p, productId }
+      if (nextType === 'term') {
+        return {
+          ...p,
+          productType: 'term',
+          productId,
+          term: {
+            ...p.term,
+            riders: p.term.riders.length ? p.term.riders : DEFAULT_TERM_RIDERS.map((r) => ({ ...r })),
+          },
+          disclaimers: [...DEFAULT_TERM_DISCLAIMERS],
+        }
+      }
+      return {
+        ...p,
+        productType: 'iul',
+        productId,
+        iul: {
+          ...p.iul,
+          riders: p.iul.riders.length ? p.iul.riders : DEFAULT_IUL_RIDERS.map((r) => ({ ...r })),
+        },
+        disclaimers: [...DEFAULT_IUL_DISCLAIMERS],
+      }
+    })
   const setLanguage = (presentationLanguage: 'pt' | 'en' | 'es') =>
     update((p) => ({ ...p, presentationLanguage }))
   const setClient = (patch: Partial<Client>) =>
     update((p) => ({ ...p, client: { ...p.client, ...patch } }))
   const setIul = (patch: Partial<IulInputs>) =>
     update((p) => ({ ...p, iul: { ...p.iul, ...patch } }))
+  const setTerm = (patch: Partial<TermInputs>) =>
+    update((p) => ({ ...p, term: { ...p.term, ...patch } }))
   const setRiders = (riders: Rider[]) => update((p) => ({ ...p, iul: { ...p.iul, riders } }))
+  const setTermRiders = (riders: Rider[]) => update((p) => ({ ...p, term: { ...p.term, riders } }))
   const setRows = (yearlyRows: YearlyRow[]) => update((p) => ({ ...p, yearlyRows }))
 
   if (query.isLoading) return <Loading label={t('page.loading')} />
@@ -195,16 +234,22 @@ function Editor({ id }: { id: string }) {
   const currency = working.displayCurrency
   const canPresent = isPresentable(working)
   const iul = working.iul
+  const term = working.term
+  const isTerm = working.productType === 'term'
 
   const toggle = (key: string) => setOpenKey((cur) => (cur === key ? '' : key))
 
   // Per-section completion + collapsed summaries (progress at a glance).
-  const includedRiders = iul.riders.filter((r) => r.included).length
+  const activeRiders = isTerm ? term.riders : iul.riders
+  const includedRiders = activeRiders.filter((r) => r.included).length
   const clientComplete = working.client.name.trim().length > 0
-  const planComplete = iul.premium != null && iul.deathBenefit != null
+  const planComplete = isTerm
+    ? term.premium != null && term.deathBenefit != null
+    : iul.premium != null && iul.deathBenefit != null
   const ridersComplete = includedRiders > 0
-  const yearsComplete =
-    iul.projectionSource === 'estimate' || working.yearlyRows.length > 0
+  const yearsComplete = isTerm
+    ? working.yearlyRows.length > 0
+    : iul.projectionSource === 'estimate' || working.yearlyRows.length > 0
 
   const productSummary = getProduct(working.productId).name
   const clientSummary = clientComplete
@@ -213,13 +258,18 @@ function Editor({ id }: { id: string }) {
         .join(' · ')
     : t('summaries.toFill')
   const planSummary = planComplete
-    ? `${formatMoney(iul.premium, currency)} · ${formatMoney(iul.deathBenefit, currency)}`
+    ? isTerm
+      ? `${formatMoney(term.premium, currency)} · ${formatMoney(term.deathBenefit, currency)}`
+      : `${formatMoney(iul.premium, currency)} · ${formatMoney(iul.deathBenefit, currency)}`
     : t('summaries.toFill')
   const ridersSummary = ridersComplete
     ? t('summaries.ridersIncluded', { count: includedRiders })
     : t('summaries.ridersNone')
-  const yearsSummary =
-    iul.projectionSource === 'estimate'
+  const yearsSummary = isTerm
+    ? working.yearlyRows.length > 0
+      ? t('summaries.rows', { count: working.yearlyRows.length })
+      : t('summaries.toFill')
+    : iul.projectionSource === 'estimate'
       ? t('summaries.sourceEstimate')
       : working.yearlyRows.length > 0
         ? t('summaries.rows', { count: working.yearlyRows.length })
@@ -311,15 +361,18 @@ function Editor({ id }: { id: string }) {
         </Card>
       </CollapsibleSection>
 
-      {/* 3) Plano IUL */}
+      {/* 3) Plano */}
       <CollapsibleSection
         step="3"
-        title={t('sections.plan')}
+        title={isTerm ? t('sections.planTerm') : t('sections.plan')}
         summary={planSummary}
         complete={planComplete}
         open={openKey === 'plano'}
         onToggle={() => toggle('plano')}
       >
+        {isTerm ? (
+          <TermPlanFields term={term} currency={currency} setTerm={setTerm} />
+        ) : (
         <Card>
           <div className="space-y-4">
             <Segmented
@@ -448,6 +501,7 @@ function Editor({ id }: { id: string }) {
             )}
           </div>
         </Card>
+        )}
       </CollapsibleSection>
 
       {/* 4) Coberturas / Riders */}
@@ -459,19 +513,33 @@ function Editor({ id }: { id: string }) {
         open={openKey === 'riders'}
         onToggle={() => toggle('riders')}
       >
-        <RidersEditor riders={iul.riders} onChange={setRiders} />
+        <RidersEditor
+          riders={isTerm ? term.riders : iul.riders}
+          onChange={isTerm ? setTermRiders : setRiders}
+        />
       </CollapsibleSection>
 
       {/* 5) Fonte dos números + tabela ano a ano (ou estimativa no app) */}
       <CollapsibleSection
         step="5"
-        title={t('sections.years')}
+        title={isTerm ? t('sections.yearsTerm') : t('sections.years')}
         summary={yearsSummary}
         complete={yearsComplete}
         open={openKey === 'fonte'}
         onToggle={() => toggle('fonte')}
       >
-        {iul.projectionSource === 'estimate' ? (
+        {isTerm ? (
+          <div className="space-y-3">
+            <p className="text-sm text-muted">{t('plan.basisNote')}</p>
+            <YearTableEditor
+              rows={working.yearlyRows}
+              onChange={setRows}
+              clientAge={working.client.age}
+              defaultDeathBenefit={term.deathBenefit}
+              variant="term"
+            />
+          </div>
+        ) : iul.projectionSource === 'estimate' ? (
           <Card tone="alt">
             <p className="text-base text-ink/80">{t('source.estimateNote')}</p>
           </Card>
@@ -590,6 +658,95 @@ function ProductSelector({
             </span>
           </span>
         </div>
+      </div>
+    </Card>
+  )
+}
+
+/**
+ * Term plan fields: premium + mode, level-term length, death benefit, optional
+ * accessible living-benefit %, and the conversion window. No source toggle, no
+ * estimator, no accumulation/income fields — term has no cash value.
+ */
+function TermPlanFields({
+  term,
+  currency,
+  setTerm,
+}: {
+  term: TermInputs
+  currency: PresentationInputs['displayCurrency']
+  setTerm: (patch: Partial<TermInputs>) => void
+}) {
+  const { t } = useTranslation('dataEntry')
+  return (
+    <Card>
+      <div className="space-y-4">
+        <div className="grid gap-4 sm:grid-cols-2">
+          <NumberField
+            label={t('planTerm.premium')}
+            value={term.premium}
+            money
+            currency={currency}
+            hint={t('plan.required')}
+            onChange={(n) => setTerm({ premium: n })}
+          />
+          <Segmented
+            label={t('plan.premiumMode')}
+            value={term.premiumMode}
+            onChange={(v) => setTerm({ premiumMode: v })}
+            options={[
+              { value: 'monthly', label: t('plan.monthly') },
+              { value: 'annual', label: t('plan.annual') },
+            ]}
+          />
+          <NumberField
+            label={t('planTerm.termLength')}
+            value={term.termLengthYears}
+            integer
+            suffix={t('plan.years')}
+            hint={t('planTerm.termLengthHint')}
+            onChange={(n) => setTerm({ termLengthYears: n })}
+          />
+          <NumberField
+            label={t('planTerm.deathBenefit')}
+            value={term.deathBenefit}
+            money
+            currency={currency}
+            hint={t('plan.required')}
+            onChange={(n) => setTerm({ deathBenefit: n })}
+          />
+          <NumberField
+            label={t('planTerm.conversionYears')}
+            value={term.conversionYears}
+            integer
+            suffix={t('plan.years')}
+            hint={t('planTerm.conversionYearsHint')}
+            onChange={(n) => setTerm({ conversionYears: n })}
+          />
+          <NumberField
+            label={t('planTerm.conversionToAge')}
+            value={term.conversionToAge}
+            integer
+            suffix={t('plan.age')}
+            hint={t('planTerm.conversionToAgeHint')}
+            onChange={(n) => setTerm({ conversionToAge: n })}
+          />
+          <NumberField
+            label={t('planTerm.livingBenefitPercent')}
+            value={term.livingBenefitPercent}
+            integer
+            suffix="%"
+            hint={t('planTerm.livingBenefitPercentHint')}
+            onChange={(n) =>
+              setTerm({
+                livingBenefitPercent: n == null ? undefined : Math.min(100, Math.max(0, n)),
+              })
+            }
+          />
+        </div>
+        <Card tone="alt">
+          <p className="text-base text-ink/80">{t('planTerm.fnNote')}</p>
+        </Card>
       </div>
     </Card>
   )

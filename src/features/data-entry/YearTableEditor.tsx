@@ -16,6 +16,14 @@ const COLUMNS: { key: NumField; labelKey: string; integer?: boolean }[] = [
   { key: 'deathBenefit', labelKey: 'years.deathBenefit' },
 ]
 
+/** Term has no cash value: drop accumulated/CSV and relabel premium. */
+const TERM_COLUMNS: { key: NumField; labelKey: string; integer?: boolean }[] = [
+  { key: 'policyYear', labelKey: 'years.policyYear', integer: true },
+  { key: 'age', labelKey: 'years.age', integer: true },
+  { key: 'premiumPaid', labelKey: 'years.premiumPaidTerm' },
+  { key: 'deathBenefit', labelKey: 'years.deathBenefit' },
+]
+
 /**
  * Editable year-by-year table copied off the carrier illustration. Add / remove
  * rows and edit every cell. A `gen` counter forces a body remount only on
@@ -26,6 +34,7 @@ export function YearTableEditor({
   onChange,
   clientAge,
   defaultDeathBenefit,
+  variant = 'iul',
 }: {
   rows: YearlyRow[]
   onChange: (next: YearlyRow[]) => void
@@ -33,9 +42,12 @@ export function YearTableEditor({
   clientAge?: number
   /** Prefilled into each new row's death benefit (level-DB common case; editable). */
   defaultDeathBenefit?: number
+  /** 'term' drops the cash-value columns (term has no accumulated/surrender value). */
+  variant?: 'iul' | 'term'
 }) {
   const { t } = useTranslation('dataEntry')
   const [gen, setGen] = useState(0)
+  const columns = variant === 'term' ? TERM_COLUMNS : COLUMNS
 
   const editCell = (index: number, key: NumField, raw: string, integer?: boolean) => {
     const parsed = parseNumberInput(raw)
@@ -70,7 +82,7 @@ export function YearTableEditor({
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="bg-surface-alt">
-                {COLUMNS.map((col) => (
+                {columns.map((col) => (
                   <th
                     key={col.key}
                     className="whitespace-nowrap px-3 py-3 font-sans text-sm font-semibold text-muted"
@@ -84,7 +96,7 @@ export function YearTableEditor({
             <tbody>
               {rows.map((row, index) => (
                 <tr key={`${gen}-${index}`} className="border-t border-line">
-                  {COLUMNS.map((col) => (
+                  {columns.map((col) => (
                     <td key={col.key} className="px-2 py-2">
                       <CellInput
                         value={row[col.key]}
