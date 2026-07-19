@@ -485,6 +485,51 @@ function timelineSlide(pptx: pptxgen, d: DerivedPresentation) {
   })
 }
 
+function valueSummarySlide(pptx: pptxgen, d: DerivedPresentation) {
+  const s = pptx.addSlide()
+  const v = slideCopy(d.meta.language).valueSummary
+  const loc = localeFor(d.meta.language)
+  const cur = d.meta.currency
+  const top = addHeader(s, v.eyebrow, v.title)
+  const h = d.headline
+  const isTerm = d.meta.productType === 'term'
+  const annualPrem = h.premium != null ? h.premium * (h.premiumMode === 'annual' ? 1 : 12) : null
+  const invest = isTerm && annualPrem != null && h.termLengthYears != null ? annualPrem * h.termLengthYears : h.totalPremiumsPaid
+  // You invest (navy card)
+  s.addShape('roundRect', { x: 0.6, y: top, w: 3.6, h: 3.6, fill: { color: C.navy }, line: { type: 'none' }, rectRadius: 0.08 })
+  s.addText(v.youInvest.toUpperCase(), { x: 0.6, y: top + 1.1, w: 3.6, h: 0.4, align: 'center', fontFace: SANS, fontSize: 11, bold: true, color: C.orange, charSpacing: 1 })
+  s.addText(formatMoney(invest, cur, { locale: loc }), { x: 0.6, y: top + 1.6, w: 3.6, h: 0.8, align: 'center', fontFace: SERIF, fontSize: 30, bold: true, color: C.white })
+  // You receive
+  const gets: Array<[string, string]> = [[v.protection, formatMoney(h.deathBenefit, cur, { locale: loc })]]
+  if (!isTerm && h.incomeOptionAnnual != null) gets.push([v.income, `${formatMoney(h.incomeOptionAnnual, cur, { locale: loc })} ${v.perYear}`])
+  if (h.livingBenefit != null) gets.push([v.living, formatMoney(h.livingBenefit, cur, { locale: loc })])
+  if (!isTerm && h.projectedAccumulatedValue != null) gets.push([v.accumulated, formatMoney(h.projectedAccumulatedValue, cur, { locale: loc })])
+  if (isTerm) gets.push([v.conversion, '✓'])
+  s.addText(v.youGet.toUpperCase(), { x: 4.6, y: top - 0.05, w: 8, h: 0.3, fontFace: SANS, fontSize: 9, bold: true, color: C.muted, charSpacing: 1 })
+  gets.slice(0, 4).forEach(([label, val], i) => {
+    const x = 4.6 + (i % 2) * 4.1
+    const y = top + 0.35 + Math.floor(i / 2) * 1.35
+    s.addShape('roundRect', { x, y, w: 3.9, h: 1.15, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.05 })
+    s.addText(label, { x: x + 0.15, y: y + 0.12, w: 3.6, h: 0.35, fontFace: SANS, fontSize: 11, color: C.muted })
+    s.addText(val, { x: x + 0.15, y: y + 0.45, w: 3.6, h: 0.6, fontFace: SERIF, fontSize: 22, bold: true, color: C.navy })
+  })
+  s.addText(v.tagline, { x: 0.6, y: top + 3.9, w: 12.1, h: 0.6, align: 'center', fontFace: SERIF, fontSize: 16, italic: true, color: C.navy })
+}
+
+function nextStepsSlide(pptx: pptxgen, d: DerivedPresentation) {
+  const s = pptx.addSlide()
+  const n = slideCopy(d.meta.language).nextSteps
+  const top = addHeader(s, n.eyebrow, n.title)
+  ;[n.step1, n.step2, n.step3].forEach((step, i) => {
+    const y = top + 0.2 + i * 1.15
+    s.addShape('roundRect', { x: 1.6, y, w: 10, h: 0.95, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.06 })
+    s.addShape('ellipse', { x: 1.85, y: y + 0.15, w: 0.65, h: 0.65, fill: { color: C.navy }, line: { type: 'none' } })
+    s.addText(String(i + 1), { x: 1.85, y: y + 0.15, w: 0.65, h: 0.65, align: 'center', valign: 'middle', fontFace: SERIF, fontSize: 20, bold: true, color: C.white })
+    s.addText(step, { x: 2.8, y, w: 8.6, h: 0.95, valign: 'middle', fontFace: SERIF, fontSize: 20, color: C.navy })
+  })
+  s.addText(n.close, { x: 1.6, y: top + 3.9, w: 10, h: 0.5, align: 'center', fontFace: SANS, fontSize: 13, color: C.muted })
+}
+
 /** Build and trigger download of the editable .pptx (branches IUL vs Term). */
 export async function downloadPptx(derived: DerivedPresentation): Promise<void> {
   const pptx = new pptxgen()
@@ -501,6 +546,8 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
     termCoverageSlide(pptx, derived)
     if (derived.table.length > 0) termScheduleSlide(pptx, derived)
     termComparisonSlide(pptx, derived)
+    valueSummarySlide(pptx, derived)
+    nextStepsSlide(pptx, derived)
     disclaimersSlide(pptx, derived)
   } else {
     coverSlide(pptx, derived)
@@ -517,6 +564,8 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
     }
     optionsSlide(pptx, derived)
     comparisonSlide(pptx, derived)
+    valueSummarySlide(pptx, derived)
+    nextStepsSlide(pptx, derived)
     disclaimersSlide(pptx, derived)
   }
 
