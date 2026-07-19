@@ -3,10 +3,13 @@ export const ptBR = {
   eyebrow: 'Apresentações',
   title: 'Suas apresentações',
   new: 'Nova apresentação',
+  newIul: 'Nova (IUL)',
+  newTerm: 'Nova (Termo)',
   creating: 'Criando…',
   noName: 'Sem nome',
   product: {
     iul: 'IUL',
+    term: 'Termo',
     annuity: 'Anuidade',
   },
   updated: 'Atualizado {{date}}',

@@ -60,11 +60,11 @@ export default function PresentationsPage() {
   }, [])
 
   const createMutation = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (productType: 'iul' | 'term' = 'iul') => {
       const profile = await profileRepository.get()
       const created = await presentationRepository.create({
         branding: profile,
-        productType: 'iul',
+        productType,
       })
       return created
     },
@@ -138,13 +138,22 @@ export default function PresentationsPage() {
         className="rounded-card"
         showLogo={false}
         right={
-          <Button
-            variant="primary"
-            onClick={() => createMutation.mutate()}
-            disabled={createMutation.isPending}
-          >
-            {createMutation.isPending ? t('creating') : `+ ${t('new')}`}
-          </Button>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant="primary"
+              onClick={() => createMutation.mutate('iul')}
+              disabled={createMutation.isPending}
+            >
+              {createMutation.isPending ? t('creating') : `+ ${t('newIul')}`}
+            </Button>
+            <Button
+              variant="secondary"
+              onClick={() => createMutation.mutate('term')}
+              disabled={createMutation.isPending}
+            >
+              {`+ ${t('newTerm')}`}
+            </Button>
+          </div>
         }
       />
 
@@ -165,7 +174,7 @@ export default function PresentationsPage() {
 
       <ListBody
         query={query}
-        onCreate={() => createMutation.mutate()}
+        onCreate={() => createMutation.mutate('iul')}
         creating={createMutation.isPending}
         onOpen={(id) => navigate(routes.editor(id))}
         onPresent={(id) => navigate(routes.present(id))}
@@ -331,7 +340,9 @@ function PresentationCard({
   const productLabel =
     presentation.productType === 'annuity'
       ? t('product.annuity')
-      : t('product.iul')
+      : presentation.productType === 'term'
+        ? t('product.term')
+        : t('product.iul')
   const subtitle = presentation.title.trim()
     ? `${presentation.title} · ${productLabel}`
     : productLabel

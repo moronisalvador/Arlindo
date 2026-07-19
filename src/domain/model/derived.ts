@@ -37,6 +37,10 @@ export interface DerivedPresentation {
     incomeOptionAnnual?: number
     incomeToAge?: number
     projectionYears?: number
+    /** Term only: level-premium period (years) and conversion-privilege window. */
+    termLengthYears?: number
+    conversionYears?: number
+    conversionToAge?: number
   }
   series: {
     policyYears: number[]

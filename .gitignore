@@ -14,3 +14,5 @@ dev-dist
 Dave Miller.pdf
 /samples/
 *.illustration.pdf
+# Belt-and-suspenders: no client illustration PDF (any name) is ever committed
+*.pdf

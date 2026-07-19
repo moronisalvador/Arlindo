@@ -326,7 +326,123 @@ function disclaimersSlide(pptx: pptxgen, d: DerivedPresentation) {
   s.addText(`${d.meta.branding.company} · ${d.meta.branding.carrier}`, { x: 0.9, y: 6.6, w: 10, h: 0.4, fontFace: SANS, fontSize: 10, color: '9AA1B2' })
 }
 
-/** Build and trigger download of the editable .pptx. */
+// ── Term slides (no cash value → premium/death/living + conversion) ──────────
+
+function termHeadlineSlide(pptx: pptxgen, d: DerivedPresentation) {
+  const s = pptx.addSlide()
+  const t = slideCopy(d.meta.language).term
+  const loc = localeFor(d.meta.language)
+  const top = addHeader(s, t.headline.eyebrow, t.headline.title)
+  const cur = d.meta.currency
+  const h = d.headline
+  const cards: Array<[string, string, string, string]> = [
+    ['🛡️', t.headline.whenEarly, formatMoney(h.deathBenefit, cur, { locale: loc }), t.headline.subDeath],
+    ['❤️', t.headline.whenIll, formatMoney(h.livingBenefit ?? h.deathBenefit, cur, { locale: loc }), t.headline.livingDiscounted],
+    ['🔄', t.headline.whenConvert, t.coverage.conversionWindow(h.conversionYears ?? null, h.conversionToAge ?? null), t.headline.convertBody],
+  ]
+  const cardW = 3.9
+  const gap = 0.2
+  cards.forEach(([emoji, when, value, sub], i) => {
+    const x = 0.6 + i * (cardW + gap)
+    s.addShape('roundRect', { x, y: top, w: cardW, h: 4, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.08 })
+    s.addText(emoji, { x, y: top + 0.25, w: cardW, h: 0.7, fontSize: 30, align: 'center' })
+    s.addText(when, { x: x + 0.15, y: top + 1.05, w: cardW - 0.3, h: 0.4, fontFace: SANS, fontSize: 13, bold: true, color: C.orange, align: 'center' })
+    s.addText(value, { x: x + 0.15, y: top + 1.6, w: cardW - 0.3, h: 1, fontFace: SERIF, fontSize: 22, bold: true, color: C.navy, align: 'center', valign: 'middle' })
+    s.addText(sub, { x: x + 0.2, y: top + 2.7, w: cardW - 0.4, h: 1, fontFace: SANS, fontSize: 11, color: C.muted, align: 'center' })
+  })
+}
+
+function termCoverageSlide(pptx: pptxgen, d: DerivedPresentation) {
+  const s = pptx.addSlide()
+  const t = slideCopy(d.meta.language).term
+  const loc = localeFor(d.meta.language)
+  const top = addHeader(s, t.coverage.eyebrow, t.coverage.title)
+  const cur = d.meta.currency
+  const h = d.headline
+  const per = h.premiumMode === 'annual' ? t.coverage.perYear : t.coverage.perMonth
+  const premiumLabel = h.termLengthYears ? `${t.coverage.premium} · ${t.coverage.forYears(h.termLengthYears)}` : t.coverage.premium
+  const stats: Array<[string, string]> = [
+    [premiumLabel, h.premium != null ? `${formatMoney(h.premium, cur, { locale: loc })} ${per}` : '—'],
+    [t.coverage.death, formatMoney(h.deathBenefit, cur, { locale: loc })],
+    [t.coverage.living, formatMoney(h.livingBenefit ?? h.deathBenefit, cur, { locale: loc })],
+  ]
+  const cardW = 3.9
+  const gap = 0.2
+  stats.forEach(([label, value], i) => {
+    const x = 0.6 + i * (cardW + gap)
+    s.addShape('roundRect', { x, y: top, w: cardW, h: 1.7, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.06 })
+    s.addShape('rect', { x, y: top, w: cardW, h: 0.45, fill: { color: C.orange } })
+    s.addText(label, { x: x + 0.15, y: top + 0.03, w: cardW - 0.3, h: 0.4, fontFace: SANS, fontSize: 10, bold: true, color: C.navy, valign: 'middle' })
+    s.addText(value, { x: x + 0.15, y: top + 0.55, w: cardW - 0.3, h: 1, fontFace: SERIF, fontSize: 24, bold: true, color: C.navy, align: 'center', valign: 'middle' })
+  })
+  // conversion callout
+  s.addShape('roundRect', { x: 0.6, y: top + 1.95, w: 12.1, h: 0.7, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.06 })
+  s.addText(`🔄  ${t.coverage.conversion}`, { x: 0.8, y: top + 1.95, w: 6, h: 0.7, fontFace: SANS, fontSize: 13, bold: true, color: C.navy, valign: 'middle' })
+  s.addText(t.coverage.conversionWindow(h.conversionYears ?? null, h.conversionToAge ?? null), { x: 6.8, y: top + 1.95, w: 5.7, h: 0.7, fontFace: SANS, fontSize: 13, color: C.ink, align: 'right', valign: 'middle' })
+  // included riders
+  const riders = d.riders.slice(0, 8)
+  s.addText(t.coverage.includedTitle, { x: 0.6, y: top + 2.85, w: 8, h: 0.4, fontFace: SERIF, fontSize: 15, bold: true, color: C.navy })
+  riders.forEach((r, i) => {
+    const col = i % 2
+    const row = Math.floor(i / 2)
+    const x = 0.6 + col * 6.2
+    const y = top + 3.35 + row * 0.42
+    s.addText(
+      [
+        { text: '✓  ', options: { color: C.orange, bold: true } },
+        { text: r.label, options: { color: C.ink } },
+        ...(r.additionalCost ? [{ text: `   ${t.coverage.additionalCost}`, options: { color: C.muted } }] : []),
+      ],
+      { x, y, w: 6, h: 0.4, fontFace: SANS, fontSize: 12 },
+    )
+  })
+}
+
+function termScheduleSlide(pptx: pptxgen, d: DerivedPresentation) {
+  const s = pptx.addSlide()
+  const t = slideCopy(d.meta.language).term
+  const loc = localeFor(d.meta.language)
+  const top = addHeader(s, t.schedule.eyebrow, t.schedule.title)
+  const cur = d.meta.currency
+  const rows = sample(d.table, 14)
+  const head = [t.schedule.year, t.schedule.age, t.schedule.premium, t.schedule.death].map((txt) => ({
+    text: txt,
+    options: { bold: true, color: C.white, fill: { color: C.navy }, fontFace: SANS, fontSize: 11, align: 'center' as const },
+  }))
+  const body = rows.map((r: YearlyRow) => [
+    { text: formatNumber(r.policyYear, { locale: loc }), options: { align: 'center' as const } },
+    { text: r.age != null ? formatNumber(r.age, { locale: loc }) : '—', options: { align: 'center' as const } },
+    { text: formatMoney(r.premiumPaid, cur, { locale: loc }), options: { align: 'right' as const, bold: true, color: C.navy } },
+    { text: formatMoney(r.deathBenefit, cur, { locale: loc }), options: { align: 'right' as const } },
+  ])
+  s.addTable([head, ...body], {
+    x: 0.6, y: top, w: 12.1, colW: [1.9, 1.9, 4.15, 4.15],
+    border: { type: 'solid', color: C.line, pt: 0.5 },
+    fontFace: SANS, fontSize: 10, color: C.ink, valign: 'middle', rowH: 0.28,
+  })
+}
+
+function termComparisonSlide(pptx: pptxgen, d: DerivedPresentation) {
+  const s = pptx.addSlide()
+  const t = slideCopy(d.meta.language).term
+  const top = addHeader(s, t.comparison.eyebrow, t.comparison.title)
+  const rows: Array<[string, string, string]> = t.comparison.rows.map((r) => [r.label, r.term, r.permanent])
+  // Term card (navy — recommended)
+  s.addShape('roundRect', { x: 0.8, y: top, w: 5.6, h: 4.3, fill: { color: C.navy }, line: { type: 'none' }, rectRadius: 0.08 })
+  s.addText(t.comparison.term, { x: 0.8, y: top + 0.15, w: 5.6, h: 0.5, fontFace: SERIF, fontSize: 18, bold: true, color: C.white, align: 'center' })
+  // Permanent card (white)
+  s.addShape('roundRect', { x: 6.9, y: top, w: 5.6, h: 4.3, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.08 })
+  s.addText(t.comparison.permanent, { x: 6.9, y: top + 0.15, w: 5.6, h: 0.5, fontFace: SERIF, fontSize: 18, bold: true, color: C.ink, align: 'center' })
+  rows.forEach(([label, termo, perm], i) => {
+    const y = top + 0.85 + i * 0.66
+    s.addText(label.toUpperCase(), { x: 1, y, w: 5.2, h: 0.22, fontFace: SANS, fontSize: 8, bold: true, color: C.orange, charSpacing: 1 })
+    s.addText(termo, { x: 1, y: y + 0.22, w: 5.2, h: 0.4, fontFace: SANS, fontSize: 12, color: C.white })
+    s.addText(label.toUpperCase(), { x: 7.1, y, w: 5.2, h: 0.22, fontFace: SANS, fontSize: 8, bold: true, color: C.muted, charSpacing: 1 })
+    s.addText(perm, { x: 7.1, y: y + 0.22, w: 5.2, h: 0.4, fontFace: SANS, fontSize: 12, color: C.ink })
+  })
+}
+
+/** Build and trigger download of the editable .pptx (branches IUL vs Term). */
 export async function downloadPptx(derived: DerivedPresentation): Promise<void> {
   const pptx = new pptxgen()
   pptx.layout = 'LAYOUT_WIDE'
@@ -336,14 +452,23 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
 
   logoDataUrl = await loadLogo()
 
-  coverSlide(pptx, derived)
-  explainerSlide(pptx, derived)
-  coverageSlide(pptx, derived)
-  projectionSlide(pptx, derived)
-  if (derived.table.length > 0) tableSlide(pptx, derived)
-  optionsSlide(pptx, derived)
-  comparisonSlide(pptx, derived)
-  disclaimersSlide(pptx, derived)
+  if (derived.meta.productType === 'term') {
+    coverSlide(pptx, derived)
+    termHeadlineSlide(pptx, derived)
+    termCoverageSlide(pptx, derived)
+    if (derived.table.length > 0) termScheduleSlide(pptx, derived)
+    termComparisonSlide(pptx, derived)
+    disclaimersSlide(pptx, derived)
+  } else {
+    coverSlide(pptx, derived)
+    explainerSlide(pptx, derived)
+    coverageSlide(pptx, derived)
+    projectionSlide(pptx, derived)
+    if (derived.table.length > 0) tableSlide(pptx, derived)
+    optionsSlide(pptx, derived)
+    comparisonSlide(pptx, derived)
+    disclaimersSlide(pptx, derived)
+  }
 
   await pptx.writeFile({ fileName: sanitizeFileName(derived.meta.clientName) })
 }
