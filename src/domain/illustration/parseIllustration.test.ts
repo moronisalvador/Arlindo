@@ -109,6 +109,10 @@ const DAVE_TERM = [
   'Dave Miller Face Amount: $600,000',
   'Male 39 Elite Non-Tobacco Initial Premium: $71.54 Monthly (EFT) Riders: ABR State: Virginia',
   'Terminal Illness Benefit: $515,807 Lump Sum',
+  'Chronic Illness Benefit: $5,508 Per Month',
+  'Critical Illness Benefit: Up to $474,549 Lump Sum',
+  'Critical Injury Benefit: Up to $474,549 Lump Sum',
+  "Alzheimer's Disease Benefit: $371,786 Lump Sum",
   'The conversion period ends 20 years from the term policy date of issue or age 70 if sooner.',
   'This policy has no cash value.',
   '1 39 $858.48 $600,000',
@@ -141,6 +145,15 @@ describe('parseIllustration — real Term format (Dave Miller)', () => {
   it('extracts the terminal-illness living benefit and the product name', () => {
     expect(p.livingBenefit).toBe(515_807)
     expect(p.productName).toBe('Term 30')
+  })
+  it('extracts per-condition ABR benefits', () => {
+    expect(p.abrBenefits).toEqual({
+      terminal: 515_807,
+      chronicMonthly: 5_508,
+      critical: 474_549,
+      criticalInjury: 474_549,
+      alzheimer: 371_786,
+    })
   })
   it('applies onto a presentation (typed path; term fields + family switch)', () => {
     // Start from an IUL default to exercise the switching-family branch.

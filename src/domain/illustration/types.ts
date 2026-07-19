@@ -1,4 +1,4 @@
-import type { ProductType, YearlyRow } from '@domain/model/presentation'
+import type { AbrBenefits, ProductType, YearlyRow } from '@domain/model/presentation'
 
 /**
  * The structured result of parsing a National Life Group / LSW illustration PDF.
@@ -24,6 +24,8 @@ export interface ParsedIllustration {
   livingBenefit?: number
   /** Guaranteed-scenario final accumulated value (IUL) — the "worst case" floor. */
   guaranteedValue?: number
+  /** Per-condition accelerated-benefit values from the summary (discounted). */
+  abrBenefits?: AbrBenefits
   /** How many years premium is actually paid (last premium-paying ledger year). */
   paymentYears?: number
   // IUL-only

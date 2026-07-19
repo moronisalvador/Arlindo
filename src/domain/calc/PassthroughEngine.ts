@@ -68,6 +68,7 @@ export class PassthroughEngine implements CalculationEngine {
       },
       table: rows,
       riders: term.riders.filter((r) => r.included).map((r) => translateRider(r, lang)),
+      abrBenefits: inputs.abrBenefits,
       disclaimers: disclaimersFor(lang, inputs.disclaimers, 'term'),
     }
   }
@@ -131,6 +132,7 @@ export class PassthroughEngine implements CalculationEngine {
       },
       table: rows,
       riders: iul.riders.filter((r) => r.included).map((r) => translateRider(r, lang)),
+      abrBenefits: inputs.abrBenefits,
       disclaimers: disclaimersFor(lang, inputs.disclaimers),
     }
   }

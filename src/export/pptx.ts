@@ -3,6 +3,7 @@ import type { DerivedPresentation } from '@domain/model/derived'
 import type { YearlyRow } from '@domain/model/presentation'
 import { formatMoney, formatNumber, formatPercent, localeFor } from '@domain/format'
 import { slideCopy } from '@domain/presentationCopy'
+import { hasAbrDetail } from '@design-system/slides/abrDetailFlag'
 
 /**
  * Generates an EDITABLE native .pptx (real text, tables, and a chart) from a
@@ -128,6 +129,36 @@ function coverSlide(pptx: pptxgen, d: DerivedPresentation) {
   s.addText(d.meta.clientName || c.cover.clientFallback, { x: 0.8, y: 4.5, w: 8, h: 0.7, fontFace: SERIF, fontSize: 28, color: C.white })
   s.addShape('rect', { x: 0.85, y: 5.25, w: 3.2, h: 0.06, fill: { color: C.orange } })
   s.addText(monthYear(d.meta.preparedOn, loc), { x: 0.8, y: 5.5, w: 6, h: 0.4, fontFace: SANS, fontSize: 12, color: 'C7CCD6' })
+}
+
+function livingBenefitsDetailSlide(pptx: pptxgen, d: DerivedPresentation) {
+  const s = pptx.addSlide()
+  const c = slideCopy(d.meta.language).livingBenefitsDetail
+  const loc = localeFor(d.meta.language)
+  const cur = d.meta.currency
+  const top = addHeader(s, c.eyebrow, c.title)
+  const money = (n: number) => formatMoney(n, cur, { locale: loc })
+  const a = d.abrBenefits ?? {}
+  s.addText(c.intro, { x: 0.6, y: top, w: 12.1, h: 0.5, fontFace: SANS, fontSize: 12, color: C.ink })
+  const items: Array<[string, string, string]> = []
+  if (a.terminal != null) items.push(['🕊️', c.terminal, money(a.terminal)])
+  if (a.chronicMonthly != null) items.push(['🩺', c.chronic, `${money(a.chronicMonthly)} ${c.perMonth}`])
+  if (a.critical != null) items.push(['🫀', c.critical, c.upTo(money(a.critical))])
+  if (a.criticalInjury != null) items.push(['🤕', c.criticalInjury, c.upTo(money(a.criticalInjury))])
+  if (a.alzheimer != null) items.push(['🧠', c.alzheimer, money(a.alzheimer)])
+  const cardW = 3.9
+  const gap = 0.2
+  items.forEach(([emoji, label, value], i) => {
+    const col = i % 3
+    const row = Math.floor(i / 3)
+    const x = 0.6 + col * (cardW + gap)
+    const y = top + 0.7 + row * 1.9
+    s.addShape('roundRect', { x, y, w: cardW, h: 1.7, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.06 })
+    s.addText(emoji, { x, y: y + 0.15, w: cardW, h: 0.5, fontSize: 22, align: 'center' })
+    s.addText(label, { x: x + 0.15, y: y + 0.72, w: cardW - 0.3, h: 0.35, fontFace: SANS, fontSize: 12, color: C.muted, align: 'center' })
+    s.addText(value, { x: x + 0.15, y: y + 1.05, w: cardW - 0.3, h: 0.5, fontFace: SERIF, fontSize: 18, bold: true, color: C.navy, align: 'center' })
+  })
+  s.addText(c.note, { x: 0.6, y: PH - 0.9, w: 12.1, h: 0.5, fontFace: SANS, fontSize: 9, color: C.muted })
 }
 
 function headlineSlide(pptx: pptxgen, d: DerivedPresentation) {
@@ -582,6 +613,7 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
     termHeadlineSlide(pptx, derived)
     explainerSlide(pptx, derived)
     termCoverageSlide(pptx, derived)
+    if (hasAbrDetail(derived)) livingBenefitsDetailSlide(pptx, derived)
     if (derived.table.length > 0) termScheduleSlide(pptx, derived)
     termComparisonSlide(pptx, derived)
     valueSummarySlide(pptx, derived)
@@ -593,6 +625,7 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
     explainerSlide(pptx, derived)
     coverageSlide(pptx, derived)
     projectionSlide(pptx, derived)
+    if (hasAbrDetail(derived)) livingBenefitsDetailSlide(pptx, derived)
     if (derived.table.length > 0) tableSlide(pptx, derived)
     if (
       derived.headline.paymentYears != null &&
