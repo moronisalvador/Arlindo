@@ -14,13 +14,6 @@ export function HeadlineSlide({ derived }: { derived: DerivedPresentation }) {
   const c = slideCopy(derived.meta.language)
   const locale = localeFor(derived.meta.language)
 
-  // "Se você adoecer" — largest lifetime cap among included riders that have one.
-  const capped = derived.riders.filter((r) => r.included && r.lifetimeMax != null)
-  const largestCap = capped.reduce<number | undefined>((max, r) => {
-    const v = r.lifetimeMax as number
-    return max == null || v > max ? v : max
-  }, undefined)
-
   const cards: Array<{
     emoji: string
     when: string
@@ -56,9 +49,12 @@ export function HeadlineSlide({ derived }: { derived: DerivedPresentation }) {
         h.livingBenefitPercent != null
           ? c.headline.livingUpToPercent(formatPercent(h.livingBenefitPercent, { locale }))
           : c.headline.livingEarly,
+      // The client's actual accessible living benefit (parsed from the illustration,
+      // e.g. the Terminal Illness Benefit), not the ABR lifetime regulatory cap —
+      // that cap ($1.5M) is a structural ceiling, meaningless under a small policy.
       subtitle:
-        largestCap != null
-          ? c.headline.livingUpTo(formatMoney(largestCap, currency, { compact: true, locale }))
+        h.livingBenefit != null
+          ? c.headline.livingUpTo(formatMoney(h.livingBenefit, currency, { locale }))
           : undefined,
     },
   ]
