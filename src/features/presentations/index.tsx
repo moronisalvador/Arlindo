@@ -20,7 +20,6 @@ import {
 import {
   presentationRepository,
   profileRepository,
-  type BackupFile,
 } from '@persistence'
 import type { PresentationInputs } from '@domain/model/presentation'
 import { formatMoney } from '@domain/format'
@@ -31,11 +30,11 @@ import { routes } from '@app/routes'
 import { queryKeys } from '@app/queryKeys'
 import { registerNamespace } from '@i18n/index'
 import { ptBR } from './i18n/pt-BR'
-import { formatDate, fileDateStamp } from './formatDate'
+import { formatDate } from './formatDate'
 
 registerNamespace('presentations', ptBR)
 
-type BackupFeedback = { kind: 'success' | 'error'; message: string } | null
+type ImportFeedback = { kind: 'success' | 'error'; message: string } | null
 
 export default function PresentationsPage() {
   const { t } = useTranslation('presentations')
@@ -44,11 +43,8 @@ export default function PresentationsPage() {
 
   const [search, setSearch] = useState('')
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null)
-  const [feedback, setFeedback] = useState<BackupFeedback>(null)
-  const [isExporting, setIsExporting] = useState(false)
-  const [isImporting, setIsImporting] = useState(false)
+  const [feedback, setFeedback] = useState<ImportFeedback>(null)
   const [isImportingPdf, setIsImportingPdf] = useState(false)
-  const fileInputRef = useRef<HTMLInputElement>(null)
   const pdfInputRef = useRef<HTMLInputElement>(null)
 
   const invalidate = () =>
@@ -96,29 +92,6 @@ export default function PresentationsPage() {
     },
   })
 
-  async function handleExport() {
-    setFeedback(null)
-    setIsExporting(true)
-    try {
-      const backup = await presentationRepository.exportAll()
-      const json = JSON.stringify(backup, null, 2)
-      const blob = new Blob([json], { type: 'application/json' })
-      const url = URL.createObjectURL(blob)
-      const anchor = document.createElement('a')
-      anchor.href = url
-      anchor.download = `arlindo-backup-${fileDateStamp()}.json`
-      document.body.appendChild(anchor)
-      anchor.click()
-      anchor.remove()
-      URL.revokeObjectURL(url)
-      setFeedback({ kind: 'success', message: t('backup.successExport') })
-    } catch {
-      setFeedback({ kind: 'error', message: t('backup.errorExport') })
-    } finally {
-      setIsExporting(false)
-    }
-  }
-
   // Import a carrier illustration PDF from the home page: parse it in-browser,
   // create a presentation of the auto-detected product type, apply the values,
   // then open the editor for review. Nothing is created if parsing fails.
@@ -147,26 +120,6 @@ export default function PresentationsPage() {
       setFeedback({ kind: 'error', message: t('importPdf.error') })
     } finally {
       setIsImportingPdf(false)
-    }
-  }
-
-  async function handleImportFile(event: ChangeEvent<HTMLInputElement>) {
-    const file = event.target.files?.[0]
-    // Reset the input so the same file can be picked again later.
-    event.target.value = ''
-    if (!file) return
-    setFeedback(null)
-    setIsImporting(true)
-    try {
-      const text = await file.text()
-      const data = JSON.parse(text) as BackupFile
-      await presentationRepository.import(data, 'merge')
-      void invalidate()
-      setFeedback({ kind: 'success', message: t('backup.successImport') })
-    } catch {
-      setFeedback({ kind: 'error', message: t('backup.errorImport') })
-    } finally {
-      setIsImporting(false)
     }
   }
 
@@ -211,20 +164,18 @@ export default function PresentationsPage() {
       />
       <div className="grid grid-cols-2 gap-2 sm:hidden">{createButtons}</div>
 
-      <BackupBar
-        onExport={handleExport}
-        onImportClick={() => fileInputRef.current?.click()}
-        isExporting={isExporting}
-        isImporting={isImporting}
-        feedback={feedback}
-      />
-      <input
-        ref={fileInputRef}
-        type="file"
-        accept=".json,application/json"
-        className="hidden"
-        onChange={handleImportFile}
-      />
+      {feedback && (
+        <p
+          role="status"
+          className={
+            feedback.kind === 'success'
+              ? 'text-base font-medium text-green-700'
+              : 'text-base font-medium text-red-600'
+          }
+        >
+          {feedback.message}
+        </p>
+      )}
       <input
         ref={pdfInputRef}
         type="file"
@@ -259,54 +210,6 @@ export default function PresentationsPage() {
         />
       )}
     </div>
-  )
-}
-
-function BackupBar({
-  onExport,
-  onImportClick,
-  isExporting,
-  isImporting,
-  feedback,
-}: {
-  onExport: () => void
-  onImportClick: () => void
-  isExporting: boolean
-  isImporting: boolean
-  feedback: BackupFeedback
-}) {
-  const { t } = useTranslation('presentations')
-  return (
-    <Card tone="alt">
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="min-w-0">
-          <h3 className="font-serif text-xl font-semibold text-navy">
-            {t('backup.title')}
-          </h3>
-          <p className="text-base text-muted">{t('backup.description')}</p>
-        </div>
-        <div className="flex flex-wrap gap-3">
-          <Button variant="secondary" onClick={onExport} disabled={isExporting}>
-            {isExporting ? t('backup.exporting') : t('backup.export')}
-          </Button>
-          <Button variant="ghost" onClick={onImportClick} disabled={isImporting}>
-            {isImporting ? t('backup.importing') : t('backup.import')}
-          </Button>
-        </div>
-      </div>
-      {feedback && (
-        <p
-          role="status"
-          className={
-            feedback.kind === 'success'
-              ? 'mt-3 text-base font-medium text-green-700'
-              : 'mt-3 text-base font-medium text-red-600'
-          }
-        >
-          {feedback.message}
-        </p>
-      )}
-    </Card>
   )
 }
 
@@ -389,8 +292,8 @@ function ListBody({
   const q = normalize(search.trim())
   const filtered = q ? items.filter((p) => searchHaystack(p, t).includes(q)) : items
 
-  // Only worth showing the search box once there's a handful to sift through.
-  const showSearch = items.length > 3
+  // Show the search box whenever there's anything to search.
+  const showSearch = items.length > 0
 
   return (
     <div className="space-y-4">
