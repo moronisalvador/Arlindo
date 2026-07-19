@@ -224,6 +224,27 @@ describe('parseIllustration — robustness (agent findings)', () => {
     expect(p.warnings.some((w) => /frequência/i.test(w))).toBe(true)
   })
 
+  it('self-corrects classification from the ledger structure (ground truth)', () => {
+    // Text weakly implies IUL, but the ledger is term-structured (no %) → switch to term.
+    const asTerm = parseIllustration([
+      'Indexed Universal Life Face Amount: $500,000',
+      '1 45 $480.00 $500,000',
+      '2 46 480.00 500,000',
+    ].join('\n'))!
+    expect(asTerm.productType).toBe('term')
+    expect(asTerm.rows).toHaveLength(2)
+    expect(asTerm.warnings.some((w) => /ajustado/i.test(w))).toBe(true)
+
+    // Text weakly implies term, but the ledger has interest-rate rows → switch to IUL.
+    const asIul = parseIllustration([
+      'This policy has no cash value comparison note. Face Amount: $250,000',
+      '1 40 $3,000.00 $0 $0 $0 6.00 % $2,500 $0 $250,000',
+      '2 41 3,000.00 0 0 0 6.00 % 5,200 0 250,000',
+    ].join('\n'))!
+    expect(asIul.productType).toBe('iul')
+    expect(asIul.rows).toHaveLength(2)
+  })
+
   it('handles junk input', () => {
     expect(parseIllustration('')).toBeNull()
     expect(parseIllustration('hello')).toBeNull()
