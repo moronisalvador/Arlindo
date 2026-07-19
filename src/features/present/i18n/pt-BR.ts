@@ -15,6 +15,7 @@ export const ptBR = {
   emptyTitle: 'Nada para apresentar',
   emptyDescription: 'Esta apresentação ainda não tem slides. Complete os dados do cliente.',
   back: 'Voltar',
+  rotateHint: 'Gire o aparelho para ver em tela cheia',
 } as const
 
 export type PresentStrings = typeof ptBR

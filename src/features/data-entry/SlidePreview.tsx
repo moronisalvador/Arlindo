@@ -36,9 +36,9 @@ export function SlidePreview({ inputs }: { inputs: PresentationInputs }) {
   return (
     <div className="space-y-4">
       <p className="text-base text-muted">{t('preview.hint')}</p>
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {chosen.map((slide) => (
-          <figure key={slide.id} className="space-y-2">
+          <figure key={slide.id} className="min-w-0 space-y-2">
             <div className="aspect-video overflow-hidden rounded-card border border-line shadow-card">
               <RenderModeProvider mode="preview">
                 <FitSlide>{slide.node}</FitSlide>

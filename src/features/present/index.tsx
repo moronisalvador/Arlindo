@@ -277,6 +277,14 @@ export default function PresentPage() {
         </RenderModeProvider>
       </div>
 
+      {/* Portrait-only hint: a 16:9 slide is a thin strip on a portrait phone. */}
+      <div className="pointer-events-none absolute inset-x-0 bottom-24 z-30 hidden justify-center px-6 max-md:portrait:flex">
+        <span className="flex items-center gap-2 rounded-full bg-white/15 px-4 py-2 text-center text-sm font-medium text-white backdrop-blur">
+          <span aria-hidden>↻</span>
+          {t('rotateHint')}
+        </span>
+      </div>
+
       {/* Invisible large tap zones (left/right thirds) for tap-to-advance.
           A swipe sets swipedRef so the trailing click here does not double-advance. */}
       <button

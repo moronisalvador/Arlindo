@@ -130,32 +130,38 @@ export default function PresentationsPage() {
     }
   }
 
+  const createButtons = (
+    <>
+      <Button
+        variant="primary"
+        className="max-sm:flex-1"
+        onClick={() => createMutation.mutate('iul')}
+        disabled={createMutation.isPending}
+      >
+        {createMutation.isPending ? t('creating') : `+ ${t('newIul')}`}
+      </Button>
+      <Button
+        variant="secondary"
+        className="max-sm:flex-1"
+        onClick={() => createMutation.mutate('term')}
+        disabled={createMutation.isPending}
+      >
+        {`+ ${t('newTerm')}`}
+      </Button>
+    </>
+  )
+
   return (
     <div className="space-y-6">
+      {/* Buttons sit in the header on sm+, and drop to a full-width row on phones. */}
       <NavyHeaderBar
         eyebrow={t('eyebrow')}
         title={t('title')}
         className="rounded-card"
         showLogo={false}
-        right={
-          <div className="flex flex-wrap gap-2">
-            <Button
-              variant="primary"
-              onClick={() => createMutation.mutate('iul')}
-              disabled={createMutation.isPending}
-            >
-              {createMutation.isPending ? t('creating') : `+ ${t('newIul')}`}
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={() => createMutation.mutate('term')}
-              disabled={createMutation.isPending}
-            >
-              {`+ ${t('newTerm')}`}
-            </Button>
-          </div>
-        }
+        right={<div className="hidden flex-wrap gap-2 sm:flex">{createButtons}</div>}
       />
+      <div className="flex gap-2 sm:hidden">{createButtons}</div>
 
       <BackupBar
         onExport={handleExport}
