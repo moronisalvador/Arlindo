@@ -21,13 +21,13 @@ export function SlidePreview({ inputs }: { inputs: PresentationInputs }) {
   }, [inputs])
 
   const chosen = useMemo(() => {
-    const wanted = ['cover', 'projection']
+    const wanted = inputs.productType === 'term' ? ['cover', 'coverage'] : ['cover', 'projection']
     const picked = wanted
       .map((id) => slides.find((s) => s.id === id))
       .filter((s): s is NonNullable<typeof s> => Boolean(s))
     if (picked.length > 0) return picked
     return slides.slice(0, 2)
-  }, [slides])
+  }, [slides, inputs.productType])
 
   if (chosen.length === 0) {
     return <EmptyState icon="👀" title={t('preview.empty')} />
