@@ -19,6 +19,11 @@ export interface ParsedIllustration {
   premium?: number
   premiumMode?: 'monthly' | 'annual'
   deathBenefit?: number
+  /** Real printed accelerated (living) benefit — e.g. the Terminal Illness value,
+   * which is discounted vs the death benefit. Preferred over a DB×% estimate. */
+  livingBenefit?: number
+  /** Guaranteed-scenario final accumulated value (IUL) — the "worst case" floor. */
+  guaranteedValue?: number
   /** How many years premium is actually paid (last premium-paying ledger year). */
   paymentYears?: number
   // IUL-only
