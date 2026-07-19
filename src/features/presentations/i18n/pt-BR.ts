@@ -60,16 +60,4 @@ export const ptBR = {
     confirm: 'Excluir',
     cancel: 'Cancelar',
   },
-  backup: {
-    title: 'Backup dos dados',
-    description: 'Salve uma cópia de todas as apresentações ou restaure de um arquivo.',
-    export: 'Salvar backup',
-    import: 'Importar backup',
-    exporting: 'Salvando…',
-    importing: 'Importando…',
-    successExport: 'Backup salvo com sucesso.',
-    successImport: 'Backup importado com sucesso.',
-    errorExport: 'Não foi possível salvar o backup.',
-    errorImport: 'Arquivo inválido. Não foi possível importar.',
-  },
 } as const
