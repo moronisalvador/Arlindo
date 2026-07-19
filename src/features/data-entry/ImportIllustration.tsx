@@ -5,7 +5,7 @@ import { formatMoney } from '@domain/format'
 import type { CurrencyCode } from '@domain/model/presentation'
 import { parseIllustration } from '@domain/illustration/parseIllustration'
 import type { ParsedIllustration } from '@domain/illustration/types'
-import { extractIllustrationText } from './pdfExtract'
+import { extractIllustrationText } from '@shared/pdfExtract'
 
 type Status = 'idle' | 'reading' | 'review' | 'error'
 
@@ -113,7 +113,14 @@ function ReviewDialog({
   if (isTerm) {
     rows.push([t('planTerm.termLength'), parsed.termLengthYears ? `${parsed.termLengthYears} ${t('plan.years')}` : '—'])
   } else {
+    if (parsed.paymentYears) rows.push([t('import.field.paymentYears'), `${parsed.paymentYears} ${t('plan.years')}`])
     rows.push([t('import.field.projected'), money(parsed.projectedAccumulatedValue)])
+    rows.push([
+      t('import.field.income'),
+      parsed.incomeOptionAnnual != null
+        ? `${money(parsed.incomeOptionAnnual)} ${t('plan.perYear')}${parsed.incomeToAge ? ` · ${parsed.incomeToAge} ${t('plan.age')}` : ''}`
+        : '—',
+    ])
     rows.push([t('import.field.rate'), parsed.assumedRatePct != null ? `${parsed.assumedRatePct}%` : '—'])
   }
   rows.push([t('import.field.rows'), String(parsed.rows.length)])
