@@ -139,7 +139,7 @@ export function parseIllustration(text: string): ParsedIllustration | null {
   const iulProduct = /flexlife|peaklife|summitlife|survivorlife/i.test(text)
   const termWeak = /level term|no cash value|annually renewable|guaranteed series/i.test(text)
   const iulWeak = /indexed universal life|accumulated value/i.test(text)
-  const productType: 'iul' | 'term' = termProduct
+  let productType: 'iul' | 'term' = termProduct
     ? 'term'
     : iulProduct
       ? 'iul'
@@ -189,7 +189,22 @@ export function parseIllustration(text: string): ParsedIllustration | null {
   const name = rawName && !NAME_LABEL_PREFIX.test(rawName) ? rawName : undefined
 
   // ---- ledger ----
-  const { rows, rate } = parseLedger(text, productType, face)
+  // The ledger structure is ground truth: an IUL ledger has interest-rate (%)
+  // columns, a term ledger doesn't. If the text-based classification yields no
+  // rows but the other product type parses cleanly, trust the ledger and switch.
+  let { rows, rate } = parseLedger(text, productType, face)
+  if (rows.length === 0) {
+    const alt = productType === 'iul' ? 'term' : 'iul'
+    const altLedger = parseLedger(text, alt, face)
+    if (altLedger.rows.length > 0) {
+      productType = alt
+      rows = altLedger.rows
+      rate = altLedger.rate
+      warnings.push(
+        `Tipo ajustado para ${alt === 'term' ? 'Seguro Temporário' : 'IUL'} com base na estrutura da tabela.`,
+      )
+    }
+  }
   if (rows.length === 0) warnings.push('Não foi possível ler a tabela ano a ano — confira/preencha manualmente.')
 
   const firstRow = rows[0]
