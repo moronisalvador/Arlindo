@@ -21,6 +21,9 @@ import {
   type BackupFile,
 } from '@persistence'
 import type { PresentationInputs } from '@domain/model/presentation'
+import { parseIllustration } from '@domain/illustration/parseIllustration'
+import { applyIllustration } from '@domain/illustration/applyIllustration'
+import { extractIllustrationText } from '@shared/pdfExtract'
 import { routes } from '@app/routes'
 import { queryKeys } from '@app/queryKeys'
 import { registerNamespace } from '@i18n/index'
@@ -40,7 +43,9 @@ export default function PresentationsPage() {
   const [feedback, setFeedback] = useState<BackupFeedback>(null)
   const [isExporting, setIsExporting] = useState(false)
   const [isImporting, setIsImporting] = useState(false)
+  const [isImportingPdf, setIsImportingPdf] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
+  const pdfInputRef = useRef<HTMLInputElement>(null)
 
   const invalidate = () =>
     queryClient.invalidateQueries({ queryKey: queryKeys.presentations })
@@ -110,6 +115,37 @@ export default function PresentationsPage() {
     }
   }
 
+  // Import a carrier illustration PDF from the home page: parse it in-browser,
+  // create a presentation of the auto-detected product type, apply the values,
+  // then open the editor for review. Nothing is created if parsing fails.
+  async function handleImportPdf(event: ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0]
+    event.target.value = ''
+    if (!file) return
+    setFeedback(null)
+    setIsImportingPdf(true)
+    try {
+      const text = await extractIllustrationText(file)
+      const parsed = parseIllustration(text)
+      if (!parsed || (parsed.rows.length === 0 && parsed.face == null && parsed.premium == null)) {
+        setFeedback({ kind: 'error', message: t('importPdf.error') })
+        return
+      }
+      const profile = await profileRepository.get()
+      const created = await presentationRepository.create({
+        branding: profile,
+        productType: parsed.productType,
+      })
+      const saved = await presentationRepository.save(applyIllustration(parsed, created))
+      void invalidate()
+      navigate(routes.editor(saved.id))
+    } catch {
+      setFeedback({ kind: 'error', message: t('importPdf.error') })
+    } finally {
+      setIsImportingPdf(false)
+    }
+  }
+
   async function handleImportFile(event: ChangeEvent<HTMLInputElement>) {
     const file = event.target.files?.[0]
     // Reset the input so the same file can be picked again later.
@@ -134,6 +170,14 @@ export default function PresentationsPage() {
     <>
       <Button
         variant="primary"
+        className="max-sm:flex-1"
+        onClick={() => pdfInputRef.current?.click()}
+        disabled={isImportingPdf}
+      >
+        {isImportingPdf ? t('importPdf.reading') : t('importPdf.button')}
+      </Button>
+      <Button
+        variant="secondary"
         className="max-sm:flex-1"
         onClick={() => createMutation.mutate('iul')}
         disabled={createMutation.isPending}
@@ -176,6 +220,13 @@ export default function PresentationsPage() {
         accept=".json,application/json"
         className="hidden"
         onChange={handleImportFile}
+      />
+      <input
+        ref={pdfInputRef}
+        type="file"
+        accept="application/pdf,.pdf"
+        className="hidden"
+        onChange={handleImportPdf}
       />
 
       <ListBody

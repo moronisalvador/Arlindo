@@ -44,8 +44,12 @@ function numFrom(s: string | undefined): number | undefined {
 function parseLedger(
   text: string,
   productType: 'iul' | 'term',
+  face?: number,
 ): { rows: YearlyRow[]; rate?: number } {
   const rows = new Map<number, YearlyRow>()
+  // For term, remember how many money columns backed each year's row, so the main
+  // schedule (premium + DB = 2 columns) beats a multi-premium comparison table.
+  const termCols = new Map<number, number>()
   let rate: number | undefined
 
   for (const line of text.split('\n')) {
@@ -101,18 +105,19 @@ function parseLedger(
         if (pctVal != null) rate = rate == null ? pctVal : Math.max(rate, pctVal)
       }
     } else {
-      // Term rows have no cash value: [premium, ..., DeathBenefit].
+      // Term rows: premium is the first money; the death benefit is a large level
+      // value (prefer one equal to the face). Robust to a trailing $0 cash-value
+      // column and to multi-premium comparison tables (prefer the simplest row).
       if (pctIndex >= 0) continue
       if (moneys.length < 2) continue
-      const db = moneys[moneys.length - 1].v
-      if (db < 1000) continue
-      if (!rows.has(year)) {
-        rows.set(year, {
-          policyYear: year,
-          age,
-          premiumPaid: moneys[0].v,
-          deathBenefit: db,
-        })
+      const premiumPaid = moneys[0].v
+      const dbCandidates = moneys.slice(1).map((m) => m.v).filter((v) => v >= 1000)
+      if (dbCandidates.length === 0) continue
+      const db = face != null && dbCandidates.includes(face) ? face : Math.max(...dbCandidates)
+      const prevCols = termCols.get(year)
+      if (prevCols == null || moneys.length < prevCols) {
+        rows.set(year, { policyYear: year, age, premiumPaid, deathBenefit: db })
+        termCols.set(year, moneys.length)
       }
     }
   }
@@ -127,15 +132,24 @@ export function parseIllustration(text: string): ParsedIllustration | null {
   const warnings: string[] = []
 
   // ---- product family ----
-  // A term illustration ("no cash value") can still mention "Accumulated Value" in
-  // a definition/comparison, so a term signal outweighs the weak "accumulated
-  // value" phrase; only the product name (FlexLife / Indexed Universal Life) is a
-  // strong IUL signal.
-  const termSignal = /level term|no cash value|annually renewable|term\s*\d+-?g|icc18-20522|guaranteed series/i.test(text)
-  const strongIul = /flexlife|indexed universal life/i.test(text)
-  const productType: 'iul' | 'term' =
-    strongIul && !termSignal ? 'iul' : termSignal ? 'term' : /accumulated value/i.test(text) ? 'iul' : 'iul'
-  if (!termSignal && !strongIul) warnings.push('Tipo de produto não identificado com certeza — assumindo IUL.')
+  // Precedence: a DEFINITIVE product identifier (a form/product name) wins over a
+  // weak phrase that can appear in either doc ("level term" in an IUL comparison,
+  // "Accumulated Value" in a term definition).
+  const termProduct = /term\s*\d+\s*-?\s*n?g\b|icc18-20522|annual\s+renewable\s+term|\bART\b/i.test(text)
+  const iulProduct = /flexlife|peaklife|summitlife|survivorlife/i.test(text)
+  const termWeak = /level term|no cash value|annually renewable|guaranteed series/i.test(text)
+  const iulWeak = /indexed universal life|accumulated value/i.test(text)
+  const productType: 'iul' | 'term' = termProduct
+    ? 'term'
+    : iulProduct
+      ? 'iul'
+      : termWeak
+        ? 'term'
+        : iulWeak
+          ? 'iul'
+          : 'iul'
+  if (!termProduct && !iulProduct && !termWeak && !iulWeak)
+    warnings.push('Tipo de produto não identificado com certeza — assumindo IUL.')
 
   // ---- summary fields ----
   // Decouple sex/age from the rate class (class may lack a Tobacco suffix, or the
@@ -156,9 +170,11 @@ export function parseIllustration(text: string): ParsedIllustration | null {
   let premiumMode: 'monthly' | 'annual' | undefined
   if (premMatch?.[2]) {
     const m = premMatch[2]
-    if (/month/i.test(m)) premiumMode = 'monthly'
+    // Check semi-annual/quarterly first — "Semi-Annual" contains "annual".
+    if (/semi|quarter/i.test(m)) {
+      warnings.push(`Frequência de prêmio "${m}" não suportada — confira o campo de frequência.`)
+    } else if (/month/i.test(m)) premiumMode = 'monthly'
     else if (/annual|year/i.test(m)) premiumMode = 'annual'
-    else warnings.push(`Frequência de prêmio "${m}" não suportada — confira o campo de frequência.`)
   }
   const state = firstMatch(text, /State:\s*([A-Za-z][A-Za-z .]+?)(?:\s{2,}|\s+Initial|\s+Tax|\n|$)/m)
   const productName = productType === 'term'
@@ -173,7 +189,7 @@ export function parseIllustration(text: string): ParsedIllustration | null {
   const name = rawName && !NAME_LABEL_PREFIX.test(rawName) ? rawName : undefined
 
   // ---- ledger ----
-  const { rows, rate } = parseLedger(text, productType)
+  const { rows, rate } = parseLedger(text, productType, face)
   if (rows.length === 0) warnings.push('Não foi possível ler a tabela ano a ano — confira/preencha manualmente.')
 
   const firstRow = rows[0]
@@ -219,7 +235,7 @@ export function parseIllustration(text: string): ParsedIllustration | null {
   } else {
     result.termLengthYears =
       numFrom(firstMatch(text, /level\s+for\s+the\s+first\s+(\d+)\s+years/i)) ??
-      numFrom(firstMatch(text, /Term\s*(\d+)-?G/i))
+      numFrom(firstMatch(text, /Term\s*(\d+)\s*-?\s*n?g\b/i))
     // Conversion window — many phrasings across NLG/LSW term forms.
     result.conversionYears =
       numFrom(firstMatch(text, /first\s+(\d+)\s+(?:policy\s+)?years?\s+from\s+(?:the\s+)?(?:term\s+policy\s+)?date\s+of\s+issue/i)) ??
@@ -228,7 +244,7 @@ export function parseIllustration(text: string): ParsedIllustration | null {
       numFrom(firstMatch(text, /convert(?:ible)?[^.]{0,40}?(?:during\s+)?(?:the\s+first\s+)?(\d+)\s+(?:policy\s+)?years/i))
     result.conversionToAge =
       numFrom(firstMatch(text, /age\s+(\d+)\s+if\s+(?:earlier|sooner)/i)) ??
-      numFrom(firstMatch(text, /convert(?:ible)?\s+to\s+age\s+(\d+)/i)) ??
+      numFrom(firstMatch(text, /convert(?:ible)?[^.]{0,60}?(?:prior\s+to|until|to)\s+age\s+(\d+)/i)) ??
       numFrom(firstMatch(text, /or\s+(?:until\s+)?age\s+(\d+)/i))
   }
 
