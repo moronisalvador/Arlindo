@@ -13,9 +13,11 @@ export function ContentSlide({
   children: ReactNode
 }) {
   return (
-    <SlideRoot className="bg-surface-alt">
+    <SlideRoot className="flex flex-col bg-surface-alt">
       <NavyHeaderBar eyebrow={eyebrow} title={title} />
-      <div className="p-12">{children}</div>
+      {/* Body fills the space below the header and vertically centers its content,
+          so slides with little content aren't top-heavy with an empty lower band. */}
+      <div className="flex min-h-0 flex-1 flex-col justify-center p-12">{children}</div>
     </SlideRoot>
   )
 }

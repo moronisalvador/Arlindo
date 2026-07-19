@@ -13,7 +13,7 @@ export function TimelineSlide({ derived }: { derived: DerivedPresentation }) {
   const c = slideCopy(meta.language).timeline
   const locale = localeFor(meta.language)
   const per = headline.premiumMode === 'annual' ? '/ano' : '/mês'
-  const premium = headline.premium != null ? `${formatMoney(headline.premium, meta.currency, { locale })} ${per}` : '—'
+  const premium = headline.premium != null ? `${formatMoney(headline.premium, meta.currency, { locale })}${per}` : '—'
   const stopAge = (meta.clientAge ?? 0) + (headline.paymentYears ?? 0)
   const income = formatMoney(headline.incomeOptionAnnual, meta.currency, { locale })
 
@@ -33,7 +33,7 @@ export function TimelineSlide({ derived }: { derived: DerivedPresentation }) {
             <div className="flex h-16 w-16 items-center justify-center rounded-full bg-navy text-3xl">
               <span>{s.emoji}</span>
             </div>
-            <div className="mt-4 font-sans text-lg font-semibold text-orange">{s.label}</div>
+            <div className="mt-4 font-sans text-lg font-semibold text-orange-dark">{s.label}</div>
             <div className="mt-2 font-serif text-2xl font-semibold leading-tight text-navy">{s.body}</div>
           </div>
         ))}

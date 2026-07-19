@@ -781,6 +781,25 @@ function cap(s: string): string {
   return s.charAt(0).toUpperCase() + s.slice(1)
 }
 
+/**
+ * Short conversion token for the term headline card's value slot — a single
+ * parallel phrase (age preferred, else years) so the three cards read as three
+ * short figures rather than two numbers + one wrapping sentence.
+ */
+export function conversionShort(
+  lang: PresentationLanguage,
+  years: number | null,
+  age: number | null,
+): string {
+  if (age != null) {
+    return lang === 'en' ? `To age ${age}` : lang === 'es' ? `Hasta los ${age}` : `Até os ${age} anos`
+  }
+  if (years != null) {
+    return lang === 'en' ? `${years} years` : lang === 'es' ? `${years} años` : `${years} anos`
+  }
+  return lang === 'en' ? 'Per policy' : lang === 'es' ? 'Según la póliza' : 'Conforme a apólice'
+}
+
 /** Self-labeling note the estimate engine prepends, per language. */
 export function estimateNoteFor(lang: PresentationLanguage | undefined): string {
   return lang === 'en'

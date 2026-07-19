@@ -28,7 +28,7 @@ export function WithdrawVsIncomeSlide({ derived }: { derived: DerivedPresentatio
           <EyebrowLabel>{c.options.opt2}</EyebrowLabel>
           <div className="mt-4 font-serif text-5xl font-semibold text-navy">
             {headline.incomeOptionAnnual != null
-              ? `${formatMoney(headline.incomeOptionAnnual, currency, { locale })} ${c.options.perYear}`
+              ? `${formatMoney(headline.incomeOptionAnnual, currency, { locale })}${c.options.perYear}`
               : c.options.none}
           </div>
           <p className="mt-4 font-sans text-lg text-muted">

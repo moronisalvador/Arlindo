@@ -4,20 +4,14 @@ import { formatMoney, formatNumber, localeFor } from '@domain/format'
 import { slideCopy } from '@domain/presentationCopy'
 import { DataTable, type Column } from '@design-system/primitives'
 import { ContentSlide } from '../ContentSlide'
-
-/** Evenly samples rows down to `max` so the table always fits one slide. */
-function sample<T>(rows: T[], max: number): T[] {
-  if (rows.length <= max) return rows
-  const step = (rows.length - 1) / (max - 1)
-  return Array.from({ length: max }, (_, i) => rows[Math.round(i * step)])
-}
+import { sampleRows } from '../sampleRows'
 
 /** Year-by-year detail table (sampled to fit; highlighted years get a tint). */
 export function TableSlide({ derived }: { derived: DerivedPresentation }) {
   const currency = derived.meta.currency
   const c = slideCopy(derived.meta.language)
   const locale = localeFor(derived.meta.language)
-  const rows = sample(derived.table, 16)
+  const rows = sampleRows(derived.table, 12)
 
   const columns: Array<Column<YearlyRow>> = [
     { key: 'year', header: c.table.year, render: (r) => formatNumber(r.policyYear, { locale }) },

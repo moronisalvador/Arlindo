@@ -51,6 +51,9 @@ export function ProjectionSlide({ derived }: { derived: DerivedPresentation }) {
               currency={meta.currency}
               locale={locale}
               yearLabel={c.table.year}
+              xAxisLabel={c.table.year}
+              markerYear={headline.projectionYears}
+              markerValue={headline.projectedAccumulatedValue}
               width={820}
               height={420}
             />

@@ -33,7 +33,7 @@ export function HeadlineSlide({ derived }: { derived: DerivedPresentation }) {
       when: c.headline.whenLong,
       label: c.headline.labelIncome,
       value: h.incomeOptionAnnual
-        ? `${formatMoney(h.incomeOptionAnnual, currency, { locale })} ${c.options.perYear}`
+        ? `${formatMoney(h.incomeOptionAnnual, currency, { locale })}${c.options.perYear}`
         : '—',
       subtitle: h.incomeToAge ? c.headline.illustratedToAge(h.incomeToAge) : undefined,
     },
@@ -66,7 +66,7 @@ export function HeadlineSlide({ derived }: { derived: DerivedPresentation }) {
           <Card key={c.when} className="h-full">
             <div className="flex h-full flex-col items-center text-center">
               <div className="text-5xl">{c.emoji}</div>
-              <div className="mt-4 font-sans text-lg font-semibold text-orange">{c.when}</div>
+              <div className="mt-4 font-sans text-lg font-semibold text-orange-dark">{c.when}</div>
               <div className="mt-1 font-sans text-base text-muted">{c.label}</div>
               <div className="mt-5 font-serif text-4xl font-semibold leading-tight text-navy tabular-nums">
                 {c.value}
