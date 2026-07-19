@@ -41,12 +41,12 @@ describe('IulProjectionEngine', () => {
     expect(d.disclaimers[0].toLowerCase()).toContain('estimativa')
   })
 
-  it('clamps the assumed rate to the AG 49-B ceiling (no runaway returns)', () => {
-    const ceiling = engine.compute(baseInputs({ assumedRatePct: 6.4 }))
+  it('clamps the assumed rate to the illustrated-rate ceiling (no runaway returns)', () => {
+    const ceiling = engine.compute(baseInputs({ assumedRatePct: 7.0 }))
     const absurd = engine.compute(baseInputs({ assumedRatePct: 50 }))
     const c = ceiling.headline.projectedAccumulatedValue ?? 0
     const b = absurd.headline.projectedAccumulatedValue ?? 0
-    // A 50% input illustrates no more than the clamped 6.4% ceiling run.
+    // A 50% input illustrates no more than the clamped 7.0% ceiling run.
     expect(b).toBe(c)
   })
 

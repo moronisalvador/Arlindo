@@ -1,10 +1,12 @@
 # Estimator Calibration — Illustration Capture List (Path B)
 
-> **Status: DORMANT.** This is a ready-to-run plan, not active work. When we decide to make
-> Arlindo's in-app estimate (`IulProjectionEngine`) near-exact, follow this to gather real
-> FlexLife illustrations from a licensed National Life rep; I then fit the engine's coefficients
-> to match and log the calibration (dated) in this folder. Until then, use the **typed** path —
-> enter the numbers straight off the official illustration (already the authoritative flow).
+> **Status: PARTIAL.** A first **single-illustration** calibration was done 2026-07-19 (see
+> [`calibration-2026-07-19.md`](./calibration-2026-07-19.md)) — the engine now tracks that real
+> FlexLife illustration to ~3.9% mean error (was ~61%). The full ~10-illustration capture set
+> below is still the goal to **generalize** across ages / faces / funding levels. Gather these
+> from a licensed National Life rep; I then re-fit the engine's coefficients and log a new dated
+> calibration here. The **typed** path (numbers straight off the official illustration) remains
+> the authoritative flow.
 
 ## Why
 Our estimate uses deliberately approximate charge assumptions (premium load, a per-$1,000

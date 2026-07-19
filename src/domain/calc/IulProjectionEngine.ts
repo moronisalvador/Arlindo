@@ -19,11 +19,20 @@ import { PassthroughEngine } from './PassthroughEngine'
  * "estimativa — não garantida" in the UI.
  */
 
+// Coefficients fit to a real FlexLife illustration — see
+// docs/knowledge/calibration-2026-07-19.md. Single-illustration fit; re-fit with
+// the full capture set (docs/knowledge/calibration-capture-list.md) for other cases.
 const PREMIUM_LOAD = 0.06 // NLG premium expense charge (approx)
-const POLICY_FEE = 72 // approx annual per-policy fee (~$6/mo)
-const UNIT_CHARGE_PER_1000_MONTH = 0.1 // approx monthly expense charge per $1,000 of face
+const POLICY_FEE = 90 // approx annual per-policy fee (~$7.5/mo)
+const UNIT_CHARGE_PER_1000_MONTH = 0.55 // approx monthly expense charge per $1,000 of face
 const UNIT_CHARGE_YEARS = 10 // per-unit charge applies in the early policy years
-const MAX_ILLUSTRATED_RATE = 6.4 // AG 49-B-style ceiling (%)
+const MAX_ILLUSTRATED_RATE = 7.0 // ceiling (%) — NLG current weighted-avg incl. multiplier
+// Accumulated Value Enhancement Rider: an annual bonus credited from policy year 2.
+const AV_ENHANCEMENT_BONUS_PCT = 0.65
+const AV_ENHANCEMENT_START_YEAR = 2
+// Surrender charge: a per-$1,000-of-face dollar amount that declines to 0 by year 11.
+const SURRENDER_CHARGE_PER_1000 = 35.5
+const SURRENDER_CHARGE_YEARS = 10
 
 function clampRatePct(pct: number): number {
   if (Number.isNaN(pct)) return 0
@@ -32,7 +41,7 @@ function clampRatePct(pct: number): number {
 
 /** Bounded, age-graded annual cost-of-insurance rate per $ of net amount at risk. */
 function coiRate(age: number): number {
-  return Math.min(0.0008 + 0.00006 * Math.max(age - 30, 0), 0.02)
+  return Math.min(0.0006 + 0.00047 * Math.max(age - 30, 0), 0.04)
 }
 
 export class IulProjectionEngine implements CalculationEngine {
@@ -57,10 +66,18 @@ export class IulProjectionEngine implements CalculationEngine {
       const unitCharge =
         i <= UNIT_CHARGE_YEARS ? (db / 1000) * UNIT_CHARGE_PER_1000_MONTH * 12 : 0
       const net = annualPremium * (1 - PREMIUM_LOAD) - coi - POLICY_FEE - unitCharge
-      av = Math.max(0, (av + net) * (1 + rate))
-      // Surrender charge declines ~10% (year 1) to 0% by year 10 (CSV only).
-      const surrenderPct = i <= 10 ? 0.1 * (1 - (i - 1) / 10) : 0
-      const csv = av * (1 - surrenderPct)
+      // Accumulated Value Enhancement Rider adds an annual bonus from year 2.
+      const yearRate =
+        rate + (i >= AV_ENHANCEMENT_START_YEAR ? AV_ENHANCEMENT_BONUS_PCT / 100 : 0)
+      // Existing value earns the full year; this year's premium is paid monthly, so
+      // it earns roughly half a year of interest on average.
+      av = Math.max(0, av * (1 + yearRate) + net * (1 + yearRate / 2))
+      // Surrender charge: a per-$1,000-of-face dollar amount, linear to 0 by year 11.
+      const surrenderCharge =
+        i <= SURRENDER_CHARGE_YEARS
+          ? (db / 1000) * SURRENDER_CHARGE_PER_1000 * ((SURRENDER_CHARGE_YEARS + 1 - i) / SURRENDER_CHARGE_YEARS)
+          : 0
+      const csv = av - surrenderCharge
       rows.push({
         policyYear: i,
         age,

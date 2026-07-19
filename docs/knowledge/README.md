@@ -16,6 +16,11 @@ primary sources, and to keep the app's shipped data factually accurate.
 - **`flexlife-audit-2026-07-18.json`** — the **raw** output of the adversarial accuracy audit:
   all 12 per-claim verdicts (app-says → sources-say → evidence → recommendation → sourceUrls)
   plus the synthesis report, verbatim. Nothing summarized away.
+- **`calibration-2026-07-19.md`** — first real calibration of the in-app estimate
+  (`IulProjectionEngine`) against a real FlexLife illustration (~61% → ~3.9% mean error). Locked
+  by a regression guard (`src/domain/calc/calibration.probe.test.ts`).
+- **`calibration-capture-list.md`** — the plan to gather ~10 illustrations and re-fit the engine
+  so it generalizes across ages/faces/funding (status: PARTIAL after the single-point fit).
 
 ### Term — Guaranteed Series
 - **`national-life-term.md`** — the curated Term knowledge: the Guaranteed Series lineup
