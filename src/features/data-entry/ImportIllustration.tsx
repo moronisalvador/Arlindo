@@ -1,6 +1,6 @@
 import { useRef, useState, type ChangeEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, Card } from '@design-system'
+import { Button, Card, Modal } from '@design-system'
 import { formatMoney } from '@domain/format'
 import type { CurrencyCode } from '@domain/model/presentation'
 import { parseIllustration } from '@domain/illustration/parseIllustration'
@@ -126,18 +126,9 @@ function ReviewDialog({
   rows.push([t('import.field.rows'), String(parsed.rows.length)])
 
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-navy/60 p-5"
-      role="dialog"
-      aria-modal="true"
-      onClick={onCancel}
-    >
-      <div
-        className="max-h-[85dvh] w-full max-w-lg overflow-y-auto rounded-card bg-surface p-6 shadow-card"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <h3 className="font-serif text-2xl font-semibold text-navy">{t('import.reviewTitle')}</h3>
-        <p className="mt-1 text-base text-muted">{t('import.reviewSubtitle')}</p>
+    <Modal onClose={onCancel} labelledBy="import-review-title" className="max-h-[85dvh] max-w-lg overflow-y-auto">
+      <h3 id="import-review-title" className="font-serif text-2xl font-semibold text-navy">{t('import.reviewTitle')}</h3>
+      <p className="mt-1 text-base text-muted">{t('import.reviewSubtitle')}</p>
 
         {parsed.confidence === 'low' && (
           <p className="mt-3 rounded-lg bg-orange/15 px-3 py-2 text-sm font-medium text-navy">
@@ -173,7 +164,6 @@ function ReviewDialog({
             {t('import.apply')}
           </Button>
         </div>
-      </div>
-    </div>
+    </Modal>
   )
 }

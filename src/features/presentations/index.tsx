@@ -13,6 +13,7 @@ import {
   EmptyState,
   ErrorState,
   Loading,
+  Modal,
   NavyHeaderBar,
 } from '@design-system'
 import {
@@ -171,7 +172,7 @@ export default function PresentationsPage() {
     <>
       <Button
         variant="primary"
-        className="max-sm:flex-1"
+        className="max-sm:col-span-2"
         onClick={() => pdfInputRef.current?.click()}
         disabled={isImportingPdf}
       >
@@ -206,7 +207,7 @@ export default function PresentationsPage() {
         showLogo={false}
         right={<div className="hidden flex-wrap gap-2 sm:flex">{createButtons}</div>}
       />
-      <div className="flex gap-2 sm:hidden">{createButtons}</div>
+      <div className="grid grid-cols-2 gap-2 sm:hidden">{createButtons}</div>
 
       <BackupBar
         onExport={handleExport}
@@ -359,7 +360,7 @@ function ListBody({
   }
 
   return (
-    <div className="grid gap-4">
+    <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
       {items.map((p) => (
         <PresentationCard
           key={p.id}
@@ -447,26 +448,26 @@ function PresentationCard({
           <div className="flex flex-wrap gap-x-6 gap-y-2 border-t border-line pt-3">
             {stats.map((s) => (
               <div key={s.label} className="min-w-0">
-                <div className="text-xs font-semibold uppercase tracking-wide text-muted">{s.label}</div>
+                <div className="text-sm font-semibold uppercase tracking-wide text-muted">{s.label}</div>
                 <div className="font-serif text-lg font-semibold text-navy tabular-nums">{s.value}</div>
               </div>
             ))}
           </div>
         )}
-        <div className="flex flex-wrap gap-3">
-          <Button variant="primary" onClick={onOpen}>
+        <div className="flex flex-wrap gap-2">
+          <Button variant="primary" size="md" onClick={onOpen}>
             {t('actions.open')}
           </Button>
-          <Button variant="secondary" onClick={onPresent}>
+          <Button variant="secondary" size="md" onClick={onPresent}>
             {t('actions.present')}
           </Button>
-          <Button variant="ghost" onClick={onExportPdf}>
+          <Button variant="ghost" size="md" onClick={onExportPdf}>
             {t('actions.exportPdf')}
           </Button>
-          <Button variant="ghost" onClick={onDuplicate} disabled={duplicating}>
+          <Button variant="ghost" size="md" onClick={onDuplicate} disabled={duplicating}>
             {t('actions.duplicate')}
           </Button>
-          <Button variant="danger" onClick={onAskDelete}>
+          <Button variant="ghost" size="md" className="ml-auto text-red-600" onClick={onAskDelete}>
             {t('actions.delete')}
           </Button>
         </div>
@@ -486,31 +487,19 @@ function ConfirmDeleteDialog({
 }) {
   const { t } = useTranslation('presentations')
   return (
-    <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-navy/60 p-5"
-      role="dialog"
-      aria-modal="true"
-      onClick={onCancel}
-    >
-      <div
-        className="w-full max-w-md rounded-card bg-surface p-6 shadow-card"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <h3 className="font-serif text-2xl font-semibold text-navy">
-          {t('confirmDelete.title')}
-        </h3>
-        <p className="mt-2 text-base text-muted">
-          {t('confirmDelete.description')}
-        </p>
-        <div className="mt-6 flex flex-wrap justify-end gap-3">
-          <Button variant="ghost" onClick={onCancel} disabled={pending}>
-            {t('confirmDelete.cancel')}
-          </Button>
-          <Button variant="danger" onClick={onConfirm} disabled={pending}>
-            {t('confirmDelete.confirm')}
-          </Button>
-        </div>
+    <Modal onClose={onCancel} labelledBy="confirm-delete-title" className="max-w-md">
+      <h3 id="confirm-delete-title" className="font-serif text-2xl font-semibold text-navy">
+        {t('confirmDelete.title')}
+      </h3>
+      <p className="mt-2 text-base text-muted">{t('confirmDelete.description')}</p>
+      <div className="mt-6 flex flex-wrap justify-end gap-3">
+        <Button variant="ghost" onClick={onCancel} disabled={pending}>
+          {t('confirmDelete.cancel')}
+        </Button>
+        <Button variant="danger" onClick={onConfirm} disabled={pending}>
+          {t('confirmDelete.confirm')}
+        </Button>
       </div>
-    </div>
+    </Modal>
   )
 }
