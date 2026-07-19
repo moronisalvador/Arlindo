@@ -44,8 +44,9 @@ Deployed via GitHub Pages at **https://moronisalvador.github.io/Arlindo/** (depl
   preview/present/print. Features import ONLY from `@design-system`.
 - **Features:** `src/features/{presentations,data-entry,present,export-pdf,calc-coming-soon,settings}`.
 - **Export:** `src/export/pptx.ts`. **Routing:** `src/app/routes.ts`, `router.tsx`.
-- **Sample illustration (Term):** `Dave Miller.pdf` at the repo root — a **Term 30-G / LSW** illustration
-  ($600k, $71.54/mo, Male 39 Elite Non-Tobacco, VA; 5 ABRs; conversion privilege). ⚠️ See Privacy note.
+- **Sample illustration (Term):** `Dave Miller.pdf` — a **Term 30-G / LSW** illustration
+  ($600k, $71.54/mo, Male 39 Elite Non-Tobacco, VA; 5 ABRs; conversion privilege). **Git-ignored**
+  (contains client PII) — keep your local copy in the repo folder; it won't be committed.
 
 ---
 
@@ -112,10 +113,10 @@ Replicate exactly the method used for IUL so the Term KB matches:
 - **Annuity** + the other NLG products via the same registry.
 
 ## ⚠️ Privacy note (`Dave Miller.pdf`)
-This file is committed to a **public** repo and contains a named client illustration (name, state,
-age, premium). If "Dave Miller" is a **real** client, remove it from the public repo and keep client
-samples in a **git-ignored** `samples/` folder instead; if it's a fictitious NLG demo, it's fine.
-Confirm before relying on it long-term.
+Now **git-ignored** (`.gitignore`: `Dave Miller.pdf`, `/samples/`, `*.illustration.pdf`) — keep client
+illustrations local, never commit them to this public repo. **Note:** the file still exists in earlier
+git history (it was committed before being ignored); if "Dave Miller" is a real client and that matters,
+scrub it from history (`git filter-repo`/BFG + force-push) — ask the human first, since it rewrites `main`.
 
 ## Verification checklist for the next session
 - `npm run build` clean; `npm test` green.

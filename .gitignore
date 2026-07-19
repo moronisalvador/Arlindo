@@ -9,3 +9,8 @@ coverage
 dev-dist
 *.log
 .vite
+
+# Client illustration samples (contain PII) — keep local, never commit
+Dave Miller.pdf
+/samples/
+*.illustration.pdf
