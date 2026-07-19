@@ -40,8 +40,30 @@ export function TermScheduleSlide({ derived }: { derived: DerivedPresentation })
     },
   ]
 
+  // Premium "cliff": level for the term, then the annually-renewable ramp. Only
+  // shown when there's a real jump (motivates conversion).
+  const all = derived.table
+  const level = all[0]?.premiumPaid
+  const peak = all.reduce((mx, r) => ((r.premiumPaid ?? 0) > (mx.premiumPaid ?? 0) ? r : mx), all[0])
+  const levelYears = derived.headline.termLengthYears
+  const showCliff =
+    level != null && peak?.premiumPaid != null && levelYears != null && peak.premiumPaid > level * 1.5
+
   return (
     <ContentSlide eyebrow={t.schedule.eyebrow} title={t.schedule.title}>
+      {showCliff && (
+        <div className="mb-5 rounded-card border-l-4 border-orange bg-surface px-5 py-3">
+          <p className="font-sans text-base font-semibold text-navy">{t.schedule.cliffTitle}</p>
+          <p className="mt-1 font-sans text-base text-ink">
+            {t.schedule.cliffBody(
+              levelYears,
+              formatMoney(level, currency, { locale }),
+              formatMoney(peak.premiumPaid, currency, { locale }),
+              peak.age ?? 0,
+            )}
+          </p>
+        </div>
+      )}
       <DataTable
         columns={columns}
         rows={rows}

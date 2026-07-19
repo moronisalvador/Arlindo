@@ -245,6 +245,19 @@ describe('parseIllustration — robustness (agent findings)', () => {
     expect(asIul.rows).toHaveLength(2)
   })
 
+  it('extracts the real ABR value and the guaranteed floor (IUL)', () => {
+    const p = parseIllustration([
+      'FlexLife Indexed Universal Life Face Amount: $55,407',
+      'Terminal Illness Benefit: $44,401 Lump Sum',
+      '15 77 2,996.00 0 0 0 12,000 12,000 55,407', // guaranteed (no %): floor at yr 15
+      '15 77 2,996.00 0 0 0 6.84 % 44,281 44,281 55,407', // current
+    ].join('\n'))!
+    expect(p.productType).toBe('iul')
+    expect(p.livingBenefit).toBe(44_401) // real Terminal Illness value, not DB×%
+    expect(p.paymentYears).toBe(15)
+    expect(p.guaranteedValue).toBe(12_000) // guaranteed AV at the payment-end year
+  })
+
   it('handles junk input', () => {
     expect(parseIllustration('')).toBeNull()
     expect(parseIllustration('hello')).toBeNull()

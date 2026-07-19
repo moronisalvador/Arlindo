@@ -8,6 +8,7 @@ import { ProjectionSlide } from './iul/ProjectionSlide'
 import { TableSlide } from './iul/TableSlide'
 import { WithdrawVsIncomeSlide } from './iul/WithdrawVsIncomeSlide'
 import { ComparisonSlide } from './iul/ComparisonSlide'
+import { TimelineSlide } from './iul/TimelineSlide'
 import { DisclaimersSlide } from './iul/DisclaimersSlide'
 import { TermHeadlineSlide } from './term/TermHeadlineSlide'
 import { TermCoverageSlide } from './term/TermCoverageSlide'
@@ -67,6 +68,15 @@ function buildIulSlides(derived: DerivedPresentation): BuiltSlide[] {
 
   if (derived.table.length > 0) {
     slides.push({ id: 'table', title: 'Ano a ano', node: <TableSlide derived={derived} /> })
+  }
+
+  // "Plan over time" timeline — only when we have the deposit-duration + income story.
+  if (
+    derived.headline.paymentYears != null &&
+    derived.headline.incomeOptionAnnual != null &&
+    derived.meta.clientAge != null
+  ) {
+    slides.push({ id: 'timeline', title: 'Linha do tempo', node: <TimelineSlide derived={derived} /> })
   }
 
   slides.push(
