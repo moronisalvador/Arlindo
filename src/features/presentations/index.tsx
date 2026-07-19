@@ -418,22 +418,26 @@ function PresentationCard({
             ))}
           </div>
         )}
-        <div className="flex flex-wrap gap-2">
-          <Button variant="primary" size="md" onClick={onOpen}>
-            {t('actions.open')}
-          </Button>
-          <Button variant="secondary" size="md" onClick={onPresent}>
-            {t('actions.present')}
-          </Button>
-          <Button variant="ghost" size="md" onClick={onExportPdf}>
-            {t('actions.exportPdf')}
-          </Button>
-          <Button variant="ghost" size="md" onClick={onDuplicate} disabled={duplicating}>
-            {t('actions.duplicate')}
-          </Button>
-          <Button variant="ghost" size="md" className="ml-auto text-red-600" onClick={onAskDelete}>
-            {t('actions.delete')}
-          </Button>
+        <div className="flex flex-col gap-2">
+          <div className="grid grid-cols-2 gap-2">
+            <Button variant="primary" size="md" fullWidth onClick={onOpen}>
+              {t('actions.open')}
+            </Button>
+            <Button variant="secondary" size="md" fullWidth onClick={onPresent}>
+              {t('actions.present')}
+            </Button>
+          </div>
+          <div className="grid grid-cols-3 gap-2">
+            <Button variant="ghost" size="md" fullWidth onClick={onExportPdf}>
+              {t('actions.exportPdf')}
+            </Button>
+            <Button variant="ghost" size="md" fullWidth onClick={onDuplicate} disabled={duplicating}>
+              {t('actions.duplicate')}
+            </Button>
+            <Button variant="ghost" size="md" fullWidth className="text-red-600" onClick={onAskDelete}>
+              {t('actions.delete')}
+            </Button>
+          </div>
         </div>
       </div>
     </Card>
