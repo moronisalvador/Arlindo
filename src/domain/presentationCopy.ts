@@ -144,6 +144,8 @@ export interface TermSlideCopy {
     labelConvert: string
     subDeath: string
     livingDiscounted: string
+    /** Living-benefit subtitle when the % is the headline: "up to {amount} — discounted…". */
+    livingAmountSub: (amount: string) => string
     convertBody: string
   }
   coverage: {
@@ -163,6 +165,8 @@ export interface TermSlideCopy {
     additionalCost: string
     /** "up to {money}" — frames a living-benefit ceiling honestly. */
     upTo: (money: string) => string
+    /** "up to {pct} of the benefit" — the accessible-percent headline. */
+    upToPercent: (pct: string) => string
   }
   schedule: {
     eyebrow: string
@@ -341,6 +345,7 @@ const pt: SlideCopy = {
       labelConvert: 'Conversão para Permanente',
       subDeath: 'Pago à sua família, livre de imposto de renda',
       livingDiscounted: 'Acesso antecipado ao benefício — com desconto, conforme a condição',
+      livingAmountSub: (amount) => `até ${amount} — com desconto, conforme a condição`,
       convertBody: 'Converta para uma apólice permanente, sem novo exame de saúde.',
     },
     coverage: {
@@ -358,6 +363,7 @@ const pt: SlideCopy = {
       includedTitle: 'Benefícios em Vida inclusos',
       additionalCost: '(custo adicional)',
       upTo: (money) => `até ${money}`,
+      upToPercent: (pct) => `até ${pct} do benefício`,
     },
     schedule: {
       eyebrow: 'Detalhamento',
@@ -538,6 +544,7 @@ const en: SlideCopy = {
       labelConvert: 'Conversion to Permanent',
       subDeath: 'Paid to your family, income-tax-free',
       livingDiscounted: 'Early access to the benefit — discounted, based on the condition',
+      livingAmountSub: (amount) => `up to ${amount} — discounted, based on the condition`,
       convertBody: 'Convert to a permanent policy with no new medical exam.',
     },
     coverage: {
@@ -555,6 +562,7 @@ const en: SlideCopy = {
       includedTitle: 'Living Benefits included',
       additionalCost: '(additional cost)',
       upTo: (money) => `up to ${money}`,
+      upToPercent: (pct) => `up to ${pct} of the benefit`,
     },
     schedule: {
       eyebrow: 'Detail',
@@ -735,6 +743,7 @@ const es: SlideCopy = {
       labelConvert: 'Conversión a Permanente',
       subDeath: 'Pagado a su familia, libre de impuesto sobre la renta',
       livingDiscounted: 'Acceso anticipado al beneficio — con descuento, según la condición',
+      livingAmountSub: (amount) => `hasta ${amount} — con descuento, según la condición`,
       convertBody: 'Convierta a una póliza permanente, sin nuevo examen médico.',
     },
     coverage: {
@@ -752,6 +761,7 @@ const es: SlideCopy = {
       includedTitle: 'Beneficios en Vida incluidos',
       additionalCost: '(costo adicional)',
       upTo: (money) => `hasta ${money}`,
+      upToPercent: (pct) => `hasta ${pct} del beneficio`,
     },
     schedule: {
       eyebrow: 'Detalle',
