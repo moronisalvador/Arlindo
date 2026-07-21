@@ -6,6 +6,7 @@ import {
   Button,
   Card,
   EyebrowLabel,
+  Icon,
   Loading,
   ErrorState,
   EmptyState,
@@ -14,6 +15,7 @@ import {
 import {
   isPresentable,
   type Client,
+  type CoverageOption,
   type IulInputs,
   type PresentationInputs,
   type Rider,
@@ -36,6 +38,7 @@ import { registerNamespace } from '@i18n/index'
 import { dataEntry } from './i18n/pt-BR'
 import { NumberField, Segmented, TextField } from './fields'
 import { RidersEditor } from './RidersEditor'
+import { CoverageOptionsEditor } from './CoverageOptionsEditor'
 import { YearTableEditor } from './YearTableEditor'
 import { SlidePreview } from './SlidePreview'
 import { CollapsibleSection } from './CollapsibleSection'
@@ -220,7 +223,7 @@ function Editor({ id }: { id: string }) {
   if (!query.data) {
     return (
       <EmptyState
-        icon="🔍"
+        icon={<Icon name="search" className="h-9 w-9 text-muted" />}
         title={t('page.notFoundTitle')}
         description={t('page.notFoundDescription')}
         action={
@@ -238,6 +241,18 @@ function Editor({ id }: { id: string }) {
   const iul = working.iul
   const term = working.term
   const isTerm = working.productType === 'term'
+  const setCoverageOptions = (coverageOptions: CoverageOption[]) =>
+    update((p) =>
+      isTerm
+        ? { ...p, term: { ...p.term, coverageOptions } }
+        : { ...p, iul: { ...p.iul, coverageOptions } },
+    )
+  const setRecommendedOptionId = (recommendedOptionId: string | undefined) =>
+    update((p) =>
+      isTerm
+        ? { ...p, term: { ...p.term, recommendedOptionId } }
+        : { ...p, iul: { ...p.iul, recommendedOptionId } },
+    )
 
   const toggle = (key: string) => setOpenKey((cur) => (cur === key ? '' : key))
 
@@ -563,6 +578,31 @@ function Editor({ id }: { id: string }) {
             />
           </div>
         )}
+      </CollapsibleSection>
+
+      {/* 6) Comparar opções (opcional) */}
+      <CollapsibleSection
+        step="6"
+        title={t('sections.options')}
+        summary={
+          (isTerm ? term.coverageOptions : iul.coverageOptions).length > 0
+            ? t('summaries.optionsCount', {
+                count: (isTerm ? term.coverageOptions : iul.coverageOptions).length,
+              })
+            : t('summaries.toFill')
+        }
+        complete
+        open={openKey === 'opcoes'}
+        onToggle={() => toggle('opcoes')}
+      >
+        <CoverageOptionsEditor
+          options={isTerm ? term.coverageOptions : iul.coverageOptions}
+          onChange={setCoverageOptions}
+          currency={currency}
+          isTerm={isTerm}
+          recommendedOptionId={isTerm ? term.recommendedOptionId : iul.recommendedOptionId}
+          onRecommend={setRecommendedOptionId}
+        />
       </CollapsibleSection>
       </div>
 

@@ -68,6 +68,8 @@ export class PassthroughEngine implements CalculationEngine {
       },
       table: rows,
       riders: term.riders.filter((r) => r.included).map((r) => translateRider(r, lang)),
+      coverageOptions: term.coverageOptions,
+      recommendedOptionId: term.recommendedOptionId,
       abrBenefits: inputs.abrBenefits,
       disclaimers: disclaimersFor(lang, inputs.disclaimers, 'term'),
     }
@@ -132,6 +134,8 @@ export class PassthroughEngine implements CalculationEngine {
       },
       table: rows,
       riders: iul.riders.filter((r) => r.included).map((r) => translateRider(r, lang)),
+      coverageOptions: iul.coverageOptions,
+      recommendedOptionId: iul.recommendedOptionId,
       abrBenefits: inputs.abrBenefits,
       disclaimers: disclaimersFor(lang, inputs.disclaimers),
     }

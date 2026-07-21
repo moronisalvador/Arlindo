@@ -6,6 +6,7 @@ import {
   Button,
   EmptyState,
   ErrorState,
+  Icon,
   Loading,
   RenderModeProvider,
   buildSlides,
@@ -206,9 +207,7 @@ export default function ExportPdfPage() {
           {!hintDismissed && (
             <div className="border-t border-line bg-surface-alt">
               <div className="mx-auto flex max-w-[1040px] flex-wrap items-center gap-3 px-4 py-3">
-                <span className="text-xl" aria-hidden="true">
-                  💡
-                </span>
+                <Icon name="lightbulb" className="h-6 w-6 text-orange-dark" strokeWidth={1.5} />
                 <p className="flex-1 text-base text-navy">{t('ipadHint')}</p>
                 <Button variant="ghost" size="md" onClick={dismissHint}>
                   {t('hintDismiss')}

@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type ChangeEvent } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, Card, Modal } from '@design-system'
+import { Button, Card, Icon, Modal } from '@design-system'
 import { formatMoney } from '@domain/format'
 import type { CurrencyCode } from '@domain/model/presentation'
 import { parseIllustration } from '@domain/illustration/parseIllustration'
@@ -177,7 +177,7 @@ function ReviewDialog({
           <ul className="mt-3 space-y-1">
             {parsed.warnings.map((w, i) => (
               <li key={i} className="flex gap-2 text-sm text-muted">
-                <span aria-hidden>⚠️</span>
+                <Icon name="warning" className="h-4 w-4 shrink-0 text-orange-dark" strokeWidth={1.8} />
                 {w}
               </li>
             ))}

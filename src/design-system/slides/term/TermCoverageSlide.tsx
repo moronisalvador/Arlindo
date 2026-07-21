@@ -1,7 +1,7 @@
 import type { DerivedPresentation } from '@domain/model/derived'
 import { formatMoney, localeFor } from '@domain/format'
 import { slideCopy } from '@domain/presentationCopy'
-import { Card } from '@design-system/primitives'
+import { Card, Icon } from '@design-system/primitives'
 import { ContentSlide } from '../ContentSlide'
 
 /** Term coverage: premium / death benefit / living benefit, the conversion privilege, and included riders. */
@@ -41,7 +41,7 @@ export function TermCoverageSlide({ derived }: { derived: DerivedPresentation })
 
       {/* Conversion privilege callout */}
       <div className="mb-5 flex items-baseline gap-3 rounded-card bg-surface px-5 py-3 shadow-card">
-        <span className="text-2xl">🔄</span>
+        <Icon name="refresh" className="h-6 w-6 text-orange-dark" strokeWidth={1.6} />
         <span className="font-sans text-lg font-semibold text-navy">{t.coverage.conversion}</span>
         <span className="font-sans text-lg text-muted">·</span>
         <span className="font-sans text-lg text-ink">

@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { registerSW } from 'virtual:pwa-register'
 import { Button } from '@design-system'
+import { routePatterns } from '@app/routes'
 
 // How often to poll for a new release while the app stays open (installed PWAs
 // on iPad are long-lived — without this they'd never notice a deploy). We also
@@ -11,11 +12,22 @@ const UPDATE_CHECK_INTERVAL_MS = 60 * 60 * 1000 // hourly
 // tell it to activate, reload anyway so the button is never a dead end.
 const RELOAD_FALLBACK_MS = 3000
 
+// Static prefix of the live-presentation route ("#/apresentar/"). Reloading
+// while this route is active would pull the deck out from under a client
+// mid-pitch, so it's the one place we never auto-apply an update.
+const PRESENT_HASH_PREFIX = `#${routePatterns.present.split(':')[0]}`
+
+function isPresentingNow(): boolean {
+  return window.location.hash.startsWith(PRESENT_HASH_PREFIX)
+}
+
 /**
- * Registers the service worker and, when a new deploy is detected, shows a
- * small non-intrusive banner. Tapping "Atualizar" activates the new version and
- * reloads. Nothing reloads on its own — safe to keep on screen during a live
- * client presentation. This is why releases no longer need a manual Shift+R.
+ * Registers the service worker and, when a new deploy is detected, applies it
+ * SILENTLY as soon as it's safe — i.e. everywhere except the live Present
+ * screen, where a reload would yank the deck out from under a client
+ * mid-pitch. Only there does it fall back to a small non-intrusive banner
+ * ("Atualizar") the agent taps when ready. Nothing ever reloads on its own
+ * while presenting. This is why releases no longer need a manual Shift+R.
  *
  * We intentionally do NOT use the `updateSW` function returned by registerSW to
  * apply the update: because we detect updates with a plain `registration.update()`
@@ -28,8 +40,18 @@ const RELOAD_FALLBACK_MS = 3000
  */
 export function UpdatePrompt() {
   const [needRefresh, setNeedRefresh] = useState(false)
+  const [presenting, setPresenting] = useState(isPresentingNow)
   const registrationRef = useRef<ServiceWorkerRegistration | null>(null)
   const cleanup = useRef<() => void>()
+  const appliedRef = useRef(false)
+
+  // HashRouter navigation doesn't reload the page, so track route changes via
+  // the hashchange event (UpdatePrompt sits outside the Router in App.tsx).
+  useEffect(() => {
+    const onHashChange = () => setPresenting(isPresentingNow())
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
 
   useEffect(() => {
     registerSW({
@@ -78,7 +100,21 @@ export function UpdatePrompt() {
     waiting.postMessage({ type: 'SKIP_WAITING' })
   }
 
-  if (!needRefresh) return null
+  // Auto-apply the moment it's safe: whenever an update is waiting and we're
+  // NOT on the live Present screen, apply it silently — no tap needed. Also
+  // fires if the agent navigates away from Present while an update was
+  // already waiting (banner dismissed there via "Depois" or otherwise).
+  useEffect(() => {
+    if (needRefresh && !presenting && !appliedRef.current) {
+      appliedRef.current = true
+      applyUpdate()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [needRefresh, presenting])
+
+  // Only ever rendered while actively presenting — everywhere else the
+  // update above already applied silently, no banner needed.
+  if (!needRefresh || !presenting) return null
 
   return (
     <div

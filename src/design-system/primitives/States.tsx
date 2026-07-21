@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { cn } from '@shared/cn'
 import { Button } from './Button'
+import { Icon } from './Icon'
 
 /** Loading state — forced everywhere a load is in flight (never a blank screen). */
 export function Loading({ label = 'Carregando…', className }: { label?: string; className?: string }) {
@@ -52,7 +53,7 @@ export function ErrorState({
 }) {
   return (
     <div className={cn('flex flex-col items-center justify-center gap-3 py-16 text-center', className)}>
-      <div className="text-4xl">⚠️</div>
+      <Icon name="warning" className="h-9 w-9 text-orange-dark" strokeWidth={1.5} />
       <h3 className="font-serif text-2xl font-semibold text-navy">{title}</h3>
       {description && <p className="max-w-md text-base text-muted">{description}</p>}
       {onRetry && (

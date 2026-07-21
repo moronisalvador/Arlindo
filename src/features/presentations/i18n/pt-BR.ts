@@ -6,7 +6,7 @@ export const ptBR = {
   newIul: 'Nova (IUL)',
   newTerm: 'Nova (Termo)',
   importPdf: {
-    button: '📄 Importar ilustração (PDF)',
+    button: 'Importar ilustração (PDF)',
     reading: 'Lendo o PDF…',
     error: 'Não foi possível ler esta ilustração. Verifique se é um PDF do National Life (FlexLife ou Termo) ou crie manualmente.',
   },
@@ -14,7 +14,7 @@ export const ptBR = {
   noName: 'Sem nome',
   search: {
     label: 'Buscar apresentações',
-    placeholder: '🔍 Buscar por cliente, produto ou título…',
+    placeholder: 'Buscar por cliente, produto ou título…',
     clear: 'Limpar busca',
     noResults: {
       title: 'Nenhum resultado',

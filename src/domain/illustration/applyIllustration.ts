@@ -1,4 +1,4 @@
-import type { PresentationInputs } from '@domain/model/presentation'
+import type { CoverageOption, PresentationInputs } from '@domain/model/presentation'
 import { defaultRidersForProduct } from '@domain/model/products'
 import { DEFAULT_IUL_DISCLAIMERS, DEFAULT_TERM_DISCLAIMERS } from '@domain/model/riders'
 import type { ParsedIllustration } from './types'
@@ -96,5 +96,26 @@ export function applyIllustration(
     abrBenefits: parsed.abrBenefits ?? existing.abrBenefits,
     yearlyRows: parsed.rows.length ? parsed.rows : existing.yearlyRows,
     disclaimers,
+  }
+}
+
+/**
+ * Merges a parsed illustration into ONE coverage-comparison-table row (a pricing
+ * tier, not the main plan) — the death benefit / living benefit / term length /
+ * premium a second or third carrier illustration prints. Same "typed numbers are
+ * authoritative" rule as `applyIllustration`, just scoped to a single option.
+ */
+export function applyIllustrationToOption(
+  parsed: ParsedIllustration,
+  existing: CoverageOption,
+): CoverageOption {
+  const premiumIsAnnual = parsed.premiumMode === 'annual'
+  return {
+    ...existing,
+    deathBenefit: parsed.deathBenefit ?? existing.deathBenefit,
+    livingBenefit: parsed.livingBenefit ?? existing.livingBenefit,
+    termYears: parsed.termLengthYears ?? existing.termYears,
+    monthlyPremium: parsed.premium != null && !premiumIsAnnual ? parsed.premium : existing.monthlyPremium,
+    annualPremium: parsed.premium != null && premiumIsAnnual ? parsed.premium : existing.annualPremium,
   }
 }

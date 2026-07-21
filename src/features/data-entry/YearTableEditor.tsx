@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Button, EmptyState } from '@design-system'
+import { Button, EmptyState, Icon } from '@design-system'
 import { parseNumberInput } from '@domain/format'
 import type { YearlyRow } from '@domain/model/presentation'
 import { cn } from '@shared/cn'
@@ -76,7 +76,7 @@ export function YearTableEditor({
   return (
     <div className="space-y-4">
       {rows.length === 0 ? (
-        <EmptyState icon="📊" title={t('years.empty')} />
+        <EmptyState icon={<Icon name="barChart" className="h-9 w-9 text-muted" />} title={t('years.empty')} />
       ) : (
         <div className="overflow-x-auto rounded-card border border-line">
           <table className="w-full border-collapse text-left">
