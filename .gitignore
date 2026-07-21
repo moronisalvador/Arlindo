@@ -12,5 +12,6 @@ dev-dist
 
 # Client illustration samples (contain PII) — keep local, never commit
 Dave Miller.pdf
+jose iul.pdf
 /samples/
 *.illustration.pdf
