@@ -95,7 +95,6 @@ export interface SlideCopy {
   valueSummary: {
     eyebrow: string
     title: string
-    youInvest: string
     youGet: string
     protection: string
     income: string
@@ -138,6 +137,20 @@ export interface SlideCopy {
   /** Term-only slide copy (term has no cash value, no accumulation, no income). */
   term: TermSlideCopy
   clientFallback: string
+  /** Side-by-side comparison of 2-3 coverage options (both products). */
+  optionsComparison: {
+    eyebrow: string
+    title: string
+    optionLabel: (n: number) => string
+    death: string
+    living: string
+    term: string
+    monthly: string
+    footnote: string
+    recommendedBadge: string
+  }
+  /** Caption stitching the headline slide back to the recommended option from the comparison table. */
+  recommendedCaption: (label: string) => string
 }
 
 export interface TermSlideCopy {
@@ -308,7 +321,6 @@ const pt: SlideCopy = {
   valueSummary: {
     eyebrow: 'O Retorno do Seu Plano',
     title: 'O que você recebe pelo que investe',
-    youInvest: 'Você investe',
     youGet: 'Você recebe',
     protection: 'Proteção por morte',
     income: 'Renda vitalícia',
@@ -417,6 +429,18 @@ const pt: SlideCopy = {
       ],
     },
   },
+  optionsComparison: {
+    eyebrow: 'Comparação de Coberturas',
+    title: 'Escolha sua Cobertura',
+    optionLabel: (n) => `Opção ${n}`,
+    death: 'Cobertura de Morte',
+    living: 'Benefício em Vida',
+    term: 'Prazo',
+    monthly: 'Valor Mensal',
+    footnote: '* Valores mensais estimados, sujeitos à análise de underwriting (idade, saúde e demais fatores).',
+    recommendedBadge: 'Recomendada',
+  },
+  recommendedCaption: (label) => `Baseado na ${label} — Recomendada`,
   clientFallback: 'o cliente',
 }
 
@@ -520,7 +544,6 @@ const en: SlideCopy = {
   valueSummary: {
     eyebrow: 'What Your Plan Returns',
     title: 'What you get for what you put in',
-    youInvest: 'You invest',
     youGet: 'You receive',
     protection: 'Death protection',
     income: 'Lifetime income',
@@ -629,6 +652,18 @@ const en: SlideCopy = {
       ],
     },
   },
+  optionsComparison: {
+    eyebrow: 'Coverage Comparison',
+    title: 'Choose Your Coverage',
+    optionLabel: (n) => `Option ${n}`,
+    death: 'Death Benefit',
+    living: 'Living Benefit',
+    term: 'Term',
+    monthly: 'Monthly Premium',
+    footnote: '* Estimated monthly amounts, subject to underwriting review (age, health and other factors).',
+    recommendedBadge: 'Recommended',
+  },
+  recommendedCaption: (label) => `Based on ${label} — Recommended`,
   clientFallback: 'the client',
 }
 
@@ -732,7 +767,6 @@ const es: SlideCopy = {
   valueSummary: {
     eyebrow: 'El Retorno de Su Plan',
     title: 'Lo que recibe por lo que invierte',
-    youInvest: 'Usted invierte',
     youGet: 'Usted recibe',
     protection: 'Protección por muerte',
     income: 'Renta de por vida',
@@ -841,6 +875,18 @@ const es: SlideCopy = {
       ],
     },
   },
+  optionsComparison: {
+    eyebrow: 'Comparación de Coberturas',
+    title: 'Elija su Cobertura',
+    optionLabel: (n) => `Opción ${n}`,
+    death: 'Cobertura por Muerte',
+    living: 'Beneficio en Vida',
+    term: 'Plazo',
+    monthly: 'Valor Mensual',
+    footnote: '* Valores mensuales estimados, sujetos a evaluación de suscripción (edad, salud y otros factores).',
+    recommendedBadge: 'Recomendada',
+  },
+  recommendedCaption: (label) => `Basado en la ${label} — Recomendada`,
   clientFallback: 'el cliente',
 }
 

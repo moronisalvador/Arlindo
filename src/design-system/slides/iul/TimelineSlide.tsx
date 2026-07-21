@@ -1,6 +1,7 @@
 import type { DerivedPresentation } from '@domain/model/derived'
 import { formatMoney, localeFor } from '@domain/format'
 import { slideCopy } from '@domain/presentationCopy'
+import { Icon, type IconName } from '@design-system/primitives'
 import { ContentSlide } from '../ContentSlide'
 
 /**
@@ -17,10 +18,10 @@ export function TimelineSlide({ derived }: { derived: DerivedPresentation }) {
   const stopAge = (meta.clientAge ?? 0) + (headline.paymentYears ?? 0)
   const income = formatMoney(headline.incomeOptionAnnual, meta.currency, { locale })
 
-  const steps = [
-    { emoji: '💰', label: c.step1, body: c.step1Body(premium, headline.paymentYears ?? 0) },
-    { emoji: '⏸️', label: c.step2, body: c.step2Body(stopAge) },
-    { emoji: '💵', label: c.step3, body: c.step3Body(income) },
+  const steps: Array<{ icon: IconName; label: string; body: string }> = [
+    { icon: 'wallet', label: c.step1, body: c.step1Body(premium, headline.paymentYears ?? 0) },
+    { icon: 'pause', label: c.step2, body: c.step2Body(stopAge) },
+    { icon: 'banknote', label: c.step3, body: c.step3Body(income) },
   ]
 
   return (
@@ -30,8 +31,8 @@ export function TimelineSlide({ derived }: { derived: DerivedPresentation }) {
         <span aria-hidden className="absolute left-[16%] right-[16%] top-8 h-1 rounded-full bg-orange/40" />
         {steps.map((s, i) => (
           <div key={i} className="relative flex flex-col items-center text-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-navy text-3xl">
-              <span>{s.emoji}</span>
+            <div className="flex h-16 w-16 items-center justify-center rounded-full bg-navy">
+              <Icon name={s.icon} className="h-8 w-8 text-orange" strokeWidth={1.4} />
             </div>
             <div className="mt-4 font-sans text-lg font-semibold text-orange-dark">{s.label}</div>
             <div className="mt-2 font-serif text-2xl font-semibold leading-tight text-navy">{s.body}</div>

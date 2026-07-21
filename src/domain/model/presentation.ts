@@ -67,6 +67,19 @@ export const yearlyRowSchema = z.object({
 })
 export type YearlyRow = z.infer<typeof yearlyRowSchema>
 
+/** A single pricing tier row for the coverage comparison table; product-agnostic (termYears is only meaningful for term). */
+export const coverageOptionSchema = z.object({
+  id: z.string(),
+  label: z.string().optional(),
+  deathBenefit: z.number().optional(),
+  livingBenefit: z.number().optional(),
+  livingBenefitPercent: z.number().min(0).max(100).optional(),
+  termYears: z.number().int().positive().optional(),
+  monthlyPremium: z.number().optional(),
+  annualPremium: z.number().optional(),
+})
+export type CoverageOption = z.infer<typeof coverageOptionSchema>
+
 /** IUL-specific fields (present when productType === 'iul'). */
 export const iulSchema = z.object({
   premium: z.number().nonnegative().optional(),
@@ -93,6 +106,9 @@ export const iulSchema = z.object({
    * is authoritative).
    */
   projectionSource: z.enum(['typed', 'estimate']).default('typed'),
+  coverageOptions: z.array(coverageOptionSchema).default([]),
+  /** Id of the coverageOptions row the rest of the deck deep-dives on (headline/coverage/projection/table). */
+  recommendedOptionId: z.string().optional(),
 })
 export type IulInputs = z.infer<typeof iulSchema>
 
@@ -120,6 +136,9 @@ export const termSchema = z.object({
   conversionYears: z.number().int().positive().optional(),
   conversionToAge: z.number().int().positive().optional(),
   riders: z.array(riderSchema).default([]),
+  coverageOptions: z.array(coverageOptionSchema).default([]),
+  /** Id of the coverageOptions row the rest of the deck deep-dives on (headline/coverage/schedule). */
+  recommendedOptionId: z.string().optional(),
 })
 export type TermInputs = z.infer<typeof termSchema>
 

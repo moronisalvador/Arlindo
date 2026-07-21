@@ -19,6 +19,7 @@ import { ValueSummarySlide } from './ValueSummarySlide'
 import { NextStepsSlide } from './NextStepsSlide'
 import { LivingBenefitsDetailSlide } from './LivingBenefitsDetailSlide'
 import { hasAbrDetail } from './abrDetailFlag'
+import { OptionsComparisonSlide } from './OptionsComparisonSlide'
 
 export interface BuiltSlide {
   id: string
@@ -51,6 +52,10 @@ function buildTermSlides(derived: DerivedPresentation): BuiltSlide[] {
     { id: 'coverage', title: 'Cobertura', node: <TermCoverageSlide derived={derived} /> },
   ]
 
+  if ((derived.coverageOptions?.length ?? 0) > 1) {
+    slides.push({ id: 'optionsComparison', title: 'Comparar opções', node: <OptionsComparisonSlide derived={derived} /> })
+  }
+
   if (hasAbrDetail(derived)) {
     slides.push({ id: 'livingDetail', title: 'Benefícios por doença', node: <LivingBenefitsDetailSlide derived={derived} /> })
   }
@@ -75,8 +80,13 @@ function buildIulSlides(derived: DerivedPresentation): BuiltSlide[] {
     { id: 'headline', title: 'Resumo', node: <HeadlineSlide derived={derived} /> },
     { id: 'explainer', title: 'O que é IUL', node: <ExplainerSlide derived={derived} /> },
     { id: 'coverage', title: 'Cobertura', node: <CoverageRidersSlide derived={derived} /> },
-    { id: 'projection', title: 'Projeção', node: <ProjectionSlide derived={derived} /> },
   ]
+
+  if ((derived.coverageOptions?.length ?? 0) > 1) {
+    slides.push({ id: 'optionsComparison', title: 'Comparar opções', node: <OptionsComparisonSlide derived={derived} /> })
+  }
+
+  slides.push({ id: 'projection', title: 'Projeção', node: <ProjectionSlide derived={derived} /> })
 
   if (hasAbrDetail(derived)) {
     slides.push({ id: 'livingDetail', title: 'Benefícios por doença', node: <LivingBenefitsDetailSlide derived={derived} /> })

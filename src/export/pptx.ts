@@ -161,6 +161,15 @@ function livingBenefitsDetailSlide(pptx: pptxgen, d: DerivedPresentation) {
   s.addText(c.note, { x: 0.6, y: PH - 0.9, w: 12.1, h: 0.5, fontFace: SANS, fontSize: 9, color: C.muted })
 }
 
+/** Label + index of the coverageOptions row marked recommended, if any. */
+function recommendedLabelFor(d: DerivedPresentation, c: ReturnType<typeof slideCopy>): string | undefined {
+  const options = d.coverageOptions
+  const idx = options?.findIndex((o) => o.id === d.recommendedOptionId) ?? -1
+  if (idx < 0) return undefined
+  const opt = options![idx]
+  return opt.label ?? c.optionsComparison.optionLabel(idx + 1)
+}
+
 function headlineSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
   const c = slideCopy(d.meta.language)
@@ -168,6 +177,14 @@ function headlineSlide(pptx: pptxgen, d: DerivedPresentation) {
   const top = addHeader(s, c.headline.eyebrow, c.headline.title)
   const cur = d.meta.currency
   const h = d.headline
+  const recommendedLabel = recommendedLabelFor(d, c)
+  let bodyTop = top
+  if (recommendedLabel) {
+    s.addText(c.recommendedCaption(recommendedLabel), {
+      x: 0.6, y: top, w: 12.1, h: 0.35, align: 'center', fontFace: SANS, fontSize: 13, bold: true, color: C.orangeDk,
+    })
+    bodyTop = top + 0.4
+  }
   const cards: Array<[string, string, string, string]> = [
     ['🛡️', c.headline.whenEarly, formatMoney(h.deathBenefit, cur, { locale: loc }), c.headline.subDeath],
     [
@@ -187,11 +204,11 @@ function headlineSlide(pptx: pptxgen, d: DerivedPresentation) {
   const gap = 0.2
   cards.forEach(([emoji, when, value, sub], i) => {
     const x = 0.6 + i * (cardW + gap)
-    s.addShape('roundRect', { x, y: top, w: cardW, h: 4, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.08 })
-    s.addText(emoji, { x, y: top + 0.25, w: cardW, h: 0.7, fontSize: 30, align: 'center' })
-    s.addText(when, { x: x + 0.15, y: top + 1.05, w: cardW - 0.3, h: 0.4, fontFace: SANS, fontSize: 13, bold: true, color: C.orange, align: 'center' })
-    s.addText(value, { x: x + 0.15, y: top + 1.6, w: cardW - 0.3, h: 1, fontFace: SERIF, fontSize: 22, bold: true, color: C.navy, align: 'center', valign: 'middle' })
-    s.addText(sub, { x: x + 0.2, y: top + 2.7, w: cardW - 0.4, h: 1, fontFace: SANS, fontSize: 11, color: C.muted, align: 'center' })
+    s.addShape('roundRect', { x, y: bodyTop, w: cardW, h: 4, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.08 })
+    s.addText(emoji, { x, y: bodyTop + 0.25, w: cardW, h: 0.7, fontSize: 30, align: 'center' })
+    s.addText(when, { x: x + 0.15, y: bodyTop + 1.05, w: cardW - 0.3, h: 0.4, fontFace: SANS, fontSize: 13, bold: true, color: C.orange, align: 'center' })
+    s.addText(value, { x: x + 0.15, y: bodyTop + 1.6, w: cardW - 0.3, h: 1, fontFace: SERIF, fontSize: 22, bold: true, color: C.navy, align: 'center', valign: 'middle' })
+    s.addText(sub, { x: x + 0.2, y: bodyTop + 2.7, w: cardW - 0.4, h: 1, fontFace: SANS, fontSize: 11, color: C.muted, align: 'center' })
   })
 }
 
@@ -403,11 +420,20 @@ function disclaimersSlide(pptx: pptxgen, d: DerivedPresentation) {
 
 function termHeadlineSlide(pptx: pptxgen, d: DerivedPresentation) {
   const s = pptx.addSlide()
-  const t = slideCopy(d.meta.language).term
+  const c = slideCopy(d.meta.language)
+  const t = c.term
   const loc = localeFor(d.meta.language)
   const top = addHeader(s, t.headline.eyebrow, t.headline.title)
   const cur = d.meta.currency
   const h = d.headline
+  const recommendedLabel = recommendedLabelFor(d, c)
+  let bodyTop = top
+  if (recommendedLabel) {
+    s.addText(c.recommendedCaption(recommendedLabel), {
+      x: 0.6, y: top, w: 12.1, h: 0.35, align: 'center', fontFace: SANS, fontSize: 13, bold: true, color: C.orangeDk,
+    })
+    bodyTop = top + 0.4
+  }
   const cards: Array<[string, string, string, string]> = [
     ['🛡️', t.headline.whenEarly, formatMoney(h.deathBenefit, cur, { locale: loc }), t.headline.subDeath],
     ['❤️', t.headline.whenIll, formatMoney(h.livingBenefit ?? h.deathBenefit, cur, { locale: loc }), t.headline.livingDiscounted],
@@ -417,11 +443,11 @@ function termHeadlineSlide(pptx: pptxgen, d: DerivedPresentation) {
   const gap = 0.2
   cards.forEach(([emoji, when, value, sub], i) => {
     const x = 0.6 + i * (cardW + gap)
-    s.addShape('roundRect', { x, y: top, w: cardW, h: 4, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.08 })
-    s.addText(emoji, { x, y: top + 0.25, w: cardW, h: 0.7, fontSize: 30, align: 'center' })
-    s.addText(when, { x: x + 0.15, y: top + 1.05, w: cardW - 0.3, h: 0.4, fontFace: SANS, fontSize: 13, bold: true, color: C.orange, align: 'center' })
-    s.addText(value, { x: x + 0.15, y: top + 1.6, w: cardW - 0.3, h: 1, fontFace: SERIF, fontSize: 22, bold: true, color: C.navy, align: 'center', valign: 'middle' })
-    s.addText(sub, { x: x + 0.2, y: top + 2.7, w: cardW - 0.4, h: 1, fontFace: SANS, fontSize: 11, color: C.muted, align: 'center' })
+    s.addShape('roundRect', { x, y: bodyTop, w: cardW, h: 4, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.08 })
+    s.addText(emoji, { x, y: bodyTop + 0.25, w: cardW, h: 0.7, fontSize: 30, align: 'center' })
+    s.addText(when, { x: x + 0.15, y: bodyTop + 1.05, w: cardW - 0.3, h: 0.4, fontFace: SANS, fontSize: 13, bold: true, color: C.orange, align: 'center' })
+    s.addText(value, { x: x + 0.15, y: bodyTop + 1.6, w: cardW - 0.3, h: 1, fontFace: SERIF, fontSize: 22, bold: true, color: C.navy, align: 'center', valign: 'middle' })
+    s.addText(sub, { x: x + 0.2, y: bodyTop + 2.7, w: cardW - 0.4, h: 1, fontFace: SANS, fontSize: 11, color: C.muted, align: 'center' })
   })
 }
 
@@ -469,6 +495,68 @@ function termCoverageSlide(pptx: pptxgen, d: DerivedPresentation) {
       { x, y, w: 6, h: 0.4, fontFace: SANS, fontSize: 12 },
     )
   })
+}
+
+/** Side-by-side comparison of 2-3 coverage options (both products); mirrors OptionsComparisonSlide.tsx. */
+function optionsComparisonSlide(pptx: pptxgen, d: DerivedPresentation) {
+  const s = pptx.addSlide()
+  const c = slideCopy(d.meta.language)
+  const t = c.optionsComparison
+  const loc = localeFor(d.meta.language)
+  const cur = d.meta.currency
+  const top = addHeader(s, t.eyebrow, t.title)
+  const options = d.coverageOptions ?? []
+  const isTerm = d.meta.productType === 'term'
+  const yearsSuffix = d.meta.language === 'en' ? 'years' : d.meta.language === 'es' ? 'años' : 'anos'
+
+  const headerCell = (text: string, align: 'left' | 'right' = 'right') => ({
+    text,
+    options: { bold: true, color: C.white, fill: { color: C.navy }, fontFace: SANS, fontSize: 11, align },
+  })
+  const head = [
+    headerCell('', 'left'),
+    headerCell(t.death),
+    headerCell(t.living),
+    ...(isTerm ? [headerCell(t.term)] : []),
+    headerCell(t.monthly),
+  ]
+
+  const body = options.map((opt, i) => {
+    const recommended = opt.id === d.recommendedOptionId
+    const shade = recommended ? { fill: { color: C.alt } } : {}
+    const label = opt.label ?? t.optionLabel(i + 1)
+    const living =
+      opt.livingBenefit != null
+        ? formatMoney(opt.livingBenefit, cur, { locale: loc })
+        : opt.livingBenefitPercent != null
+          ? c.coverage.upTo(`${opt.livingBenefitPercent}%`)
+          : '—'
+    const monthly = opt.monthlyPremium ?? (opt.annualPremium != null ? opt.annualPremium / 12 : undefined)
+    const row: Array<{ text: string; options: Record<string, unknown> }> = [
+      {
+        text: recommended ? `${label}   ★ ${t.recommendedBadge}` : label,
+        options: { bold: true, color: C.navy, ...shade },
+      },
+      { text: formatMoney(opt.deathBenefit, cur, { locale: loc }), options: { align: 'right' as const, ...shade } },
+      { text: living, options: { align: 'right' as const, ...shade } },
+    ]
+    if (isTerm) {
+      row.push({
+        text: opt.termYears != null ? `${formatNumber(opt.termYears, { locale: loc })} ${yearsSuffix}` : '—',
+        options: { align: 'right' as const, ...shade },
+      })
+    }
+    row.push({ text: formatMoney(monthly, cur, { locale: loc }), options: { align: 'right' as const, bold: true, ...shade } })
+    return row
+  })
+
+  const colW = isTerm ? [3.3, 2.8, 2.8, 1.4, 1.8] : [3.7, 3, 3, 2.4]
+  s.addTable([head, ...body], {
+    x: 0.6, y: top, w: 12.1, colW,
+    border: { type: 'solid', color: C.line, pt: 0.5 },
+    fontFace: SANS, fontSize: 11, color: C.ink, valign: 'middle', rowH: 0.55,
+  })
+  s.addText(t.footnote, { x: 0.6, y: top + 0.55 * (options.length + 1) + 0.3, w: 12.1, h: 0.4, fontFace: SANS, fontSize: 9, color: C.muted })
 }
 
 function termScheduleSlide(pptx: pptxgen, d: DerivedPresentation) {
@@ -561,25 +649,19 @@ function valueSummarySlide(pptx: pptxgen, d: DerivedPresentation) {
   const top = addHeader(s, v.eyebrow, v.title)
   const h = d.headline
   const isTerm = d.meta.productType === 'term'
-  const annualPrem = h.premium != null ? h.premium * (h.premiumMode === 'annual' ? 1 : 12) : null
-  const invest = isTerm && annualPrem != null && h.termLengthYears != null ? annualPrem * h.termLengthYears : h.totalPremiumsPaid
-  // You invest (navy card)
-  s.addShape('roundRect', { x: 0.6, y: top, w: 3.6, h: 3.6, fill: { color: C.navy }, line: { type: 'none' }, rectRadius: 0.08 })
-  s.addText(v.youInvest.toUpperCase(), { x: 0.6, y: top + 1.1, w: 3.6, h: 0.4, align: 'center', fontFace: SANS, fontSize: 11, bold: true, color: C.orange, charSpacing: 1 })
-  s.addText(formatMoney(invest, cur, { locale: loc }), { x: 0.6, y: top + 1.6, w: 3.6, h: 0.8, align: 'center', fontFace: SERIF, fontSize: 30, bold: true, color: C.white })
   // You receive
   const gets: Array<[string, string]> = [[v.protection, formatMoney(h.deathBenefit, cur, { locale: loc })]]
   if (!isTerm && h.incomeOptionAnnual != null) gets.push([v.income, `${formatMoney(h.incomeOptionAnnual, cur, { locale: loc })} ${v.perYear}`])
   if (h.livingBenefit != null) gets.push([v.living, formatMoney(h.livingBenefit, cur, { locale: loc })])
   if (!isTerm && h.projectedAccumulatedValue != null) gets.push([v.accumulated, formatMoney(h.projectedAccumulatedValue, cur, { locale: loc })])
   if (isTerm) gets.push([v.conversion, '✓'])
-  s.addText(v.youGet.toUpperCase(), { x: 4.6, y: top - 0.05, w: 8, h: 0.3, fontFace: SANS, fontSize: 9, bold: true, color: C.muted, charSpacing: 1 })
+  s.addText(v.youGet.toUpperCase(), { x: 0.6, y: top - 0.05, w: 8, h: 0.3, fontFace: SANS, fontSize: 9, bold: true, color: C.muted, charSpacing: 1 })
   gets.slice(0, 4).forEach(([label, val], i) => {
-    const x = 4.6 + (i % 2) * 4.1
+    const x = 0.6 + (i % 2) * 6.15
     const y = top + 0.35 + Math.floor(i / 2) * 1.35
-    s.addShape('roundRect', { x, y, w: 3.9, h: 1.15, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.05 })
-    s.addText(label, { x: x + 0.15, y: y + 0.12, w: 3.6, h: 0.35, fontFace: SANS, fontSize: 11, color: C.muted })
-    s.addText(val, { x: x + 0.15, y: y + 0.45, w: 3.6, h: 0.6, fontFace: SERIF, fontSize: 22, bold: true, color: C.navy })
+    s.addShape('roundRect', { x, y, w: 5.95, h: 1.15, fill: { color: C.white }, line: { color: C.line }, rectRadius: 0.05 })
+    s.addText(label, { x: x + 0.15, y: y + 0.12, w: 5.65, h: 0.35, fontFace: SANS, fontSize: 11, color: C.muted })
+    s.addText(val, { x: x + 0.15, y: y + 0.45, w: 5.65, h: 0.6, fontFace: SERIF, fontSize: 22, bold: true, color: C.navy })
   })
   s.addText(v.tagline, { x: 0.6, y: top + 3.9, w: 12.1, h: 0.6, align: 'center', fontFace: SERIF, fontSize: 16, italic: true, color: C.navy })
 }
@@ -613,6 +695,7 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
     termHeadlineSlide(pptx, derived)
     explainerSlide(pptx, derived)
     termCoverageSlide(pptx, derived)
+    if ((derived.coverageOptions?.length ?? 0) > 1) optionsComparisonSlide(pptx, derived)
     if (hasAbrDetail(derived)) livingBenefitsDetailSlide(pptx, derived)
     if (derived.table.length > 0) termScheduleSlide(pptx, derived)
     termComparisonSlide(pptx, derived)
@@ -624,6 +707,7 @@ export async function downloadPptx(derived: DerivedPresentation): Promise<void> 
     headlineSlide(pptx, derived)
     explainerSlide(pptx, derived)
     coverageSlide(pptx, derived)
+    if ((derived.coverageOptions?.length ?? 0) > 1) optionsComparisonSlide(pptx, derived)
     projectionSlide(pptx, derived)
     if (hasAbrDetail(derived)) livingBenefitsDetailSlide(pptx, derived)
     if (derived.table.length > 0) tableSlide(pptx, derived)

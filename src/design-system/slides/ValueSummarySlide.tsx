@@ -15,13 +15,6 @@ export function ValueSummarySlide({ derived }: { derived: DerivedPresentation })
   const money = (n?: number) => formatMoney(n, meta.currency, { locale })
   const isTerm = meta.productType === 'term'
 
-  // "You invest": for term use the LEVEL-period total (not the ART ramp).
-  const annualPrem = headline.premium != null ? headline.premium * (headline.premiumMode === 'annual' ? 1 : 12) : null
-  const invest =
-    isTerm && annualPrem != null && headline.termLengthYears != null
-      ? annualPrem * headline.termLengthYears
-      : headline.totalPremiumsPaid
-
   // Each benefit is scoped to its life scenario, so the list reads as "what the
   // plan does in each situation" — not a simultaneous payout (using one can reduce
   // another). Honest, and reinforces that the plan covers every case.
@@ -37,23 +30,17 @@ export function ValueSummarySlide({ derived }: { derived: DerivedPresentation })
 
   return (
     <ContentSlide eyebrow={v.eyebrow} title={v.title}>
-      <div className="grid grid-cols-[minmax(0,1fr)_1.8fr] items-stretch gap-8">
-        <div className="flex flex-col items-center justify-center rounded-card bg-navy p-8 text-center text-white">
-          <div className="font-sans text-sm font-semibold uppercase tracking-wide text-orange">{v.youInvest}</div>
-          <div className="mt-2 font-serif text-4xl font-semibold tabular-nums">{money(invest)}</div>
-        </div>
-        <div>
-          <div className="mb-3 font-sans text-sm font-semibold uppercase tracking-wide text-muted">{v.youGet}</div>
-          <div className="grid grid-cols-2 gap-3">
-            {gets.map((g, i) => (
-              <div key={i} className="rounded-card bg-surface p-4">
-                <div className="font-sans text-xs font-semibold uppercase tracking-wide text-orange-dark">{g.when}</div>
-                <div className="mt-0.5 font-sans text-base text-muted">{g.label}</div>
-                <div className="font-serif text-2xl font-semibold text-navy tabular-nums">{g.value}</div>
-                {g.sub && <div className="mt-0.5 font-sans text-xs font-semibold text-orange-dark">{g.sub}</div>}
-              </div>
-            ))}
-          </div>
+      <div>
+        <div className="mb-3 font-sans text-sm font-semibold uppercase tracking-wide text-muted">{v.youGet}</div>
+        <div className="grid grid-cols-2 gap-4">
+          {gets.map((g, i) => (
+            <div key={i} className="rounded-card bg-surface p-5">
+              <div className="font-sans text-xs font-semibold uppercase tracking-wide text-orange-dark">{g.when}</div>
+              <div className="mt-0.5 font-sans text-base text-muted">{g.label}</div>
+              <div className="font-serif text-2xl font-semibold text-navy tabular-nums">{g.value}</div>
+              {g.sub && <div className="mt-0.5 font-sans text-xs font-semibold text-orange-dark">{g.sub}</div>}
+            </div>
+          ))}
         </div>
       </div>
       <p className="mt-6 text-center font-serif text-xl italic text-navy">{v.tagline}</p>

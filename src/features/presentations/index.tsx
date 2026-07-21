@@ -12,6 +12,7 @@ import {
   Card,
   EmptyState,
   ErrorState,
+  Icon,
   Loading,
   Modal,
   NavyHeaderBar,
@@ -134,7 +135,10 @@ export default function PresentationsPage() {
         onClick={() => pdfInputRef.current?.click()}
         disabled={isImportingPdf}
       >
-        {isImportingPdf ? t('importPdf.reading') : t('importPdf.button')}
+        <span className="inline-flex items-center gap-2">
+          <Icon name="document" className="h-5 w-5" strokeWidth={1.6} />
+          {isImportingPdf ? t('importPdf.reading') : t('importPdf.button')}
+        </span>
       </Button>
       <Button
         variant="secondary"
@@ -280,7 +284,7 @@ function ListBody({
   if (items.length === 0) {
     return (
       <EmptyState
-        icon="📁"
+        icon={<Icon name="folder" className="h-9 w-9 text-muted" />}
         title={t('empty.title')}
         description={t('empty.description')}
         action={
@@ -312,7 +316,7 @@ function ListBody({
 
       {filtered.length === 0 ? (
         <EmptyState
-          icon="🔍"
+          icon={<Icon name="search" className="h-9 w-9 text-muted" />}
           title={t('search.noResults.title')}
           description={t('search.noResults.description')}
           action={

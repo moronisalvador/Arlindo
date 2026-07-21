@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { EmptyState, FitSlide, RenderModeProvider, buildSlides } from '@design-system'
+import { EmptyState, FitSlide, Icon, RenderModeProvider, buildSlides } from '@design-system'
 import { derive } from '@domain/calc'
 import type { PresentationInputs } from '@domain/model/presentation'
 
@@ -30,7 +30,7 @@ export function SlidePreview({ inputs }: { inputs: PresentationInputs }) {
   }, [slides, inputs.productType])
 
   if (chosen.length === 0) {
-    return <EmptyState icon="👀" title={t('preview.empty')} />
+    return <EmptyState icon={<Icon name="eye" className="h-9 w-9 text-muted" />} title={t('preview.empty')} />
   }
 
   return (

@@ -12,6 +12,10 @@ const alias = (p: string) => fileURLToPath(new URL(p, import.meta.url))
 
 export default defineConfig({
   base,
+  server: {
+    port: Number(process.env.PORT) || 5173,
+    strictPort: true,
+  },
   resolve: {
     alias: {
       '@': alias('./src'),

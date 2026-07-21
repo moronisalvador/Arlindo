@@ -1,7 +1,7 @@
 import type { DerivedPresentation } from '@domain/model/derived'
 import { formatMoney, localeFor } from '@domain/format'
 import { slideCopy } from '@domain/presentationCopy'
-import { Card } from '@design-system/primitives'
+import { Card, Icon, type IconName } from '@design-system/primitives'
 import { ContentSlide } from './ContentSlide'
 
 /**
@@ -17,14 +17,14 @@ export function LivingBenefitsDetailSlide({ derived }: { derived: DerivedPresent
   const money = (n: number) => formatMoney(n, currency, { locale })
   const a = derived.abrBenefits ?? {}
 
-  const items: Array<{ icon: string; label: string; value: string }> = []
-  if (a.terminal != null) items.push({ icon: '🕊️', label: c.terminal, value: money(a.terminal) })
+  const items: Array<{ icon: IconName; label: string; value: string }> = []
+  if (a.terminal != null) items.push({ icon: 'dove', label: c.terminal, value: money(a.terminal) })
   if (a.chronicMonthly != null)
-    items.push({ icon: '🩺', label: c.chronic, value: `${money(a.chronicMonthly)} ${c.perMonth}` })
-  if (a.critical != null) items.push({ icon: '🫀', label: c.critical, value: c.upTo(money(a.critical)) })
+    items.push({ icon: 'stethoscope', label: c.chronic, value: `${money(a.chronicMonthly)} ${c.perMonth}` })
+  if (a.critical != null) items.push({ icon: 'heartPulse', label: c.critical, value: c.upTo(money(a.critical)) })
   if (a.criticalInjury != null)
-    items.push({ icon: '🤕', label: c.criticalInjury, value: c.upTo(money(a.criticalInjury)) })
-  if (a.alzheimer != null) items.push({ icon: '🧠', label: c.alzheimer, value: money(a.alzheimer) })
+    items.push({ icon: 'bandage', label: c.criticalInjury, value: c.upTo(money(a.criticalInjury)) })
+  if (a.alzheimer != null) items.push({ icon: 'brain', label: c.alzheimer, value: money(a.alzheimer) })
 
   return (
     <ContentSlide eyebrow={c.eyebrow} title={c.title}>
@@ -33,7 +33,7 @@ export function LivingBenefitsDetailSlide({ derived }: { derived: DerivedPresent
         {items.map((it) => (
           <Card key={it.label} className="h-full">
             <div className="flex h-full flex-col items-center text-center">
-              <div className="text-4xl">{it.icon}</div>
+              <Icon name={it.icon} className="h-9 w-9 text-orange" strokeWidth={1.4} />
               <div className="mt-3 font-sans text-base text-muted">{it.label}</div>
               <div className="mt-2 font-serif text-2xl font-semibold text-navy tabular-nums">{it.value}</div>
             </div>

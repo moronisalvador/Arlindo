@@ -56,6 +56,7 @@ export const dataEntry = {
     riders: 'Coberturas e benefícios',
     years: 'Tabela ano a ano',
     yearsTerm: 'Cronograma de prêmios',
+    options: 'Comparar opções (opcional)',
     preview: 'Prévia da apresentação',
   },
   summaries: {
@@ -67,6 +68,8 @@ export const dataEntry = {
     rows_other: '{{count}} anos na tabela',
     sourceEstimate: 'Estimado no app',
     sourceTyped: 'Digitado da ilustração',
+    optionsCount_one: '{{count}} opção adicionada',
+    optionsCount_other: '{{count}} opções adicionadas',
   },
   language: {
     label: 'Idioma da apresentação',
@@ -149,6 +152,20 @@ export const dataEntry = {
     categoryIncluded: 'Já incluídos',
     categoryExclusive: 'Exclusivos do IUL',
     categoryOptional: 'Opcionais',
+  },
+  options: {
+    hint: 'Adicione 2 ou 3 opções para o cliente comparar valores de cobertura lado a lado.',
+    addButton: 'Adicionar opção',
+    removeButton: 'Remover opção',
+    recommendButton: 'Recomendar',
+    recommended: 'Recomendada',
+    labelPlaceholder: 'Opção {{n}}',
+    deathBenefit: 'Benefício por morte',
+    livingBenefit: 'Benefício em vida',
+    livingBenefitPercent: 'Percentual do benefício em vida',
+    termYears: 'Duração',
+    monthlyPremium: 'Depósito mensal',
+    importPdf: 'Importar PDF',
   },
   years: {
     empty: 'Nenhum ano adicionado ainda.',
